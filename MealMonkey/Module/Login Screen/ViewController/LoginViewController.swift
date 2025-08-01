@@ -27,14 +27,6 @@ class LoginViewController: UIViewController {
         txtEmail.setPadding(left: 34)
         txtPassword.setPadding(left: 34)
         
-        
-        
-        
-        
-        
-        
-        
-        
         // Do any additional setup after loading the view.
     }
     
