@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_1xSplashScreen.png",
+      "filename" : "ic_google-plus-logo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_2xSplashScreen.png",
+      "filename" : "ic_2xgoogle-plus-logo.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_3xSplashScreen.png",
+      "filename" : "ic_3xgoogle-plus-logo.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
