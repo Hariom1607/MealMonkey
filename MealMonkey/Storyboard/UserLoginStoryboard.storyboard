@@ -466,9 +466,81 @@
                     <view key="view" contentMode="scaleToFill" id="aXB-dC-giu">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-yd-xfc">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQd-Qr-Gb7">
+                                        <rect key="frame" x="87.333333333333329" y="42" width="218.33333333333337" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="3rG-h4-5h7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                        <color key="textColor" name="LoginLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cm-dd-heM">
+                                        <rect key="frame" x="72.000000000000014" y="91" width="249.33333333333337" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="v7d-W4-6Bl"/>
+                                        </constraints>
+                                        <string key="text">Please enter your email to receive a 
+link to  create a new password via email</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" name="ExtraLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zjy-AZ-njz">
+                                        <rect key="frame" x="34" y="192" width="325" height="56"/>
+                                        <color key="backgroundColor" name="TextFieldBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="KKj-cM-Sn6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjx-Tl-4hS">
+                                        <rect key="frame" x="34" y="282" width="325" height="56"/>
+                                        <color key="backgroundColor" name="LoginButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="fQ3-lO-dJE"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Send"/>
+                                        <connections>
+                                            <action selector="btnSendAction:" destination="5eg-hg-eav" eventType="touchUpInside" id="Kry-PC-Tly"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="zjy-AZ-njz" firstAttribute="top" secondItem="5cm-dd-heM" secondAttribute="bottom" constant="59" id="5nF-lN-7BU"/>
+                                    <constraint firstItem="EQd-Qr-Gb7" firstAttribute="top" secondItem="9ZO-yd-xfc" secondAttribute="top" constant="42" id="8TF-yw-Zw7"/>
+                                    <constraint firstAttribute="trailing" secondItem="zjy-AZ-njz" secondAttribute="trailing" constant="34" id="9Wa-zq-12R"/>
+                                    <constraint firstAttribute="trailing" secondItem="kjx-Tl-4hS" secondAttribute="trailing" constant="34" id="CWw-wd-NSF"/>
+                                    <constraint firstItem="zjy-AZ-njz" firstAttribute="leading" secondItem="9ZO-yd-xfc" secondAttribute="leading" constant="34" id="Pyg-Vr-9Zj"/>
+                                    <constraint firstItem="5cm-dd-heM" firstAttribute="top" secondItem="EQd-Qr-Gb7" secondAttribute="bottom" constant="13" id="dau-ae-FsU"/>
+                                    <constraint firstItem="EQd-Qr-Gb7" firstAttribute="centerX" secondItem="9ZO-yd-xfc" secondAttribute="centerX" id="fhW-8o-3Ka"/>
+                                    <constraint firstItem="kjx-Tl-4hS" firstAttribute="leading" secondItem="9ZO-yd-xfc" secondAttribute="leading" constant="34" id="jCK-UZ-N3C"/>
+                                    <constraint firstItem="kjx-Tl-4hS" firstAttribute="top" secondItem="zjy-AZ-njz" secondAttribute="bottom" constant="34" id="lrD-Fk-MTg"/>
+                                    <constraint firstItem="5cm-dd-heM" firstAttribute="centerX" secondItem="9ZO-yd-xfc" secondAttribute="centerX" id="uCT-hs-TU2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fhH-Hm-JwR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fhH-Hm-JwR" firstAttribute="bottom" secondItem="9ZO-yd-xfc" secondAttribute="bottom" id="7b3-Sn-6e3"/>
+                            <constraint firstItem="9ZO-yd-xfc" firstAttribute="top" secondItem="fhH-Hm-JwR" secondAttribute="top" id="EF8-Vd-AAy"/>
+                            <constraint firstItem="fhH-Hm-JwR" firstAttribute="trailing" secondItem="9ZO-yd-xfc" secondAttribute="trailing" id="qwI-WG-R7o"/>
+                            <constraint firstItem="9ZO-yd-xfc" firstAttribute="leading" secondItem="fhH-Hm-JwR" secondAttribute="leading" id="r6U-C1-xIt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnSend" destination="kjx-Tl-4hS" id="MCl-py-Vjx"/>
+                        <outlet property="txtEmail" destination="zjy-AZ-njz" id="xBy-Nz-7nZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dd6-y0-qqd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
