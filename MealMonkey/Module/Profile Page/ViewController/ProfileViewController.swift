@@ -10,8 +10,6 @@ import UIKit
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var viewImg: UIView!
-    @IBOutlet weak var txtConfirmPassword: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtMobileNo: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -33,7 +31,7 @@ class ProfileViewController: UIViewController {
 //        viewImg.layer.borderColor = UIColor.loginButton.cgColor
         viewImg.clipsToBounds = true
         
-        let allViews = [txtName!, txtEmail!, txtAddress!, txtPassword!, txtMobileNo!, txtConfirmPassword!, btnSaveUser!]
+        let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSaveUser!]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         setTextFieldPadding(allViews, left: 34)

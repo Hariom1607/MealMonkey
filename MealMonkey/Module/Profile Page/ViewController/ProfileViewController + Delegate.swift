@@ -14,3 +14,24 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true)
     }
 }
+
+extension ProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn (_ textField: UITextField) -> Bool{
+        if textField == txtEmail && textField.returnKeyType == .next {
+            txtName.resignFirstResponder()
+            txtEmail.becomeFirstResponder()
+        }
+        else if textField == txtEmail && textField.returnKeyType == .next {
+            txtEmail.resignFirstResponder()
+            txtMobileNo.becomeFirstResponder()
+        }
+        else if textField == txtMobileNo && textField.returnKeyType == .next {
+            txtMobileNo.resignFirstResponder()
+            txtAddress.becomeFirstResponder()
+        }
+        else{
+            txtAddress.resignFirstResponder()
+        }
+        return true
+    }
+}
