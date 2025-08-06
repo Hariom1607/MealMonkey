@@ -40,7 +40,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IwS-Zr-vzQ">
                                         <rect key="frame" x="0.0" y="9" width="70" height="70"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G5O-MG-Ko1">
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G5O-MG-Ko1">
                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                             </imageView>
                                         </subviews>
@@ -59,7 +59,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gC1-QH-ghs">
                                                 <rect key="frame" x="0.0" y="22" width="188" height="48"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjl-5D-nIT">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjl-5D-nIT">
                                                         <rect key="frame" x="0.0" y="0.0" width="188" height="27"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="ng3-4T-rcj"/>
@@ -68,7 +68,7 @@
                                                         <color key="textColor" name="LoginLabel"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-AN-c66">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXs-AN-c66">
                                                         <rect key="frame" x="0.0" y="28" width="188" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="Vx3-Kn-AvB"/>

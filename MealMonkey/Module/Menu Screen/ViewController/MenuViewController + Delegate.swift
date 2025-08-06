@@ -21,6 +21,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource{
         cell.lblName.text = items.strName
         cell.lblQuantity.text = items.strQuantity
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         
         if let imageName = items.imageName{
             cell.imgItem.image = UIImage(named: imageName)
@@ -31,6 +32,25 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+        case 0:
+            print("Food")
+        case 1:
+            print("Bevarages")
+        case 2:
+            let storyboard = UIStoryboard(name: "MenuStoryboard",bundle: nil)
+            if let dessertvc = storyboard.instantiateViewController(withIdentifier: "DessertsViewController") as? DessertsViewController {
+                self.navigationController?.pushViewController(dessertvc,animated: true)
+            }
+            
+        default:
+            break
+        }
+        
     }
     
 }

@@ -9,9 +9,6 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell {
 
-    
-    
-
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblQuantity: UILabel!
     @IBOutlet weak var imgItem: UIImageView!
