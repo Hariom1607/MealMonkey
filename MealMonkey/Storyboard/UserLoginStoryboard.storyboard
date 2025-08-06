@@ -63,7 +63,7 @@
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="YcD-dS-mAG"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDa-1U-Kh7">
                                                         <rect key="frame" x="34" y="312" width="325" height="56"/>
@@ -470,8 +470,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-yd-xfc">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQd-Qr-Gb7">
-                                        <rect key="frame" x="87.333333333333329" y="42" width="218.33333333333337" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQd-Qr-Gb7">
+                                        <rect key="frame" x="82.333333333333329" y="42" width="228.66666666666669" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="3rG-h4-5h7"/>
                                         </constraints>
@@ -537,6 +537,7 @@ link to  create a new password via email</string>
                             <constraint firstItem="9ZO-yd-xfc" firstAttribute="leading" secondItem="fhH-Hm-JwR" secondAttribute="leading" id="r6U-C1-xIt"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dIr-iI-wql"/>
                     <connections>
                         <outlet property="btnSend" destination="kjx-Tl-4hS" id="MCl-py-Vjx"/>
                         <outlet property="txtEmail" destination="zjy-AZ-njz" id="xBy-Nz-7nZ"/>
@@ -544,7 +545,107 @@ link to  create a new password via email</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dd6-y0-qqd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2408" y="-40"/>
+            <point key="canvasLocation" x="3333.5877862595416" y="-40.140845070422536"/>
+        </scene>
+        <!--New Password View Controller-->
+        <scene sceneID="WyN-Wo-1Tc">
+            <objects>
+                <viewController storyboardIdentifier="NewPasswordViewController" id="2r3-bV-Qs7" customClass="NewPasswordViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qdm-sf-KoO">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOW-eD-fPu">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGc-KK-o8c">
+                                        <rect key="frame" x="95.666666666666671" y="42" width="201.66666666666663" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="duk-zp-BpP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                        <color key="textColor" name="LoginLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9B-kw-PE6">
+                                        <rect key="frame" x="72.000000000000014" y="91" width="249.33333333333337" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="hVR-4h-hnL"/>
+                                        </constraints>
+                                        <string key="text">Please enter your email to receive a 
+link to  create a new password via email</string>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" name="ExtraLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJW-4Q-bXt">
+                                        <rect key="frame" x="34" y="192" width="325" height="56"/>
+                                        <color key="backgroundColor" name="TextFieldBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="r5r-fB-7LK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74A-r7-b4G">
+                                        <rect key="frame" x="34" y="360" width="325" height="56"/>
+                                        <color key="backgroundColor" name="LoginButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="5mA-O5-M3H"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Next"/>
+                                        <connections>
+                                            <action selector="btnSubmit:" destination="2r3-bV-Qs7" eventType="touchUpInside" id="ezV-tv-dEC"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-ZR-hTe">
+                                        <rect key="frame" x="34" y="276" width="325" height="56"/>
+                                        <color key="backgroundColor" name="TextFieldBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="fTn-LS-HGQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="NJW-4Q-bXt" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="3KC-go-ZqN"/>
+                                    <constraint firstItem="74A-r7-b4G" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="8lj-Cx-5BQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="74A-r7-b4G" secondAttribute="trailing" constant="34" id="LE8-lw-sKf"/>
+                                    <constraint firstItem="sGc-KK-o8c" firstAttribute="top" secondItem="pOW-eD-fPu" secondAttribute="top" constant="42" id="NTh-aW-pOi"/>
+                                    <constraint firstItem="74A-r7-b4G" firstAttribute="top" secondItem="HSg-ZR-hTe" secondAttribute="bottom" constant="28" id="ZSn-eI-Lf9"/>
+                                    <constraint firstItem="NJW-4Q-bXt" firstAttribute="top" secondItem="h9B-kw-PE6" secondAttribute="bottom" constant="59" id="ZjQ-yk-xCl"/>
+                                    <constraint firstItem="sGc-KK-o8c" firstAttribute="centerX" secondItem="pOW-eD-fPu" secondAttribute="centerX" id="dKZ-A1-Ei1"/>
+                                    <constraint firstItem="HSg-ZR-hTe" firstAttribute="top" secondItem="NJW-4Q-bXt" secondAttribute="bottom" constant="28" id="gYY-RD-0wE"/>
+                                    <constraint firstItem="h9B-kw-PE6" firstAttribute="top" secondItem="sGc-KK-o8c" secondAttribute="bottom" constant="13" id="jow-du-Kyo"/>
+                                    <constraint firstAttribute="trailing" secondItem="NJW-4Q-bXt" secondAttribute="trailing" constant="34" id="k8f-RB-UUw"/>
+                                    <constraint firstItem="h9B-kw-PE6" firstAttribute="centerX" secondItem="pOW-eD-fPu" secondAttribute="centerX" id="nQp-Od-aOy"/>
+                                    <constraint firstItem="HSg-ZR-hTe" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="qhO-3P-TSD"/>
+                                    <constraint firstAttribute="trailing" secondItem="HSg-ZR-hTe" secondAttribute="trailing" constant="34" id="vPk-f9-ub0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eKt-5A-wnB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eKt-5A-wnB" firstAttribute="bottom" secondItem="pOW-eD-fPu" secondAttribute="bottom" id="iG7-bW-pHo"/>
+                            <constraint firstItem="pOW-eD-fPu" firstAttribute="leading" secondItem="eKt-5A-wnB" secondAttribute="leading" id="qGH-zs-3W0"/>
+                            <constraint firstItem="pOW-eD-fPu" firstAttribute="top" secondItem="eKt-5A-wnB" secondAttribute="top" id="v3O-qz-2a6"/>
+                            <constraint firstItem="eKt-5A-wnB" firstAttribute="trailing" secondItem="pOW-eD-fPu" secondAttribute="trailing" id="zgR-aT-eRr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnSubmit" destination="74A-r7-b4G" id="uE3-RG-mrP"/>
+                        <outlet property="txtConfirmPassword" destination="HSg-ZR-hTe" id="Dc8-CT-6Es"/>
+                        <outlet property="txtNewPassword" destination="NJW-4Q-bXt" id="TGP-xW-gLc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kjf-gn-7WS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4402.2900763358775" y="-40.140845070422536"/>
         </scene>
     </scenes>
     <resources>

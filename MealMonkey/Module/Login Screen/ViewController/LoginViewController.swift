@@ -16,10 +16,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnFacebookLogin: UIButton!
     @IBOutlet weak var btnForgotPassword: UIButton!
     @IBOutlet weak var btnLogin: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.navigationController?.navigationBar.isHidden = true
         let allViews = [txtEmail!, txtPassword!, btnLogin!, btnSignup!, btnGoogleLogin!, btnFacebookLogin!, btnForgotPassword!]
         
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
@@ -30,7 +31,22 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    private func showMainTabBar() {
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+            
+            // Set as rootViewController
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                
+                sceneDelegate.window?.rootViewController = tabBarController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
+        }
+    }
+    
     @IBAction func btnLoginAction(_ sender: Any) {
+        showMainTabBar()
     }
     
     @IBAction func btnForgotPasswordAction(_ sender: Any) {

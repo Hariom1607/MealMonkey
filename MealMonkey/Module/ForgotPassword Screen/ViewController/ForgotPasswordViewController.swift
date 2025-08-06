@@ -14,18 +14,26 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let allViews = [txtEmail!, btnSend!]
-        
-        styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
-        
-        txtEmail.setPadding(left: 34)
+        self.navigationController?.navigationBar.isHidden = false
 
+        let allViews = [txtEmail!, btnSend!]
+        styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        txtEmail.setPadding(left: 34)
+        
+        setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
     }
+    
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     
     @IBAction func btnSendAction(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(identifier: "NewPasswordViewController") as? NewPasswordViewController {
+            self.navigationController?.pushViewController(mlvc, animated: true)
+        }
     }
-    
-    
-
 }

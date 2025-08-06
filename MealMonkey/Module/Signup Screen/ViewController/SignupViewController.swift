@@ -8,7 +8,7 @@
 import UIKit
 
 class SignupViewController: UIViewController {
-
+    
     
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
@@ -21,7 +21,6 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var btnSignup: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         let allFields = [txtName!, txtPassword!, txtEmail!, txtAddress!, txtMobileNo!, txtConfirmPassword!, btnSignup!]
         
@@ -34,14 +33,12 @@ class SignupViewController: UIViewController {
         txtPassword.setPadding(left: 34)
         txtConfirmPassword.setPadding(left: 34)
         txtMobileNo.setPadding(left: 34)
-
-        
         
     }
     
-
     @IBAction func btnSignupAction(_ sender: Any) {
     }
+    
     @IBAction func btnBackToLogin(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
@@ -49,10 +46,7 @@ class SignupViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             
         }
-        
     }
-    
-
 }
 
 extension SignupViewController: UITextFieldDelegate {
