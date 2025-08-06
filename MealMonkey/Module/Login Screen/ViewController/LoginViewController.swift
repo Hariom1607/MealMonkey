@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     }
     
     private func showMainTabBar() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
             
             // Set as rootViewController

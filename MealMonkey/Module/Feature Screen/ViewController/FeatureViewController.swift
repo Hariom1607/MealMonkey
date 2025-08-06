@@ -55,7 +55,7 @@ class FeatureViewController: UIViewController {
         }
         
         else {
-            let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+            let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
             if let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController{
                 self.navigationController?.pushViewController(menuVC, animated: true)
             }

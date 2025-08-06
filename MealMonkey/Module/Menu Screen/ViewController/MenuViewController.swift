@@ -20,8 +20,7 @@ class MenuViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("Menu")
         setCartButton(target: self, action: #selector(cartBtnTapped))
-        
-        
+            
         txtSearch.setPadding(left: 10)
         let allviews = [txtSearch!]
         styleViews(allviews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)

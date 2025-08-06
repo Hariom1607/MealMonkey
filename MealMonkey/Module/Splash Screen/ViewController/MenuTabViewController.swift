@@ -9,9 +9,11 @@ import UIKit
 
 class MenuTabViewController: UITabBarController {
 
+    @IBOutlet weak var customTabBar: UITabBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     

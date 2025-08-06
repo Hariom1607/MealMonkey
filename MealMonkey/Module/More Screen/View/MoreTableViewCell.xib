@@ -34,13 +34,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1K-R2-tfc">
                                         <rect key="frame" x="72" y="0.0" width="306" height="53"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="ExtraLabel"/>
+                                        <color key="textColor" name="MorePageLabelTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="TextFieldBackground"/>
+                        <color key="backgroundColor" name="MorePageSectionBackground"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="VUs-jE-pNu" secondAttribute="bottom" constant="9" id="1gg-h4-HNA"/>
                             <constraint firstAttribute="height" constant="75" id="IAv-ha-xjG"/>
@@ -67,14 +67,14 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="ExtraLabel">
-            <color red="0.48627450980392156" green="0.49019607843137253" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Image Background">
             <color red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="TextFieldBackground">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="MorePageLabelTextColor">
+            <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MorePageSectionBackground">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
