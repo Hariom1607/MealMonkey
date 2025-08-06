@@ -110,22 +110,82 @@
             </objects>
             <point key="canvasLocation" x="-8.3969465648854964" y="3.5211267605633805"/>
         </scene>
-        <!--View Controller-->
+        <!--Offers View Controller-->
         <scene sceneID="4f3-hg-EDO">
             <objects>
-                <viewController id="dtQ-Z1-vLK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OffersViewController" id="dtQ-Z1-vLK" customClass="OffersViewController" customModule="MealMonkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RgB-w7-oE5">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evD-QG-sMs">
+                                <rect key="frame" x="0.0" y="118" width="393" height="617"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNP-mu-qQ9">
+                                        <rect key="frame" x="15" y="77.333333333333343" width="81.333333333333329" height="14.666666666666671"/>
+                                        <color key="backgroundColor" name="LoginButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81.310000000000002" id="lv7-9C-9cU"/>
+                                            <constraint firstAttribute="height" constant="14.83" id="vAF-xt-TTa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Check Offers"/>
+                                        <connections>
+                                            <action selector="btnCheckOffersAction:" destination="dtQ-Z1-vLK" eventType="touchUpInside" id="EqG-l5-Yj5"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="StD-dy-OUC">
+                                        <rect key="frame" x="0.0" y="128" width="393" height="464"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="dtQ-Z1-vLK" id="bAB-Dt-es4"/>
+                                            <outlet property="delegate" destination="dtQ-Z1-vLK" id="8YC-Cu-UWR"/>
+                                        </connections>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7et-br-7QS">
+                                        <rect key="frame" x="15" y="21.000000000000004" width="363" height="32.333333333333343"/>
+                                        <string key="text">Find discounts, Offers special
+meals and more!</string>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                        <color key="textColor" name="ExtraLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="StD-dy-OUC" firstAttribute="top" secondItem="TNP-mu-qQ9" secondAttribute="bottom" constant="36" id="6G9-yA-YaX"/>
+                                    <constraint firstAttribute="bottom" secondItem="StD-dy-OUC" secondAttribute="bottom" constant="25" id="H7p-GO-Vuw"/>
+                                    <constraint firstAttribute="trailing" secondItem="StD-dy-OUC" secondAttribute="trailing" id="I72-hU-Z9f"/>
+                                    <constraint firstItem="7et-br-7QS" firstAttribute="top" secondItem="evD-QG-sMs" secondAttribute="top" constant="21" id="Jx4-5G-duM"/>
+                                    <constraint firstItem="TNP-mu-qQ9" firstAttribute="top" secondItem="7et-br-7QS" secondAttribute="bottom" constant="24" id="bRf-C3-mpw"/>
+                                    <constraint firstItem="7et-br-7QS" firstAttribute="leading" secondItem="evD-QG-sMs" secondAttribute="leading" constant="15" id="jDK-zd-YW2"/>
+                                    <constraint firstItem="StD-dy-OUC" firstAttribute="leading" secondItem="evD-QG-sMs" secondAttribute="leading" id="p1m-D3-9Id"/>
+                                    <constraint firstAttribute="trailing" secondItem="7et-br-7QS" secondAttribute="trailing" constant="15" id="wnF-06-SVR"/>
+                                    <constraint firstItem="TNP-mu-qQ9" firstAttribute="leading" secondItem="evD-QG-sMs" secondAttribute="leading" constant="15" id="zgJ-CD-N17"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="9FC-Wx-J9R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" name="LoginButton"/>
+                        <constraints>
+                            <constraint firstItem="9FC-Wx-J9R" firstAttribute="trailing" secondItem="evD-QG-sMs" secondAttribute="trailing" id="ESq-ic-o6x"/>
+                            <constraint firstItem="evD-QG-sMs" firstAttribute="top" secondItem="9FC-Wx-J9R" secondAttribute="top" id="QEL-wq-0Ff"/>
+                            <constraint firstItem="evD-QG-sMs" firstAttribute="leading" secondItem="9FC-Wx-J9R" secondAttribute="leading" id="bAa-Xh-T1G"/>
+                            <constraint firstItem="9FC-Wx-J9R" firstAttribute="bottom" secondItem="evD-QG-sMs" secondAttribute="bottom" id="ytB-4T-uzA"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="ic_Offers" id="aEP-H2-fbw"/>
+                    <connections>
+                        <outlet property="btnCheckOffers" destination="TNP-mu-qQ9" id="E5t-2j-qeG"/>
+                        <outlet property="tblOffers" destination="StD-dy-OUC" id="b6d-VD-xkT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oF1-G9-sI2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1439" y="725"/>
+            <point key="canvasLocation" x="-1440.4580152671756" y="724.64788732394368"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2eY-dy-RQa">

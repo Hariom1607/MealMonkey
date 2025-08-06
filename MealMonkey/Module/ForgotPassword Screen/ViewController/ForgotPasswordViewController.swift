@@ -18,7 +18,7 @@ class ForgotPasswordViewController: UIViewController {
 
         let allViews = [txtEmail!, btnSend!]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
-        txtEmail.setPadding(left: 34)
+        txtEmail.setPadding(left: 34, right: 34)
         
         setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
     }

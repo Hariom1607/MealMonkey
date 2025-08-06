@@ -19,7 +19,7 @@ class DessertsViewController: UIViewController {
         super.viewDidLoad()
         
         txtSearch.layer.cornerRadius = 28
-        txtSearch.setPadding(left: 34)
+        txtSearch.setPadding(left: 34, right: 34)
         
         setLeftAlignedTitleWithBack("Desserts", target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))

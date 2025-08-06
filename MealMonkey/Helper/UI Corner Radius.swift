@@ -17,7 +17,7 @@ func styleViews(_ views: [UIView], cornerRadius: CGFloat, borderWidth: CGFloat, 
     }
 }
 
-func setTextFieldPadding(_ views: [UIView], left: CGFloat = 0, right: CGFloat = 0) {
+func setTextFieldPadding(_ views: [UIView], left: CGFloat = 34, right: CGFloat = 34) {
     for view in views {
         if let textField = view as? UITextField {
             textField.setPadding(left: left, right: right)

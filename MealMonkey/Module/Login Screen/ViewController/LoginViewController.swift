@@ -9,6 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var btnEye: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var btnSignup: UIButton!
@@ -16,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnFacebookLogin: UIButton!
     @IBOutlet weak var btnForgotPassword: UIButton!
     @IBOutlet weak var btnLogin: UIButton!
+    
+    var isPasswordVisible: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +28,8 @@ class LoginViewController: UIViewController {
         
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
-        txtEmail.setPadding(left: 34)
-        txtPassword.setPadding(left: 34)
+        txtEmail.setPadding(left: 34, right: 34)
+        txtPassword.setPadding(left: 34, right: 48)
         
         // Do any additional setup after loading the view.
     }
@@ -54,6 +57,16 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
         if let mlvc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController{
             self.navigationController?.pushViewController(mlvc, animated: true)
+        }
+        
+    }
+    
+    @IBAction func btnEyeAction(_ sender: Any) {
+        isPasswordVisible = !isPasswordVisible
+        txtPassword.isSecureTextEntry = !isPasswordVisible
+        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        if let button = sender as? UIButton {
+            button.setImage(UIImage(systemName: imageName), for: .normal)
         }
         
     }

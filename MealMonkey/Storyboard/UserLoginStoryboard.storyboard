@@ -170,6 +170,18 @@
                                                             <action selector="btnSignupAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wTB-N9-Esg"/>
                                                         </connections>
                                                     </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-Ge-TxX">
+                                                        <rect key="frame" x="34" y="228" width="325" height="56"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="56" id="8P8-Jy-XWE"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="PlaceholderColor"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="btnEyeAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MyM-x6-gm7"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -177,6 +189,7 @@
                                                     <constraint firstItem="96I-XX-TiU" firstAttribute="top" secondItem="ujm-Q9-L2y" secondAttribute="top" constant="42" id="9k3-dH-lVB"/>
                                                     <constraint firstItem="Xo3-aO-tXK" firstAttribute="top" secondItem="rqU-3z-YiB" secondAttribute="bottom" constant="51" id="Fga-dR-1da"/>
                                                     <constraint firstItem="hRw-nL-mpO" firstAttribute="top" secondItem="96I-XX-TiU" secondAttribute="bottom" constant="14" id="Gjg-to-N4g"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qnn-Ge-TxX" secondAttribute="trailing" constant="34" id="Hx9-KV-o6M"/>
                                                     <constraint firstItem="BPH-ge-7le" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="30" id="K2e-rI-KlO"/>
                                                     <constraint firstItem="iXJ-73-Cep" firstAttribute="centerX" secondItem="ujm-Q9-L2y" secondAttribute="centerX" id="KZ2-y6-tDp"/>
                                                     <constraint firstAttribute="trailing" secondItem="eDa-1U-Kh7" secondAttribute="trailing" constant="34" id="KjA-Nv-cAU"/>
@@ -190,6 +203,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="mqm-9w-QNL" secondAttribute="trailing" constant="34" id="h0l-D8-uCO"/>
                                                     <constraint firstItem="nRS-Bl-jrF" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="30" id="h1q-hQ-dBp"/>
                                                     <constraint firstItem="nRS-Bl-jrF" firstAttribute="top" secondItem="BPH-ge-7le" secondAttribute="bottom" constant="28" id="hOt-SQ-eVA"/>
+                                                    <constraint firstItem="qnn-Ge-TxX" firstAttribute="top" secondItem="6OQ-e3-rjm" secondAttribute="bottom" constant="28" id="hkh-CI-iHI"/>
                                                     <constraint firstItem="eDa-1U-Kh7" firstAttribute="top" secondItem="mqm-9w-QNL" secondAttribute="bottom" constant="28" id="jfG-Tn-iMa"/>
                                                     <constraint firstItem="6OQ-e3-rjm" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="34" id="lwe-b1-jF8"/>
                                                     <constraint firstItem="6OQ-e3-rjm" firstAttribute="top" secondItem="hRw-nL-mpO" secondAttribute="bottom" constant="35" id="paO-W8-ecU"/>
@@ -199,6 +213,8 @@
                                                     <constraint firstItem="rqU-3z-YiB" firstAttribute="top" secondItem="eDa-1U-Kh7" secondAttribute="bottom" constant="25" id="tfA-j8-NRa"/>
                                                     <constraint firstAttribute="trailing" secondItem="BPH-ge-7le" secondAttribute="trailing" constant="30" id="txJ-Up-3mx"/>
                                                     <constraint firstItem="hRw-nL-mpO" firstAttribute="centerX" secondItem="ujm-Q9-L2y" secondAttribute="centerX" id="vjq-TX-P3Y"/>
+                                                    <constraint firstItem="eDa-1U-Kh7" firstAttribute="top" secondItem="qnn-Ge-TxX" secondAttribute="bottom" constant="28" id="xBs-tN-v0H"/>
+                                                    <constraint firstItem="qnn-Ge-TxX" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="34" id="zDA-dm-wlS"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -231,6 +247,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnEye" destination="qnn-Ge-TxX" id="Xkd-vs-nzJ"/>
                         <outlet property="btnFacebookLogin" destination="BPH-ge-7le" id="DFs-ju-e9Y"/>
                         <outlet property="btnForgotPassword" destination="rqU-3z-YiB" id="BIZ-JW-LLx"/>
                         <outlet property="btnGoogleLogin" destination="nRS-Bl-jrF" id="31E-dg-aOo"/>
@@ -318,24 +335,58 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CzV-Ly-7by">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJh-FO-xKv">
                                                                 <rect key="frame" x="0.0" y="336" width="325" height="56"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CzV-Ly-7by">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58B-SW-eTL">
+                                                                        <rect key="frame" x="281" y="0.0" width="44" height="56"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="44" id="msH-MI-pu4"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" name="PlaceholderColor"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                                                        <connections>
+                                                                            <action selector="btnEyePasswordAction:" destination="CaW-kI-8zj" eventType="touchUpInside" id="BR9-cy-re7"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="56" id="c8S-WT-nAE"/>
+                                                                    <constraint firstAttribute="height" constant="56" id="KdU-iZ-V7B"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                                            </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bIG-uI-0q7">
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJt-1r-vcq">
                                                                 <rect key="frame" x="0.0" y="420" width="325" height="56"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bIG-uI-0q7">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-w9-Y7i">
+                                                                        <rect key="frame" x="281" y="0.0" width="44" height="56"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="44" id="Plu-D3-vxn"/>
+                                                                        </constraints>
+                                                                        <color key="tintColor" name="PlaceholderColor"/>
+                                                                        <state key="normal" title="Button"/>
+                                                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                                                        <connections>
+                                                                            <action selector="btnEyeConfirmPasswordAction:" destination="CaW-kI-8zj" eventType="touchUpInside" id="eJh-m0-4kG"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="56" id="sPV-QO-bqM"/>
+                                                                    <constraint firstAttribute="height" constant="56" id="bEd-nw-u7A"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                                            </textField>
+                                                            </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-fk-PD4">
                                                                 <rect key="frame" x="0.0" y="504" width="325" height="56"/>
                                                                 <color key="backgroundColor" name="LoginButton"/>
@@ -446,9 +497,13 @@
                     </view>
                     <connections>
                         <outlet property="btnBackToLogin" destination="50f-sW-yjI" id="1nK-P4-gOt"/>
+                        <outlet property="btnEyeConfirmPassword" destination="1tU-w9-Y7i" id="iN5-qf-ZcU"/>
+                        <outlet property="btnEyePassword" destination="58B-SW-eTL" id="7cI-R6-zsm"/>
                         <outlet property="btnSignup" destination="9cb-fk-PD4" id="xT3-Hd-4gc"/>
+                        <outlet property="stackConfirmPassword" destination="dJt-1r-vcq" id="L7w-mQ-RJ7"/>
+                        <outlet property="stackPassword" destination="KJh-FO-xKv" id="6x5-Pv-Xmz"/>
                         <outlet property="txtAddress" destination="Ehn-Fy-du4" id="uwL-qv-thX"/>
-                        <outlet property="txtConfirmPassword" destination="bIG-uI-0q7" id="JMj-zv-YxN"/>
+                        <outlet property="txtConfirmPassword" destination="bIG-uI-0q7" id="rYs-lG-g6G"/>
                         <outlet property="txtEmail" destination="btB-aF-SyE" id="Wg1-Mb-CXJ"/>
                         <outlet property="txtMobileNo" destination="a2k-3Z-Qf3" id="3C8-eX-6IC"/>
                         <outlet property="txtName" destination="6Kv-7k-J8o" id="4y3-wA-fpi"/>
@@ -649,6 +704,7 @@ link to  create a new password via email</string>
         </scene>
     </scenes>
     <resources>
+        <image name="eye.slash" catalog="system" width="128" height="97"/>
         <image name="ic_Facebook" width="7.3333334922790527" height="16"/>
         <image name="ic_google-plus-logo" width="19.666666030883789" height="12.333333015441895"/>
         <namedColor name="ExtraLabel">
@@ -665,6 +721,9 @@ link to  create a new password via email</string>
         </namedColor>
         <namedColor name="LoginLabel">
             <color red="0.29019607843137257" green="0.29411764705882354" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PlaceholderColor">
+            <color red="0.71372549019607845" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextFieldBackground">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -10,30 +10,51 @@ import UIKit
 class SignupViewController: UIViewController {
     
     
+    
+    @IBOutlet weak var btnEyeConfirmPassword: UIButton!
+    @IBOutlet weak var stackConfirmPassword: UIStackView!
+    @IBOutlet weak var stackPassword: UIStackView!
+    @IBOutlet weak var btnEyePassword: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtMobileNo: UITextField!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
-    
     @IBOutlet weak var btnBackToLogin: UIButton!
     @IBOutlet weak var btnSignup: UIButton!
+    
+    var isPasswordVisible: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let allFields = [txtName!, txtPassword!, txtEmail!, txtAddress!, txtMobileNo!, txtConfirmPassword!, btnSignup!]
+        let allFields = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSignup!, stackPassword!, stackConfirmPassword!]
         
         styleViews(allFields, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
-        txtName.setPadding(left: 34)
-        txtAddress.setPadding(left: 34)
-        txtEmail.setPadding(left: 34)
-        txtPassword.setPadding(left: 34)
-        txtPassword.setPadding(left: 34)
-        txtConfirmPassword.setPadding(left: 34)
-        txtMobileNo.setPadding(left: 34)
+        let allViews = [txtName!, txtPassword!, txtEmail!, txtAddress!, txtMobileNo!, txtConfirmPassword!]
         
+        setTextFieldPadding(allViews)
+        
+    }
+    
+    @IBAction func btnEyePasswordAction(_ sender: Any) {
+        isPasswordVisible = !isPasswordVisible
+        txtPassword.isSecureTextEntry = !isPasswordVisible
+        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        if let button = sender as? UIButton {
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }
+        
+    }
+    @IBAction func btnEyeConfirmPasswordAction(_ sender: Any) {
+        isPasswordVisible = !isPasswordVisible
+        txtConfirmPassword.isSecureTextEntry = !isPasswordVisible
+        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        if let button = sender as? UIButton {
+            button.setImage(UIImage(systemName: imageName), for: .normal)
+        }
     }
     
     @IBAction func btnSignupAction(_ sender: Any) {
