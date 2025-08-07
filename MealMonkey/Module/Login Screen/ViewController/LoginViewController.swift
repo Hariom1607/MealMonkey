@@ -20,10 +20,13 @@ class LoginViewController: UIViewController {
     
     var isPasswordVisible: Bool = false
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.isHidden = true
+                
         let allViews = [txtEmail!, txtPassword!, btnLogin!, btnSignup!, btnGoogleLogin!, btnFacebookLogin!, btnForgotPassword!]
         
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)

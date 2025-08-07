@@ -54,7 +54,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOH-3v-CUo">
-                                <rect key="frame" x="584" y="228.33333333333334" width="13" height="13"/>
+                                <rect key="frame" x="573" y="228.33333333333334" width="13" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="RjF-Ej-efF"/>
                                     <constraint firstAttribute="width" constant="13" id="v74-A5-9yT"/>
@@ -75,7 +75,7 @@
                             <constraint firstItem="4pv-ca-Jjv" firstAttribute="top" secondItem="ajU-6N-QKx" secondAttribute="top" constant="12" id="a1p-CM-PwN"/>
                             <constraint firstAttribute="bottom" secondItem="4pv-ca-Jjv" secondAttribute="bottom" constant="11" id="c80-A7-sfE"/>
                             <constraint firstItem="zOH-3v-CUo" firstAttribute="centerY" secondItem="4qH-8h-IEC" secondAttribute="centerY" id="sSn-a3-iiu"/>
-                            <constraint firstAttribute="trailing" secondItem="zOH-3v-CUo" secondAttribute="trailing" constant="21" id="wat-vP-Vi5"/>
+                            <constraint firstItem="zOH-3v-CUo" firstAttribute="centerX" secondItem="Vuv-0a-OUg" secondAttribute="centerX" id="xW9-0N-eSH"/>
                         </constraints>
                     </view>
                 </subviews>

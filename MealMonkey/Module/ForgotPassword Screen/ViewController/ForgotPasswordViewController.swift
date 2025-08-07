@@ -32,7 +32,7 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func btnSendAction(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(identifier: "NewPasswordViewController") as? NewPasswordViewController {
+        if let mlvc = storyboard.instantiateViewController(identifier: "OtpViewController") as? OtpViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }
