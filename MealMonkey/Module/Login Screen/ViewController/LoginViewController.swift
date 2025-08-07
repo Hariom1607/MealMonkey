@@ -20,9 +20,7 @@ class LoginViewController: UIViewController {
     
     var isPasswordVisible: Bool = false
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +35,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+   
     private func showMainTabBar() {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {

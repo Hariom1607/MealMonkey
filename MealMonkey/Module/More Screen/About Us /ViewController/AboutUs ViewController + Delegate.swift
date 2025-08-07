@@ -19,7 +19,7 @@ extension AboutUsViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "AboutUsTableViewCell", for: indexPath) as! AboutUsTableViewCell
         
         switch objPagetype {
-            
+        
         case .AboutUs:
             cell.configureAboutUsCell(about: arrCurrent[indexPath.row])
             

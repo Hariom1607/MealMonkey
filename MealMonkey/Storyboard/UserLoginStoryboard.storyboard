@@ -636,50 +636,42 @@ continue to reset your password</string>
                                         <color key="textColor" name="ExtraLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWZ-Bz-PyS">
-                                        <rect key="frame" x="13" y="215" width="56" height="56"/>
-                                        <color key="backgroundColor" name="TextFieldBackground"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="V4n-sL-aHx">
+                                        <rect key="frame" x="13" y="215" width="325" height="56"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWZ-Bz-PyS">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="56"/>
+                                                <color key="backgroundColor" name="TextFieldBackground"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" textContentType="one-time-code"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8zq-wq-bEG">
+                                                <rect key="frame" x="88.333333333333329" y="0.0" width="60.333333333333329" height="56"/>
+                                                <color key="backgroundColor" name="TextFieldBackground"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLL-Ij-64C">
+                                                <rect key="frame" x="176.66666666666666" y="0.0" width="60" height="56"/>
+                                                <color key="backgroundColor" name="TextFieldBackground"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5WV-Zw-hNC">
+                                                <rect key="frame" x="264.66666666666669" y="0.0" width="60.333333333333314" height="56"/>
+                                                <color key="backgroundColor" name="TextFieldBackground"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="fbF-RO-6oi"/>
-                                            <constraint firstAttribute="width" constant="56" id="yc5-AZ-w9W"/>
+                                            <constraint firstAttribute="height" constant="56" id="8yA-48-fQe"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" textContentType="one-time-code"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8zq-wq-bEG">
-                                        <rect key="frame" x="97" y="215" width="56" height="56"/>
-                                        <color key="backgroundColor" name="TextFieldBackground"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="0NO-oL-Bsd"/>
-                                            <constraint firstAttribute="height" constant="56" id="3S5-lw-BIQ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLL-Ij-64C">
-                                        <rect key="frame" x="181" y="215" width="56" height="56"/>
-                                        <color key="backgroundColor" name="TextFieldBackground"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="1T7-3k-G8A"/>
-                                            <constraint firstAttribute="height" constant="56" id="z1M-Oz-H3H"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5WV-Zw-hNC">
-                                        <rect key="frame" x="265" y="215" width="56" height="56"/>
-                                        <color key="backgroundColor" name="TextFieldBackground"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="eBp-lf-kRk"/>
-                                            <constraint firstAttribute="height" constant="56" id="vET-Lg-xJx"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haO-P5-RRj">
                                         <rect key="frame" x="13" y="307" width="325" height="56"/>
                                         <color key="backgroundColor" name="LoginButton"/>
@@ -748,23 +740,18 @@ continue to reset your password</string>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="V4n-sL-aHx" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="CvD-8M-SpM"/>
                                     <constraint firstItem="haO-P5-RRj" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="DAf-Ne-bpo"/>
-                                    <constraint firstItem="haO-P5-RRj" firstAttribute="top" secondItem="eWZ-Bz-PyS" secondAttribute="bottom" constant="36" id="EEC-zN-p0Y"/>
                                     <constraint firstAttribute="trailing" secondItem="haO-P5-RRj" secondAttribute="trailing" constant="13" id="HtR-A6-yec"/>
-                                    <constraint firstItem="eWZ-Bz-PyS" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="JHq-u6-fCZ"/>
                                     <constraint firstItem="Oys-CZ-9tT" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="KTM-VR-Vfk"/>
-                                    <constraint firstItem="eWZ-Bz-PyS" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="Mrr-Hb-x8q"/>
-                                    <constraint firstItem="8zq-wq-bEG" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="P8T-fQ-Xgw"/>
                                     <constraint firstItem="Oys-CZ-9tT" firstAttribute="top" secondItem="haO-P5-RRj" secondAttribute="bottom" constant="33" id="V3O-Vb-LMQ"/>
                                     <constraint firstItem="HtD-va-Upb" firstAttribute="top" secondItem="ohi-UU-uJs" secondAttribute="top" constant="47" id="Vlr-yJ-RrY"/>
-                                    <constraint firstItem="8zq-wq-bEG" firstAttribute="leading" secondItem="eWZ-Bz-PyS" secondAttribute="trailing" constant="28" id="ZIu-Ol-aM3"/>
-                                    <constraint firstItem="5WV-Zw-hNC" firstAttribute="leading" secondItem="GLL-Ij-64C" secondAttribute="trailing" constant="28" id="cFW-y9-yMv"/>
+                                    <constraint firstItem="V4n-sL-aHx" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="f5j-sb-C9b"/>
                                     <constraint firstItem="yTv-Lw-2et" firstAttribute="top" secondItem="HtD-va-Upb" secondAttribute="bottom" constant="13" id="fR7-vc-r5c"/>
                                     <constraint firstItem="HtD-va-Upb" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="iGA-cB-Scz"/>
-                                    <constraint firstItem="GLL-Ij-64C" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="iHl-oF-VVg"/>
+                                    <constraint firstItem="haO-P5-RRj" firstAttribute="top" secondItem="V4n-sL-aHx" secondAttribute="bottom" constant="36" id="pAQ-xc-EKS"/>
+                                    <constraint firstAttribute="trailing" secondItem="V4n-sL-aHx" secondAttribute="trailing" constant="13" id="qN1-z1-OPO"/>
                                     <constraint firstItem="yTv-Lw-2et" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="s3W-Yd-DpV"/>
-                                    <constraint firstItem="GLL-Ij-64C" firstAttribute="leading" secondItem="8zq-wq-bEG" secondAttribute="trailing" constant="28" id="uHT-22-7vx"/>
-                                    <constraint firstItem="5WV-Zw-hNC" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="y3o-Fm-Xow"/>
                                 </constraints>
                             </view>
                         </subviews>

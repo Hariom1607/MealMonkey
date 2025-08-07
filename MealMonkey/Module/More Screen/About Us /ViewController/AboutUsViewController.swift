@@ -19,15 +19,6 @@ class AboutUsViewController: UIViewController {
         tblAboutUs.register(UINib(nibName: "AboutUsTableViewCell", bundle: nil), forCellReuseIdentifier: "AboutUsTableViewCell")
         
         switch objPagetype {
-        case .Payment:
-            setLeftAlignedTitleWithBack("Payment", target: self, action: #selector(backButtonTapped))
-            setCartButton(target: self, action: #selector(cartPaymentTapped))
-
-            
-        case .MyOrders:
-            setLeftAlignedTitleWithBack("MyOrders", target: self, action: #selector(backButtonTapped))
-            setCartButton(target: self, action: #selector(cartMyOrdersTapped))
-
             
         case .Notifications:
             setLeftAlignedTitleWithBack("Notifications", target: self, action: #selector(backButtonTapped))

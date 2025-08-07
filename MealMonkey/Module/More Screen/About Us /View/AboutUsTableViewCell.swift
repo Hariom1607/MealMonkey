@@ -51,8 +51,6 @@ class AboutUsTableViewCell: UITableViewCell {
 }
 
 enum PageType {
-    case Payment
-    case MyOrders
     case Notifications
     case Inbox
     case AboutUs

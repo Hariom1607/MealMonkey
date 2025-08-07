@@ -57,14 +57,12 @@ extension OtpViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        // Only allow numbers
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
         guard allowedCharacters.isSuperset(of: characterSet) else {
             return false
         }
         
-        // Prevent more than 1 character
         if string.count > 1 {
             return false
         }
