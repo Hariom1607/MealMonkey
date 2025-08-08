@@ -155,6 +155,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="ViewCardCell" destination="NnH-Gn-lGY" id="UPC-Jm-jZh"/>
                 <outlet property="btnDeleteCard" destination="Ul8-eV-bvX" id="ARm-pP-qmb"/>
                 <outlet property="lblCardNumber" destination="IxT-85-Zij" id="IwR-43-8QU"/>
             </connections>

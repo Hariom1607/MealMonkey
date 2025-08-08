@@ -63,6 +63,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61u-hX-RSR">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" name="TransparentColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5T-z9-gt5">
                                 <rect key="frame" x="0.0" y="118" width="393" height="666"/>
                                 <subviews>
@@ -120,10 +124,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uaq-CH-EqQ">
-                                <rect key="frame" x="0.0" y="219.33333333333331" width="393" height="632.66666666666674"/>
+                                <rect key="frame" x="0.0" y="200" width="393" height="652"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VME-wD-1kA">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="632.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="652"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MOw-B0-O8r">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="632.33333333333337"/>
@@ -135,7 +139,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn8-fQ-dfI">
-                                                        <rect key="frame" x="367.66666666666669" y="13.333333333333314" width="9" height="9"/>
+                                                        <rect key="frame" x="367.66666666666669" y="13.666666666666657" width="9" height="9"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="9" id="U29-yy-e0J"/>
                                                             <constraint firstAttribute="width" constant="9" id="WvR-1Z-vsL"/>
@@ -148,14 +152,14 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ykf-LM-aLa">
-                                                        <rect key="frame" x="21" y="59.666666666666657" width="351" height="1"/>
+                                                        <rect key="frame" x="21" y="60" width="351" height="1"/>
                                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="zS3-ds-7Vb"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="ZmJ-DJ-2QK">
-                                                        <rect key="frame" x="21" y="79.333333333333371" width="351" height="356"/>
+                                                        <rect key="frame" x="21" y="79.333333333333314" width="351" height="356"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewA-Bp-CeB">
                                                                 <rect key="frame" x="0.0" y="0.0" width="351" height="56"/>
@@ -196,13 +200,13 @@
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AQI-2I-hbz">
-                                                                <rect key="frame" x="0.0" y="224.99999999999994" width="351" height="56"/>
+                                                                <rect key="frame" x="0.0" y="225" width="351" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kL2-ON-SJ2">
-                                                                <rect key="frame" x="0.0" y="299.99999999999994" width="351" height="56"/>
+                                                                <rect key="frame" x="0.0" y="300.00000000000006" width="351" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -210,7 +214,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-En-nOC">
-                                                        <rect key="frame" x="21" y="472.33333333333326" width="351" height="35"/>
+                                                        <rect key="frame" x="21" y="472.33333333333337" width="351" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZ5-zO-5LK">
                                                                 <rect key="frame" x="0.0" y="0.0" width="302" height="35"/>
@@ -235,14 +239,16 @@ at anytime </string>
                                                         </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nq8-3f-yHi">
-                                                        <rect key="frame" x="21" y="547.33333333333326" width="351" height="56"/>
+                                                        <rect key="frame" x="21" y="547.33333333333337" width="351" height="56"/>
                                                         <color key="backgroundColor" name="LoginButton"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="56" id="Ebe-rL-ujz"/>
                                                         </constraints>
                                                         <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Add Card"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="ic_2Lines" title="Add Card"/>
                                                         <connections>
                                                             <action selector="btnAddCardViewAction:" destination="uEh-bM-OnZ" eventType="touchUpInside" id="eoa-5U-e7I"/>
                                                         </connections>
@@ -281,7 +287,6 @@ at anytime </string>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="VME-wD-1kA" firstAttribute="leading" secondItem="Uaq-CH-EqQ" secondAttribute="leading" id="27c-Sb-6wm"/>
                                     <constraint firstAttribute="bottom" secondItem="VME-wD-1kA" secondAttribute="bottom" id="Aiu-Bc-AtG"/>
@@ -294,16 +299,24 @@ at anytime </string>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="dI0-3d-ba6" firstAttribute="trailing" secondItem="Uaq-CH-EqQ" secondAttribute="trailing" id="8aE-DK-v7O"/>
-                            <constraint firstItem="Uaq-CH-EqQ" firstAttribute="height" secondItem="D5T-z9-gt5" secondAttribute="height" multiplier="0.95" id="Fab-8a-D8g"/>
+                            <constraint firstItem="Uaq-CH-EqQ" firstAttribute="leading" secondItem="dI0-3d-ba6" secondAttribute="leading" id="Adx-Su-Sms"/>
                             <constraint firstItem="Uaq-CH-EqQ" firstAttribute="leading" secondItem="dI0-3d-ba6" secondAttribute="leading" id="JCp-1Y-rOb"/>
                             <constraint firstItem="dI0-3d-ba6" firstAttribute="bottom" secondItem="D5T-z9-gt5" secondAttribute="bottom" id="MPe-lc-Pv0"/>
+                            <constraint firstItem="61u-hX-RSR" firstAttribute="leading" secondItem="4qc-lA-Xas" secondAttribute="leading" id="O3a-Gr-GUI"/>
+                            <constraint firstAttribute="trailing" secondItem="61u-hX-RSR" secondAttribute="trailing" id="QtT-B5-udE"/>
+                            <constraint firstAttribute="bottom" secondItem="61u-hX-RSR" secondAttribute="bottom" id="R0R-TI-Jsg"/>
+                            <constraint firstAttribute="bottom" secondItem="Uaq-CH-EqQ" secondAttribute="bottom" id="WFo-ZP-MQy"/>
                             <constraint firstItem="D5T-z9-gt5" firstAttribute="top" secondItem="dI0-3d-ba6" secondAttribute="top" id="dye-bB-d6i"/>
                             <constraint firstItem="dI0-3d-ba6" firstAttribute="trailing" secondItem="D5T-z9-gt5" secondAttribute="trailing" id="e1L-62-Nvn"/>
                             <constraint firstAttribute="bottom" secondItem="Uaq-CH-EqQ" secondAttribute="bottom" id="gGs-er-WId"/>
+                            <constraint firstItem="61u-hX-RSR" firstAttribute="top" secondItem="4qc-lA-Xas" secondAttribute="top" id="kFW-zU-1bA"/>
+                            <constraint firstItem="Uaq-CH-EqQ" firstAttribute="trailing" secondItem="dI0-3d-ba6" secondAttribute="trailing" id="ncn-ze-sqq"/>
+                            <constraint firstItem="Uaq-CH-EqQ" firstAttribute="top" secondItem="dI0-3d-ba6" secondAttribute="top" constant="82" id="oYb-V9-wxF"/>
                             <constraint firstItem="D5T-z9-gt5" firstAttribute="leading" secondItem="dI0-3d-ba6" secondAttribute="leading" id="xkM-J4-gRg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ScrollView" destination="VME-wD-1kA" id="Sk9-Ij-r6f"/>
                         <outlet property="btnAddCardView" destination="nq8-3f-yHi" id="Ut4-LX-mdZ"/>
                         <outlet property="btnAddNewCard" destination="MFx-sT-sen" id="AXZ-EC-eBI"/>
                         <outlet property="btnCloseAddCardView" destination="Sn8-fQ-dfI" id="czO-9P-YaG"/>
@@ -316,6 +329,7 @@ at anytime </string>
                         <outlet property="txtLastName" destination="kL2-ON-SJ2" id="6Ue-ty-up9"/>
                         <outlet property="txtSecurityCode" destination="yY4-tu-aqE" id="C2P-V1-2Lc"/>
                         <outlet property="viewAddCard" destination="Uaq-CH-EqQ" id="bZf-Nb-Jbm"/>
+                        <outlet property="viewBack" destination="61u-hX-RSR" id="WfM-sZ-l9F"/>
                         <outlet property="viewMain" destination="D5T-z9-gt5" id="Uge-xw-oL3"/>
                         <outlet property="viewScroll" destination="MOw-B0-O8r" id="PFC-1G-bcs"/>
                     </connections>
@@ -326,6 +340,7 @@ at anytime </string>
         </scene>
     </scenes>
     <resources>
+        <image name="ic_2Lines" width="11.333333015441895" height="24"/>
         <namedColor name="LoginButton">
             <color red="0.9882352941176471" green="0.37647058823529411" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -337,6 +352,9 @@ at anytime </string>
         </namedColor>
         <namedColor name="TextFieldBackground">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TransparentColor">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

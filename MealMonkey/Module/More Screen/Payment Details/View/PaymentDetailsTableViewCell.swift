@@ -9,6 +9,7 @@ import UIKit
 
 class PaymentDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ViewCardCell: UIView!
     @IBOutlet weak var btnDeleteCard: UIButton!
     @IBOutlet weak var lblCardNumber: UILabel!
     override func awakeFromNib() {
