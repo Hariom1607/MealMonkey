@@ -33,12 +33,11 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource{
                 self.navigationController?.pushViewController(plvc, animated: true)
             }
             print("First row selected")
-//        case 1:
-//            let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-//            if let plvc = storyboard.instantiateViewController(withIdentifier: "AboutUsViewController") as? AboutUsViewController {
-//                plvc.objPagetype = .MyOrders
-//                self.navigationController?.pushViewController(plvc, animated: true)
-//            }
+        case 1:
+            let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
+            if let plvc = storyboard.instantiateViewController(withIdentifier: "MyOrderViewController") as? MyOrderViewController {
+                self.navigationController?.pushViewController(plvc, animated: true)
+            }
             print("Second row selected")
         case 2:
             print("Third row selected")

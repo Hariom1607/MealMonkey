@@ -30,10 +30,7 @@ class Menu{
                  strQuantity: "220 Items"),
             Menu(imageName: "ic_1x_DesertMenu",
                  strName: "Desserts",
-                 strQuantity: "155 Items"),
-            Menu(imageName: nil,
-                 strName: "Promotions",
-                 strQuantity: "25 Items") // No image
+                 strQuantity: "155 Items")
         ]
     }
 }

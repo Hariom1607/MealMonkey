@@ -89,6 +89,7 @@ class PaymentDetailsViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = false
         }
     }
+    
     @IBAction func switchValueChanged(_ sender: Any) {
     }
     
