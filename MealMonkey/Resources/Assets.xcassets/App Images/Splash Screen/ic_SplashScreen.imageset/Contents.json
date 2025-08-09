@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "ic_1xSplashScreen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_SplashScreen.png",
+      "filename" : "ic_2xSplashScreen.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "ic_3xSplashScreen.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

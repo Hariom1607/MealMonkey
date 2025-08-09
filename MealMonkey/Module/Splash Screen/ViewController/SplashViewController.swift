@@ -21,12 +21,10 @@ class SplashViewController: UIViewController {
         sleep(3)
 
         
-        let storyboard = UIStoryboard(name: "LoginStoryboard", bundle: nil)
+        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
         if let mlvc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController{
             self.navigationController?.pushViewController(mlvc, animated: true)
             
         }
     }
-
-
 }
