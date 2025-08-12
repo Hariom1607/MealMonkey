@@ -20,4 +20,18 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedProduct = arrProducts[indexPath.row]
+        
+        RecentItemsHelper.shared.addProduct(selectedProduct)
+        
+            let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+            if let detailVC = storyboard.instantiateViewController(withIdentifier: "FoodDetailViewController") as? FoodDetailViewController {
+                
+                detailVC.product = selectedProduct
+                
+                navigationController?.pushViewController(detailVC, animated: true)
+            }
+    }
+    
 }

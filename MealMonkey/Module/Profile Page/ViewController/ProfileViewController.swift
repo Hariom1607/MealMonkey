@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var viewImg: UIView!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtMobileNo: UITextField!
@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
         
         viewImg.layer.cornerRadius = viewImg.frame.size.width/2
         viewImg.layer.borderWidth = 2
-//        viewImg.layer.borderColor = UIColor.loginButton.cgColor
+        //        viewImg.layer.borderColor = UIColor.loginButton.cgColor
         viewImg.clipsToBounds = true
         
         let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSaveUser!]
@@ -42,7 +42,10 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func profileCartBtn() {
-        
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController{
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
     @objc func openImagePicker() {

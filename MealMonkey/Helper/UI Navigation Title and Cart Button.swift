@@ -31,7 +31,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .white
     }
 
-    
+
     func setLeftAlignedTitle(_ title: String, font: UIFont = .systemFont(ofSize: 29), textColor: UIColor = UIColor(named: "NavigationColor") ?? .black) {
         let titleLabel = UILabel()
         titleLabel.text = title

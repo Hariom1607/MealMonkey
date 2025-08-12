@@ -1167,14 +1167,6 @@ at anytime </string>
             </objects>
             <point key="canvasLocation" x="3069.4656488549617" y="15.492957746478874"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="BQf-6e-yyB">
-            <objects>
-                <viewController id="e4V-5B-kxD" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Pn-sF-P8V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2630" y="644"/>
-        </scene>
         <!--Map View Controller-->
         <scene sceneID="jxW-ca-mkq">
             <objects>
@@ -1197,11 +1189,20 @@ at anytime </string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a saved place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wat-KZ-UQC">
-                                                <rect key="frame" x="53.333333333333343" y="0.0" width="295.66666666666663" height="36"/>
+                                                <rect key="frame" x="53.333333333333329" y="0.0" width="138.66666666666669" height="36"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                 <color key="textColor" name="LoginLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBZ-4c-9CZ">
+                                                <rect key="frame" x="209.33333333333337" y="0.0" width="139.66666666666663" height="36"/>
+                                                <color key="tintColor" name="LoginButton"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="chevron.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="btnChooseSavedAddress:" destination="r9n-WS-Wbo" eventType="touchUpInside" id="ypA-Ih-XJD"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="N4e-IC-6u0"/>
@@ -1219,7 +1220,22 @@ at anytime </string>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeS-C4-fx8">
                                         <rect key="frame" x="0.0" y="60" width="393" height="448"/>
                                         <standardMapConfiguration key="preferredConfiguration"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="r9n-WS-Wbo" id="Mkf-q1-oO3"/>
+                                        </connections>
                                     </mapView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Za-NV8">
+                                        <rect key="frame" x="320" y="435" width="50" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="5IM-Lr-RcL"/>
+                                            <constraint firstAttribute="width" constant="50" id="oXp-ce-q8n"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="Ic_Current_Location_Target"/>
+                                        <connections>
+                                            <action selector="btnCurrentLocationTapped:" destination="r9n-WS-Wbo" eventType="touchUpInside" id="ew9-c4-xkj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1228,11 +1244,13 @@ at anytime </string>
                                     <constraint firstItem="IAK-dm-wEY" firstAttribute="top" secondItem="1UZ-KP-8qw" secondAttribute="bottom" constant="24" id="Jkw-bH-i2r"/>
                                     <constraint firstAttribute="trailing" secondItem="IAK-dm-wEY" secondAttribute="trailing" constant="22" id="SEd-Rr-Fmj"/>
                                     <constraint firstAttribute="trailing" secondItem="KeS-C4-fx8" secondAttribute="trailing" id="TcA-R8-NdJ"/>
+                                    <constraint firstItem="1UZ-KP-8qw" firstAttribute="top" secondItem="waL-Za-NV8" secondAttribute="bottom" constant="35" id="WA2-VW-8pt"/>
                                     <constraint firstItem="1UZ-KP-8qw" firstAttribute="leading" secondItem="7sr-op-KTD" secondAttribute="leading" constant="21" id="X8b-V1-0VW"/>
                                     <constraint firstAttribute="trailing" secondItem="1UZ-KP-8qw" secondAttribute="trailing" constant="21" id="YhF-4h-TWm"/>
                                     <constraint firstItem="KeS-C4-fx8" firstAttribute="leading" secondItem="7sr-op-KTD" secondAttribute="leading" id="bYd-tU-ncY"/>
                                     <constraint firstAttribute="bottom" secondItem="IAK-dm-wEY" secondAttribute="bottom" constant="34" id="oqE-uL-VjB"/>
                                     <constraint firstItem="IAK-dm-wEY" firstAttribute="leading" secondItem="7sr-op-KTD" secondAttribute="leading" constant="22" id="pBL-8D-jSk"/>
+                                    <constraint firstAttribute="trailing" secondItem="waL-Za-NV8" secondAttribute="trailing" constant="23" id="zXH-Kp-YCx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1246,7 +1264,10 @@ at anytime </string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnChangeLocation" destination="waL-Za-NV8" id="eW2-25-Vkq"/>
+                        <outlet property="btnSavedAddress" destination="eBZ-4c-9CZ" id="sX2-yW-10Q"/>
                         <outlet property="mapView" destination="KeS-C4-fx8" id="yT7-8E-wbN"/>
+                        <outlet property="txtSearchAddress" destination="1UZ-KP-8qw" id="Q5q-GK-u3p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84d-fB-7XE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1255,6 +1276,8 @@ at anytime </string>
         </scene>
     </scenes>
     <resources>
+        <image name="Ic_Current_Location_Target" width="52" height="58"/>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="ic_2Lines" width="11.333333015441895" height="24"/>
         <image name="ic_2lineOrange" width="6.3333334922790527" height="12"/>
         <image name="ic_ThankYou" width="226.66667175292969" height="249"/>

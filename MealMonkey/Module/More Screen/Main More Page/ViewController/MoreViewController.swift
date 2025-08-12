@@ -10,7 +10,7 @@ import UIKit
 class MoreViewController: UIViewController {
     
     let arrTitles: [More] = More.items
-
+    
     @IBOutlet weak var tblMore: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,11 @@ class MoreViewController: UIViewController {
         setLeftAlignedTitle("More")
         setCartButton(target: self, action: #selector(cartButtonTapped))
     }
-
+    
     @objc func cartButtonTapped() {
-        
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController{
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
 }
