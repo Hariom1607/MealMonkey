@@ -23,11 +23,9 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var btnLocationChange: UIButton!
     @IBOutlet weak var tblPaymentDetails: UITableView!
-    
     @IBOutlet weak var txtLastName: UITextField!
     @IBOutlet var txtFirstName: [UITextField]!
     @IBOutlet weak var txtCardNumber: UITextField!
-    
     @IBOutlet weak var btnBackToHome: UIButton!
     @IBOutlet weak var btnTrackOrder: UIButton!
     @IBOutlet weak var btnCloseAddCardView: UIButton!
@@ -41,10 +39,12 @@ class CheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let allTextFields = [txtLastName!, txtFirstName!, txtCardNumber!, txtExpiryYear!, txtExpiryMonth!, txtSecurityCode!]
+        
         let allViews = [btnSendOrder!, btnTrackOrder!, btnAddNewCardPopUp!]
         
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
-       
+        
         sendOrderView.isHidden = true
         addCardView.isHidden = true
         viewTransparent.isHidden = true
@@ -54,7 +54,7 @@ class CheckoutViewController: UIViewController {
         tblPaymentDetails.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "CardTableViewCell")
         tblPaymentDetails.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
         tblPaymentDetails.register(UINib(nibName: "UpiTableViewCell", bundle: nil), forCellReuseIdentifier: "UpiTableViewCell")
-
+        
     }
     
     @objc func backBtnTapped() {
@@ -90,8 +90,6 @@ class CheckoutViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = false
         }
     }
-    
-    
     
     @IBAction func btnSendOrderAction(_ sender: Any) {
         sendOrderView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)

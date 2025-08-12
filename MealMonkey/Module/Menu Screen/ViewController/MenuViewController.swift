@@ -8,7 +8,7 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-
+    
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var tblMenu: UITableView!
     
@@ -20,11 +20,11 @@ class MenuViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         setLeftAlignedTitle("Menu")
         setCartButton(target: self, action: #selector(cartBtnTapped))
-            
+        
         txtSearch.setPadding(left: 34, right: 34)
         let allviews = [txtSearch!]
         styleViews(allviews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
-
+        
         // Do any additional setup after loading the view.
         
         tblMenu.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
@@ -34,6 +34,9 @@ class MenuViewController: UIViewController {
     }
     
     @objc func cartBtnTapped() {
-        
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
 }

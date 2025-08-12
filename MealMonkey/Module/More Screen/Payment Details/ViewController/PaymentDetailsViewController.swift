@@ -94,7 +94,10 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     @objc func btnCartPressed() {
-        
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController{
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
     
 }

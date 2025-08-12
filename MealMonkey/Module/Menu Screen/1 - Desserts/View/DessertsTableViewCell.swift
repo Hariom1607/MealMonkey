@@ -28,13 +28,13 @@ class DessertsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(with product: Product){
-        imgProduct.image = UIImage(named: product.imageName)
-        lblCategoryName.text = product.categoryName
-        lblRestaurantName.text = product.restaurantName
-        lblRating.text = product.rating
-        lblProductName.text = product.productName
-        imgShade.image = UIImage(named: product.imageShade)
+    func configure(with product: ProductModel){
+        imgProduct.image = UIImage(named: product.strProductImage)
+        lblCategoryName.text = "\(product.objProductCategory)"
+        lblRestaurantName.text = "Meal Monkey" 
+        lblRating.text = String(format: "%.1f", product.floatProductRating)
+        lblProductName.text = product.strProductName
+        imgShade.image = UIImage(named: "ic_shadeDesserts")
     }
     
 }

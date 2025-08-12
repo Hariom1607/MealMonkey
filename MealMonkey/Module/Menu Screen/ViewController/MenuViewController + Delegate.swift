@@ -35,22 +35,21 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 0:
-            print("Food")
-        case 1:
-            print("Bevarages")
-        case 2:
-            let storyboard = UIStoryboard(name: "MenuStoryboard",bundle: nil)
-            if let dessertvc = storyboard.instantiateViewController(withIdentifier: "DessertsViewController") as? DessertsViewController {
-                self.navigationController?.pushViewController(dessertvc,animated: true)
+        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "DessertsViewController") as? DessertsViewController {
+            
+            switch indexPath.row {
+            case 0:
+                vc.selectedCategory = .food
+            case 1:
+                vc.selectedCategory = .Beverages
+            case 2:
+                vc.selectedCategory = .Desserts
+            default:
+                return
             }
             
-        default:
-            break
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
-    
 }
