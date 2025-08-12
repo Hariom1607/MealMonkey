@@ -101,8 +101,8 @@ class FoodDetailViewController: UIViewController {
         guard let appDelegate = appDelegate else { return }
         
         if let existingIndex = appDelegate.arrCart.firstIndex(where: { $0.intId == productToAdd.intId }) {
-            appDelegate.arrCart[existingIndex].intProductQty = quantity
-            print("Updated \(productToAdd.strProductName) quantity to \(quantity).")
+            appDelegate.arrCart[existingIndex].intProductQty! += quantity
+            print("Updated \(productToAdd.strProductName) quantity to \(appDelegate.arrCart[existingIndex].intProductQty ?? 0).")
         } else {
             let newProduct = productToAdd
             newProduct.intProductQty = quantity
@@ -110,6 +110,7 @@ class FoodDetailViewController: UIViewController {
             print("Added \(productToAdd.strProductName) with quantity \(quantity).")
         }
     }
+
     
     @objc func cartBtnTapped() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)

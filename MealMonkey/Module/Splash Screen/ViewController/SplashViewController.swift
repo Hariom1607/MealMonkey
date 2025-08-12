@@ -20,7 +20,6 @@ class SplashViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         sleep(3)
 
-        
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
         if let mlvc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController{
             self.navigationController?.pushViewController(mlvc, animated: true)

@@ -1,19 +1,18 @@
 //
-//  MyOrderTableViewCell.swift
+//  OrderListTableViewCell.swift
 //  MealMonkey
 //
-//  Created by Hariom Sharma on 08/08/25.
+//  Created by Hariom Sharma on 12/08/25.
 //
 
 import UIKit
 
-class MyOrderTableViewCell: UITableViewCell {
+class OrderListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var lblProductPrice: UILabel!
-    @IBOutlet weak var lblProductsName: UILabel!
-    @IBOutlet weak var lblProductQty: UILabel!
-    
-   
+    @IBOutlet weak var lblProductName: UILabel!
+    @IBOutlet weak var lblTotalPrice: UILabel!
+    @IBOutlet weak var lblOrderNo: UILabel!
+    @IBOutlet weak var imgOrder: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

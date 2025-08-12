@@ -15,6 +15,10 @@ class MyOrderViewController: UIViewController {
     @IBOutlet weak var btnAddNotes: UIButton!
     @IBOutlet weak var btnCheckout: UIButton!
     @IBOutlet weak var tblMyOrders: UITableView!
+    
+    var orderProducts: [ProductModel] = []
+    let deliveryCost: Double = 5.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +27,15 @@ class MyOrderViewController: UIViewController {
         btnCheckout.layer.cornerRadius = 28
         tblMyOrders.register(UINib(nibName: "MyOrderTableViewCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableViewCell")
         
+        calculateTotals()
+        
+    }
+    
+    func calculateTotals() {
+        let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
+        lblSubTotal.text = "$\(String(format: "%.2f", subtotal))"
+        lblDeliveryCost.text = "$\(String(format: "%.2f", deliveryCost))"
+        lblTotal.text = "$\(String(format: "%.2f", subtotal + deliveryCost))"
     }
     
     @objc func backBtnTapped() {

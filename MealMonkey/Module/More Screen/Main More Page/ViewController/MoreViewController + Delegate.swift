@@ -35,8 +35,8 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource{
             print("First row selected")
         case 1:
             let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-            if let plvc = storyboard.instantiateViewController(withIdentifier: "MyOrderViewController") as? MyOrderViewController {
-                self.navigationController?.pushViewController(plvc, animated: true)
+            if let mlvc = storyboard.instantiateViewController(withIdentifier: "OrderListViewController") as? OrderListViewController {
+                self.navigationController?.pushViewController(mlvc, animated: true)
             }
             print("Second row selected")
         case 2:
