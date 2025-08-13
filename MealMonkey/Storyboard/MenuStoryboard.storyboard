@@ -282,13 +282,6 @@
                                                                             <constraint firstAttribute="height" constant="99" id="H2m-6u-JaN"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_btncart" translatesAutoresizingMaskIntoConstraints="NO" id="vE0-A9-Xxl">
-                                                                        <rect key="frame" x="321.66666666666669" y="36" width="47" height="47"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="47" id="PhJ-oR-glp"/>
-                                                                            <constraint firstAttribute="height" constant="47" id="QVB-AJ-gVK"/>
-                                                                        </constraints>
-                                                                    </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGG-Qt-o28">
                                                                         <rect key="frame" x="160" y="27" width="56.333333333333343" height="14"/>
                                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
@@ -301,9 +294,17 @@
                                                                         <color key="textColor" red="0.2901960784" green="0.29411764709999999" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_btncart" translatesAutoresizingMaskIntoConstraints="NO" id="vE0-A9-Xxl">
+                                                                        <rect key="frame" x="317.66666666666669" y="36" width="47" height="47"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="47" id="PhJ-oR-glp"/>
+                                                                            <constraint firstAttribute="height" constant="47" id="QVB-AJ-gVK"/>
+                                                                        </constraints>
+                                                                    </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="vE0-A9-Xxl" firstAttribute="leading" secondItem="LiN-8D-lRe" secondAttribute="trailing" constant="75" id="90W-6O-a1p"/>
                                                                     <constraint firstItem="DGG-Qt-o28" firstAttribute="top" secondItem="9ee-oL-CF9" secondAttribute="top" constant="27" id="FKp-rF-OUi"/>
                                                                     <constraint firstItem="LiN-8D-lRe" firstAttribute="leading" secondItem="uPS-Sn-xb8" secondAttribute="trailing" constant="52" id="HNb-6Y-5b3"/>
                                                                     <constraint firstItem="uPS-Sn-xb8" firstAttribute="top" secondItem="9ee-oL-CF9" secondAttribute="top" id="KX7-1E-IJ5"/>
@@ -354,7 +355,6 @@
                                                             <constraint firstItem="Ojf-uS-7Yy" firstAttribute="leading" secondItem="O65-YI-nMg" secondAttribute="leading" constant="22" id="gsT-5G-1MQ"/>
                                                             <constraint firstItem="Uze-tf-2Vr" firstAttribute="centerX" secondItem="O65-YI-nMg" secondAttribute="centerX" id="mFr-O5-hqd"/>
                                                             <constraint firstAttribute="trailing" secondItem="Ycw-sv-Tpz" secondAttribute="trailing" constant="21" id="nHm-Dg-6yp"/>
-                                                            <constraint firstItem="vE0-A9-Xxl" firstAttribute="centerX" secondItem="fvN-eP-Px1" secondAttribute="centerX" id="r5b-oz-xQ6"/>
                                                             <constraint firstItem="9ee-oL-CF9" firstAttribute="leading" secondItem="O65-YI-nMg" secondAttribute="leading" id="rfd-nW-rHy"/>
                                                             <constraint firstItem="oU4-w7-tEo" firstAttribute="leading" secondItem="O65-YI-nMg" secondAttribute="leading" constant="22" id="rlS-C0-fWH"/>
                                                             <constraint firstItem="Ycw-sv-Tpz" firstAttribute="top" secondItem="HEp-da-0tJ" secondAttribute="bottom" constant="21" id="sUS-jE-TLt"/>

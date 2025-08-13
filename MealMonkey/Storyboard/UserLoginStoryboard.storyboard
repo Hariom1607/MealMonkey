@@ -55,6 +55,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Inter-Regular" family="Inter" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="C2e-ac-5rB"/>
+                                                        </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mqm-9w-QNL">
                                                         <rect key="frame" x="34" y="228" width="325" height="56"/>
@@ -64,7 +67,22 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="swF-98-Ge3"/>
+                                                        </connections>
                                                     </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-Ge-TxX">
+                                                        <rect key="frame" x="300" y="228" width="59" height="56"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="56" id="8P8-Jy-XWE"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="PlaceholderColor"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="btnEyeAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MyM-x6-gm7"/>
+                                                        </connections>
+                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDa-1U-Kh7">
                                                         <rect key="frame" x="34" y="312" width="325" height="56"/>
                                                         <color key="backgroundColor" name="LoginButton"/>
@@ -170,18 +188,6 @@
                                                             <action selector="btnSignupAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wTB-N9-Esg"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-Ge-TxX">
-                                                        <rect key="frame" x="34" y="228" width="325" height="56"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="56" id="8P8-Jy-XWE"/>
-                                                        </constraints>
-                                                        <color key="tintColor" name="PlaceholderColor"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
-                                                        <connections>
-                                                            <action selector="btnEyeAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MyM-x6-gm7"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -214,7 +220,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="BPH-ge-7le" secondAttribute="trailing" constant="30" id="txJ-Up-3mx"/>
                                                     <constraint firstItem="hRw-nL-mpO" firstAttribute="centerX" secondItem="ujm-Q9-L2y" secondAttribute="centerX" id="vjq-TX-P3Y"/>
                                                     <constraint firstItem="eDa-1U-Kh7" firstAttribute="top" secondItem="qnn-Ge-TxX" secondAttribute="bottom" constant="28" id="xBs-tN-v0H"/>
-                                                    <constraint firstItem="qnn-Ge-TxX" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="34" id="zDA-dm-wlS"/>
+                                                    <constraint firstItem="qnn-Ge-TxX" firstAttribute="leading" secondItem="ujm-Q9-L2y" secondAttribute="leading" constant="300" id="zDA-dm-wlS"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -307,6 +313,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="CaW-kI-8zj" id="YXk-4Q-SNU"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btB-aF-SyE">
                                                                 <rect key="frame" x="0.0" y="84" width="325" height="56"/>
@@ -316,6 +325,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="CaW-kI-8zj" id="oFg-Ww-WEb"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a2k-3Z-Qf3">
                                                                 <rect key="frame" x="0.0" y="168" width="325" height="56"/>
@@ -325,6 +337,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="CaW-kI-8zj" id="bND-fE-ni7"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ehn-Fy-du4">
                                                                 <rect key="frame" x="0.0" y="252" width="325" height="56"/>
@@ -334,6 +349,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="CaW-kI-8zj" id="yLH-G0-M0p"/>
+                                                                </connections>
                                                             </textField>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KJh-FO-xKv">
                                                                 <rect key="frame" x="0.0" y="336" width="325" height="56"/>
@@ -342,6 +360,9 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="CaW-kI-8zj" id="PLR-Gr-1aW"/>
+                                                                        </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58B-SW-eTL">
                                                                         <rect key="frame" x="281" y="0.0" width="44" height="56"/>
@@ -368,6 +389,9 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                                        <connections>
+                                                                            <outlet property="delegate" destination="CaW-kI-8zj" id="8ij-2W-bso"/>
+                                                                        </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-w9-Y7i">
                                                                         <rect key="frame" x="281" y="0.0" width="44" height="56"/>

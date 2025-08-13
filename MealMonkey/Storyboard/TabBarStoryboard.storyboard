@@ -232,17 +232,17 @@ meals and more!</string>
                                         </constraints>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u1Y-De-riK">
-                                        <rect key="frame" x="21" y="95" width="351" height="45"/>
+                                        <rect key="frame" x="21" y="95" width="351" height="56"/>
                                         <color key="backgroundColor" name="TextFieldBackground"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="Iiz-G1-hof"/>
+                                            <constraint firstAttribute="height" constant="56" id="Iiz-G1-hof"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NSr-bd-q93">
-                                        <rect key="frame" x="0.0" y="170" width="393" height="382"/>
+                                        <rect key="frame" x="0.0" y="181" width="393" height="371"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="rwv-m7-VVK" id="J2G-2w-4Ys"/>

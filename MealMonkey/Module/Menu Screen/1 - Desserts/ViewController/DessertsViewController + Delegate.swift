@@ -10,18 +10,18 @@ import UIKit
 
 extension DessertsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrProducts.count
+        return filteredProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DessertsTableViewCell", for: indexPath) as! DessertsTableViewCell
-        let product = arrProducts[indexPath.row]
+        let product = filteredProducts[indexPath.row]
         cell.configure(with: product)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedProduct = arrProducts[indexPath.row]
+        let selectedProduct = filteredProducts[indexPath.row]
         
         RecentItemsHelper.shared.addProduct(selectedProduct)
         

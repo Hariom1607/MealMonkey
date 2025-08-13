@@ -17,6 +17,16 @@ class CardTableViewCell: UITableViewCell {
         super.awakeFromNib()
         let allviews = [viewCard!]
         styleViews(allviews, cornerRadius: 6, borderWidth: 1, borderColor: UIColor.black.cgColor)
+        
+        btnCardSelection.setImage(UIImage(systemName: "circle"), for: .normal)
+        btnCardSelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+        btnCardSelection.tintColor = .loginButton // Or whatever color you want
+        btnCardSelection.backgroundColor = .clear
+        btnCardSelection.layer.cornerRadius = btnCardSelection.frame.height / 2
+        btnCardSelection.clipsToBounds = true
+
+        self.selectionStyle = .none
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

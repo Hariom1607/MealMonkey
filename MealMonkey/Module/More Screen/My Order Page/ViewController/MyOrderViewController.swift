@@ -45,6 +45,7 @@ class MyOrderViewController: UIViewController {
     @IBAction func btnCheckOutAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
         if let mlvc = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
+            mlvc.orderProducts = self.orderProducts
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }

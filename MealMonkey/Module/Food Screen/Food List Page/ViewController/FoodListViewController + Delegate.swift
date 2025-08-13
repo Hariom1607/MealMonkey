@@ -31,7 +31,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             cell.collectionType = .category
             cell.selectedCategory = selectedCategory
-            cell.categories = ProductCategory.allCases
+            cell.categories = filteredCategories
             cell.lblCollViewHeading.isHidden = true
             cell.btnViewAll.isHidden = true
             cell.collViewHeight.constant = 113 // fixed
@@ -42,7 +42,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             cell.btnViewAll.isHidden = false
             cell.lblCollViewHeading.text = "Popular"
             if selectedCategory == .All {
-                cell.products = arrProductData.filter { $0.floatProductRating >= 4.0 && $0.floatProductRating < 4.5 }
+                cell.products = filteredProducts.filter { $0.floatProductRating >= 4.0 && $0.floatProductRating < 4.5 }
             } else {
                 cell.products = arrProductData.filter {
                     $0.floatProductRating >= 4.0 &&
@@ -59,7 +59,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             cell.lblCollViewHeading.text = "Most Popular"
             cell.collViewHeight.constant = 185
             if selectedCategory == .All {
-                cell.products = arrProductData.filter { $0.floatProductRating >= 4.5 && $0.floatProductRating <= 5.0 }
+                cell.products = filteredProducts.filter { $0.floatProductRating >= 4.5 && $0.floatProductRating <= 5.0 }
             } else {
                 cell.products = arrProductData.filter {
                     $0.floatProductRating >= 4.5 &&

@@ -38,4 +38,23 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
+    
+    func saveOrdersToUserDefaults(_ orders: [[ProductModel]]) {
+        let ordersArray = orders.map { order in
+            order.map { product in
+                productToDict(product) // reuse your helper function
+            }
+        }
+        UserDefaults.standard.set(ordersArray, forKey: "orders")
+    }
+    
+    func loadOrdersFromUserDefaults() -> [[ProductModel]] {
+        guard let savedOrders = UserDefaults.standard.array(forKey: "orders") as? [[[String: Any]]] else {
+            return []
+        }
+        return savedOrders.map { orderDictArray in
+            orderDictArray.map { dictToProduct($0) } // reuse your helper
+        }
+    }
+    
 }

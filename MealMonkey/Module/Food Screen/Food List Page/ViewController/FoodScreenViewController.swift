@@ -18,6 +18,9 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     var objProductCategory: ProductModel?
     var recentItems: [ProductModel] = []
     
+    var filteredProducts: [ProductModel] = []
+    var filteredCategories: [ProductCategory] = []
+    
     override func viewWillAppear(_ animated: Bool) {
         recentItems = RecentItemsHelper.shared.getRecentItems()
         tblRecentItems.reloadData()
@@ -25,7 +28,15 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        filteredProducts = arrProductData
+        filteredCategories = ProductCategory.allCases
+        
+        styleViews([txtSearchFood], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        setTextFieldPadding([txtSearchFood])
+        
+        txtSearchFood.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+        
         setLeftAlignedTitle("Good morning Hariom!")
         setCartButton(target: self, action: #selector(btnCartTapped))
         
@@ -35,6 +46,30 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             self.tblRecentItems.reloadData()
         }
     }
+    
+    @objc func searchTextChanged(_ textField: UITextField) {
+        let searchText = textField.text?.lowercased() ?? ""
+        
+        if searchText.isEmpty {
+            // Reset to all data
+            filteredProducts = arrProductData
+            filteredCategories = ProductCategory.allCases
+        } else {
+            // Filter products by name or type
+            filteredProducts = arrProductData.filter {
+                $0.strProductName.lowercased().contains(searchText) ||
+                $0.objProductCategory.rawValue.lowercased().contains(searchText)
+            }
+            
+            // Filter categories
+            filteredCategories = ProductCategory.allCases.filter {
+                $0.rawValue.lowercased().contains(searchText)
+            }
+        }
+        
+        tblRecentItems.reloadData()
+    }
+    
     
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)

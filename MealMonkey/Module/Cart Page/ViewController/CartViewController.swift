@@ -15,6 +15,7 @@ class CartViewController: UIViewController {
     var cartItems: [ProductModel] {
         return (UIApplication.shared.delegate as? AppDelegate)?.arrCart ?? []
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +24,16 @@ class CartViewController: UIViewController {
         setLeftAlignedTitleWithBack("Cart", target: self, action: #selector(backBtnTapped))
         
         tblCart.register(UINib(nibName: "CartTableViewCell", bundle: nil), forCellReuseIdentifier: "CartTableViewCell")
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            // Load saved cart
+            let savedCartArray = loadCartFromUserDefaults()
+            appDelegate.arrCart = savedCartArray.map { dictToProduct($0) }
+            
+            // Load saved orders (THIS WAS MISSING)
+            let savedOrders = loadOrdersFromUserDefaults()
+            appDelegate.arrOrders = savedOrders
+        }
         
     }
     
@@ -38,25 +49,27 @@ class CartViewController: UIViewController {
             // Save the current cart as a new order
             appDelegate.arrOrders.append(appDelegate.arrCart)
             
-            // Clear the cart
+            // Save orders using helper function from helpers file
+            saveOrdersToUserDefaults(appDelegate.arrOrders)
+            
+            // Clear cart
             appDelegate.arrCart.removeAll()
+            saveCartToUserDefaults(cartArray: [])
             
             // Show success alert
             let alert = UIAlertController(title: "Order Placed",
                                           message: "Your order has been placed successfully!",
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                // Optional: Go back to previous page or reset cart UI
                 self.tblCart.reloadData()
             }))
-            present(alert, animated: true, completion: nil)
+            present(alert, animated: true)
         } else {
-            // Show warning if cart is empty
             let alert = UIAlertController(title: "Cart is Empty",
                                           message: "Please add items to your cart before placing an order.",
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
         }
     }
     

@@ -27,6 +27,8 @@ class PaymentDetailsViewController: UIViewController {
     @IBOutlet weak var btnAddNewCard: UIButton!
     @IBOutlet weak var tblCardDetails: UITableView!
     
+    var arrCards: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,19 +47,16 @@ class PaymentDetailsViewController: UIViewController {
         
         ScrollView.backgroundColor = .clear
         
-        viewAddCard.layer.cornerRadius = 20
-        viewAddCard.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        viewAddCard.layer.shadowColor = UIColor.black.cgColor
-        viewAddCard.layer.shadowOpacity = 0.2
-        viewAddCard.layer.shadowOffset = CGSize(width: 0, height: -2)
-        viewAddCard.layer.shadowRadius = 10
-        
         viewScroll.layer.cornerRadius = 20
         viewScroll.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewScroll.layer.shadowColor = UIColor.black.cgColor
         viewScroll.layer.shadowOpacity = 0.2
         viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
         viewScroll.layer.shadowRadius = 10
+        
+        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
+            arrCards = savedCards
+        }
         
     }
     
@@ -77,6 +76,31 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     @IBAction func btnAddCardViewAction(_ sender: Any) {
+        
+        guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
+            showAlert(message: "Card number must be exactly 16 digits.")
+            return
+        }
+        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
+            showAlert(message: "Expiry month must be 2 digits.")
+            return
+        }
+        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
+            showAlert(message: "Expiry year must be 2 digits.")
+            return
+        }
+        
+        arrCards.append(cardNumber)
+        saveCardsToDefaults()
+        tblCardDetails.reloadData()
+        btnRemoveAddCardView(sender)
+        
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func btnRemoveAddCardView(_ sender: Any) {

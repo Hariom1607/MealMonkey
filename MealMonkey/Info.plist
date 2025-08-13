@@ -21,6 +21,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to show it on the map</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show it on the map</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Black.otf</string>
