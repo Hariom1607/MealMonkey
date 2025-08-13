@@ -20,8 +20,6 @@ class LoginViewController: UIViewController {
     
     var isPasswordVisible: Bool = false
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
                 

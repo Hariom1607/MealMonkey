@@ -15,6 +15,7 @@ class DessertsViewController: UIViewController {
     var selectedCategory: ProductType = .food
     var arrProducts: [ProductModel] = []
     var selectedProduct: Menu?
+    var filteredProducts: [ProductModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,11 @@ class DessertsViewController: UIViewController {
             titleText = "Desserts"
         }
         
+        arrProducts = ProductModel.addProductData().filter { $0.objProductType == selectedCategory }
+        filteredProducts = arrProducts
+        
+        txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+        
         setLeftAlignedTitleWithBack(titleText, target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))
         
@@ -39,6 +45,20 @@ class DessertsViewController: UIViewController {
         
         arrProducts = ProductModel.addProductData().filter { $0.objProductType == selectedCategory }
         
+    }
+    
+    @objc func searchTextChanged(_ textField: UITextField) {
+        let searchText = textField.text?.lowercased() ?? ""
+        
+        if searchText.isEmpty {
+            filteredProducts = arrProducts
+        } else {
+            filteredProducts = arrProducts.filter {
+                $0.strProductName.lowercased().contains(searchText)
+            }
+        }
+        
+        tblDesserts.reloadData()
     }
     
     @objc func dessertBackBtn(){

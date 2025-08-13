@@ -11,12 +11,12 @@ class OrderListViewController: UIViewController {
     
     @IBOutlet weak var tblOrderList: UITableView!
     
-    var orders: [[ProductModel]] {
-        return (UIApplication.shared.delegate as? AppDelegate)?.arrOrders ?? []
-    }
+    var orders: [[ProductModel]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        orders = loadOrdersFromUserDefaults()
         
         setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(backBtnTapped))
         tblOrderList.register(UINib(nibName: "OrderListTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderListTableViewCell")

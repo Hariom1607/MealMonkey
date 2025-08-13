@@ -109,6 +109,9 @@ class FoodDetailViewController: UIViewController {
             appDelegate.arrCart.append(newProduct)
             print("Added \(productToAdd.strProductName) with quantity \(quantity).")
         }
+        
+        let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
+        saveCartToUserDefaults(cartArray: cartDictArray)
     }
 
     
