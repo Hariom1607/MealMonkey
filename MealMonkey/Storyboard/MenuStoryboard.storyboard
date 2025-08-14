@@ -453,9 +453,16 @@
                                             <outlet property="delegate" destination="1gv-Fx-c49" id="nqR-b5-Rbj"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart List is empty." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFA-gE-QMw">
+                                        <rect key="frame" x="109.33333333333333" y="320" width="174.66666666666669" height="26"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
+                                        <color key="textColor" name="LoginLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="IFA-gE-QMw" firstAttribute="centerX" secondItem="WRM-kD-iQk" secondAttribute="centerX" id="6WI-94-vnQ"/>
                                     <constraint firstAttribute="bottom" secondItem="5jO-PX-pb1" secondAttribute="bottom" id="9rX-ke-24Q"/>
                                     <constraint firstAttribute="trailing" secondItem="5jO-PX-pb1" secondAttribute="trailing" constant="21" id="RLN-pE-Gv5"/>
                                     <constraint firstItem="ger-sy-VST" firstAttribute="top" secondItem="WRM-kD-iQk" secondAttribute="top" id="WHn-kT-uAM"/>
@@ -463,6 +470,7 @@
                                     <constraint firstAttribute="trailing" secondItem="ger-sy-VST" secondAttribute="trailing" id="l2U-sw-i7X"/>
                                     <constraint firstItem="ger-sy-VST" firstAttribute="leading" secondItem="WRM-kD-iQk" secondAttribute="leading" id="nde-qv-5Lo"/>
                                     <constraint firstItem="5jO-PX-pb1" firstAttribute="leading" secondItem="WRM-kD-iQk" secondAttribute="leading" constant="21" id="tgO-OB-J3I"/>
+                                    <constraint firstItem="IFA-gE-QMw" firstAttribute="centerY" secondItem="WRM-kD-iQk" secondAttribute="centerY" id="zNm-P2-3wO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -477,6 +485,7 @@
                     </view>
                     <connections>
                         <outlet property="btnPlaceOrder" destination="5jO-PX-pb1" id="nUV-LP-p3d"/>
+                        <outlet property="lblEmpty" destination="IFA-gE-QMw" id="yu4-L2-uGa"/>
                         <outlet property="tblCart" destination="ger-sy-VST" id="Cc8-dC-WYX"/>
                     </connections>
                 </viewController>

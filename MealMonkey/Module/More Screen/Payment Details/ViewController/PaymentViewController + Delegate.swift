@@ -44,6 +44,7 @@ extension PaymentDetailsViewController: UITableViewDelegate, UITableViewDataSour
             arrCards.remove(at: indexPath.row)
             saveCardsToDefaults()
             tblCardDetails.reloadData()
+            updateEmptyLabel()
         }
     }
     
