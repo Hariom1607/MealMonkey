@@ -36,8 +36,19 @@ class CheckoutViewController: UIViewController {
     
     var arrCards: [String] = []
     var selectedPaymentIndex: Int = 0 // Default COD is selected
-    var orderProducts: [ProductModel] = [] 
+    var orderProducts: [ProductModel] = []
     let deliveryCost: Double = 5.0         // Default delivery cost
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Always update current location label
+        if let address = UserDefaults.standard.string(forKey: "currentAddress") {
+            lblCurrentLocation.text = address
+        } else {
+            lblCurrentLocation.text = "Select your location"
+        }
+    }
 
     
     override func viewDidLoad() {
@@ -70,8 +81,14 @@ class CheckoutViewController: UIViewController {
     
     @IBAction func btnChangeLocationAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
-            self.navigationController?.pushViewController(mlvc, animated: true)
+        if let mapVC = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            
+            // Pass closure to update label immediately
+            mapVC.onLocationSelected = { [weak self] address in
+                self?.lblCurrentLocation.text = address
+            }
+            
+            self.navigationController?.pushViewController(mapVC, animated: true)
         }
     }
     

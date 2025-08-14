@@ -9,6 +9,7 @@ import UIKit
 
 class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate {
     
+    @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var tblRecentItems: UITableView!
     @IBOutlet weak var txtSearchFood: UITextField!
     @IBOutlet weak var btnCurrentLocation: UIButton!
@@ -24,6 +25,12 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     override func viewWillAppear(_ animated: Bool) {
         recentItems = RecentItemsHelper.shared.getRecentItems()
         tblRecentItems.reloadData()
+        
+        if let address = UserDefaults.standard.string(forKey: "currentAddress") {
+            lblCurrentLocation.text = address
+        } else {
+            lblCurrentLocation.text = "Select your location"
+        }
     }
     
     override func viewDidLoad() {

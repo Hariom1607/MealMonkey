@@ -9,6 +9,7 @@ import UIKit
 
 class OrderListViewController: UIViewController {
     
+    @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var tblOrderList: UITableView!
     
     var orders: [[ProductModel]] = []
@@ -21,6 +22,19 @@ class OrderListViewController: UIViewController {
         setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(backBtnTapped))
         tblOrderList.register(UINib(nibName: "OrderListTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderListTableViewCell")
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        orders = loadOrdersFromUserDefaults() 
+        updateEmptyLabel()
+        tblOrderList.reloadData()
+    }
+    
+    func updateEmptyLabel() {
+        let isEmpty = orders.isEmpty
+        lblEmpty.isHidden = !isEmpty
+        tblOrderList.isHidden = isEmpty
     }
     
     @objc func backBtnTapped() {

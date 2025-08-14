@@ -9,6 +9,7 @@ import UIKit
 
 class CartViewController: UIViewController {
     
+    @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var btnPlaceOrder: UIButton!
     @IBOutlet weak var tblCart: UITableView!
     
@@ -38,7 +39,16 @@ class CartViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        updateEmptyLabel()
         tblCart.reloadData()
+    }
+    
+    func updateEmptyLabel() {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let isCartEmpty = appDelegate.arrCart.isEmpty
+            lblEmpty.isHidden = !isCartEmpty
+            btnPlaceOrder.isHidden = isCartEmpty
+        }
     }
     
     @IBAction func btnPlaceOrderAction(_ sender: Any) {

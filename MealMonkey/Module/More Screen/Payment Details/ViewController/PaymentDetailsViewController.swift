@@ -10,6 +10,7 @@ import UIKit
 class PaymentDetailsViewController: UIViewController {
     
     
+    @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var viewMain: UIView!
@@ -60,11 +61,28 @@ class PaymentDetailsViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewAddCard.isHidden = true
+        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
+            arrCards = savedCards
+        }
+        updateEmptyLabel()
+        tblCardDetails.reloadData()
+    }
+    
+    func updateEmptyLabel() {
+        let isEmpty = arrCards.isEmpty
+        lblEmpty.isHidden = !isEmpty
+        tblCardDetails.isHidden = isEmpty
+    }
+    
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnAddNewCardAction(_ sender: Any) {
+        lblEmpty.isHidden = true
         viewAddCard.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         viewAddCard.isHidden = false
         UIView.animate(withDuration: 0.3) {
@@ -111,6 +129,7 @@ class PaymentDetailsViewController: UIViewController {
         }) { _ in
             self.viewAddCard.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
+            self.updateEmptyLabel()
         }
     }
     

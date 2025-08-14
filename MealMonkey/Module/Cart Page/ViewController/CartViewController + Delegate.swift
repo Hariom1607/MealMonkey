@@ -29,6 +29,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
             let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
             saveCartToUserDefaults(cartArray: cartDictArray)
             
+            updateEmptyLabel()
             self.tblCart.reloadData()
         }
         
