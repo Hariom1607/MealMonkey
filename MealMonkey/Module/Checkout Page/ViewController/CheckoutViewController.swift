@@ -49,7 +49,7 @@ class CheckoutViewController: UIViewController {
             lblCurrentLocation.text = "Select your location"
         }
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,10 +173,17 @@ class CheckoutViewController: UIViewController {
     
     @IBAction func btnBackToHomeAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? MenuTabViewController {
-            self.navigationController?.pushViewController(mlvc, animated: true)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+            
+            tabBarController.selectedIndex = 2
+            
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                
+                sceneDelegate.window?.rootViewController = tabBarController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
         }
-        
     }
     
     @IBAction func btnTrackMyOrderAction(_ sender: Any) {

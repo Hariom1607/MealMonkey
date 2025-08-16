@@ -27,6 +27,8 @@ class More: NSObject{
              title: "Notifications"),
         More(imgSection: "ic_1x_Inbox",
              title: "Inbox"),
+        More(imgSection: "heart",
+             title: "Wishlist"),
         More(imgSection: "ic_1x_aboutus",
              title: "About Us")
     ]

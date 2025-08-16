@@ -16,8 +16,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 extension ProfileViewController: UITextFieldDelegate {
-    func textFieldShouldReturn (_ textField: UITextField) -> Bool{
-        if textField == txtEmail && textField.returnKeyType == .next {
+    func textFieldShouldReturn (_ textField: UITextField) -> Bool {
+        if textField == txtName && textField.returnKeyType == .next {
             txtName.resignFirstResponder()
             txtEmail.becomeFirstResponder()
         }

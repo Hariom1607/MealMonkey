@@ -17,6 +17,7 @@ class OrderListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        styleViews([imgOrder!], cornerRadius: 14, borderWidth: 0, borderColor: UIColor.black.cgColor)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

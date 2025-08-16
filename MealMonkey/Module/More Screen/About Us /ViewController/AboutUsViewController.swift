@@ -12,10 +12,10 @@ class AboutUsViewController: UIViewController {
     
     var objPagetype: PageType = .AboutUs
     var arrCurrent:[AboutModel] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         tblAboutUs.register(UINib(nibName: "AboutUsTableViewCell", bundle: nil), forCellReuseIdentifier: "AboutUsTableViewCell")
         
         switch objPagetype {

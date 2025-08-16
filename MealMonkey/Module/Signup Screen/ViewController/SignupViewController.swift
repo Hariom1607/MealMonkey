@@ -33,9 +33,12 @@ class SignupViewController: UIViewController {
         
         styleViews(allFields, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
-        let allViews = [txtName!, txtPassword!, txtEmail!, txtAddress!, txtMobileNo!, txtConfirmPassword!]
+        let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!]
         
         setTextFieldPadding(allViews)
+        
+        txtPassword.setPadding(left: 34, right: 5)
+        txtConfirmPassword.setPadding(left: 34, right: 5)
         
     }
     
@@ -58,6 +61,65 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func btnSignupAction(_ sender: Any) {
+        let username = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
+        let password = txtPassword.text ?? ""
+        let confirmPassword = txtConfirmPassword.text ?? ""
+        let address = txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let mobileNo = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        switch true {
+            
+        case username.isEmpty:
+            UIAlertController.showAlert(title: "Name Missing", message: "Please enter your name", viewController: self)
+            return
+            
+        case email.isEmpty:
+            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
+            return
+            
+        case !isValidEmail(email):
+            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address", viewController: self)
+            return
+            
+        case mobileNo.isEmpty:
+            UIAlertController.showAlert(title: "Mobile Number Missing", message: "Please enter your mobile number", viewController: self)
+            return
+            
+        case address.isEmpty:
+            UIAlertController.showAlert(title: "Address Missing", message: "Please enter your address", viewController: self)
+            return
+            
+        case password.isEmpty:
+            UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password", viewController: self)
+            return
+            
+        case !isValidPassword(password):
+            UIAlertController.showAlert(
+                title: "Invalid Password",
+                message: """
+                             Password must be at least 8 characters long,
+                             contain at least 1 uppercase letter,
+                             1 lowercase letter, 1 number, and 1 special character.
+                             """, viewController: self
+            )
+            return
+            
+        case confirmPassword.isEmpty:
+            UIAlertController.showAlert(title: "Confirm Password Missing", message: "Please enter confirm password", viewController: self)
+            return
+            
+        case password != confirmPassword:
+            UIAlertController.showAlert(title: "Passwords Do Not Match", message: "Password and confirm password must be the same", viewController: self)
+            return
+            
+        default:
+            let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+            if ((storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController) != nil){
+                self.navigationController?.popViewController(animated: true)
+                
+            }
+        }
     }
     
     @IBAction func btnBackToLogin(_ sender: Any) {
