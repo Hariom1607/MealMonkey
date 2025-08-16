@@ -61,6 +61,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func btnSignOutAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
+        
     }
     
     @IBAction func btnSaveUserAction(_ sender: Any) {

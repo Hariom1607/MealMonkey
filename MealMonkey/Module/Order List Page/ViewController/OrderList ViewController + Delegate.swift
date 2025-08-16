@@ -17,19 +17,24 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListTableViewCell", for: indexPath) as! OrderListTableViewCell
         
         let order = orders[indexPath.row]
-        let firstProductName = order.first?.strProductName ?? "No Product"
+        
+        let allProductNames = order.map { $0.strProductName }.joined(separator: ", ")
         
         // Total price
-        let totalPrice = order.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
+        let totalPrice = order.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 0)) }
         
         cell.lblOrderNo.text = "Order No : \(indexPath.row + 1)"
-        cell.lblProductName.text = firstProductName
+        cell.lblProductName.text = allProductNames
         cell.lblTotalPrice.text = "$\(String(format: "%.2f", totalPrice))"
+        
+        // Keep first product's image for display
         if let imgName = order.first?.strProductImage {
             cell.imgOrder.image = UIImage(named: imgName)
         }
+        
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)

@@ -22,26 +22,27 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         let allViews = [txtEmail!, txtPassword!, btnLogin!, btnSignup!, btnGoogleLogin!, btnFacebookLogin!, btnForgotPassword!]
         
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         txtEmail.setPadding(left: 34, right: 34)
         txtPassword.setPadding(left: 34, right: 48)
-        
+        self.tabBarController?.tabBar.isHidden = true
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
     }
-   
+    
     private func showMainTabBar() {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
             
-            // Set as rootViewController
+            tabBarController.selectedIndex = 2
+            
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
                 
@@ -51,8 +52,44 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
     @IBAction func btnLoginAction(_ sender: Any) {
-        showMainTabBar()
+        let email = txtEmail.text ?? ""
+        let password = txtPassword.text ?? ""
+        
+        if email.isEmpty{
+            UIAlertController.showAlert(title: "Email Is Missing", message: "Please enter your email", viewController: self)
+        }
+        
+        else  if !isValidEmail(txtEmail.text ?? "") {
+            UIAlertController.showAlert(
+                title: "Invalid Email",
+                message: "Please enter a valid email address.",
+                viewController: self
+            )
+            return
+        }
+        
+        else if password.isEmpty{
+            UIAlertController.showAlert(title: "Password is Missing", message: "Please enter your password", viewController: self)
+        }
+        
+        else if !isValidPassword(txtPassword.text ?? "") {
+            UIAlertController.showAlert(
+                title: "Invalid Password",
+                message: """
+                                    Password must be at least 8 characters long, 
+                                    contain at least 1 uppercase letter, 
+                                    1 lowercase letter, 1 number, and 1 special character.
+                                    """,
+                viewController: self
+            )
+            return
+        }
+        
+        else{
+            showMainTabBar()
+        }
     }
     
     @IBAction func btnForgotPasswordAction(_ sender: Any) {

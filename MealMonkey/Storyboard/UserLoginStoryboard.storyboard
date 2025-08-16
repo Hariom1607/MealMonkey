@@ -357,7 +357,7 @@
                                                                 <rect key="frame" x="0.0" y="336" width="325" height="56"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CzV-Ly-7by">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="266" height="56"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                                         <connections>
@@ -365,9 +365,9 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58B-SW-eTL">
-                                                                        <rect key="frame" x="281" y="0.0" width="44" height="56"/>
+                                                                        <rect key="frame" x="266" y="0.0" width="59" height="56"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="44" id="msH-MI-pu4"/>
+                                                                            <constraint firstAttribute="width" constant="59" id="msH-MI-pu4"/>
                                                                         </constraints>
                                                                         <color key="tintColor" name="PlaceholderColor"/>
                                                                         <state key="normal" title="Button"/>
@@ -386,7 +386,7 @@
                                                                 <rect key="frame" x="0.0" y="420" width="325" height="56"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bIG-uI-0q7">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="281" height="56"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="266" height="56"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                                         <connections>
@@ -394,9 +394,9 @@
                                                                         </connections>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-w9-Y7i">
-                                                                        <rect key="frame" x="281" y="0.0" width="44" height="56"/>
+                                                                        <rect key="frame" x="266" y="0.0" width="59" height="56"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="44" id="Plu-D3-vxn"/>
+                                                                            <constraint firstAttribute="width" constant="59" id="Plu-D3-vxn"/>
                                                                         </constraints>
                                                                         <color key="tintColor" name="PlaceholderColor"/>
                                                                         <state key="normal" title="Button"/>
@@ -840,7 +840,35 @@ link to  create a new password via email</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2r3-bV-Qs7" id="5w7-sz-090"/>
+                                        </connections>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-ZR-hTe">
+                                        <rect key="frame" x="34" y="276" width="325" height="56"/>
+                                        <color key="backgroundColor" name="TextFieldBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="fTn-LS-HGQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2r3-bV-Qs7" id="1p5-hb-u93"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwX-Nl-AFy">
+                                        <rect key="frame" x="300" y="192" width="59" height="56"/>
+                                        <color key="backgroundColor" name="TextFieldBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="8F1-jF-s22"/>
+                                        </constraints>
+                                        <color key="tintColor" name="PlaceholderColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                        <connections>
+                                            <action selector="btnEyePasswordAction:" destination="2r3-bV-Qs7" eventType="touchUpInside" id="zZC-sW-R28"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74A-r7-b4G">
                                         <rect key="frame" x="34" y="360" width="325" height="56"/>
                                         <color key="backgroundColor" name="LoginButton"/>
@@ -854,31 +882,43 @@ link to  create a new password via email</string>
                                             <action selector="btnSubmit:" destination="2r3-bV-Qs7" eventType="touchUpInside" id="ezV-tv-dEC"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HSg-ZR-hTe">
-                                        <rect key="frame" x="34" y="276" width="325" height="56"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wd-2s-pS6">
+                                        <rect key="frame" x="300" y="276" width="59" height="56"/>
                                         <color key="backgroundColor" name="TextFieldBackground"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="fTn-LS-HGQ"/>
+                                            <constraint firstAttribute="height" constant="56" id="dhH-0v-e1q"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                    </textField>
+                                        <color key="tintColor" name="PlaceholderColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system"/>
+                                        <connections>
+                                            <action selector="btnEyeConfirmPasswordAction:" destination="2r3-bV-Qs7" eventType="touchUpInside" id="yam-B8-9Mk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="NJW-4Q-bXt" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="3KC-go-ZqN"/>
                                     <constraint firstItem="74A-r7-b4G" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="8lj-Cx-5BQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="NJW-4Q-bXt" secondAttribute="trailing" constant="34" id="IMA-SH-evB"/>
+                                    <constraint firstItem="HSg-ZR-hTe" firstAttribute="top" secondItem="jwX-Nl-AFy" secondAttribute="bottom" constant="28" id="K0f-3M-Fms"/>
+                                    <constraint firstItem="5wd-2s-pS6" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="300" id="KuD-7D-icm"/>
                                     <constraint firstAttribute="trailing" secondItem="74A-r7-b4G" secondAttribute="trailing" constant="34" id="LE8-lw-sKf"/>
                                     <constraint firstItem="sGc-KK-o8c" firstAttribute="top" secondItem="pOW-eD-fPu" secondAttribute="top" constant="42" id="NTh-aW-pOi"/>
                                     <constraint firstItem="74A-r7-b4G" firstAttribute="top" secondItem="HSg-ZR-hTe" secondAttribute="bottom" constant="28" id="ZSn-eI-Lf9"/>
                                     <constraint firstItem="NJW-4Q-bXt" firstAttribute="top" secondItem="h9B-kw-PE6" secondAttribute="bottom" constant="59" id="ZjQ-yk-xCl"/>
+                                    <constraint firstItem="74A-r7-b4G" firstAttribute="top" secondItem="5wd-2s-pS6" secondAttribute="bottom" constant="28" id="Zvy-ED-CQS"/>
                                     <constraint firstItem="sGc-KK-o8c" firstAttribute="centerX" secondItem="pOW-eD-fPu" secondAttribute="centerX" id="dKZ-A1-Ei1"/>
                                     <constraint firstItem="HSg-ZR-hTe" firstAttribute="top" secondItem="NJW-4Q-bXt" secondAttribute="bottom" constant="28" id="gYY-RD-0wE"/>
                                     <constraint firstItem="h9B-kw-PE6" firstAttribute="top" secondItem="sGc-KK-o8c" secondAttribute="bottom" constant="13" id="jow-du-Kyo"/>
-                                    <constraint firstAttribute="trailing" secondItem="NJW-4Q-bXt" secondAttribute="trailing" constant="34" id="k8f-RB-UUw"/>
+                                    <constraint firstItem="jwX-Nl-AFy" firstAttribute="top" secondItem="h9B-kw-PE6" secondAttribute="bottom" constant="59" id="ldd-gs-uAe"/>
                                     <constraint firstItem="h9B-kw-PE6" firstAttribute="centerX" secondItem="pOW-eD-fPu" secondAttribute="centerX" id="nQp-Od-aOy"/>
                                     <constraint firstItem="HSg-ZR-hTe" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="34" id="qhO-3P-TSD"/>
-                                    <constraint firstAttribute="trailing" secondItem="HSg-ZR-hTe" secondAttribute="trailing" constant="34" id="vPk-f9-ub0"/>
+                                    <constraint firstItem="5wd-2s-pS6" firstAttribute="top" secondItem="NJW-4Q-bXt" secondAttribute="bottom" constant="28" id="qw0-bt-xqM"/>
+                                    <constraint firstAttribute="trailing" secondItem="jwX-Nl-AFy" secondAttribute="trailing" constant="34" id="t83-5y-NVS"/>
+                                    <constraint firstAttribute="trailing" secondItem="5wd-2s-pS6" secondAttribute="trailing" constant="34" id="tMx-Or-wCN"/>
+                                    <constraint firstAttribute="trailing" secondItem="HSg-ZR-hTe" secondAttribute="trailing" constant="34" id="td4-mc-GY6"/>
+                                    <constraint firstItem="jwX-Nl-AFy" firstAttribute="leading" secondItem="pOW-eD-fPu" secondAttribute="leading" constant="300" id="zo6-Kf-rM7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -892,6 +932,8 @@ link to  create a new password via email</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnEyeConfirmPassword" destination="5wd-2s-pS6" id="dZh-mw-Ia8"/>
+                        <outlet property="btnEyePassword" destination="jwX-Nl-AFy" id="tci-0d-ALU"/>
                         <outlet property="btnSubmit" destination="74A-r7-b4G" id="uE3-RG-mrP"/>
                         <outlet property="txtConfirmPassword" destination="HSg-ZR-hTe" id="Dc8-CT-6Es"/>
                         <outlet property="txtNewPassword" destination="NJW-4Q-bXt" id="TGP-xW-gLc"/>

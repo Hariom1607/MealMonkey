@@ -9,6 +9,10 @@ import UIKit
 
 class FoodDetailViewController: UIViewController {
     
+    @IBOutlet weak var btnWishlist: UIButton!
+    @IBOutlet weak var btnDropDownPortions: UIButton!
+    @IBOutlet weak var btnDropDownIngredients: UIButton!
+    @IBOutlet weak var viewFoodDetailContent: UIScrollView!
     @IBOutlet weak var stackRating: UIStackView!
     @IBOutlet weak var lblTotalPice: UILabel!
     @IBOutlet weak var btnAddtoCart: UIButton!
@@ -35,7 +39,19 @@ class FoodDetailViewController: UIViewController {
         
         let allviews = [btnPortionReduce!, btnPortionIncrease!]
         styleViews(allviews, cornerRadius: 15, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        styleViews([lblNimberOfPortion], cornerRadius: 15, borderWidth: 1, borderColor: UIColor.loginButton.cgColor)
+        setTextFieldPadding([txtSelectIngridients!, txtSizeOfPortions!])
         btnAddtoCart.layer.cornerRadius = 7.42
+        viewFoodDetailContent.layer.cornerRadius = 42
+        viewFoodDetailContent.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        viewFoodDetailContent.clipsToBounds = true
+        
+        styleViews([btnDropDownPortions!, btnDropDownIngredients!, txtSizeOfPortions!, txtSelectIngridients!], cornerRadius: 4, borderWidth: 0, borderColor: UIColor.white.cgColor)
+        
+        btnDropDownIngredients.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        btnDropDownPortions.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        txtSizeOfPortions.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        txtSelectIngridients.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         quantity = 1
         lblNimberOfPortion.text = "\(quantity)"
@@ -52,11 +68,17 @@ class FoodDetailViewController: UIViewController {
             lblFoodPrize.text = "$\(product.doubleProductPrice)"
         }
         
+        if let appDelegate = appDelegate,
+           appDelegate.arrWishlist.contains(where: { $0.intId == product?.intId }) {
+            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
     }
     
     func configureUI() {
         guard let product = product else { return }
-        self.title = product.strProductName
         lblFoodName.text = product.strProductName
         lblFoodDescription.text = product.strProductDescription
         imgFood.image = UIImage(named: product.strProductImage)
@@ -113,12 +135,32 @@ class FoodDetailViewController: UIViewController {
         let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
         saveCartToUserDefaults(cartArray: cartDictArray)
     }
-
+    
+    @IBAction func btnDropDownPortionAction(_ sender: Any) {
+    }
+    
+    @IBAction func btnDropDownIngredientsAction(_ sender: Any) {
+    }
     
     @objc func cartBtnTapped() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
+    }
+    
+    @IBAction func btnWishlistAction(_ sender: Any) {
+        guard let product  = product else {return}
+        guard let appDelegate = appDelegate else {return}
+        
+        if let existingIndex = appDelegate.arrWishlist.firstIndex(where: {$0 .intId == product.intId}) {
+            appDelegate.arrWishlist.remove(at: existingIndex)
+            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        else {
+            appDelegate.arrWishlist.append(product)
+            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        saveWishlist(appDelegate.arrWishlist)
     }
 }

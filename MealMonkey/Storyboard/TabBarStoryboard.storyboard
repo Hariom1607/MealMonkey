@@ -96,6 +96,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="LoginButton"/>
+                        <color key="selectedImageTintColor" name="LoginButton"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabBar" destination="PXb-ja-3l2" id="e3V-b9-K6r"/>
@@ -306,7 +308,7 @@ meals and more!</string>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYc-Bw-f9n">
                                                                 <rect key="frame" x="5.6666666666666572" y="0.0" width="102" height="102"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-9q-uIq">
+                                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-9q-uIq">
                                                                         <rect key="frame" x="0.0" y="0.6666666666666643" width="102" height="100.66666666666669"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -385,24 +387,36 @@ meals and more!</string>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="1hZ-df-uhf" id="77c-iE-Tof"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e9h-rV-tLg">
                                                                 <rect key="frame" x="0.0" y="73" width="351" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="1hZ-df-uhf" id="21s-Sh-dnV"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLv-dI-ddg">
                                                                 <rect key="frame" x="0.0" y="146" width="351" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="1hZ-df-uhf" id="Hpp-P4-aEN"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QXD-Jo-lbw">
                                                                 <rect key="frame" x="0.0" y="219" width="351" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="1hZ-df-uhf" id="BeJ-nz-m42"/>
+                                                                </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61C-vW-a79">
                                                                 <rect key="frame" x="0.0" y="292" width="351" height="56"/>

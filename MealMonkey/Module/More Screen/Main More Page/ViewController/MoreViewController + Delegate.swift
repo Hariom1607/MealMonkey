@@ -54,17 +54,23 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource{
             }
             
             print("fourth row selected")
+            
         case 4:
+            let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
+            if let plvc = storyboard.instantiateViewController(withIdentifier: "WishlistViewController") as? WishlistViewController {
+                self.navigationController?.pushViewController(plvc, animated: true)
+            }
+            print("fifth row selected")
+            
+        case 5:
             let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
             if let plvc = storyboard.instantiateViewController(withIdentifier: "AboutUsViewController") as? AboutUsViewController {
                 plvc.objPagetype = .AboutUs
                 self.navigationController?.pushViewController(plvc, animated: true)
             }
-            print("fifth row selected")
+            print("sixth row selected")
         default:
             print("Other row selected")
         }
     }
-
-    
 }

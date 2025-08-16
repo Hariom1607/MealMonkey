@@ -28,6 +28,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        styleViews([txtSearchAddress], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        setTextFieldPadding([txtSearchAddress])
+        
+        setLeftAlignedTitleWithBack("Change Address", target: self, action: #selector(backBtnTapped))
+        
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -49,6 +54,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         tapGesture.numberOfTapsRequired = 1
         mapView.addGestureRecognizer(tapGesture)
         
+    }
+    
+    @objc func backBtnTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
