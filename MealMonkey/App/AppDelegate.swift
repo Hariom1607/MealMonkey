@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var arrOrders: [[ProductModel]] = []
     var arrWishlist: [ProductModel] = [] {
         didSet {
-            saveWishlist(arrWishlist) // Auto-save whenever wishlist changes
+            saveWishlist(arrWishlist, forUser: "") // Auto-save whenever wishlist changes
         }
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        arrWishlist = loadWishlist()
+        arrWishlist = loadWishlist(forUser: "")
         return true
     }
     
@@ -38,11 +39,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        saveWishlist(arrWishlist)
+        saveWishlist(arrWishlist, forUser: "")
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        saveWishlist(arrWishlist) // Extra safety
+        saveWishlist(arrWishlist, forUser: "") // Extra safety
+        saveContext()
     }
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Food Model") // Make sure this matches your .xcdatamodeld filename
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved Core Data error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
+    
+    func saveContext() {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved Core Data error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
 }
 

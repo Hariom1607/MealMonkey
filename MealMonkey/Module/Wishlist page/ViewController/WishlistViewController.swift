@@ -15,15 +15,21 @@ class WishlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setLeftAlignedTitleWithBack("WishList", target: self, action: #selector(backBtnTapped))
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
+        wishlistItems = loadWishlist(forUser: currentUserEmail)
+        
+        tblWishlist.delegate = self
+        tblWishlist.dataSource = self
         tblWishlist.register(UINib(nibName: "WishlistTableViewCell", bundle: nil), forCellReuseIdentifier: "WishlistTableViewCell")
+        tblWishlist.reloadData()
+        
+        setLeftAlignedTitleWithBack("WishList", target: self, action: #selector(backBtnTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            wishlistItems = appDelegate.arrWishlist
-        }
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
+        wishlistItems = loadWishlist(forUser: currentUserEmail)
         tblWishlist.reloadData()
     }
     

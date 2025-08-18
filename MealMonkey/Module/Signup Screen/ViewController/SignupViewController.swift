@@ -68,58 +68,59 @@ class SignupViewController: UIViewController {
         let address = txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let mobileNo = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
+        // ✅ Same validations as you already have…
         switch true {
-            
         case username.isEmpty:
             UIAlertController.showAlert(title: "Name Missing", message: "Please enter your name", viewController: self)
             return
-            
         case email.isEmpty:
             UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
             return
-            
         case !isValidEmail(email):
             UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address", viewController: self)
             return
-            
         case mobileNo.isEmpty:
-            UIAlertController.showAlert(title: "Mobile Number Missing", message: "Please enter your mobile number", viewController: self)
+            UIAlertController.showAlert(title: "Mobile Missing", message: "Please enter your mobile number", viewController: self)
             return
-            
         case address.isEmpty:
             UIAlertController.showAlert(title: "Address Missing", message: "Please enter your address", viewController: self)
             return
-            
         case password.isEmpty:
             UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password", viewController: self)
             return
-            
         case !isValidPassword(password):
-            UIAlertController.showAlert(
-                title: "Invalid Password",
-                message: """
-                             Password must be at least 8 characters long,
-                             contain at least 1 uppercase letter,
-                             1 lowercase letter, 1 number, and 1 special character.
-                             """, viewController: self
-            )
+            UIAlertController.showAlert(title: "Invalid Password", message: "Please enter a stronger password", viewController: self)
             return
-            
         case confirmPassword.isEmpty:
-            UIAlertController.showAlert(title: "Confirm Password Missing", message: "Please enter confirm password", viewController: self)
+            UIAlertController.showAlert(title: "Confirm Password Missing", message: "Please re-enter password", viewController: self)
             return
-            
         case password != confirmPassword:
-            UIAlertController.showAlert(title: "Passwords Do Not Match", message: "Password and confirm password must be the same", viewController: self)
+            UIAlertController.showAlert(title: "Passwords Do Not Match", message: "Password and confirm password must match", viewController: self)
             return
-            
-        default:
-            let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-            if ((storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController) != nil){
-                self.navigationController?.popViewController(animated: true)
-                
-            }
+        default: break
         }
+        
+        // ✅ Fetch existing users
+        var users = UserDefaults.standard.dictionary(forKey: "users") as? [String: [String: String]] ?? [:]
+        
+        // ✅ Check duplicate email
+        if users[email] != nil {
+            UIAlertController.showAlert(title: "Email Already Exists", message: "This email is already registered.", viewController: self)
+            return
+        }
+        
+        // ✅ Save new user
+        users[email] = [
+            "name": username,
+            "email": email,
+            "password": password,
+            "mobile": mobileNo,
+            "address": address
+        ]
+        UserDefaults.standard.set(users, forKey: "users")
+        
+        // ✅ Navigate back to Login
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnBackToLogin(_ sender: Any) {

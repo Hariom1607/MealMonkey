@@ -23,12 +23,20 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        txtName.text = UserDefaults.standard.string(forKey: "userName")
+        txtEmail.text = UserDefaults.standard.string(forKey: "userEmail")
+        txtMobileNo.text = UserDefaults.standard.string(forKey: "userMobile")
+        txtAddress.text = UserDefaults.standard.string(forKey: "userAddress")
+        
+        if let name = UserDefaults.standard.string(forKey: "userName") {
+            lblWelcomeMsg.text = "Welcome, \(name)"
+        }
+        
         setLeftAlignedTitle("Profile")
         setCartButton(target: self, action: #selector(profileCartBtn))
         
         viewImg.layer.cornerRadius = viewImg.frame.size.width/2
         viewImg.layer.borderWidth = 2
-        //        viewImg.layer.borderColor = UIColor.loginButton.cgColor
         viewImg.clipsToBounds = true
         
         let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSaveUser!]
@@ -61,14 +69,31 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func btnSignOutAction(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "isLoggedIn")
+        defaults.removeObject(forKey: "userName")
+        defaults.removeObject(forKey: "userEmail")
+        defaults.removeObject(forKey: "userMobile")
+        defaults.removeObject(forKey: "userAddress")
+        
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            self.navigationController?.pushViewController(menuVC, animated: true)
+        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            self.navigationController?.setViewControllers([loginVC], animated: true)
         }
         
     }
     
     @IBAction func btnSaveUserAction(_ sender: Any) {
+        UserDefaults.standard.set(txtName.text ?? "", forKey: "userName")
+        UserDefaults.standard.set(txtEmail.text ?? "", forKey: "userEmail")
+        UserDefaults.standard.set(txtMobileNo.text ?? "", forKey: "userMobile")
+        UserDefaults.standard.set(txtAddress.text ?? "", forKey: "userAddress")
+        
+        UIAlertController.showAlert(
+            title: "Success",
+            message: "Profile updated successfully!",
+            viewController: self
+        )
     }
     
 }
