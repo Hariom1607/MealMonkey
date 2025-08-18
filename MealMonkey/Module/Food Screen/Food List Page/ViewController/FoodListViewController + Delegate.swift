@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -87,4 +88,67 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
+    
+    func saveOrderForCurrentUser(products: [ProductModel]) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // Fetch current user email
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
+        
+        // Fetch the User object from Core Data
+        let userFetch: NSFetchRequest<User> = User.fetchRequest()
+        userFetch.predicate = NSPredicate(format: "email == %@", currentUserEmail)
+        
+        do {
+            let users = try context.fetch(userFetch)
+            let user: User
+            
+            if let existingUser = users.first {
+                user = existingUser
+            } else {
+                // Create user if not exist (rare case)
+                user = User(context: context)
+                user.id = UUID()
+                user.email = currentUserEmail
+                user.name = UserDefaults.standard.string(forKey: "userName")
+            }
+            
+            // Create new Order
+            let order = Order(context: context)
+            order.order_no = Int32((user.orders?.count ?? 0) + 1)
+            order.total_price = products.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 1)) }
+            order.users = user
+            
+            // Add products to order
+            for prod in products {
+                let foodItemFetch: NSFetchRequest<Food_Items> = Food_Items.fetchRequest()
+                foodItemFetch.predicate = NSPredicate(format: "name == %@", prod.strProductName)
+                let fetchedFoodItems = try context.fetch(foodItemFetch)
+                
+                let foodItem: Food_Items
+                if let existingFood = fetchedFoodItems.first {
+                    foodItem = existingFood
+                } else {
+                    foodItem = Food_Items(context: context)
+                    foodItem.id = UUID()
+                    foodItem.name = prod.strProductName
+                    foodItem.price = prod.doubleProductPrice
+                    foodItem.imageName = prod.strProductImage
+                    foodItem.category = prod.objProductCategory.rawValue
+                }
+                
+                order.addToProducts(foodItem)
+            }
+            
+            user.addToOrders(order)
+            
+            try context.save()
+            print("✅ Order saved for user: \(currentUserEmail)")
+            
+        } catch {
+            print("❌ Failed to save order: \(error.localizedDescription)")
+        }
+    }
+    
 }

@@ -18,9 +18,9 @@ extension MyOrderViewController: UITableViewDelegate, UITableViewDataSource{
         
         let product = orderProducts[indexPath.row]
         cell.lblProductsName.text = product.strProductName
-        cell.lblProductQty.text = "x \(product.intProductQty ?? 0)"
-        cell.lblProductPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice * Double(product.intProductQty!)))"
-            
+        cell.lblProductQty.text = "x \(product.intProductQty ?? 1)"
+        cell.lblProductPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice * Double(product.intProductQty ?? 1)))"
+        
         return cell
     }
 }

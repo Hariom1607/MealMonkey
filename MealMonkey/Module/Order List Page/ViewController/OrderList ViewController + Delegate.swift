@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,4 +63,23 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    func fetchOrdersForCurrentUser() -> [Order] {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
+        let context = appDelegate.persistentContainer.viewContext
+
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return [] }
+
+        let request: NSFetchRequest<Order> = Order.fetchRequest()
+        request.predicate = NSPredicate(format: "users.email == %@", currentUserEmail)
+        request.sortDescriptors = [NSSortDescriptor(key: "order_no", ascending: true)]
+
+        do {
+            let orders = try context.fetch(request)
+            return orders
+        } catch {
+            print("❌ Failed to fetch orders: \(error.localizedDescription)")
+            return []
+        }
+    }
+
 }

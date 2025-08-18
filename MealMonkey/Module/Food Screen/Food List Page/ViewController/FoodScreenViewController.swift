@@ -15,7 +15,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     @IBOutlet weak var btnCurrentLocation: UIButton!
     
     var selectedCategory: ProductCategory = .All
-    var arrProductData: [ProductModel] = ProductModel.addProductData()
+    var arrProductData: [ProductModel] = []
     var objProductCategory: ProductModel?
     var recentItems: [ProductModel] = []
     
@@ -36,12 +36,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filteredProducts = arrProductData
-        filteredCategories = ProductCategory.allCases
-        
         styleViews([txtSearchFood], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding([txtSearchFood])
-        
         txtSearchFood.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
         setLeftAlignedTitle("Good morning Hariom!")
@@ -49,8 +45,22 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         
         tblRecentItems.register(UINib(nibName: "FoodListTableViewCell", bundle: nil), forCellReuseIdentifier: "FoodListTableViewCell")
         
-        DispatchQueue.main.async {
-            self.tblRecentItems.reloadData()
+        // Initialize categories
+        filteredCategories = ProductCategory.allCases
+        
+        // Fetch products from API
+        ProductAPIHelper.shared.fetchProducts { [weak self] products in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                if let products = products {
+                    self.arrProductData = products
+                    self.filteredProducts = products
+                    self.tblRecentItems.reloadData()
+                } else {
+                    print("❌ No products fetched from API")
+                }
+            }
         }
     }
     
@@ -62,7 +72,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             filteredProducts = arrProductData
             filteredCategories = ProductCategory.allCases
         } else {
-            // Filter products by name or type
+            // Filter products by name or category
             filteredProducts = arrProductData.filter {
                 $0.strProductName.lowercased().contains(searchText) ||
                 $0.objProductCategory.rawValue.lowercased().contains(searchText)

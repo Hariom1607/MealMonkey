@@ -337,16 +337,13 @@ meals and more!</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hii there Emilia!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmR-6B-eEM">
-                                                                <rect key="frame" x="0.0" y="146" width="113" height="19"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="19" id="W0p-ta-pne"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="0.0" y="146" width="113" height="18.666666666666657"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                                 <color key="textColor" name="LoginLabel"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29O-M9-fkh">
-                                                                <rect key="frame" x="31" y="171" width="46" height="13"/>
+                                                                <rect key="frame" x="31" y="170.66666666666669" width="46" height="13"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="13" id="Uyg-j2-kfT"/>
                                                                 </constraints>

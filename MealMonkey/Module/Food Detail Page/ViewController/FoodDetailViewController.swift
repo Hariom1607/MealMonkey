@@ -34,6 +34,21 @@ class FoodDetailViewController: UIViewController {
     var quantity: Int = 1
     var cartItems: [(product: ProductModel, quantity: Int)] = []
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let product = product,
+              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
+        
+        let userWishlist = loadWishlist(forUser: currentUserEmail)
+        if userWishlist.contains(where: { $0.intId == product.intId }) {
+            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,18 +76,14 @@ class FoodDetailViewController: UIViewController {
         setCartButton(target: self, action: #selector(cartBtnTapped))
         configureUI()
         
-        if let product = product {
-            imgFood.image = UIImage(named: product.strProductImage)
-            lblFoodName.text = product.strProductName
-            lblFoodDescription.text = product.strProductDescription
-            lblFoodPrize.text = "$\(product.doubleProductPrice)"
-        }
-        
-        if let appDelegate = appDelegate,
-           appDelegate.arrWishlist.contains(where: { $0.intId == product?.intId }) {
-            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        if let product = product,
+           let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") {
+            let userWishlist = loadWishlist(forUser: currentUserEmail)
+            if userWishlist.contains(where: { $0.intId == product.intId }) {
+                btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
         }
         
     }
@@ -150,17 +161,19 @@ class FoodDetailViewController: UIViewController {
     }
     
     @IBAction func btnWishlistAction(_ sender: Any) {
-        guard let product  = product else {return}
-        guard let appDelegate = appDelegate else {return}
+        guard let product  = product else { return }
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
         
-        if let existingIndex = appDelegate.arrWishlist.firstIndex(where: {$0 .intId == product.intId}) {
-            appDelegate.arrWishlist.remove(at: existingIndex)
+        var wishlist = loadWishlist(forUser: currentUserEmail)
+        
+        if let index = wishlist.firstIndex(where: { $0.intId == product.intId }) {
+            wishlist.remove(at: index)
             btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
-        else {
-            appDelegate.arrWishlist.append(product)
+        } else {
+            wishlist.append(product)
             btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
-        saveWishlist(appDelegate.arrWishlist)
+        
+        saveWishlist(wishlist, forUser: currentUserEmail)
     }
 }

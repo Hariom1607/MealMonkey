@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AD5A7F7D2E522C2B007773F3 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5A7F7C2E522C2B007773F3 /* WebKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		AD5A7F7C2E522C2B007773F3 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		ADD8EEA02E3B890C00314D79 /* MealMonkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealMonkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -36,16 +41,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD5A7F7D2E522C2B007773F3 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD5A7F7B2E522C2B007773F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD5A7F7C2E522C2B007773F3 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ADD8EE972E3B890C00314D79 = {
 			isa = PBXGroup;
 			children = (
 				ADD8EEA22E3B890C00314D79 /* MealMonkey */,
+				AD5A7F7B2E522C2B007773F3 /* Frameworks */,
 				ADD8EEA12E3B890C00314D79 /* Products */,
 			);
 			sourceTree = "<group>";

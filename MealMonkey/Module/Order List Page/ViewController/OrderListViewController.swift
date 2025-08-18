@@ -26,7 +26,29 @@ class OrderListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        orders = loadOrdersFromUserDefaults() 
+        //        orders = loadOrdersFromUserDefaults()
+        
+        let coreDataOrders = fetchOrdersForCurrentUser()
+        
+        self.orders = coreDataOrders.map { order in
+            let foodItems = (order.products?.allObjects as? [Food_Items])?.sorted(by: { $0.name ?? "" < $1.name ?? "" }) ?? []
+            
+            return foodItems.map { foodItem in
+                ProductModel(
+                    intId: 0,
+                    strProductName: foodItem.name ?? "",
+                    strProductDescription: foodItem.productDescription ?? "",
+                    floatProductRating: 0.0,
+                    doubleProductPrice: foodItem.price,
+                    strProductImage: foodItem.imageName ?? "",
+                    intProductQty: Int(foodItem.quantity),
+                    intTotalNumberOfRatings: 0,
+                    objProductCategory: ProductCategory(rawValue: foodItem.category ?? "") ?? .Gujarati,
+                    objProductType: ProductType.food
+                )
+            }
+        }
+        
         updateEmptyLabel()
         tblOrderList.reloadData()
     }

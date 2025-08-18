@@ -54,42 +54,46 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func btnLoginAction(_ sender: Any) {
-        let email = txtEmail.text ?? ""
+        let email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
         let password = txtPassword.text ?? ""
         
-        if email.isEmpty{
-            UIAlertController.showAlert(title: "Email Is Missing", message: "Please enter your email", viewController: self)
+        if email.isEmpty {
+            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
+            return
         }
-        
-        else  if !isValidEmail(txtEmail.text ?? "") {
-            UIAlertController.showAlert(
-                title: "Invalid Email",
-                message: "Please enter a valid email address.",
-                viewController: self
-            )
+        if password.isEmpty {
+            UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password", viewController: self)
             return
         }
         
-        else if password.isEmpty{
-            UIAlertController.showAlert(title: "Password is Missing", message: "Please enter your password", viewController: self)
-        }
+        // ✅ Fetch users from UserDefaults
+        let users = UserDefaults.standard.dictionary(forKey: "users") as? [String: [String: String]] ?? [:]
         
-        else if !isValidPassword(txtPassword.text ?? "") {
-            UIAlertController.showAlert(
-                title: "Invalid Password",
-                message: """
-                                    Password must be at least 8 characters long, 
-                                    contain at least 1 uppercase letter, 
-                                    1 lowercase letter, 1 number, and 1 special character.
-                                    """,
-                viewController: self
-            )
+        // ✅ Check if email exists
+        guard let user = users[email] else {
+            UIAlertController.showAlert(title: "User Not Found", message: "No account found with this email.", viewController: self)
             return
         }
         
-        else{
-            showMainTabBar()
+        // ✅ Check password
+        if user["password"] != password {
+            UIAlertController.showAlert(title: "Invalid Password", message: "Wrong password. Please try again.", viewController: self)
+            return
         }
+        
+        // ✅ Save current user session
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "isLoggedIn")
+        defaults.set(email, forKey: "currentUser")
+        
+        // Also set details for profile page
+        defaults.set(user["name"], forKey: "userName")
+        defaults.set(user["email"], forKey: "userEmail")
+        defaults.set(user["mobile"], forKey: "userMobile")
+        defaults.set(user["address"], forKey: "userAddress")
+        
+        // ✅ Go to main tab bar
+        showMainTabBar()
     }
     
     @IBAction func btnForgotPasswordAction(_ sender: Any) {
@@ -108,7 +112,6 @@ class LoginViewController: UIViewController {
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
-        
     }
     
     @IBAction func btnLoginFaceBookAction(_ sender: Any) {
