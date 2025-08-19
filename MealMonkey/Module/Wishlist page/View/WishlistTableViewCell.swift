@@ -1,10 +1,3 @@
-//
-//  WishlistTableViewCell.swift
-//  MealMonkey
-//
-//  Created by Hariom Sharma on 15/08/25.
-//
-
 import UIKit
 
 class WishlistTableViewCell: UITableViewCell {
@@ -16,21 +9,57 @@ class WishlistTableViewCell: UITableViewCell {
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var imgProduct: UIImageView!
     
-    var product: ProductModel?
-    var onWishlistToggle: (() -> Void)?   // 🔥 callback to VC
+    var productId: Int = 0
+    var userEmail: String = ""
+    var onWishlistToggle: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imgProduct.layer.cornerRadius = 8
+        imgProduct.clipsToBounds = true
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func configure(with product: ProductModel, userEmail: String) {
+        productId = product.intId
+        self.userEmail = userEmail
         
-        // Configure the view for the selected state
+        lblProductName.text = product.strProductName
+        lblPrice.text = "₹\(product.doubleProductPrice)"
+        lblCategory.text = product.objProductCategory.rawValue
+        lblType.text = product.objProductType.rawValue
+        
+        // Load product image
+        if product.strProductImage.hasPrefix("http") {
+            if let imageUrl = URL(string: product.strProductImage) {
+                URLSession.shared.dataTask(with: imageUrl) { [weak self] data, _, _ in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.imgProduct.image = image
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self?.imgProduct.image = UIImage(named: "placeholder")
+                        }
+                    }
+                }.resume()
+            }
+        } else {
+            imgProduct.image = UIImage(named: product.strProductImage) ?? UIImage(named: "placeholder")
+        }
+        
+        // ✅ Use CoreData to check and show correct heart state
+        let isInWishlist = CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: userEmail)
+        btnWishlist.setImage(UIImage(systemName: isInWishlist ? "heart.fill" : "heart"), for: .normal)
     }
     
     @IBAction func btnWishListAction(_ sender: Any) {
+        if CoreDataHelper.shared.isInWishlist(productId: productId, userEmail: userEmail) {
+            CoreDataHelper.shared.removeFromWishlist(productId: productId, userEmail: userEmail)
+            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        } else {
+            CoreDataHelper.shared.addToWishlist(productId: productId, userEmail: userEmail)
+            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
         onWishlistToggle?()
     }
 }

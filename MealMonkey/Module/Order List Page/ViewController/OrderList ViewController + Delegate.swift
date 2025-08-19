@@ -67,7 +67,8 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
         let context = appDelegate.persistentContainer.viewContext
 
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return [] }
+        // ✅ Use the correct key
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return [] }
 
         let request: NSFetchRequest<Order> = Order.fetchRequest()
         request.predicate = NSPredicate(format: "users.email == %@", currentUserEmail)

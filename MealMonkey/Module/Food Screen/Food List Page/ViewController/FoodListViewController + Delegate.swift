@@ -131,7 +131,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
                     foodItem = existingFood
                 } else {
                     foodItem = Food_Items(context: context)
-                    foodItem.id = UUID()
+                    foodItem.id = Int64(prod.intId)
                     foodItem.name = prod.strProductName
                     foodItem.price = prod.doubleProductPrice
                     foodItem.imageName = prod.strProductImage

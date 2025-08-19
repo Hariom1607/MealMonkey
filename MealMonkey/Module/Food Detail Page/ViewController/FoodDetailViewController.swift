@@ -37,15 +37,7 @@ class FoodDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let product = product,
-              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
-        
-        let userWishlist = loadWishlist(forUser: currentUserEmail)
-        if userWishlist.contains(where: { $0.intId == product.intId }) {
-            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
+        updateWishlistButton()
     }
     
     
@@ -75,17 +67,27 @@ class FoodDetailViewController: UIViewController {
         setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
         setCartButton(target: self, action: #selector(cartBtnTapped))
         configureUI()
+        setupUI()
+    }
+    
+    private func setupUI() {
+        guard let product = product else { return }
         
-        if let product = product,
-           let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") {
-            let userWishlist = loadWishlist(forUser: currentUserEmail)
-            if userWishlist.contains(where: { $0.intId == product.intId }) {
-                btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            } else {
-                btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
-            }
+        lblFoodName.text = product.strProductName
+        lblFoodDescription.text = product.strProductDescription
+        imgFood.image = UIImage(named: product.strProductImage)
+        updatePriceAndQuantityUI()
+    }
+    
+    private func updateWishlistButton() {
+        guard let product = product,
+              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else {
+            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+            return
         }
         
+        let filled = CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: currentUserEmail)
+        btnWishlist.setImage(UIImage(systemName: filled ? "heart.fill" : "heart"), for: .normal)
     }
     
     func configureUI() {
@@ -110,12 +112,14 @@ class FoodDetailViewController: UIViewController {
     }
     
     @IBAction func btnAddToCartAction(_ sender: Any) {
-        guard let product = product else { return }
+        guard let product = product,
+              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
-        checkProduct(productToAdd: product)
+        CoreDataHelper.shared.addCartItem(product: product, quantity: quantity, userEmail: currentUserEmail)
+        
         let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     @IBAction func btnPortionDecreaseAction(_ sender: Any) {
@@ -131,19 +135,31 @@ class FoodDetailViewController: UIViewController {
     }
     
     func checkProduct(productToAdd: ProductModel) {
-        guard let appDelegate = appDelegate else { return }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         if let existingIndex = appDelegate.arrCart.firstIndex(where: { $0.intId == productToAdd.intId }) {
-            appDelegate.arrCart[existingIndex].intProductQty! += quantity
-            print("Updated \(productToAdd.strProductName) quantity to \(appDelegate.arrCart[existingIndex].intProductQty ?? 0).")
+            appDelegate.arrCart[existingIndex].intProductQty = (appDelegate.arrCart[existingIndex].intProductQty ?? 0) + quantity
         } else {
-            let newProduct = productToAdd
+            var newProduct = productToAdd
             newProduct.intProductQty = quantity
             appDelegate.arrCart.append(newProduct)
-            print("Added \(productToAdd.strProductName) with quantity \(quantity).")
         }
         
-        let cartDictArray = appDelegate.arrCart.map { productToDict($0) }
+        // Save to UserDefaults
+        let cartDictArray = appDelegate.arrCart.map { product -> [String: Any] in
+            return [
+                "intId": product.intId,
+                "strProductName": product.strProductName,
+                "strProductDescription": product.strProductDescription,
+                "doubleProductPrice": product.doubleProductPrice,
+                "strProductImage": product.strProductImage,
+                "intProductQty": product.intProductQty ?? 1,
+                "floatProductRating": product.floatProductRating,
+                "intTotalNumberOfRatings": product.intTotalNumberOfRatings,
+                "objProductCategory": product.objProductCategory.rawValue,
+                "objProductType": product.objProductType.rawValue
+            ]
+        }
         saveCartToUserDefaults(cartArray: cartDictArray)
     }
     
@@ -161,19 +177,14 @@ class FoodDetailViewController: UIViewController {
     }
     
     @IBAction func btnWishlistAction(_ sender: Any) {
-        guard let product  = product else { return }
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
+        guard let product = product,
+              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
-        var wishlist = loadWishlist(forUser: currentUserEmail)
-        
-        if let index = wishlist.firstIndex(where: { $0.intId == product.intId }) {
-            wishlist.remove(at: index)
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+        if CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: currentUserEmail) {
+            CoreDataHelper.shared.removeFromWishlist(productId: product.intId, userEmail: currentUserEmail)
         } else {
-            wishlist.append(product)
-            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            CoreDataHelper.shared.addToWishlist(productId: product.intId, userEmail: currentUserEmail)
         }
-        
-        saveWishlist(wishlist, forUser: currentUserEmail)
+        updateWishlistButton()
     }
 }

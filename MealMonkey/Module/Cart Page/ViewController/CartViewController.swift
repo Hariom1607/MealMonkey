@@ -14,9 +14,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var btnPlaceOrder: UIButton!
     @IBOutlet weak var tblCart: UITableView!
     
-    var cartItems: [ProductModel] {
-        return (UIApplication.shared.delegate as? AppDelegate)?.arrCart ?? []
-    }
+    var cartItems: [CartItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,29 +39,27 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            let savedCartArray = loadCartFromUserDefaults()
-            appDelegate.arrCart = savedCartArray.map { dictToProduct($0) }
+        if let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") {
+            cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
         }
-        
         updateEmptyLabel()
         tblCart.reloadData()
     }
     
+    
     func updateEmptyLabel() {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            let isCartEmpty = appDelegate.arrCart.isEmpty
-            lblEmpty.isHidden = !isCartEmpty
-            btnPlaceOrder.isHidden = isCartEmpty
-        }
+        lblEmpty.isHidden = !cartItems.isEmpty
+        btnPlaceOrder.isHidden = cartItems.isEmpty
     }
     
     @IBAction func btnPlaceOrderAction(_ sender: Any) {
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail"),
+              let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
-        let cart = appDelegate.arrCart
-        if cart.isEmpty {
+        cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
+        
+        if cartItems.isEmpty {
             let alert = UIAlertController(title: "Cart is Empty",
                                           message: "Please add items to your cart before placing an order.",
                                           preferredStyle: .alert)
@@ -74,62 +70,43 @@ class CartViewController: UIViewController {
         
         let context = appDelegate.persistentContainer.viewContext
         
-        // 1️⃣ Fetch current user from Core Data
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else { return }
-        
-        let userRequest: NSFetchRequest<User> = User.fetchRequest()
-        userRequest.predicate = NSPredicate(format: "email == %@", currentUserEmail)
-        
         do {
-            let users = try context.fetch(userRequest)
-            let user: User
+            // Fetch user
+            guard let user = CoreDataHelper.shared.fetchUser(byEmail: currentUserEmail) else { return }
             
-            if let existingUser = users.first {
-                user = existingUser
-            } else {
-                // Create new user if not exist
-                user = User(context: context)
-                user.id = UUID()
-                user.email = currentUserEmail
-                user.name = UserDefaults.standard.string(forKey: "userName")
-            }
-            
-            // 2️⃣ Create new order
+            // Create new order
             let order = Order(context: context)
             order.order_no = Int32((user.orders?.count ?? 0) + 1)
-            order.total_price = cart.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 1)) }
+            order.total_price = cartItems.reduce(0.0) { $0 + ($1.price * Double($1.quantity)) }
             order.users = user
             
-            // 3️⃣ Add products to order
-            for prod in cart {
+            // Add products to order
+            for item in cartItems {
                 let foodItem = Food_Items(context: context)
-                foodItem.id = UUID()
-                foodItem.name = prod.strProductName
-                foodItem.price = prod.doubleProductPrice
-                foodItem.imageName = prod.strProductImage
-                foodItem.category = prod.objProductCategory.rawValue
-                foodItem.quantity = Int16(prod.intProductQty ?? 1)
-                foodItem.productDescription = prod.strProductDescription
-
+                foodItem.id = Int64(item.id)
+                foodItem.name = item.name
+                foodItem.price = item.price
+                foodItem.imageName = item.image
+                foodItem.category = "" // you can map category if available
+                foodItem.quantity = Int16(item.quantity)
+                foodItem.productDescription = "" // map description if available
+                
                 order.addToProducts(foodItem)
             }
             
-            // 4️⃣ Add order to user and save context
+            // Save order
             user.addToOrders(order)
             try context.save()
+            
             print("✅ Order saved for user: \(currentUserEmail)")
             
-            // 5️⃣ Save to UserDefaults / arrOrders
-            appDelegate.arrOrders.append(cart)
-            saveOrdersToUserDefaults(appDelegate.arrOrders)
-            
-            // 6️⃣ Clear cart
-            appDelegate.arrCart.removeAll()
-            saveCartToUserDefaults(cartArray: [])
+            // Clear cart
+            CoreDataHelper.shared.clearCart(for: currentUserEmail)
+            cartItems.removeAll()
             updateEmptyLabel()
             tblCart.reloadData()
             
-            // 7️⃣ Show success alert
+            // Success alert
             let alert = UIAlertController(title: "Order Placed",
                                           message: "Your order has been placed successfully!",
                                           preferredStyle: .alert)
@@ -144,7 +121,6 @@ class CartViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         }
-        
     }
     
     @objc func backBtnTapped() {

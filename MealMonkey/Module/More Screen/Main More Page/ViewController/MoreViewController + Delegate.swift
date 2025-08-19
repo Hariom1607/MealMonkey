@@ -20,7 +20,8 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource{
         let item = arrTitles[indexPath.row]
         cell.lblTitleMore.text = item.title
         cell.imgIconMore.image = item.imgSection
-        
+        cell.imgIconMore.image = item.imgSection
+        cell.imgIconMore.tintColor = .loginLabel
         
         return cell
     }

@@ -7,59 +7,42 @@
 
 import Foundation
 
-/// A singleton helper class to manage a list of recently viewed or accessed products.
-/// This class maintains a fixed-size list of recent `ProductModel` items, ensuring no duplicates,
-/// and provides methods to add, retrieve, and clear recent products.
+// Helper class to manage recently viewed products
 class RecentItemsHelper {
     
-    /// Shared singleton instance to access `RecentItemsHelper` globally.
+    // Singleton instance
     static let shared = RecentItemsHelper()
     
-    /// Private initializer to prevent multiple instances.
+    // Private init to prevent multiple instances
     private init() {}
     
-    /// Array holding the recent products.
-    /// The most recent product is at the front (index 0).
+    // List of recent products (most recent at index 0)
     private var recentItems: [ProductModel] = []
     
-    /// Maximum number of recent items to keep track of.
+    // Maximum number of items to keep
     private let maxItems = 7
     
-    /**
-     Adds a new product to the recent items list.
-     
-     - Parameter product: The `ProductModel` instance to be added.
-     
-     This method ensures that if the product already exists in the list,
-     it is first removed to avoid duplicates, and then inserted at the front
-     of the list (most recent). If the total count exceeds `maxItems`, the oldest
-     product (at the end) is removed.
-     */
+    // Add a product to recent items
     func addProduct(_ product: ProductModel) {
-        // Check if product already exists in recentItems
+        // Remove existing product if already in list
         if let existingIndex = recentItems.firstIndex(where: { $0.intId == product.intId }) {
-            // Remove the existing product to avoid duplicates
             recentItems.remove(at: existingIndex)
         }
-        // Insert the new product at the beginning to mark it as most recent
+        // Insert at the front (most recent)
         recentItems.insert(product, at: 0)
         
-        // Ensure the list does not exceed the maximum allowed items
+        // Keep only up to maxItems
         if recentItems.count > maxItems {
             recentItems.removeLast()
         }
     }
     
-    /**
-     Retrieves the current list of recent products.
-     
-     - Returns: An array of `ProductModel` objects, ordered from most recent to oldest.
-     */
+    // Get all recent items (most recent first)
     func getRecentItems() -> [ProductModel] {
         return recentItems
     }
     
-    /// Clears all recent items from the list.
+    // Clear all recent items
     func clear() {
         recentItems.removeAll()
     }

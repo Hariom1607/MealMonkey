@@ -358,7 +358,7 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Add To Cart"/>
                                                                 <connections>
-                                                                    <action selector="btnAddToCartAction:" destination="7DJ-aP-n0I" eventType="touchUpInside" id="rAL-59-gZj"/>
+                                                                    <action selector="btnAddToCartAction:" destination="7DJ-aP-n0I" eventType="touchUpInside" id="Kpu-6F-LDp"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -445,7 +445,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnAddtoCart" destination="Uze-tf-2Vr" id="qOE-vb-w3O"/>
+                        <outlet property="btnAddtoCart" destination="Uze-tf-2Vr" id="EeG-mC-4KX"/>
                         <outlet property="btnDropDownIngredients" destination="bk3-zj-KY3" id="Y37-zw-Osx"/>
                         <outlet property="btnDropDownPortions" destination="eRb-QC-EJa" id="d8O-uq-mbM"/>
                         <outlet property="btnPortionIncrease" destination="fvN-eP-Px1" id="IaE-CO-dS6"/>

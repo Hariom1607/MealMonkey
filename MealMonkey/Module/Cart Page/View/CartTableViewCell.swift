@@ -24,13 +24,11 @@ class CartTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(with product: ProductModel) {
-        lblFoodName.text = product.strProductName
-        imgProduct.image = UIImage(named: product.strProductImage)
-        lblFoodPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice))"
-        lblFoodType.text = product.objProductType.rawValue.capitalized
-        lblFoodCategory.text = product.objProductCategory.rawValue
-        lblQty.text = "QTY: \(product.intProductQty ?? 1)"
+    func configure(with cartItem: CartItem) {
+        lblFoodName.text = cartItem.name
+        imgProduct.image = UIImage(named: cartItem.image ?? "")
+        lblFoodPrice.text = "$\(String(format: "%.2f", cartItem.price))"
+        lblQty.text = "QTY: \(cartItem.quantity)"
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

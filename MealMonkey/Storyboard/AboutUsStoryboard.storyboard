@@ -29,12 +29,20 @@
                                             <outlet property="delegate" destination="wzQ-IC-hUl" id="kkk-RP-zWF"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WishList is empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxV-5o-7bT">
+                                        <rect key="frame" x="108.66666666666667" y="320.33333333333331" width="175.66666666666663" height="25.333333333333314"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
+                                        <color key="textColor" name="LoginLabel"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="gde-hQ-qWf" firstAttribute="leading" secondItem="b1q-fR-9fo" secondAttribute="leading" id="00u-8J-s9r"/>
                                     <constraint firstItem="gde-hQ-qWf" firstAttribute="top" secondItem="b1q-fR-9fo" secondAttribute="top" id="5Fd-dk-2gD"/>
+                                    <constraint firstItem="uxV-5o-7bT" firstAttribute="centerY" secondItem="b1q-fR-9fo" secondAttribute="centerY" id="UYH-xN-PrB"/>
                                     <constraint firstAttribute="trailing" secondItem="gde-hQ-qWf" secondAttribute="trailing" id="iUj-36-0aa"/>
+                                    <constraint firstItem="uxV-5o-7bT" firstAttribute="centerX" secondItem="b1q-fR-9fo" secondAttribute="centerX" id="oZP-y6-XaU"/>
                                     <constraint firstAttribute="bottom" secondItem="gde-hQ-qWf" secondAttribute="bottom" id="tdz-oN-eEk"/>
                                 </constraints>
                             </view>
@@ -49,6 +57,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblEmpty" destination="uxV-5o-7bT" id="rdy-s9-zhm"/>
                         <outlet property="tblWishlist" destination="gde-hQ-qWf" id="uo3-Yt-oAn"/>
                     </connections>
                 </viewController>

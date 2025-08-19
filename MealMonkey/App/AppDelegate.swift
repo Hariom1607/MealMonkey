@@ -13,14 +13,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var arrCart: [ProductModel] = []
     var arrOrders: [[ProductModel]] = []
-    var arrWishlist: [ProductModel] = [] {
-        didSet {
-            saveWishlist(arrWishlist, forUser: "") // Auto-save whenever wishlist changes
+    var allProducts: [ProductModel] = [] // Store API products here
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Food Model")
+        
+        if let storeDescription = container.persistentStoreDescriptions.first {
+            storeDescription.shouldMigrateStoreAutomatically = true
+            storeDescription.shouldInferMappingModelAutomatically = true
         }
-    }
+        
+        container.loadPersistentStores { storeDescription, error in
+            if let error = error as NSError? {
+                // 🚨 Reset the store if migration fails
+                if let url = storeDescription.url {
+                    try? container.persistentStoreCoordinator.destroyPersistentStore(
+                        at: url,
+                        ofType: NSSQLiteStoreType,
+                        options: nil
+                    )
+                    try? container.persistentStoreCoordinator.addPersistentStore(
+                        ofType: NSSQLiteStoreType,
+                        configurationName: nil,
+                        at: url,
+                        options: [
+                            NSMigratePersistentStoresAutomaticallyOption: true,
+                            NSInferMappingModelAutomaticallyOption: true
+                        ]
+                    )
+                    print("⚠️ Old Core Data store reset due to migration error.")
+                } else {
+                    fatalError("❌ Unresolved Core Data error \(error), \(error.userInfo)")
+                }
+            } else {
+                print("✅ Core Data store loaded at: \(storeDescription.url?.absoluteString ?? "unknown")")
+            }
+        }
+        
+        return container
+    }()
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        arrWishlist = loadWishlist(forUser: "")
+        ProductAPIHelper.shared.fetchProducts { products in
+            guard let products = products else { return }
+            DispatchQueue.main.async {
+                self.allProducts = products
+            }
+        }
         return true
     }
     
@@ -39,35 +80,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        saveWishlist(arrWishlist, forUser: "")
+        //        saveWishlist(arrWishlist, forUser: "")
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        saveWishlist(arrWishlist, forUser: "") // Extra safety
+        //        saveWishlist(arrWishlist, forUser: "") // Extra safety
         saveContext()
     }
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Food Model") // Make sure this matches your .xcdatamodeld filename
-        container.loadPersistentStores { storeDescription, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved Core Data error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
     
     func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved Core Data error \(nserror), \(nserror.userInfo)")
-            }
+            try? context.save()
         }
     }
-    
 }
 

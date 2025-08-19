@@ -9,24 +9,24 @@ import Foundation
 import CoreData
 import UIKit
 
+// Save a new order for the current user
 func saveOrder(for products: [Food_Items], totalPrice: Double) {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let context = appDelegate.persistentContainer.viewContext
     
-    // 1️⃣ Create a new Order object
+    // Create new order
     let order = Order(context: context)
     order.order_no = Int32(Date().timeIntervalSince1970) // unique order number
     order.total_price = totalPrice
     order.product_name = products.map { $0.name ?? "" }.joined(separator: ", ")
     
-    // 2️⃣ Add products to the order
+    // Link products to order
     for product in products {
         order.addToProducts(product)
     }
     
-    // 3️⃣ Get current logged-in user
+    // Link order to current logged-in user
     let currentEmail = UserDefaults.standard.string(forKey: "currentUser")
-    
     let request: NSFetchRequest<User> = User.fetchRequest()
     request.predicate = NSPredicate(format: "email == %@", currentEmail ?? "")
     
@@ -36,7 +36,6 @@ func saveOrder(for products: [Food_Items], totalPrice: Double) {
             order.users = user
             user.addToOrders(order)
         }
-        
         try context.save()
         print("Order saved successfully for user: \(currentEmail ?? "")")
     } catch {
@@ -44,12 +43,12 @@ func saveOrder(for products: [Food_Items], totalPrice: Double) {
     }
 }
 
+// Fetch all orders of the current logged-in user
 func fetchOrdersForCurrentUser() -> [Order] {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
     let context = appDelegate.persistentContainer.viewContext
     
     let request: NSFetchRequest<Order> = Order.fetchRequest()
-    
     let currentEmail = UserDefaults.standard.string(forKey: "currentUser") ?? ""
     request.predicate = NSPredicate(format: "users.email == %@", currentEmail)
     
@@ -61,5 +60,3 @@ func fetchOrdersForCurrentUser() -> [Order] {
         return []
     }
 }
-
-

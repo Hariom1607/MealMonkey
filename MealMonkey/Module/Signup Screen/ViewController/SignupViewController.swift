@@ -68,7 +68,7 @@ class SignupViewController: UIViewController {
         let address = txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let mobileNo = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        // ✅ Same validations as you already have…
+        // ✅ Validations
         switch true {
         case username.isEmpty:
             UIAlertController.showAlert(title: "Name Missing", message: "Please enter your name", viewController: self)
@@ -100,29 +100,29 @@ class SignupViewController: UIViewController {
         default: break
         }
         
-        // ✅ Fetch existing users
-        var users = UserDefaults.standard.dictionary(forKey: "users") as? [String: [String: String]] ?? [:]
-        
-        // ✅ Check duplicate email
-        if users[email] != nil {
-            UIAlertController.showAlert(title: "Email Already Exists", message: "This email is already registered.", viewController: self)
-            return
+        if CoreDataHelper.shared.saveUser(
+            name: username,
+            email: email,
+            password: password,
+            address: address,
+            mobile: mobileNo
+        ) {
+            showAlert("✅ Signup successful! Please login.", completion: {
+                self.dismiss(animated: true)
+            })
+        } else {
+            showAlert("⚠️ User already exists, try logging in.")
         }
         
-        // ✅ Save new user
-        users[email] = [
-            "name": username,
-            "email": email,
-            "password": password,
-            "mobile": mobileNo,
-            "address": address
-        ]
-        UserDefaults.standard.set(users, forKey: "users")
-        
-        // ✅ Navigate back to Login
-        self.navigationController?.popViewController(animated: true)
     }
     
+    private func showAlert(_ message: String, completion: (() -> Void)? = nil) {
+           let alert = UIAlertController(title: "Signup", message: message, preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+               completion?()
+           })
+           present(alert, animated: true)
+       }
     @IBAction func btnBackToLogin(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
