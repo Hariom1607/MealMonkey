@@ -47,6 +47,26 @@ class ProfileViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
         imgUser.addGestureRecognizer(tapGesture)
         
+        loadUserProfile()
+        
+    }
+    
+    func loadUserProfile() {
+        guard let email = UserDefaults.standard.string(forKey: "currentUserEmail"),
+              let user = CoreDataHelper.shared.fetchUser(email: email) else { return }
+        
+        txtName.text = user.name
+        txtEmail.text = user.email
+        txtMobileNo.text = user.mobile
+        txtAddress.text = user.address
+        
+        lblWelcomeMsg.text = "Welcome, \(user.name ?? "")"
+        
+        if let imageData = user.imageData {
+            imgUser.image = UIImage(data: imageData)
+        } else if let savedImageData = UserDefaults.standard.data(forKey: "userImage") {
+            imgUser.image = UIImage(data: savedImageData)
+        }
     }
     
     @objc func profileCartBtn() {
@@ -70,31 +90,52 @@ class ProfileViewController: UIViewController {
     
     @IBAction func btnSignOutAction(_ sender: Any) {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "isLoggedIn")
-        defaults.removeObject(forKey: "userName")
-        defaults.removeObject(forKey: "userEmail")
-        defaults.removeObject(forKey: "userMobile")
-        defaults.removeObject(forKey: "userAddress")
+        defaults.removeObject(forKey: "currentUserEmail")
+        defaults.set(false, forKey: "isLoggedIn") // ✅ Mark user as logged out
+        defaults.synchronize()
         
+        // Go back to login screen
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            self.navigationController?.setViewControllers([loginVC], animated: true)
-        }
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        let navController = UINavigationController(rootViewController: loginVC)
+        navController.navigationBar.isHidden = true
         
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = navController
+            sceneDelegate.window?.makeKeyAndVisible()
+        }
     }
     
     @IBAction func btnSaveUserAction(_ sender: Any) {
-        UserDefaults.standard.set(txtName.text ?? "", forKey: "userName")
-        UserDefaults.standard.set(txtEmail.text ?? "", forKey: "userEmail")
-        UserDefaults.standard.set(txtMobileNo.text ?? "", forKey: "userMobile")
-        UserDefaults.standard.set(txtAddress.text ?? "", forKey: "userAddress")
+        guard let email = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
-        UIAlertController.showAlert(
-            title: "Success",
-            message: "Profile updated successfully!",
-            viewController: self
-        )
+        let name = txtName.text
+        let mobile = txtMobileNo.text
+        let address = txtAddress.text
+        let imageData = imgUser.image?.jpegData(compressionQuality: 0.8)
+        
+        if CoreDataHelper.shared.updateUser(email: email,
+                                            name: name,
+                                            mobile: mobile,
+                                            address: address,
+                                            password: nil,
+                                            imageData: imageData) {
+            
+            let defaults = UserDefaults.standard
+            defaults.set(name, forKey: "userName")
+            defaults.set(mobile, forKey: "userMobile")
+            defaults.set(address, forKey: "userAddress")
+            if let imageData = imageData {
+                defaults.set(imageData, forKey: "userImage")
+            }
+            defaults.synchronize()
+            
+            loadUserProfile() // ✅ refresh UI
+            UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
+        } else {
+            UIAlertController.showAlert(title: "Error", message: "Failed to update profile.", viewController: self)
+        }
     }
-    
 }
 

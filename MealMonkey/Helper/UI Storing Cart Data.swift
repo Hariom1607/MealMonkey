@@ -1,16 +1,16 @@
 import Foundation
 
-// Save cart to UserDefaults
+// Save the current cart (array of product dictionaries) to UserDefaults
 func saveCartToUserDefaults(cartArray: [[String: Any]]) {
     UserDefaults.standard.set(cartArray, forKey: "SavedCart")
 }
 
-// Load cart from UserDefaults
+// Load the saved cart from UserDefaults
 func loadCartFromUserDefaults() -> [[String: Any]] {
     return UserDefaults.standard.array(forKey: "SavedCart") as? [[String: Any]] ?? []
 }
 
-// Convert ProductModel → Dictionary for saving
+// Convert ProductModel → Dictionary (so it can be stored in UserDefaults)
 func productToDict(_ product: ProductModel) -> [String: Any] {
     return [
         "intId": product.intId,
@@ -26,8 +26,7 @@ func productToDict(_ product: ProductModel) -> [String: Any] {
     ]
 }
 
-
-// Convert Dictionary → ProductModel for loading
+// Convert Dictionary → ProductModel (for loading saved products back into objects)
 func dictToProduct(_ dict: [String: Any]) -> ProductModel {
     return ProductModel(
         intId: dict["intId"] as? Int ?? 0,
@@ -43,7 +42,7 @@ func dictToProduct(_ dict: [String: Any]) -> ProductModel {
     )
 }
 
-// Save orders
+// Save a list of orders (each order is an array of products) to UserDefaults
 func saveOrdersToUserDefaults(_ orders: [[ProductModel]]) {
     let ordersArray = orders.map { order in
         order.map { product in
@@ -53,7 +52,7 @@ func saveOrdersToUserDefaults(_ orders: [[ProductModel]]) {
     UserDefaults.standard.set(ordersArray, forKey: "orders")
 }
 
-// Load orders
+// Load saved orders (restore them back into [[ProductModel]])
 func loadOrdersFromUserDefaults() -> [[ProductModel]] {
     guard let savedOrders = UserDefaults.standard.array(forKey: "orders") as? [[[String: Any]]] else {
         return []

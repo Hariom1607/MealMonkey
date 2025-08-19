@@ -30,7 +30,6 @@ class LoginViewController: UIViewController {
         txtEmail.setPadding(left: 34, right: 34)
         txtPassword.setPadding(left: 34, right: 48)
         self.tabBarController?.tabBar.isHidden = true
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,31 +65,19 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // ✅ Fetch users from UserDefaults
-        let users = UserDefaults.standard.dictionary(forKey: "users") as? [String: [String: String]] ?? [:]
-        
-        // ✅ Check if email exists
-        guard let user = users[email] else {
-            UIAlertController.showAlert(title: "User Not Found", message: "No account found with this email.", viewController: self)
+        if let user = CoreDataHelper.shared.verifyUser(email: email, password: password) {
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            UserDefaults.standard.set(email, forKey: "currentUserEmail") // <-- always lowercase
+            UserDefaults.standard.synchronize()
+            
+            print("✅ Login successful: \(email)")
+        }
+
+        else {
+            print("❌ Invalid credentials")
+            UIAlertController.showAlert(title: "Login Failed", message: "Invalid email or password", viewController: self)
             return
         }
-        
-        // ✅ Check password
-        if user["password"] != password {
-            UIAlertController.showAlert(title: "Invalid Password", message: "Wrong password. Please try again.", viewController: self)
-            return
-        }
-        
-        // ✅ Save current user session
-        let defaults = UserDefaults.standard
-        defaults.set(true, forKey: "isLoggedIn")
-        defaults.set(email, forKey: "currentUser")
-        
-        // Also set details for profile page
-        defaults.set(user["name"], forKey: "userName")
-        defaults.set(user["email"], forKey: "userEmail")
-        defaults.set(user["mobile"], forKey: "userMobile")
-        defaults.set(user["address"], forKey: "userAddress")
         
         // ✅ Go to main tab bar
         showMainTabBar()

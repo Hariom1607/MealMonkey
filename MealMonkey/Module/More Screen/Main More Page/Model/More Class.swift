@@ -14,7 +14,11 @@ class More: NSObject{
     let title: String
     
     init(imgSection: String, title: String) {
-        self.imgSection = UIImage(named: imgSection)
+        if let systemImage = UIImage(systemName: imgSection) {
+            self.imgSection = systemImage.withRenderingMode(.alwaysTemplate) 
+        } else {
+            self.imgSection = UIImage(named: imgSection)
+        }
         self.title = title
     }
     
@@ -27,7 +31,7 @@ class More: NSObject{
              title: "Notifications"),
         More(imgSection: "ic_1x_Inbox",
              title: "Inbox"),
-        More(imgSection: "heart",
+        More(imgSection: "heart.fill",
              title: "Wishlist"),
         More(imgSection: "ic_1x_aboutus",
              title: "About Us")
