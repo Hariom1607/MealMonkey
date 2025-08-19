@@ -85,7 +85,7 @@
                                             <constraint firstAttribute="height" constant="268" id="4kY-Uc-cg3"/>
                                         </constraints>
                                     </imageView>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHw-me-W9H">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHw-me-W9H">
                                         <rect key="frame" x="0.0" y="268" width="393" height="398"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="itB-wc-hh1">
@@ -109,19 +109,19 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="FWi-lB-iGv">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="174.66666666666666" height="20.333333333333332"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4Zw-Pg-GSk">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4Zw-Pg-GSk">
                                                                                         <rect key="frame" x="0.0" y="-0.33333333333333215" width="35" height="19.999999999999996"/>
                                                                                         <color key="tintColor" name="LoginButton"/>
                                                                                     </imageView>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="16f-3r-eaT">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="16f-3r-eaT">
                                                                                         <rect key="frame" x="35" y="-0.33333333333333215" width="34.666666666666657" height="19.999999999999996"/>
                                                                                         <color key="tintColor" name="LoginButton"/>
                                                                                     </imageView>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bnY-mt-FlQ">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bnY-mt-FlQ">
                                                                                         <rect key="frame" x="69.666666666666671" y="-0.33333333333333215" width="35" height="19.999999999999996"/>
                                                                                         <color key="tintColor" name="LoginButton"/>
                                                                                     </imageView>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="omP-Jv-rcc">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="omP-Jv-rcc">
                                                                                         <rect key="frame" x="104.66666666666667" y="-0.33333333333333215" width="35.000000000000014" height="19.999999999999996"/>
                                                                                         <color key="tintColor" name="LoginButton"/>
                                                                                     </imageView>
@@ -547,6 +547,7 @@
         <image name="ic_btncart" width="54.333332061767578" height="54.333332061767578"/>
         <image name="ic_sideBackView" width="97" height="171"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <namedColor name="ExtraLabel">
             <color red="0.48627450980392156" green="0.49019607843137253" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

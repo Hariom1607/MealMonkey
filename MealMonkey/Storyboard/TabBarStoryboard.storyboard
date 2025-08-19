@@ -303,10 +303,10 @@ meals and more!</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="644"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6H-Dk-4z3">
-                                                        <rect key="frame" x="140" y="30" width="113" height="184"/>
+                                                        <rect key="frame" x="140.33333333333334" y="30" width="112.33333333333334" height="184"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYc-Bw-f9n">
-                                                                <rect key="frame" x="5.6666666666666572" y="0.0" width="102" height="102"/>
+                                                                <rect key="frame" x="5.3333333333333144" y="0.0" width="102" height="102"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-9q-uIq">
                                                                         <rect key="frame" x="0.0" y="0.6666666666666643" width="102" height="100.66666666666669"/>
@@ -323,7 +323,7 @@ meals and more!</string>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs9-u9-8sG">
-                                                                <rect key="frame" x="16" y="121" width="81" height="12"/>
+                                                                <rect key="frame" x="16" y="121" width="80.333333333333329" height="12"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="12" id="bDc-HY-34T"/>
                                                                 </constraints>
@@ -337,13 +337,13 @@ meals and more!</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hii there Emilia!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmR-6B-eEM">
-                                                                <rect key="frame" x="0.0" y="146" width="113" height="18.666666666666657"/>
+                                                                <rect key="frame" x="0.0" y="146" width="112.33333333333333" height="18.666666666666657"/>
                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                                 <color key="textColor" name="LoginLabel"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29O-M9-fkh">
-                                                                <rect key="frame" x="31" y="170.66666666666669" width="46" height="13"/>
+                                                                <rect key="frame" x="31.000000000000004" y="170.66666666666669" width="45.333333333333343" height="13"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="13" id="Uyg-j2-kfT"/>
                                                                 </constraints>
@@ -365,7 +365,6 @@ meals and more!</string>
                                                             <constraint firstItem="cYc-Bw-f9n" firstAttribute="centerX" secondItem="e6H-Dk-4z3" secondAttribute="centerX" id="DVh-sb-UvR"/>
                                                             <constraint firstItem="29O-M9-fkh" firstAttribute="leading" secondItem="e6H-Dk-4z3" secondAttribute="leading" constant="31" id="FAv-2d-Zng"/>
                                                             <constraint firstItem="vmR-6B-eEM" firstAttribute="top" secondItem="Qs9-u9-8sG" secondAttribute="bottom" constant="13" id="I1y-bf-qxb"/>
-                                                            <constraint firstAttribute="width" constant="113" id="Lhu-CK-La5"/>
                                                             <constraint firstItem="vmR-6B-eEM" firstAttribute="leading" secondItem="e6H-Dk-4z3" secondAttribute="leading" id="Ueo-aR-1zy"/>
                                                             <constraint firstAttribute="height" constant="184" id="hO9-lu-T0U"/>
                                                             <constraint firstItem="Qs9-u9-8sG" firstAttribute="leading" secondItem="e6H-Dk-4z3" secondAttribute="leading" constant="16" id="sRc-RL-Xat"/>

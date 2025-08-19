@@ -7,20 +7,24 @@
 
 import UIKit
 
+// Delegate protocol to handle user interactions from this table view cell
 protocol FoodListTableViewCellDelegate: AnyObject {
     func foodListTableViewCell(_ cell: FoodListTableViewCell, didSelectProduct product: ProductModel)
     func foodListTableViewCell(_ cell: FoodListTableViewCell, didSelectCategory category: ProductCategory)
 }
 
+// Custom table view cell that contains a collection view
 class FoodListTableViewCell: UITableViewCell {
     
     weak var delegate: FoodListTableViewCellDelegate?
     
-    @IBOutlet weak var collViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var collViewFood: UICollectionView!
-    @IBOutlet weak var btnViewAll: UIButton!
-    @IBOutlet weak var lblCollViewHeading: UILabel!
+    // MARK: - Outlets
+    @IBOutlet weak var collViewHeight: NSLayoutConstraint! // Dynamic height for collection view
+    @IBOutlet weak var collViewFood: UICollectionView!     // Embedded collection view
+    @IBOutlet weak var btnViewAll: UIButton!              // "View All" button
+    @IBOutlet weak var lblCollViewHeading: UILabel!       // Heading label above collection
     
+    // Defines different types of collection views this cell can represent
     enum CollectionType {
         case category
         case popular
@@ -28,8 +32,11 @@ class FoodListTableViewCell: UITableViewCell {
         case RecentItems
     }
     
+    // MARK: - Properties
     var selectedCategory: ProductCategory = .All
     var collectionType: CollectionType = .category
+    
+    // Categories list
     var categories: [ProductCategory] = [] {
         didSet {
             collViewFood.reloadData()
@@ -40,6 +47,7 @@ class FoodListTableViewCell: UITableViewCell {
         }
     }
     
+    // Products list
     var products: [ProductModel] = [] {
         didSet {
             collViewFood.reloadData()
@@ -50,18 +58,26 @@ class FoodListTableViewCell: UITableViewCell {
         }
     }
     
+    // Update collection view height dynamically (for vertical scrolling layouts)
     func updateCollectionHeight() {
+        collViewFood.layoutIfNeeded()
+        
         if let layout = collViewFood.collectionViewLayout as? UICollectionViewFlowLayout,
            layout.scrollDirection == .vertical {
-            self.collViewHeight.constant = self.collViewFood.collectionViewLayout.collectionViewContentSize.height
+            let height = collViewFood.collectionViewLayout.collectionViewContentSize.height
+            self.collViewHeight.constant = height
         }
     }
     
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        // Set collection view delegate & datasource
         collViewFood.dataSource = self
         collViewFood.delegate = self
         
+        // Register all required collection view cells
         collViewFood.register(UINib(nibName: "FoodCategoryCollectionViewCell", bundle: nil),
                               forCellWithReuseIdentifier: "FoodCategoryCollectionViewCell")
         collViewFood.register(UINib(nibName: "PopularFoodCollectionViewCell", bundle: nil),
@@ -76,12 +92,15 @@ class FoodListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // "View All" button action (currently empty, can be delegated if needed)
     @IBAction func btnViewAllClick(_ sender: Any) {
     }
 }
 
+// MARK: - Collection View Handling
 extension FoodListTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // Number of items based on collection type
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionType {
         case .category:
@@ -91,9 +110,8 @@ extension FoodListTableViewCell: UICollectionViewDataSource, UICollectionViewDel
         }
     }
     
+    // Configure and return the correct cell type
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
         switch collectionType {
         case .category:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCollectionViewCell", for: indexPath) as! FoodCategoryCollectionViewCell
@@ -115,12 +133,13 @@ extension FoodListTableViewCell: UICollectionViewDataSource, UICollectionViewDel
             
         case .RecentItems:
             let product = products[indexPath.row]
-            let cell: RecentItemsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemsCollectionViewCell", for: indexPath) as! RecentItemsCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemsCollectionViewCell", for: indexPath) as! RecentItemsCollectionViewCell
             cell.configure(with: product)
             return cell
         }
     }
     
+    // Set item sizes based on collection type
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionType == .category {
             return CGSize(width: 88, height: 113)
@@ -130,11 +149,12 @@ extension FoodListTableViewCell: UICollectionViewDataSource, UICollectionViewDel
             return CGSize(width: 228, height: 185)
         } else if collectionType == .RecentItems {
             return CGSize(width: collViewFood.frame.size.width, height: 79)
-        } else{
+        } else {
             return CGSize(width: 100, height: 100)
         }
     }
     
+    // Handle item selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionType {
         case .category:

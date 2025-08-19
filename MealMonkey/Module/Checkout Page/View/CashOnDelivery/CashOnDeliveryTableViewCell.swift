@@ -7,35 +7,43 @@
 
 import UIKit
 
+/// Custom cell representing the "Cash on Delivery" payment option
 class CashOnDeliveryTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var viewCash: UIView!
-    @IBOutlet weak var btnCashOnDeliverySelection: UIButton!
+    @IBOutlet weak var viewCash: UIView!                       // Container view
+    @IBOutlet weak var btnCashOnDeliverySelection: UIButton!   // Selection button
+    
+    /// Closure to notify the parent controller when this payment option is selected
+    var onCashSelected: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let allviews = [viewCash!]
-        styleViews(allviews, cornerRadius: 6, borderWidth: 1, borderColor: UIColor.black.cgColor)
         
+        // Apply rounded corners & border styling to container
+        styleViews([viewCash!],
+                   cornerRadius: 6,
+                   borderWidth: 1,
+                   borderColor: UIColor.black.cgColor)
+        
+        // Configure selection button
         btnCashOnDeliverySelection.setImage(UIImage(systemName: "circle"), for: .normal)
         btnCashOnDeliverySelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
-        btnCashOnDeliverySelection.tintColor = .loginButton // Or whatever color you want
+        btnCashOnDeliverySelection.tintColor = .loginButton
         btnCashOnDeliverySelection.backgroundColor = .clear
         btnCashOnDeliverySelection.layer.cornerRadius = btnCashOnDeliverySelection.frame.height / 2
         btnCashOnDeliverySelection.clipsToBounds = true
         
+        // Remove default gray cell highlight
         self.selectionStyle = .none
-
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+        // Default override — no custom behavior
     }
     
-    
-    @IBAction func btnAddNewCardAction(_ sender: Any) {
+    /// Action when "Cash on Delivery" button is tapped
+    @IBAction func btnCashOnDeliverySelectionAction(_ sender: Any) {
+        onCashSelected?()  // Notify parent VC
     }
-    
 }

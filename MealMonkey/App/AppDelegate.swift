@@ -11,21 +11,26 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // Global arrays for cart, orders, and all available products
     var arrCart: [ProductModel] = []
     var arrOrders: [[ProductModel]] = []
     var allProducts: [ProductModel] = [] // Store API products here
     
+    // MARK: - Core Data Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
+        // Initialize Core Data stack with "Food Model"
         let container = NSPersistentContainer(name: "Food Model")
         
+        // Enable automatic lightweight migrations
         if let storeDescription = container.persistentStoreDescriptions.first {
             storeDescription.shouldMigrateStoreAutomatically = true
             storeDescription.shouldInferMappingModelAutomatically = true
         }
         
+        // Load persistent store (database)
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
-                // 🚨 Reset the store if migration fails
+                // 🚨 If migration fails, reset and recreate the store
                 if let url = storeDescription.url {
                     try? container.persistentStoreCoordinator.destroyPersistentStore(
                         at: url,
@@ -46,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     fatalError("❌ Unresolved Core Data error \(error), \(error.userInfo)")
                 }
             } else {
+                // ✅ Store loaded successfully
                 print("✅ Core Data store loaded at: \(storeDescription.url?.absoluteString ?? "unknown")")
             }
         }
@@ -53,9 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+    // MARK: - App Lifecycle
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Fetch products from API on app launch
         ProductAPIHelper.shared.fetchProducts { products in
             guard let products = products else { return }
             DispatchQueue.main.async {
@@ -69,24 +76,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
+        // Return the default scene configuration.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        // Called when user discards a scene session.
+        // Clean up any resources related to the discarded sessions.
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        //        saveWishlist(arrWishlist, forUser: "")
+        // Save wishlist or other user data here if needed
+        // saveWishlist(arrWishlist, forUser: "")
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        //        saveWishlist(arrWishlist, forUser: "") // Extra safety
+        // Save wishlist before termination (extra safety)
+        // saveWishlist(arrWishlist, forUser: "")
         saveContext()
     }
+    
+    // MARK: - Core Data Save Support
     
     func saveContext() {
         let context = persistentContainer.viewContext
@@ -95,4 +105,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-

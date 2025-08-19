@@ -9,48 +9,59 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var viewImg: UIView!
-    @IBOutlet weak var txtAddress: UITextField!
-    @IBOutlet weak var txtMobileNo: UITextField!
-    @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var txtName: UITextField!
-    @IBOutlet weak var btnSaveUser: UIButton!
-    @IBOutlet weak var btnSignOut: UIButton!
-    @IBOutlet weak var lblWelcomeMsg: UILabel!
-    @IBOutlet weak var btnEditProfile: UIButton!
-    @IBOutlet weak var imgUser: UIImageView!
+    // MARK: - Outlets
+    @IBOutlet weak var viewImg: UIView!             // View container for user profile image
+    @IBOutlet weak var txtAddress: UITextField!     // Address input field
+    @IBOutlet weak var txtMobileNo: UITextField!    // Mobile number input field
+    @IBOutlet weak var txtEmail: UITextField!       // Email input field
+    @IBOutlet weak var txtName: UITextField!        // Name input field
+    @IBOutlet weak var btnSaveUser: UIButton!       // Save button for profile changes
+    @IBOutlet weak var btnSignOut: UIButton!        // Sign out button
+    @IBOutlet weak var lblWelcomeMsg: UILabel!      // Welcome message label
+    @IBOutlet weak var btnEditProfile: UIButton!    // Edit profile button (currently unused)
+    @IBOutlet weak var imgUser: UIImageView!        // User profile image
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load saved user data from UserDefaults into textfields
         txtName.text = UserDefaults.standard.string(forKey: "userName")
         txtEmail.text = UserDefaults.standard.string(forKey: "userEmail")
         txtMobileNo.text = UserDefaults.standard.string(forKey: "userMobile")
         txtAddress.text = UserDefaults.standard.string(forKey: "userAddress")
         
+        // Update welcome message
         if let name = UserDefaults.standard.string(forKey: "userName") {
             lblWelcomeMsg.text = "Welcome, \(name)"
         }
         
+        // Set navigation bar title & cart button
         setLeftAlignedTitle("Profile")
         setCartButton(target: self, action: #selector(profileCartBtn))
         
+        // Round profile image container
         viewImg.layer.cornerRadius = viewImg.frame.size.width/2
         viewImg.layer.borderWidth = 2
         viewImg.clipsToBounds = true
         
+        // Apply styling to textfields and save button
         let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSaveUser!]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
+        // Add left padding to textfields
         setTextFieldPadding(allViews, left: 34)
         
+        // Enable profile image tap gesture to open image picker
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
         imgUser.addGestureRecognizer(tapGesture)
         
+        // Load user profile from CoreData or UserDefaults
         loadUserProfile()
-        
     }
     
+    // MARK: - Load Profile
+    /// Loads the profile of the current logged-in user from CoreData or UserDefaults
     func loadUserProfile() {
         guard let email = UserDefaults.standard.string(forKey: "currentUserEmail"),
               let user = CoreDataHelper.shared.fetchUser(email: email) else { return }
@@ -62,44 +73,51 @@ class ProfileViewController: UIViewController {
         
         lblWelcomeMsg.text = "Welcome, \(user.name ?? "")"
         
+        // ✅ Load profile image directly from CoreData
         if let imageData = user.imageData {
             imgUser.image = UIImage(data: imageData)
-        } else if let savedImageData = UserDefaults.standard.data(forKey: "userImage") {
-            imgUser.image = UIImage(data: savedImageData)
+        } else {
+            imgUser.image = UIImage(named: "defaultProfile") // fallback
         }
     }
     
+    // MARK: - Navigation Buttons
+    /// Navigates to the Cart screen
     @objc func profileCartBtn() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController{
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
     
+    // MARK: - Image Picker
+    /// Opens image picker to select/update profile image
     @objc func openImagePicker() {
-        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
         present(picker, animated: true)
-        
     }
     
+    // MARK: - Button Actions
+    /// Edit Profile button action (currently empty implementation)
     @IBAction func btnEditProfileAction(_ sender: Any) {
     }
     
+    /// Sign Out button action
     @IBAction func btnSignOutAction(_ sender: Any) {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "currentUserEmail")
         defaults.set(false, forKey: "isLoggedIn") // ✅ Mark user as logged out
         defaults.synchronize()
         
-        // Go back to login screen
+        // Navigate back to login screen
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
         let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
         let navController = UINavigationController(rootViewController: loginVC)
         navController.navigationBar.isHidden = true
         
+        // Replace rootViewController with login screen
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let sceneDelegate = windowScene.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = navController
@@ -107,14 +125,17 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    /// Save User button action → Updates user info in CoreData and UserDefaults
     @IBAction func btnSaveUserAction(_ sender: Any) {
         guard let email = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
+        // Collect updated user details
         let name = txtName.text
         let mobile = txtMobileNo.text
         let address = txtAddress.text
         let imageData = imgUser.image?.jpegData(compressionQuality: 0.8)
         
+        // Update user in CoreData
         if CoreDataHelper.shared.updateUser(email: email,
                                             name: name,
                                             mobile: mobile,
@@ -122,20 +143,18 @@ class ProfileViewController: UIViewController {
                                             password: nil,
                                             imageData: imageData) {
             
+            // Save updated details in UserDefaults
             let defaults = UserDefaults.standard
             defaults.set(name, forKey: "userName")
             defaults.set(mobile, forKey: "userMobile")
             defaults.set(address, forKey: "userAddress")
-            if let imageData = imageData {
-                defaults.set(imageData, forKey: "userImage")
-            }
             defaults.synchronize()
             
-            loadUserProfile() // ✅ refresh UI
+            // Refresh UI after saving
+            loadUserProfile()
             UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
         } else {
             UIAlertController.showAlert(title: "Error", message: "Failed to update profile.", viewController: self)
         }
     }
 }
-

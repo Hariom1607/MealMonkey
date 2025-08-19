@@ -7,17 +7,22 @@
 
 import UIKit
 
+// Custom UICollectionViewCell to display a feature's image
 class FeatureCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imgFeature: UIImageView!
+    // MARK: - Outlets
+    @IBOutlet weak var imgFeature: UIImageView!   // Image view to display the feature
     
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Initialization code (called after the cell is loaded from nib)
     }
     
+    // MARK: - Configuration
+    /// Configures the cell with a Feature model
+    /// - Parameter model: Feature object containing imageName, title, and subtitle
     func configure(with model: Feature){
-        imgFeature.image = UIImage(named: model.imageName)
+        imgFeature.image = UIImage(named: model.imageName) // Set the feature image
     }
-
 }

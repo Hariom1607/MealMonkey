@@ -7,15 +7,20 @@
 
 import UIKit
 
+// MARK: - Main Tab Bar Controller
 class MenuTabViewController: UITabBarController {
 
+    // Outlet to reference the custom tab bar from storyboard
     @IBOutlet weak var customTabBar: UITabBar!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Hide navigation bar since we are using a Tab Bar as the root navigation element
         self.navigationController?.navigationBar.isHidden = true
 
-        // Do any additional setup after loading the view.
+        // Additional customization for tab bar can be done here
+        // Example: setting tintColor, backgroundColor, icons, etc.
     }
-
 }

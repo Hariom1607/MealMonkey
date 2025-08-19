@@ -7,19 +7,23 @@
 
 import UIKit
 
+// Cell to display food category in collection view
 class FoodCategoryCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var lblFoodCategory: UILabel!
-    @IBOutlet weak var imgFoodCategory: UIImageView!
+    @IBOutlet weak var lblFoodCategory: UILabel!     // Label for category name
+    @IBOutlet weak var imgFoodCategory: UIImageView! // Image for category
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Style category image
         styleViews([imgFoodCategory], cornerRadius: 10, borderWidth: 0, borderColor: UIColor.black.cgColor)
     }
     
+    // Configure cell with given product category
     func configure(with category: ProductCategory) {
         lblFoodCategory.text = category.rawValue
         
-        // Provide images for categories explicitly, e.g.:
+        // Set category-specific image
         switch category {
         case .All:
             imgFoodCategory.image = UIImage(named: "ic_butternaan")

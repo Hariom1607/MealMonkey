@@ -22,19 +22,22 @@
                         <rect key="frame" x="9" y="0.0" width="398" height="192"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hakkanoodles" translatesAutoresizingMaskIntoConstraints="NO" id="R0s-Ns-Vg7">
-                                <rect key="frame" x="0.0" y="13" width="398" height="125"/>
+                                <rect key="frame" x="0.0" y="13" width="398" height="118"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WmY-Gq-EVF">
-                                <rect key="frame" x="21" y="146" width="356" height="33"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WmY-Gq-EVF">
+                                <rect key="frame" x="21" y="139" width="356" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café De Bambaa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctM-qn-BJd">
-                                        <rect key="frame" x="0.0" y="0.0" width="356" height="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café De Bambaa" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctM-qn-BJd">
+                                        <rect key="frame" x="0.0" y="0.0" width="356" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Az3-fd-Npb"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="18.940000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7Q9-GF-K4C">
-                                        <rect key="frame" x="0.0" y="19" width="356" height="14"/>
+                                        <rect key="frame" x="0.0" y="26" width="356" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Café    Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-WQ-60f">
                                                 <rect key="frame" x="0.0" y="0.0" width="114" height="14"/>

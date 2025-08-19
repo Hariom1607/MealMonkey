@@ -8,13 +8,18 @@
 import Foundation
 import UIKit
 
-extension CartViewController: UITableViewDelegate, UITableViewDataSource{
+/// Handles table view display & delete actions for Cart
+extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
+    /// Number of rows = cart items count
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartItems.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    /// Configure cart cell
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: "CartTableViewCell",
             for: indexPath) as? CartTableViewCell else {
@@ -24,13 +29,18 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
         let product = cartItems[indexPath.row]
         cell.configure(with: product)
         
+        // Handle delete button
         cell.onDelete = { [weak self] in
-            guard let self = self else { return }
-            guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
-
-            CoreDataHelper.shared.deleteCartItem(productId: Int(product.id), userEmail: currentUserEmail)
-
-            // Refresh from Core Data
+            guard let self = self,
+                  let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
+            
+            // Delete item from Core Data
+            CoreDataHelper.shared.deleteCartItem(
+                productId: Int(product.id),
+                userEmail: currentUserEmail
+            )
+            
+            // Refresh cart after deletion
             self.cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
             self.updateEmptyLabel()
             self.tblCart.reloadData()
@@ -38,5 +48,4 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
-    
 }
