@@ -9,32 +9,45 @@ import UIKit
 
 class SplashViewController: UIViewController {
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        // Additional setup if needed (currently unused).
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Hide navigation bar on splash screen
         self.navigationController?.navigationBar.isHidden = true
         
+        // Wait 2 seconds before navigating (splash delay)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            
+            // Check if user is already logged in (from UserDefaults)
             let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-            if isLoggedIn, let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+            
+            if isLoggedIn,
+               let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+                // ✅ Auto-login case
                 print("✅ Auto-login user: \(email)")
                 self.showMainTabBar()
             } else {
+                // 🚪 Not logged in → go to Login
                 self.showLogin()
             }
         }
     }
     
+    // MARK: - Navigation
+    
+    /// Show login screen (when no active user session found)
     private func showLogin() {
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+        
         if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             
+            // Replace rootViewController with Login inside a UINavigationController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
                 
@@ -45,9 +58,15 @@ class SplashViewController: UIViewController {
         }
     }
     
+    /// Show main app tab bar (when user is already logged in)
+    /// Show main app tab bar (when user is already logged in)
     private func showMainTabBar() {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
+        
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+            
+            // 👉 Set the default tab (example: index 0 = Menu, index 1 = Home, etc.)
+            tabBarController.selectedIndex = 2   // Change this to the index of your Home tab
             
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
@@ -61,5 +80,4 @@ class SplashViewController: UIViewController {
             }
         }
     }
-    
 }

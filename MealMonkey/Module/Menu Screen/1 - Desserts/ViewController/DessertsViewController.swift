@@ -9,22 +9,32 @@ import UIKit
 
 class DessertsViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var tblDesserts: UITableView!
     
+    // MARK: - Properties
     var selectedCategory: ProductType = .food
-    var arrProducts: [ProductModel] = []
-    var selectedProduct: Menu?
-    var filteredProducts: [ProductModel] = []
+    var arrProducts: [ProductModel] = []          // All fetched products for the selected category
+    var selectedProduct: Menu?                   // (Possibly unused – check if needed later)
+    var filteredProducts: [ProductModel] = []    // Search results
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        fetchProducts()
+    }
+    
+    // MARK: - UI Setup
+    private func setupUI() {
+        // Search box styling
         txtSearch.layer.cornerRadius = 28
         txtSearch.setPadding(left: 34, right: 34)
         txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
-        // Title based on category
+        // Set navigation title dynamically based on category
         let titleText: String
         switch selectedCategory {
         case .food: titleText = "Food"
@@ -34,15 +44,18 @@ class DessertsViewController: UIViewController {
         setLeftAlignedTitleWithBack(titleText, target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))
         
+        // Register custom table view cell
         tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil),
                              forCellReuseIdentifier: "DessertsTableViewCell")
-        
-        // Fetch products from API
+    }
+    
+    // MARK: - API Call
+    private func fetchProducts() {
         ProductAPIHelper.shared.fetchProducts { [weak self] products in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if let products = products {
-                    // Filter products by selected type
+                    // ✅ Filter products by selected category
                     self.arrProducts = products.filter { $0.objProductType == self.selectedCategory }
                     self.filteredProducts = self.arrProducts
                     self.tblDesserts.reloadData()
@@ -51,29 +64,26 @@ class DessertsViewController: UIViewController {
                 }
             }
         }
-        
     }
     
+    // MARK: - Actions
     @objc func searchTextChanged(_ textField: UITextField) {
         let searchText = textField.text?.lowercased() ?? ""
-        if searchText.isEmpty {
-            filteredProducts = arrProducts
-        } else {
-            filteredProducts = arrProducts.filter {
-                $0.strProductName.lowercased().contains(searchText)
-            }
-        }
+        filteredProducts = searchText.isEmpty
+        ? arrProducts
+        : arrProducts.filter { $0.strProductName.lowercased().contains(searchText) }
+        
         tblDesserts.reloadData()
     }
     
-    @objc func dessertBackBtn(){
+    @objc func dessertBackBtn() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController{
-            self.navigationController?.pushViewController(menuVC, animated: true)
+        if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(cartVC, animated: true)
         }
     }
 }

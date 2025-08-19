@@ -8,57 +8,63 @@
 import UIKit
 import CoreData
 
+/// Handles cart display and order placement
 class CartViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var btnPlaceOrder: UIButton!
     @IBOutlet weak var tblCart: UITableView!
     
+    /// Cart items for current user
     var cartItems: [CartItem] = []
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Style button
         styleViews([btnPlaceOrder!], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
+        // Add title + back button
         setLeftAlignedTitleWithBack("Cart", target: self, action: #selector(backBtnTapped))
         
+        // Register custom cell
         tblCart.register(UINib(nibName: "CartTableViewCell", bundle: nil), forCellReuseIdentifier: "CartTableViewCell")
-        
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            // Load saved cart
-            let savedCartArray = loadCartFromUserDefaults()
-            appDelegate.arrCart = savedCartArray.map { dictToProduct($0) }
-            
-            // Load saved orders (THIS WAS MISSING)
-            let savedOrders = loadOrdersFromUserDefaults()
-            appDelegate.arrOrders = savedOrders
-        }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        // Fetch cart items for logged-in user
         if let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") {
             cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
         }
+        
         updateEmptyLabel()
         tblCart.reloadData()
     }
     
+    // MARK: - Helpers
     
+    /// Show/hide empty cart label & button
     func updateEmptyLabel() {
         lblEmpty.isHidden = !cartItems.isEmpty
         btnPlaceOrder.isHidden = cartItems.isEmpty
     }
     
+    // MARK: - Actions
+    
+    /// Place order button tapped
     @IBAction func btnPlaceOrderAction(_ sender: Any) {
-        
         guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail"),
               let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
+        // Refresh cart
         cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
         
+        // Check empty cart
         if cartItems.isEmpty {
             let alert = UIAlertController(title: "Cart is Empty",
                                           message: "Please add items to your cart before placing an order.",
@@ -80,16 +86,16 @@ class CartViewController: UIViewController {
             order.total_price = cartItems.reduce(0.0) { $0 + ($1.price * Double($1.quantity)) }
             order.users = user
             
-            // Add products to order
+            // Add cart items as Food_Items
             for item in cartItems {
                 let foodItem = Food_Items(context: context)
                 foodItem.id = Int64(item.id)
                 foodItem.name = item.name
                 foodItem.price = item.price
                 foodItem.imageName = item.image
-                foodItem.category = "" // you can map category if available
+                foodItem.category = ""              // TODO: map category if available
                 foodItem.quantity = Int16(item.quantity)
-                foodItem.productDescription = "" // map description if available
+                foodItem.productDescription = ""    // TODO: map description if available
                 
                 order.addToProducts(foodItem)
             }
@@ -97,7 +103,6 @@ class CartViewController: UIViewController {
             // Save order
             user.addToOrders(order)
             try context.save()
-            
             print("✅ Order saved for user: \(currentUserEmail)")
             
             // Clear cart
@@ -123,6 +128,7 @@ class CartViewController: UIViewController {
         }
     }
     
+    /// Handle back button tap
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }

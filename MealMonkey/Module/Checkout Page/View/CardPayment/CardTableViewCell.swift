@@ -7,34 +7,42 @@
 
 import UIKit
 
+/// Custom table view cell for displaying a saved card
 class CardTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var viewCard: UIView!
-    @IBOutlet weak var btnCardSelection: UIButton!
-    @IBOutlet weak var lblCardNumber: UILabel!
+    @IBOutlet weak var viewCard: UIView!                // Container view for card UI
+    @IBOutlet weak var btnCardSelection: UIButton!      // Button to select card
+    @IBOutlet weak var lblCardNumber: UILabel!          // Label to show masked card number
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let allviews = [viewCard!]
-        styleViews(allviews, cornerRadius: 6, borderWidth: 1, borderColor: UIColor.black.cgColor)
         
+        // Apply rounded corners & border styling to card container
+        let allviews = [viewCard!]
+        styleViews(allviews,
+                   cornerRadius: 6,
+                   borderWidth: 1,
+                   borderColor: UIColor.black.cgColor)
+        
+        // Configure selection button with two states: normal & selected
         btnCardSelection.setImage(UIImage(systemName: "circle"), for: .normal)
         btnCardSelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
-        btnCardSelection.tintColor = .loginButton // Or whatever color you want
+        btnCardSelection.tintColor = .loginButton  // custom color (defined in UIColor extension)
         btnCardSelection.backgroundColor = .clear
         btnCardSelection.layer.cornerRadius = btnCardSelection.frame.height / 2
         btnCardSelection.clipsToBounds = true
-
+        
+        // Disable default gray selection highlight of UITableViewCell
         self.selectionStyle = .none
-
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+        // Default override → no custom behavior
     }
     
+    /// Action for selecting a card
     @IBAction func btnCardSelectionAction(_ sender: Any) {
+        // TODO: Handle card selection (notify controller or update UI)
     }
 }

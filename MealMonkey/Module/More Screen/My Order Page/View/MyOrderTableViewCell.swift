@@ -7,23 +7,22 @@
 
 import UIKit
 
+// MARK: - UITableViewCell for displaying order details in My Orders screen
 class MyOrderTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var lblProductPrice: UILabel!
-    @IBOutlet weak var lblProductsName: UILabel!
-    @IBOutlet weak var lblProductQty: UILabel!
+    // MARK: - Outlets
+    @IBOutlet weak var lblProductPrice: UILabel!   // Label for product price
+    @IBOutlet weak var lblProductsName: UILabel!   // Label for product name
+    @IBOutlet weak var lblProductQty: UILabel!     // Label for product quantity
     
-   
-    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Initialization code (called after the cell is loaded from nib)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        // Configure the view for the selected state (optional highlight styling)
     }
-    
 }

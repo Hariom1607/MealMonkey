@@ -9,65 +9,49 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-    var window: UIWindow?
+    var window: UIWindow?   // The main window of the app
     
+    // MARK: - Scene Setup
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
         
-        let defaults = UserDefaults.standard
-        let storyboard: UIStoryboard
+        // Load the Splash storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // 👈 Replace "Main" with the storyboard that contains SplashViewController
+        let splashVC = storyboard.instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         
-        if defaults.bool(forKey: "isLoggedIn") {
-            // User already logged in → go to MainTabBar
-            storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController")
-        } else {
-            // Not logged in → go to Login screen inside NavigationController
-            storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            let navController = UINavigationController(rootViewController: loginVC)
-            navController.navigationBar.isHidden = true
-            window?.rootViewController = navController
-        }
-        
-        
+        // Set Splash as the first screen
+        window?.rootViewController = splashVC
         window?.makeKeyAndVisible()
     }
     
+    // MARK: - Scene Lifecycle Methods
+    
     func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        // Called when the scene is being released by the system.
+        // Happens when app goes into background OR scene is discarded.
+        // Use this to release resources.
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        // Called when the app scene becomes active (foreground).
+        // Resume tasks that were paused while inactive.
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        // Called when the app scene is about to move from active → inactive.
+        // Example: phone call, notification interruption.
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        // Called when the app scene transitions from background → foreground.
+        // Undo changes made while in background.
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        // Called when the app transitions from foreground → background.
+        // Save data, release shared resources, and store scene state if needed.
     }
-    
-    
 }
-

@@ -9,28 +9,31 @@ import UIKit
 
 class OffersTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var foodType: UILabel!
-    @IBOutlet weak var restaurantType: UILabel!
-    @IBOutlet weak var noOfRatings: UILabel!
-    @IBOutlet weak var cafeName: UILabel!
+    // MARK: - Outlets
+    @IBOutlet weak var lblFoodType: UILabel!
+    @IBOutlet weak var lblRestaurantType: UILabel!
+    @IBOutlet weak var lblNoOfRatings: UILabel!
+    @IBOutlet weak var lblCafeName: UILabel!
     @IBOutlet weak var imgCafe: UIImageView!
+    
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Optional: make image rounded or styled here if needed
+        imgCafe.layer.cornerRadius = 10
+        imgCafe.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configure(with offer: offer){
+    // MARK: - Configure Cell
+    func configure(with offer: Offer) {
         imgCafe.image = UIImage(named: offer.imageCafe)
-        cafeName.text = offer.strCafeName
-        foodType.text = offer.strFoodType
-        restaurantType.text = offer.strRestaurantType
-        noOfRatings.text = offer.strNoOfRatings
+        lblCafeName.text = offer.cafeName
+        lblFoodType.text = offer.foodType
+        lblRestaurantType.text = offer.restaurantType
+        lblNoOfRatings.text = offer.noOfRatings
     }
-    
 }

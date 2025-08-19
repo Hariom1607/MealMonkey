@@ -13,24 +13,27 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="258" id="KGk-i7-Jjw" customClass="UpiTableViewCell" customModule="MealMonkey" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="421" height="258"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="421" height="258"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vC-SI-L4Z">
-                        <rect key="frame" x="0.0" y="13" width="421" height="43"/>
+                        <rect key="frame" x="0.0" y="6.6666666666666679" width="421" height="34.333333333333329"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uc2-Xu-R33">
-                                <rect key="frame" x="21" y="0.0" width="379" height="43"/>
+                                <rect key="frame" x="21" y="0.0" width="379" height="34.333333333333336"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="johndoe@email.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQQ-hq-lPa">
-                                        <rect key="frame" x="0.0" y="0.0" width="329.33333333333331" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="329.33333333333331" height="34.333333333333336"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="8nZ-In-6Gn"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkd-M6-hGT">
-                                        <rect key="frame" x="329.33333333333331" y="0.0" width="49.666666666666686" height="43"/>
+                                        <rect key="frame" x="329.33333333333331" y="0.0" width="49.666666666666686" height="34.333333333333336"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.98823529409999999" green="0.37647058820000001" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
@@ -45,7 +48,6 @@
                         <color key="backgroundColor" name="MorePageSectionBackground"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Uc2-Xu-R33" secondAttribute="trailing" constant="21" id="D8e-nk-xOW"/>
-                            <constraint firstAttribute="height" constant="43" id="T9Q-Nm-nPo"/>
                             <constraint firstItem="Uc2-Xu-R33" firstAttribute="top" secondItem="2vC-SI-L4Z" secondAttribute="top" id="chM-It-jfr"/>
                             <constraint firstAttribute="bottom" secondItem="Uc2-Xu-R33" secondAttribute="bottom" id="qvo-gw-zqJ"/>
                             <constraint firstItem="Uc2-Xu-R33" firstAttribute="leading" secondItem="2vC-SI-L4Z" secondAttribute="leading" constant="21" id="sb6-d0-o53"/>
@@ -54,8 +56,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="2vC-SI-L4Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ccd-vt-cyu"/>
-                    <constraint firstItem="2vC-SI-L4Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="g5T-wr-gwG"/>
-                    <constraint firstAttribute="bottom" secondItem="2vC-SI-L4Z" secondAttribute="bottom" id="qAH-bn-9dL"/>
+                    <constraint firstItem="2vC-SI-L4Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6.5" id="g5T-wr-gwG"/>
+                    <constraint firstAttribute="bottom" secondItem="2vC-SI-L4Z" secondAttribute="bottom" constant="6.5" id="qAH-bn-9dL"/>
                     <constraint firstAttribute="trailing" secondItem="2vC-SI-L4Z" secondAttribute="trailing" id="tR2-Hk-Atj"/>
                 </constraints>
             </tableViewCellContentView>

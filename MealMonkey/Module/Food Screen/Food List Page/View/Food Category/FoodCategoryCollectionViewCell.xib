@@ -19,18 +19,19 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqS-Uc-8kM">
-                        <rect key="frame" x="11" y="0.0" width="236" height="158"/>
+                        <rect key="frame" x="12" y="0.0" width="223" height="158"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_1x_BeveragesMenu" translatesAutoresizingMaskIntoConstraints="NO" id="T69-E9-Iym">
-                                <rect key="frame" x="5" y="0.0" width="226" height="80"/>
+                                <rect key="frame" x="71.666666666666671" y="0.0" width="80.000000000000014" height="80"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="X0x-ya-kly"/>
                                     <constraint firstAttribute="height" constant="80" id="hcE-A7-veV"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BF-e7-6w2">
-                                <rect key="frame" x="89.666666666666671" y="87" width="57.000000000000014" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BF-e7-6w2">
+                                <rect key="frame" x="83" y="87" width="57" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="ZNK-IF-XwW"/>
+                                    <constraint firstAttribute="height" constant="21" id="ZNK-IF-XwW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="LoginLabel"/>
@@ -39,21 +40,20 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="T69-E9-Iym" secondAttribute="trailing" constant="5" id="9tc-r0-7wb"/>
                             <constraint firstItem="2BF-e7-6w2" firstAttribute="top" secondItem="T69-E9-Iym" secondAttribute="bottom" constant="7" id="Ier-Bz-dpq"/>
-                            <constraint firstItem="T69-E9-Iym" firstAttribute="leading" secondItem="eqS-Uc-8kM" secondAttribute="leading" constant="5" id="kia-2Z-oCg"/>
                             <constraint firstItem="T69-E9-Iym" firstAttribute="top" secondItem="eqS-Uc-8kM" secondAttribute="top" id="l2m-X4-4ap"/>
-                            <constraint firstItem="2BF-e7-6w2" firstAttribute="centerX" secondItem="T69-E9-Iym" secondAttribute="centerX" id="pJo-Qf-GvZ"/>
+                            <constraint firstItem="T69-E9-Iym" firstAttribute="centerX" secondItem="eqS-Uc-8kM" secondAttribute="centerX" id="qZn-pX-YbT"/>
+                            <constraint firstItem="2BF-e7-6w2" firstAttribute="centerX" secondItem="eqS-Uc-8kM" secondAttribute="centerX" id="zV5-EQ-gGa"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="eqS-Uc-8kM" secondAttribute="trailing" id="5au-LZ-LiG"/>
+                <constraint firstAttribute="trailing" secondItem="eqS-Uc-8kM" secondAttribute="trailing" constant="12" id="5au-LZ-LiG"/>
                 <constraint firstItem="eqS-Uc-8kM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hLu-Of-myG"/>
                 <constraint firstAttribute="bottom" secondItem="eqS-Uc-8kM" secondAttribute="bottom" id="qyc-uU-e1M"/>
-                <constraint firstItem="eqS-Uc-8kM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="11" id="skF-MX-x5f"/>
+                <constraint firstItem="eqS-Uc-8kM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="skF-MX-x5f"/>
             </constraints>
             <size key="customSize" width="247" height="158"/>
             <connections>

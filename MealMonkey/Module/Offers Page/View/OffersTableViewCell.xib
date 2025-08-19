@@ -103,11 +103,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="cafeName" destination="kp0-sj-APk" id="zy6-P8-B2s"/>
-                <outlet property="foodType" destination="V9x-dE-211" id="2Rd-a2-34u"/>
                 <outlet property="imgCafe" destination="GbD-5f-Zs9" id="AvB-tT-OoB"/>
-                <outlet property="noOfRatings" destination="cBj-Ul-Ev6" id="tcG-Ru-qYD"/>
-                <outlet property="restaurantType" destination="614-bK-NGG" id="YzI-lt-1ug"/>
+                <outlet property="lblCafeName" destination="kp0-sj-APk" id="xwu-gs-mm0"/>
+                <outlet property="lblFoodType" destination="V9x-dE-211" id="30x-Rz-K5C"/>
+                <outlet property="lblNoOfRatings" destination="cBj-Ul-Ev6" id="XHA-UN-rrY"/>
+                <outlet property="lblRestaurantType" destination="614-bK-NGG" id="nYU-6h-n5v"/>
             </connections>
             <point key="canvasLocation" x="64.122137404580144" y="11.619718309859156"/>
         </tableViewCell>

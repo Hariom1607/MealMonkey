@@ -21,19 +21,22 @@
                         <rect key="frame" x="0.0" y="21" width="351" height="344"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hakkanoodles" translatesAutoresizingMaskIntoConstraints="NO" id="Ip5-XW-RjY">
-                                <rect key="frame" x="0.0" y="0.0" width="351" height="301"/>
+                                <rect key="frame" x="0.0" y="0.0" width="351" height="295"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nZx-jT-MgQ">
-                                <rect key="frame" x="21" y="309" width="309" height="33"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nZx-jT-MgQ">
+                                <rect key="frame" x="21" y="303" width="309" height="39"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minute by tuk tuk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqn-cj-x4f">
-                                        <rect key="frame" x="0.0" y="0.0" width="309" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="309" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="THX-bU-K2K"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a8i-tG-rno">
-                                        <rect key="frame" x="0.0" y="19" width="309" height="14"/>
+                                        <rect key="frame" x="0.0" y="25" width="309" height="14"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="exi-gs-UOV">
                                                 <rect key="frame" x="0.0" y="0.0" width="145.66666666666666" height="14"/>

@@ -19,33 +19,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZs-a2-CHB">
-                        <rect key="frame" x="0.0" y="15" width="507" height="36"/>
+                        <rect key="frame" x="10" y="15" width="487" height="115"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_kheer" translatesAutoresizingMaskIntoConstraints="NO" id="huu-DH-D2c">
-                                <rect key="frame" x="10" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="vLX-79-q48"/>
-                                    <constraint firstAttribute="height" constant="100" id="zhb-Ud-zRF"/>
+                                    <constraint firstAttribute="width" constant="100" id="Ndp-6Q-DCg"/>
+                                    <constraint firstAttribute="height" constant="100" id="xS9-Fs-ZP8"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="pmP-qd-SLD">
-                                <rect key="frame" x="120" y="0.0" width="377" height="36"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pmP-qd-SLD">
+                                <rect key="frame" x="110" y="0.0" width="377" height="115"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order No: 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOO-uG-4ok">
-                                        <rect key="frame" x="0.0" y="0.0" width="377" height="18.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="377" height="38.333333333333336"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Product Name " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEC-Ag-oQv">
-                                        <rect key="frame" x="0.0" y="8.6666666666666661" width="377" height="18.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Product Name " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEC-Ag-oQv">
+                                        <rect key="frame" x="0.0" y="38.333333333333329" width="377" height="38.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Price:  RS 1020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fq-D3-ZCU">
-                                        <rect key="frame" x="0.0" y="17.333333333333336" width="377" height="18.666666666666664"/>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        <rect key="frame" x="0.0" y="76.666666666666671" width="377" height="38.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -54,21 +54,21 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pmP-qd-SLD" secondAttribute="trailing" constant="10" id="5NP-iX-xpT"/>
-                            <constraint firstItem="pmP-qd-SLD" firstAttribute="leading" secondItem="huu-DH-D2c" secondAttribute="trailing" constant="10" id="7d3-qQ-lLN"/>
-                            <constraint firstAttribute="bottom" secondItem="huu-DH-D2c" secondAttribute="bottom" id="bgT-uC-iHl"/>
-                            <constraint firstItem="pmP-qd-SLD" firstAttribute="top" secondItem="lZs-a2-CHB" secondAttribute="top" id="nMh-aW-SCL"/>
-                            <constraint firstItem="huu-DH-D2c" firstAttribute="top" secondItem="lZs-a2-CHB" secondAttribute="top" id="xfi-2p-uMf"/>
-                            <constraint firstItem="huu-DH-D2c" firstAttribute="leading" secondItem="lZs-a2-CHB" secondAttribute="leading" constant="10" id="y8U-vq-orH"/>
-                            <constraint firstAttribute="bottom" secondItem="pmP-qd-SLD" secondAttribute="bottom" id="z6Q-T2-zkC"/>
+                            <constraint firstAttribute="trailing" secondItem="pmP-qd-SLD" secondAttribute="trailing" id="3Wg-Hk-w6G"/>
+                            <constraint firstItem="huu-DH-D2c" firstAttribute="top" secondItem="lZs-a2-CHB" secondAttribute="top" id="FDW-VC-IXR"/>
+                            <constraint firstItem="pmP-qd-SLD" firstAttribute="leading" secondItem="huu-DH-D2c" secondAttribute="trailing" constant="10" id="Hff-0n-6JB"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="MFZ-md-CqH"/>
+                            <constraint firstItem="pmP-qd-SLD" firstAttribute="top" secondItem="lZs-a2-CHB" secondAttribute="top" id="RKd-YI-MWt"/>
+                            <constraint firstAttribute="bottom" secondItem="pmP-qd-SLD" secondAttribute="bottom" id="jwi-VC-PGW"/>
+                            <constraint firstItem="huu-DH-D2c" firstAttribute="leading" secondItem="lZs-a2-CHB" secondAttribute="leading" id="qVN-mf-IOI"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lZs-a2-CHB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="8n8-P8-Mp8"/>
-                    <constraint firstAttribute="trailing" secondItem="lZs-a2-CHB" secondAttribute="trailing" id="CH8-1A-t2L"/>
-                    <constraint firstItem="lZs-a2-CHB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DMb-2R-4TC"/>
-                    <constraint firstAttribute="bottom" secondItem="lZs-a2-CHB" secondAttribute="bottom" constant="15" id="f9r-X5-Hp5"/>
+                    <constraint firstItem="lZs-a2-CHB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0eh-jh-CgF"/>
+                    <constraint firstItem="lZs-a2-CHB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="hES-Ir-FLn"/>
+                    <constraint firstAttribute="bottom" secondItem="lZs-a2-CHB" secondAttribute="bottom" constant="15" id="mIa-j0-V7M"/>
+                    <constraint firstAttribute="trailing" secondItem="lZs-a2-CHB" secondAttribute="trailing" constant="10" id="w2S-7w-mug"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -78,7 +78,7 @@
                 <outlet property="lblProductName" destination="aEC-Ag-oQv" id="1HX-Sd-CDr"/>
                 <outlet property="lblTotalPrice" destination="5fq-D3-ZCU" id="dUO-OH-9ex"/>
             </connections>
-            <point key="canvasLocation" x="295.41984732824426" y="-31.338028169014088"/>
+            <point key="canvasLocation" x="313.74045801526717" y="26.408450704225352"/>
         </tableViewCell>
     </objects>
     <resources>

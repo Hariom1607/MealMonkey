@@ -9,6 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var btnEye: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
@@ -18,30 +19,49 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnForgotPassword: UIButton!
     @IBOutlet weak var btnLogin: UIButton!
     
-    var isPasswordVisible: Bool = false
+    // MARK: - Properties
+    var isPasswordVisible: Bool = false   // Used to toggle password visibility
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let allViews = [txtEmail!, txtPassword!, btnLogin!, btnSignup!, btnGoogleLogin!, btnFacebookLogin!, btnForgotPassword!]
-        
+        // Apply rounded style to all inputs and buttons
+        let allViews = [
+            txtEmail!,
+            txtPassword!,
+            btnLogin!,
+            btnSignup!,
+            btnGoogleLogin!,
+            btnFacebookLogin!,
+            btnForgotPassword!
+        ]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
+        // Add padding to text fields
         txtEmail.setPadding(left: 34, right: 34)
         txtPassword.setPadding(left: 34, right: 48)
+        
+        // Hide tab bar on login screen
         self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide navigation bar for a cleaner login screen
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - Navigation
+    /// Switch to main TabBar after successful login
     private func showMainTabBar() {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
             
+            // Default open tab at index 2
             tabBarController.selectedIndex = 2
             
+            // Replace root view controller with TabBar
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate {
                 
@@ -51,11 +71,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
     
+    /// Handles login button tap
     @IBAction func btnLoginAction(_ sender: Any) {
         let email = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
         let password = txtPassword.text ?? ""
         
+        // Validate inputs
         if email.isEmpty {
             UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
             return
@@ -65,67 +88,68 @@ class LoginViewController: UIViewController {
             return
         }
         
+        // Check credentials against Core Data
         if let user = CoreDataHelper.shared.verifyUser(email: email, password: password) {
+            // ✅ Save login state
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
-            UserDefaults.standard.set(email, forKey: "currentUserEmail") // <-- always lowercase
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(email, forKey: "currentUserEmail") // always lowercase
             
+            // ✅ Save user's name for greeting
+            if let name = user.name { // assuming CoreData entity has "name"
+                UserDefaults.standard.set(name, forKey: "currentUserName")
+            }
+            UserDefaults.standard.synchronize()
             print("✅ Login successful: \(email)")
         }
-
-        else {
-            print("❌ Invalid credentials")
-            UIAlertController.showAlert(title: "Login Failed", message: "Invalid email or password", viewController: self)
-            return
-        }
         
-        // ✅ Go to main tab bar
+        // ✅ Go to main tab bar after successful login
         showMainTabBar()
     }
     
+    /// Navigate to Forgot Password screen
     @IBAction func btnForgotPasswordAction(_ sender: Any) {
-        
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController{
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
-        
     }
     
+    /// Toggle password visibility (eye button)
     @IBAction func btnEyeAction(_ sender: Any) {
-        isPasswordVisible = !isPasswordVisible
+        isPasswordVisible.toggle()
         txtPassword.isSecureTextEntry = !isPasswordVisible
+        
+        // Change eye icon accordingly
         let imageName = isPasswordVisible ? "eye" : "eye.slash"
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
     
-    @IBAction func btnLoginFaceBookAction(_ sender: Any) {
-    }
+    /// Facebook login (to be implemented)
+    @IBAction func btnLoginFaceBookAction(_ sender: Any) {}
     
-    @IBAction func btnLoginGoogleAction(_ sender: Any) {
-    }
+    /// Google login (to be implemented)
+    @IBAction func btnLoginGoogleAction(_ sender: Any) {}
     
+    /// Navigate to Signup screen
     @IBAction func btnSignupAction(_ sender: Any) {
-        
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "SignupViewController") as? SignupViewController{
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: "SignupViewController") as? SignupViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
-            
         }
-        
     }
-    
 }
 
+// MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn (_ textField: UITextField) -> Bool{
-        if textField == txtEmail && textField.returnKeyType == .next{
+    
+    /// Handles return key navigation between fields
+    func textFieldShouldReturn (_ textField: UITextField) -> Bool {
+        if textField == txtEmail && textField.returnKeyType == .next {
             txtEmail.resignFirstResponder()
             txtPassword.becomeFirstResponder()
-        }
-        else{
+        } else {
             txtPassword.resignFirstResponder()
         }
         return true

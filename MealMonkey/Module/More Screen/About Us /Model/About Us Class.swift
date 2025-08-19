@@ -8,19 +8,35 @@
 import Foundation
 import UIKit
 
+/// Model used for About Us, Notifications, and Inbox data
 class AboutModel {
+    
+    /// General text (e.g., About Us paragraph, notification message, inbox title)
     var strText: String?
+    
+    /// Time info for notifications (e.g., "5m ago", "1d ago")
     var strTimezone: String?
+    
+    /// Right-side label (e.g., date like "6th July")
     var strRightSideText: String?
+    
+    /// Secondary text (e.g., inbox message description)
     var strText2: String?
-  
-    init(strText: String? = nil, strTimezone: String? = nil, strRightSideText: String? = nil, strText2: String? = nil) {
+    
+    /// Initializer with optional fields
+    init(strText: String? = nil,
+         strTimezone: String? = nil,
+         strRightSideText: String? = nil,
+         strText2: String? = nil) {
         self.strText = strText
         self.strTimezone = strTimezone
         self.strRightSideText = strRightSideText
         self.strText2 = strText2
     }
     
+    // MARK: - Static Data Providers
+    
+    /// Provides sample "About Us" content paragraphs
     class func addAboutData() -> [AboutModel] {
         return [
             AboutModel(
@@ -54,41 +70,28 @@ class AboutModel {
         ]
     }
     
-    class func addNotificationData()-> [AboutModel] {
+    /// Provides sample notification list (title + relative time)
+    class func addNotificationData() -> [AboutModel] {
         return [
-                AboutModel(strText: "Order placed successfully",
-                           strTimezone: "Just now"),
-                AboutModel(strText: "Your payment has been confirmed",
-                           strTimezone: "5m ago"),
-                AboutModel(strText: "Your food is being prepared",
-                           strTimezone: "10m ago"),
-                AboutModel(strText: "Delivery agent assigned",
-                           strTimezone: "30m ago"),
-                AboutModel(strText: "Your order is on the way",
-                           strTimezone: "1h ago"),
-                AboutModel(strText: "Special discount available!",
-                           strTimezone: "2h ago"),
-                AboutModel(strText: "Download our new app update",
-                           strTimezone: "3h ago"),
-                AboutModel(strText: "Refer a friend and earn",
-                           strTimezone: "5h ago"),
-                AboutModel(strText: "Limited-time deal ending soon",
-                           strTimezone: "12h ago"),
-                AboutModel(strText: "Delivery completed",
-                           strTimezone: "1d ago"),
-                AboutModel(strText: "Rate your last meal",
-                           strTimezone: "2d ago"),
-                AboutModel(strText: "Weekend offer just for you",
-                           strTimezone: "3d ago"),
-                AboutModel(strText: "Free delivery on orders above ₹299",
-                           strTimezone: "5d ago"),
-                AboutModel(strText: "Thanks for being with us!",
-                           strTimezone: "6d ago"),
-                AboutModel(strText: "New restaurants added near you",
-                           strTimezone: "1w ago")
-            ]
+            AboutModel(strText: "Order placed successfully", strTimezone: "Just now"),
+            AboutModel(strText: "Your payment has been confirmed", strTimezone: "5m ago"),
+            AboutModel(strText: "Your food is being prepared", strTimezone: "10m ago"),
+            AboutModel(strText: "Delivery agent assigned", strTimezone: "30m ago"),
+            AboutModel(strText: "Your order is on the way", strTimezone: "1h ago"),
+            AboutModel(strText: "Special discount available!", strTimezone: "2h ago"),
+            AboutModel(strText: "Download our new app update", strTimezone: "3h ago"),
+            AboutModel(strText: "Refer a friend and earn", strTimezone: "5h ago"),
+            AboutModel(strText: "Limited-time deal ending soon", strTimezone: "12h ago"),
+            AboutModel(strText: "Delivery completed", strTimezone: "1d ago"),
+            AboutModel(strText: "Rate your last meal", strTimezone: "2d ago"),
+            AboutModel(strText: "Weekend offer just for you", strTimezone: "3d ago"),
+            AboutModel(strText: "Free delivery on orders above ₹299", strTimezone: "5d ago"),
+            AboutModel(strText: "Thanks for being with us!", strTimezone: "6d ago"),
+            AboutModel(strText: "New restaurants added near you", strTimezone: "1w ago")
+        ]
     }
     
+    /// Provides sample inbox messages (title + date + short description)
     class func addInboxData() -> [AboutModel] {
         return [
             AboutModel(strText: "MealMonkey Promotions",
@@ -139,4 +142,3 @@ class AboutModel {
         ]
     }
 }
-

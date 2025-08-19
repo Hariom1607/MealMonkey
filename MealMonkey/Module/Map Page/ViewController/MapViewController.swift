@@ -12,55 +12,63 @@ import Contacts
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    // MARK: - Outlets
     @IBOutlet weak var btnShowtheSavedAddress: UIButton!
     @IBOutlet weak var btnSearchAddress: UIButton!
     @IBOutlet weak var txtSearchAddress: UITextField!
     @IBOutlet weak var btnRedirectToCurrentLocation: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
+    // MARK: - Properties
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var onLocationSelected: ((String) -> Void)?
     var hasCenteredOnUser = false
     
-    private let bubbleTag = 999
+    private let bubbleTag = 999 // Used to identify & remove custom bubble views
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Style search box
         styleViews([txtSearchAddress], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding([txtSearchAddress])
         
+        // Custom nav bar title with back button
         setLeftAlignedTitleWithBack("Change Address", target: self, action: #selector(backBtnTapped))
         
+        // Configure map and location manager
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        // Request permission & start updating
+        // Request location permission
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        // We draw our own pin & bubble
+        // We draw our own pin & bubble → disable default user location pin
         mapView.showsUserLocation = false
         
-        // Gestures
+        // Enable gestures
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.isRotateEnabled = true
         
-        // Tap anywhere to drop a pin
+        // Tap anywhere on map to drop a pin
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(_:)))
         tapGesture.numberOfTapsRequired = 1
         mapView.addGestureRecognizer(tapGesture)
-        
     }
     
+    // MARK: - Navigation
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Center on user location only once
         if let location = locations.last, !hasCenteredOnUser {
             currentLocation = location
             addCustomPin(at: location, title: "Your Current Location")
@@ -69,35 +77,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get location:", error.localizedDescription)
+        print("❌ Failed to get location:", error.localizedDescription)
     }
     
+    // MARK: - Map Tap Handler
     @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: mapView)
-        // If tap lands on an annotation view, ignore (pin double-tap is handled on the pin)
-        if let hitView = mapView.hitTest(point, with: nil) as? MKAnnotationView {
-            // Do nothing; the pin handles its own gestures
-            return
-        }
+        
+        // If tap was on a pin → ignore (pin handles its own gestures)
+        if let _ = mapView.hitTest(point, with: nil) as? MKAnnotationView { return }
+        
+        // Convert screen tap → coordinates
         let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         addCustomPin(at: newLocation, title: "Selected Location")
     }
     
+    // MARK: - Add Custom Pin + Address
     func addCustomPin(at location: CLLocation, title: String) {
         let geocoder = CLGeocoder()
+        
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let self = self else { return }
             guard let placemark = placemarks?.first else { return }
             
+            // Format address string
             var fullAddress = ""
             if let postalAddress = placemark.postalAddress {
+                // Best formatted address
                 let formatter = CNPostalAddressFormatter()
                 formatter.style = .mailingAddress
                 fullAddress = formatter
                     .string(from: postalAddress)
                     .replacingOccurrences(of: "\n", with: ", ")
             } else {
+                // Fallback if no postalAddress
                 fullAddress = [
                     placemark.subThoroughfare,
                     placemark.thoroughfare,
@@ -109,13 +123,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 ].compactMap { $0 }.joined(separator: ", ")
             }
             
-            // Save address & coords
+            // Save address + coords in UserDefaults
             UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
             UserDefaults.standard.set(location.coordinate.latitude, forKey: "currentLatitude")
             UserDefaults.standard.set(location.coordinate.longitude, forKey: "currentLongitude")
+            
+            // Pass selected address back (if callback provided)
             self.onLocationSelected?(fullAddress)
             
-            // Replace any existing annotations
+            // Remove old pins, add new one
             self.mapView.removeAnnotations(self.mapView.annotations)
             let annotation = MKPointAnnotation()
             annotation.coordinate = location.coordinate
@@ -123,7 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             annotation.subtitle = fullAddress
             self.mapView.addAnnotation(annotation)
             
-            // Center map
+            // Center on new pin
             let region = MKCoordinateRegion(center: location.coordinate,
                                             latitudinalMeters: 1000,
                                             longitudinalMeters: 1000)
@@ -131,29 +147,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    // MARK: - MKMapViewDelegate
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        // Remove bubble when pin is deselected
         view.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // Skip default user location
         if annotation is MKUserLocation { return nil }
         
         let identifier = "CustomLocationPin"
         var view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if view == nil {
+            // Create new annotation view
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view?.canShowCallout = false // no default callout
+            view?.canShowCallout = false // disable default bubble
             view?.image = UIImage(named: "Ic_Location_Pin")
             
-            // Double-tap recognizer on the PIN (not the map)
+            // Add double-tap recognizer → show bubble
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleAnnotationDoubleTap(_:)))
             doubleTap.numberOfTapsRequired = 2
             doubleTap.cancelsTouchesInView = true
             view?.addGestureRecognizer(doubleTap)
         } else {
+            // Reuse annotation view
             view?.annotation = annotation
-            // Ensure only one double-tap recognizer is attached
+            
+            // Ensure it has a double-tap recognizer
             if view?.gestureRecognizers?.contains(where: {
                 guard let tap = $0 as? UITapGestureRecognizer else { return false }
                 return tap.numberOfTapsRequired == 2
@@ -165,15 +187,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
         
+        // Remove any existing bubble before reusing
         view?.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
         return view
     }
     
+    // MARK: - Bubble Handling
     @objc private func handleAnnotationDoubleTap(_ gr: UITapGestureRecognizer) {
         guard let view = gr.view as? MKAnnotationView,
               let annotation = view.annotation else { return }
         
-        // Remove any existing bubble (toggle behavior)
+        // Remove existing bubble → toggling behavior
         view.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
         showBubble(for: view, annotation: annotation)
     }
@@ -194,7 +218,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let titleFont = UIFont.boldSystemFont(ofSize: 14)
         let bodyFont = UIFont.systemFont(ofSize: 12)
         
-        // Measure address height so nothing is truncated
+        // Dynamically calculate text height
         let maxTextWidth = bubbleWidth - (paddingH * 2)
         let addrBounds = (addressText as NSString).boundingRect(
             with: CGSize(width: maxTextWidth, height: .greatestFiniteMagnitude),
@@ -206,33 +230,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let addressHeight: CGFloat = ceil(addrBounds.height)
         let bubbleHeight = paddingTop + titleHeight + labelSpacing + addressHeight + paddingBottom
         
-        // Container that also holds the pointer triangle
+        // Container view (bubble + pointer)
         let containerHeight = bubbleHeight + pointerHeight
         let container = UIView(frame: CGRect(
             x: (annotationView.bounds.width - bubbleWidth)/2,
-            y: -containerHeight - 4, // above the pin, anchored to bottom tip
+            y: -containerHeight - 4, // position above pin
             width: bubbleWidth,
             height: containerHeight
         ))
         container.backgroundColor = .clear
         container.tag = bubbleTag
         container.alpha = 0
-        container.transform = CGAffineTransform(translationX: 0, y: 8) // start near pin tip
+        container.transform = CGAffineTransform(translationX: 0, y: 8) // start animation below
         
-        // Bubble (rounded rectangle)
+        // Bubble rectangle
         let bubbleView = UIView(frame: CGRect(x: 0, y: 0, width: bubbleWidth, height: bubbleHeight))
-        bubbleView.backgroundColor = UIColor(red: 252/255, green: 96/255, blue: 17/255, alpha: 1.0) // #FC6011
+        bubbleView.backgroundColor = UIColor(red: 252/255, green: 96/255, blue: 17/255, alpha: 1.0) // Orange color #FC6011
         bubbleView.layer.cornerRadius = cornerRadius
         bubbleView.clipsToBounds = true
         
-        // Title
+        // Title label
         let titleLabel = UILabel(frame: CGRect(x: paddingH, y: paddingTop, width: maxTextWidth, height: titleHeight))
         titleLabel.textColor = .white
         titleLabel.font = titleFont
         titleLabel.text = titleText
         bubbleView.addSubview(titleLabel)
         
-        // Address (multi-line)
+        // Address label (multi-line)
         let addressLabel = UILabel(frame: CGRect(x: paddingH,
                                                  y: paddingTop + titleHeight + labelSpacing,
                                                  width: maxTextWidth,
@@ -244,7 +268,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         addressLabel.text = addressText
         bubbleView.addSubview(addressLabel)
         
-        // Pointer triangle (downward)
+        // Pointer triangle
         let pointerLayer = CAShapeLayer()
         let path = UIBezierPath()
         let pointerWidth: CGFloat = 16
@@ -256,20 +280,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         pointerLayer.path = path.cgPath
         pointerLayer.fillColor = bubbleView.backgroundColor?.cgColor
         
-        // Assemble
+        // Assemble bubble + pointer
         container.addSubview(bubbleView)
         container.layer.addSublayer(pointerLayer)
         annotationView.addSubview(container)
         
-        // Animate in
+        // Animate bubble appearance
         UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut]) {
             container.alpha = 1
             container.transform = .identity
         }
     }
     
+    // MARK: - Actions
     @IBAction func btnSearchAddressAction(_ sender: Any) {
         guard let address = txtSearchAddress.text, !address.isEmpty else { return }
+        
+        // Geocode typed address → drop pin
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { [weak self] placemarks, _ in
             guard let self = self,
@@ -280,6 +307,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @IBAction func btnRedirectToCurrentLocationAction(_ sender: Any) {
+        // Zoom to user's last known location
         if let location = currentLocation {
             let region = MKCoordinateRegion(center: location.coordinate,
                                             latitudinalMeters: 1000,
@@ -290,6 +318,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @IBAction func btnShowSavedAddressAction(_ sender: Any) {
+        // Load saved address from UserDefaults
         let lat = UserDefaults.standard.double(forKey: "currentLatitude")
         let lon = UserDefaults.standard.double(forKey: "currentLongitude")
         if lat != 0 && lon != 0 {

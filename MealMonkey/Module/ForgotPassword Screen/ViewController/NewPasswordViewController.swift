@@ -9,50 +9,72 @@ import UIKit
 
 class NewPasswordViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var btnEyeConfirmPassword: UIButton!
     @IBOutlet weak var btnEyePassword: UIButton!
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var txtConfirmPassword: UITextField!
     @IBOutlet weak var txtNewPassword: UITextField!
     
-    var isPasswordVisible: Bool = false
+    // MARK: - Properties
+    var isPasswordVisible: Bool = false   // Used to toggle password visibility
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let allViews = [txtNewPassword!, txtConfirmPassword!, btnSubmit!, btnEyePassword!, btnEyeConfirmPassword!]
+        // Apply rounded style to fields and buttons
+        let allViews = [
+            txtNewPassword!,
+            txtConfirmPassword!,
+            btnSubmit!,
+            btnEyePassword!,
+            btnEyeConfirmPassword!
+        ]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
+        // Add padding inside password fields
         txtNewPassword.setPadding(left: 34, right: 48)
         txtConfirmPassword.setPadding(left: 34, right: 48)
         
+        // Set navigation bar title with back button
         setLeftAlignedTitleWithBack("New Password", target: self, action: #selector(backButtonTapped))
-        
     }
     
+    // MARK: - Navigation
     @objc func backButtonTapped() {
+        // Navigate back to previous screen
         self.navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Actions
+    
+    /// Handles submit button tap → navigates to Feature screen
     @IBAction func btnSubmit(_ sender: Any) {
         let storyboard = UIStoryboard(name: "FeatureStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(identifier: "FeatureViewController") as? FeatureViewController{
+        if let mlvc = storyboard.instantiateViewController(identifier: "FeatureViewController") as? FeatureViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }
     
+    /// Toggle visibility for Confirm Password field
     @IBAction func btnEyeConfirmPasswordAction(_ sender: Any) {
-        isPasswordVisible = !isPasswordVisible
+        isPasswordVisible.toggle()
         txtConfirmPassword.isSecureTextEntry = !isPasswordVisible
+        
+        // Change eye icon accordingly
         let imageName = isPasswordVisible ? "eye" : "eye.slash"
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }
     
+    /// Toggle visibility for New Password field
     @IBAction func btnEyePasswordAction(_ sender: Any) {
-        isPasswordVisible = !isPasswordVisible
+        isPasswordVisible.toggle()
         txtNewPassword.isSecureTextEntry = !isPasswordVisible
+        
+        // Change eye icon accordingly
         let imageName = isPasswordVisible ? "eye" : "eye.slash"
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
@@ -60,13 +82,15 @@ class NewPasswordViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension NewPasswordViewController: UITextFieldDelegate {
-    func textFieldShouldReturn (_ textField: UITextField) -> Bool{
-        if textField == txtNewPassword && textField.returnKeyType == .next{
+    
+    /// Handles return key navigation between fields
+    func textFieldShouldReturn (_ textField: UITextField) -> Bool {
+        if textField == txtNewPassword && textField.returnKeyType == .next {
             txtNewPassword.resignFirstResponder()
             txtConfirmPassword.becomeFirstResponder()
-        }
-        else{
+        } else {
             txtConfirmPassword.resignFirstResponder()
         }
         return true
