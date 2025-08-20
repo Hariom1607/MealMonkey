@@ -54,9 +54,10 @@ class FoodDetailViewController: UIViewController {
         setTextFieldPadding([txtSelectIngridients!, txtSizeOfPortions!])
         btnAddtoCart.layer.cornerRadius = 7.42
         
-        viewFoodDetailContent.layer.cornerRadius = 42
+        styleViews([viewFoodDetailContent], cornerRadius: 42, borderWidth: 1, borderColor: UIColor.extraLabel.cgColor)
         viewFoodDetailContent.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewFoodDetailContent.clipsToBounds = true
+        
         
         // Initial setup
         hideUIElementsBeforeLoading()

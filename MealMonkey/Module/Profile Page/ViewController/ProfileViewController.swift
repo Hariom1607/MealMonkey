@@ -128,30 +128,43 @@ class ProfileViewController: UIViewController {
     
     /// Save User button action → Updates user info in CoreData and UserDefaults
     @IBAction func btnSaveUserAction(_ sender: Any) {
-        guard let email = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
+        guard let oldEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
         // Collect updated user details
         let name = txtName.text
+        let newEmail = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let mobile = txtMobileNo.text
         let address = txtAddress.text
         let imageData = imgUser.image?.jpegData(compressionQuality: 0.8)
         
+        // ✅ Check if new email is already registered (and not the same as old one)
+        if !newEmail.isEmpty && newEmail != oldEmail &&
+            CoreDataHelper.shared.isEmailTaken(newEmail, excluding: oldEmail) {
+            
+            UIAlertController.showAlert(title: "Error",
+                                        message: "This email is already registered. Please use another one.",
+                                        viewController: self)
+            return
+        }
+        
         // Update user in CoreData
-        if CoreDataHelper.shared.updateUser(email: email,
+        if CoreDataHelper.shared.updateUser(oldEmail: oldEmail,
+                                            newEmail: newEmail,
                                             name: name,
                                             mobile: mobile,
                                             address: address,
                                             password: nil,
                                             imageData: imageData) {
-            
-            // Save updated details in UserDefaults
+            // ✅ Update UserDefaults
             let defaults = UserDefaults.standard
             defaults.set(name, forKey: "userName")
+            defaults.set(newEmail, forKey: "userEmail")
             defaults.set(mobile, forKey: "userMobile")
             defaults.set(address, forKey: "userAddress")
+            defaults.set(newEmail, forKey: "currentUserEmail")
             defaults.synchronize()
             
-            // Refresh UI after saving
+            // Refresh UI
             loadUserProfile()
             UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
         } else {
