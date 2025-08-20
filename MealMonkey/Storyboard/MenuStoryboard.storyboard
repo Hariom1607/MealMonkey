@@ -433,11 +433,16 @@
                                     <constraint firstItem="qjE-XT-LAj" firstAttribute="top" secondItem="mFR-Tn-dlm" secondAttribute="top" id="qdc-Wy-uA9"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="kzw-N6-QHT">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="va5-Q9-HoD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="kzw-N6-QHT" firstAttribute="centerX" secondItem="Vsi-h6-hCb" secondAttribute="centerX" id="2g5-95-KcD"/>
                             <constraint firstItem="mFR-Tn-dlm" firstAttribute="leading" secondItem="va5-Q9-HoD" secondAttribute="leading" id="8Ww-YR-ObX"/>
+                            <constraint firstItem="kzw-N6-QHT" firstAttribute="centerY" secondItem="Vsi-h6-hCb" secondAttribute="centerY" id="BPU-ve-6Qh"/>
                             <constraint firstItem="va5-Q9-HoD" firstAttribute="bottom" secondItem="mFR-Tn-dlm" secondAttribute="bottom" id="Kve-pW-A9b"/>
                             <constraint firstItem="mFR-Tn-dlm" firstAttribute="top" secondItem="va5-Q9-HoD" secondAttribute="top" id="PJP-Po-u48"/>
                             <constraint firstItem="mFR-Tn-dlm" firstAttribute="top" secondItem="va5-Q9-HoD" secondAttribute="top" id="ggC-o2-p7E"/>
@@ -445,6 +450,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="kzw-N6-QHT" id="a5R-ZD-R0c"/>
                         <outlet property="btnAddtoCart" destination="Uze-tf-2Vr" id="EeG-mC-4KX"/>
                         <outlet property="btnDropDownIngredients" destination="bk3-zj-KY3" id="Y37-zw-Osx"/>
                         <outlet property="btnDropDownPortions" destination="eRb-QC-EJa" id="d8O-uq-mbM"/>
