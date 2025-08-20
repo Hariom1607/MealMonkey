@@ -59,7 +59,6 @@ class SplashViewController: UIViewController {
     }
     
     /// Show main app tab bar (when user is already logged in)
-    /// Show main app tab bar (when user is already logged in)
     private func showMainTabBar() {
         let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         

@@ -14,18 +14,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     /// Called when the user finishes picking an image from the UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.editedImage] as? UIImage {
+            // Only set it temporarily
             imgUser.image = selectedImage
-            
-            // ✅ Save image to CoreData for the current user
-            if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
-                let imageData = selectedImage.jpegData(compressionQuality: 0.8)
-                CoreDataHelper.shared.updateUser(email: email,
-                                                 name: nil,
-                                                 mobile: nil,
-                                                 address: nil,
-                                                 password: nil,
-                                                 imageData: imageData)
-            }
         }
         dismiss(animated: true)
     }

@@ -69,8 +69,8 @@ class FeatureViewController: UIViewController {
         }
         else {
             // Navigate to Menu screen after last feature
-            let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-            if let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? MenuTabViewController {
+            let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+            if let menuVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
                 self.navigationController?.pushViewController(menuVC, animated: true)
             }
         }

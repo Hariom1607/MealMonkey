@@ -92,18 +92,25 @@ class LoginViewController: UIViewController {
         if let user = CoreDataHelper.shared.verifyUser(email: email, password: password) {
             // ✅ Save login state
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
-            UserDefaults.standard.set(email, forKey: "currentUserEmail") // always lowercase
+            UserDefaults.standard.set(email, forKey: "currentUserEmail")
             
-            // ✅ Save user's name for greeting
-            if let name = user.name { // assuming CoreData entity has "name"
+            if let name = user.name {
                 UserDefaults.standard.set(name, forKey: "currentUserName")
             }
             UserDefaults.standard.synchronize()
+            
             print("✅ Login successful: \(email)")
+            // ✅ Only go to main tab bar if login succeeds
+            showMainTabBar()
         }
-        
-        // ✅ Go to main tab bar after successful login
-        showMainTabBar()
+        else {
+            // 🚨 Wrong credentials
+            UIAlertController.showAlert(
+                title: "Login Failed",
+                message: "Invalid email or password. Please sign up if you don't have an account.",
+                viewController: self
+            )
+        }
     }
     
     /// Navigate to Forgot Password screen

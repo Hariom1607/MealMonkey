@@ -1229,7 +1229,7 @@ at anytime </string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Had-eX-lRz">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="651"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbS-9p-ZQF">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbS-9p-ZQF">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="651"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qM-a9-izV">
@@ -1396,13 +1396,15 @@ at anytime </string>
                         <outlet property="txtFirstName" destination="uNT-ff-m85" id="b6W-Fy-9m2"/>
                         <outlet property="txtLastName" destination="kns-d3-BxL" id="L8d-HC-pMl"/>
                         <outlet property="txtSecurityCode" destination="frE-LB-1sQ" id="qci-oQ-LXP"/>
+                        <outlet property="viewAddCardTopCorner" destination="Jrt-13-6ai" id="egW-Iq-WjI"/>
                         <outlet property="viewMain" destination="FuA-bE-ZxX" id="EZe-RE-rhc"/>
+                        <outlet property="viewPlaceOrderTopCorner" destination="5qM-a9-izV" id="niP-VL-OTp"/>
                         <outlet property="viewTransparent" destination="DUq-o9-zk8" id="tem-gg-McW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUz-ty-ffL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3112" y="-27"/>
+            <point key="canvasLocation" x="3110.6870229007632" y="-27.464788732394368"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="jxW-ca-mkq">
@@ -1570,10 +1572,10 @@ at anytime </string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -212,6 +212,8 @@ class CoreDataHelper {
                 cartItem.price = product.doubleProductPrice
                 cartItem.image = product.strProductImage
                 cartItem.quantity = Int64(quantity)
+                cartItem.category = product.objProductCategory.rawValue
+                cartItem.type = product.objProductType.rawValue
                 cartItem.user = user
             }
             

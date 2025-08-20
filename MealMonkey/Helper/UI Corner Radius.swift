@@ -25,3 +25,14 @@ func setTextFieldPadding(_ views: [UIView], left: CGFloat = 34, right: CGFloat =
         }
     }
 }
+
+/// Helper to apply rounded corners to multiple views
+func roundCorners(of views: [UIView],
+                  radius: CGFloat = 18,
+                  corners: CACornerMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner]) {
+    views.forEach { view in
+        view.layer.cornerRadius = radius
+        view.layer.masksToBounds = true
+        view.layer.maskedCorners = corners
+    }
+}
