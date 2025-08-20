@@ -412,6 +412,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="itB-wc-hh1" firstAttribute="leading" secondItem="UHw-me-W9H" secondAttribute="leading" id="8eA-w1-9dr"/>
                                             <constraint firstItem="itB-wc-hh1" firstAttribute="top" secondItem="UHw-me-W9H" secondAttribute="top" constant="80" id="IaU-qn-8G7"/>
@@ -422,7 +423,7 @@
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.76280937995110354" alpha="0.6243133544921875" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="UHw-me-W9H" firstAttribute="top" secondItem="qjE-XT-LAj" secondAttribute="bottom" id="94C-Al-kpH"/>
                                     <constraint firstAttribute="trailing" secondItem="UHw-me-W9H" secondAttribute="trailing" id="DXO-6W-poQ"/>
@@ -433,8 +434,9 @@
                                     <constraint firstItem="qjE-XT-LAj" firstAttribute="top" secondItem="mFR-Tn-dlm" secondAttribute="top" id="qdc-Wy-uA9"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="kzw-N6-QHT">
-                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="kzw-N6-QHT">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                <color key="color" name="LoginButton"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="va5-Q9-HoD"/>

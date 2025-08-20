@@ -50,12 +50,12 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
             if selectedCategory == .All {
                 cell.products = filteredProducts.filter {
-                    $0.floatProductRating >= 4.0 && $0.floatProductRating < 4.5
+                    $0.floatProductRating >= 4.0 && $0.floatProductRating <= 4.5
                 }
             } else {
                 cell.products = arrProductData.filter {
                     $0.floatProductRating >= 4.0 &&
-                    $0.floatProductRating < 4.5 &&
+                    $0.floatProductRating <= 4.5 &&
                     $0.objProductCategory == selectedCategory
                 }
             }

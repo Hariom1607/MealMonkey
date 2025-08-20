@@ -75,18 +75,25 @@ class CoreDataHelper {
         return try? context.fetch(request).first
     }
     
-    // Update user details (including profile image)
-    func updateUser(email: String,
+    // Update user details (including profile image and email)
+    func updateUser(oldEmail: String,
+                    newEmail: String?,
                     name: String?,
                     mobile: String?,
                     address: String?,
                     password: String?,
                     imageData: Data?) -> Bool {
+        
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", email)
+        request.predicate = NSPredicate(format: "email == %@", oldEmail)
         
         do {
             if let user = try context.fetch(request).first {
+                
+                // ✅ allow updating email
+                if let newEmail = newEmail, !newEmail.isEmpty {
+                    user.email = newEmail
+                }
                 if let name = name { user.name = name }
                 if let mobile = mobile { user.mobile = mobile }
                 if let address = address { user.address = address }
@@ -94,7 +101,7 @@ class CoreDataHelper {
                 if let imageData = imageData { user.imageData = imageData }
                 
                 try context.save()
-                print("✅ User updated: \(email)")
+                print("✅ User updated: \(newEmail ?? oldEmail)")
                 return true
             }
         } catch {
@@ -103,6 +110,23 @@ class CoreDataHelper {
         return false
     }
     
+    func isEmailTaken(_ email: String, excluding oldEmail: String? = nil) -> Bool {
+        let request: NSFetchRequest<User> = User.fetchRequest()
+        if let oldEmail = oldEmail {
+            request.predicate = NSPredicate(format: "email == %@ AND email != %@", email, oldEmail)
+        } else {
+            request.predicate = NSPredicate(format: "email == %@", email)
+        }
+        
+        do {
+            let count = try context.count(for: request)
+            return count > 0
+        } catch {
+            print("❌ Failed to check email existence: \(error.localizedDescription)")
+            return false
+        }
+    }
+
     // Fetch user by email (duplicate function with logging)
     func fetchUser(email: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
