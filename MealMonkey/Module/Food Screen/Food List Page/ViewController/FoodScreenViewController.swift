@@ -10,6 +10,7 @@ import UIKit
 class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate {
     
     // MARK: - Outlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var lblCurrentLocation: UILabel!
     @IBOutlet weak var tblRecentItems: UITableView!
     @IBOutlet weak var txtSearchFood: UITextField!
@@ -58,6 +59,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         setupUI()
         setupTableView()
         setupSearchBar()
+        showLoader()       // 👈 show loader before loading products
         
         // Initialize with all categories
         filteredCategories = ProductCategory.allCases
@@ -84,6 +86,18 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         setCartButton(target: self, action: #selector(btnCartTapped))
     }
     
+    private func showLoader() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        tblRecentItems.isHidden = true
+    }
+
+    private func hideLoader() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        tblRecentItems.isHidden = false
+    }
+
     private func setupTableView() {
         tblRecentItems.register(UINib(nibName: "FoodListTableViewCell", bundle: nil),
                                 forCellReuseIdentifier: "FoodListTableViewCell")
@@ -101,6 +115,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             guard let self = self else { return }
             
             DispatchQueue.main.async {
+                self.hideLoader()
+                
                 if let products = products {
                     self.arrProductData = products
                     self.filteredProducts = products

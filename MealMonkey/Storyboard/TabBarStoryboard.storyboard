@@ -263,6 +263,10 @@ meals and more!</string>
                                     <constraint firstAttribute="trailing" secondItem="u1Y-De-riK" secondAttribute="trailing" constant="21" id="xvA-R7-EgM"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
+                                <rect key="frame" x="186" y="416" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFm-JP-0mb"/>
                         <color key="tintColor" name="LoginButton"/>
@@ -275,6 +279,7 @@ meals and more!</string>
                     </view>
                     <navigationItem key="navigationItem" id="lDr-ah-WHh"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qjh-rc-4kp" id="bQD-Lw-YcD"/>
                         <outlet property="btnCurrentLocation" destination="Wvp-o4-anD" id="MJl-rn-v3k"/>
                         <outlet property="lblCurrentLocation" destination="h5H-7b-nwm" id="WW9-FX-Lrb"/>
                         <outlet property="tblRecentItems" destination="NSr-bd-q93" id="dtb-pg-Vft"/>

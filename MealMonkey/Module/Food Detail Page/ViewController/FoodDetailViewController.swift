@@ -10,6 +10,7 @@ import UIKit
 class FoodDetailViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var btnWishlist: UIButton!
     @IBOutlet weak var btnDropDownPortions: UIButton!
     @IBOutlet weak var btnDropDownIngredients: UIButton!
@@ -52,9 +53,26 @@ class FoodDetailViewController: UIViewController {
         styleViews([lblNimberOfPortion], cornerRadius: 15, borderWidth: 1, borderColor: UIColor.loginButton.cgColor)
         setTextFieldPadding([txtSelectIngridients!, txtSizeOfPortions!])
         btnAddtoCart.layer.cornerRadius = 7.42
+        
         viewFoodDetailContent.layer.cornerRadius = 42
         viewFoodDetailContent.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewFoodDetailContent.clipsToBounds = true
+        
+        // Initial setup
+        hideUIElementsBeforeLoading()
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        
+        // Simulate network/data loading for 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            self.showUIElementsAfterLoading()
+            
+            // Refresh UI with product data
+            self.configureUI()
+            self.updateWishlistButton()
+        }
         
         // Styling dropdowns & text fields with rounded corners
         styleViews([btnDropDownPortions!, btnDropDownIngredients!, txtSizeOfPortions!, txtSelectIngridients!], cornerRadius: 4, borderWidth: 0, borderColor: UIColor.white.cgColor)
@@ -84,6 +102,22 @@ class FoodDetailViewController: UIViewController {
         lblFoodDescription.text = product.strProductDescription
         imgFood.image = UIImage(named: product.strProductImage)
         updatePriceAndQuantityUI()
+    }
+    
+    // Hide UI elements until data is loaded
+    private func hideUIElementsBeforeLoading() {
+        viewFoodDetailContent.isHidden = true
+        btnAddtoCart.isHidden = true
+        btnWishlist.isHidden = true
+        imgFood.isHidden = true
+    }
+    
+    // Show UI elements once loading is done
+    private func showUIElementsAfterLoading() {
+        viewFoodDetailContent.isHidden = false
+        btnAddtoCart.isHidden = false
+        btnWishlist.isHidden = false
+        imgFood.isHidden = false
     }
     
     /// Updates wishlist button (filled heart if product is in wishlist)

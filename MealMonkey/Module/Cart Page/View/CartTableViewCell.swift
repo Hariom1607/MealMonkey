@@ -25,6 +25,7 @@ class CartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initial setup after loading cell from nib
+        styleViews([imgProduct!], cornerRadius: 7, borderWidth: 0, borderColor: UIColor.black.cgColor)
     }
     
     /// Configure cell with cart item data
