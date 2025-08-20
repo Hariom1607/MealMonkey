@@ -263,9 +263,8 @@ meals and more!</string>
                                     <constraint firstAttribute="trailing" secondItem="u1Y-De-riK" secondAttribute="trailing" constant="21" id="xvA-R7-EgM"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
-                                <rect key="frame" x="186" y="416" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFm-JP-0mb"/>
@@ -273,7 +272,9 @@ meals and more!</string>
                         <constraints>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="top" secondItem="NFm-JP-0mb" secondAttribute="top" id="2Ru-AN-yx7"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="leading" secondItem="NFm-JP-0mb" secondAttribute="leading" id="3KI-2f-fbC"/>
+                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerY" secondItem="qzj-Xt-7cD" secondAttribute="centerY" id="8NL-Ji-YoC"/>
                             <constraint firstItem="NFm-JP-0mb" firstAttribute="bottom" secondItem="Flp-Yh-k8T" secondAttribute="bottom" id="KZY-2V-YMM"/>
+                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerX" secondItem="qzj-Xt-7cD" secondAttribute="centerX" id="Yl5-5O-q4l"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="trailing" secondItem="NFm-JP-0mb" secondAttribute="trailing" id="oz8-aU-ZAe"/>
                         </constraints>
                     </view>
