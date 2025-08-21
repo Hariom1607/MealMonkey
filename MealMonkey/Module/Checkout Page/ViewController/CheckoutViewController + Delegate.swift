@@ -12,7 +12,7 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 1 (COD) + all saved cards + 1 (UPI)
-        return 1 + arrCards.count + 1
+        return 1 + savedCards.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -23,15 +23,16 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
             cell.btnCashOnDeliverySelection.isSelected = (selectedPaymentIndex == 0)
             return cell
             
-        case 1..<(1 + arrCards.count):
+        case 1..<(1 + savedCards.count):
             // Cases 1...N → Card cells (from arrCards)
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardTableViewCell", for: indexPath) as! CardTableViewCell
             let cardIndex = indexPath.row - 1
-            cell.lblCardNumber.text = maskedCardNumber(arrCards[cardIndex])
+            let card = savedCards[cardIndex]
+            cell.lblCardNumber.text = CardHelper.maskedCardNumber(card.cardNumber ?? "")
             cell.btnCardSelection.isSelected = (selectedPaymentIndex == indexPath.row)
             return cell
             
-        case 1 + arrCards.count:
+        case 1 + savedCards.count:
             // Last case → UPI cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "UpiTableViewCell", for: indexPath) as! UpiTableViewCell
             cell.btnUpiSelection.isSelected = (selectedPaymentIndex == indexPath.row)
@@ -59,39 +60,28 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
         lblTotal.text = "$\(String(format: "%.2f", total))"
     }
     
-    func saveCardFromPopup(cardNumber: String) {
-        // Save card to UserDefaults (helper function assumed)
-        addNewCard(cardNumber)
-        arrCards = getSavedCards() // Refresh local array
-        tblPaymentDetails.reloadData() // Reload table view
-    }
-    
-    func closeAddCardPopup() {
-        // Animate popup dismissal
-        UIView.animate(withDuration: 0.3, animations: {
-            self.addCardView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
-            self.viewTransparent.isHidden = true
-        }) { _ in
-            self.addCardView.isHidden = true
-            self.tabBarController?.tabBar.isHidden = false
-            self.navigationController?.navigationBar.backgroundColor  = UIColor.white
-            self.txtCardNumber.text = "" // Clear text field after closing
-        }
-    }
-    
-    func maskedCardNumber(_ number: String) -> String {
-        // Mask all digits except last 4
-        let last4 = number.suffix(4)
-        let masked = String(repeating: "*", count: max(0, number.count - 4))
+    // MARK: - UITextFieldDelegate
+    /// Restricts input based on field type (card, expiry, cvv, etc.)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
-        var result = ""
-        for (index, char) in (masked + last4).enumerated() {
-            if index != 0 && index % 4 == 0 {
-                result.append(" ") // Add space every 4 chars
-            }
-            result.append(char)
+        // Card number → max 16 digits, numeric only
+        if textField == txtCardNumber {
+            return newText.count <= 16 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
         }
-        return result
+        
+        // Expiry month and year → max 2 digits, numeric only
+        if textField == txtExpiryMonth || textField == txtExpiryYear {
+            return newText.count <= 2 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+        }
+        
+        // CVV → max 3 digits, numeric only
+        if textField == txtSecurityCode {
+            return newText.count <= 3 && CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+        }
+        
+        return true
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,13 +95,6 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
         let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
-    }
-    
-    func saveCardsToDefaults() {
-        // ⚠️ NOTE: In CheckoutViewController you use "savedCards" (lowercase s)
-        // Here you're using "SavedCards" (uppercase S).
-        // This will cause inconsistency if both are used.
-        UserDefaults.standard.set(arrCards, forKey: "SavedCards")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

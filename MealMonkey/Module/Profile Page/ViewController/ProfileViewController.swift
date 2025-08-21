@@ -130,14 +130,35 @@ class ProfileViewController: UIViewController {
         guard let oldEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
         // Collect updated user details
-        let name = txtName.text
+        let name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let newEmail = txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let mobile = txtMobileNo.text
-        let address = txtAddress.text
+        let mobile = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let address = txtAddress.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let imageData = imgUser.image?.jpegData(compressionQuality: 0.8)
         
-        // ✅ Check if new email is already registered (and not the same as old one)
-        if !newEmail.isEmpty && newEmail != oldEmail &&
+        // ✅ Specific check for empty email
+        if newEmail.isEmpty {
+            let alert = UIAlertController(title: "Validation Error",
+                                          message: "Email cannot be empty.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                // Restore the old email into textfield
+                self.txtEmail.text = oldEmail
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        
+        // ✅ General empty field validation
+        if name.isEmpty || mobile.isEmpty || address.isEmpty {
+            UIAlertController.showAlert(title: "Validation Error",
+                                        message: "All fields must be filled before saving.",
+                                        viewController: self)
+            return
+        }
+        
+        // ✅ Email uniqueness validation
+        if newEmail != oldEmail &&
             CoreDataHelper.shared.isEmailTaken(newEmail, excluding: oldEmail) {
             
             UIAlertController.showAlert(title: "Error",
@@ -146,7 +167,7 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        // Update user in CoreData
+        // ✅ Proceed with CoreData update
         if CoreDataHelper.shared.updateUser(oldEmail: oldEmail,
                                             newEmail: newEmail,
                                             name: name,

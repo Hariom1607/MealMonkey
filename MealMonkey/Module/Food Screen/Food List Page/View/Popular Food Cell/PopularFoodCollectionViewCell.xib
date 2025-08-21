@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVB-Po-XOz">
-                        <rect key="frame" x="0.0" y="21" width="351" height="344"/>
+                        <rect key="frame" x="0.0" y="33" width="351" height="332"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hakkanoodles" translatesAutoresizingMaskIntoConstraints="NO" id="Ip5-XW-RjY">
-                                <rect key="frame" x="0.0" y="0.0" width="351" height="295"/>
+                                <rect key="frame" x="0.0" y="0.0" width="351" height="283"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nZx-jT-MgQ">
-                                <rect key="frame" x="21" y="303" width="309" height="39"/>
+                                <rect key="frame" x="21" y="291" width="309" height="39"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minute by tuk tuk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqn-cj-x4f">
                                         <rect key="frame" x="0.0" y="0.0" width="309" height="20"/>
@@ -93,7 +93,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="MVB-Po-XOz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="21" id="ELX-4R-NXo"/>
+                <constraint firstItem="MVB-Po-XOz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="33" id="ELX-4R-NXo"/>
                 <constraint firstAttribute="trailing" secondItem="MVB-Po-XOz" secondAttribute="trailing" id="nRl-h1-AEr"/>
                 <constraint firstAttribute="bottom" secondItem="MVB-Po-XOz" secondAttribute="bottom" id="u1c-zA-oe7"/>
                 <constraint firstItem="MVB-Po-XOz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xhp-qD-TI0"/>

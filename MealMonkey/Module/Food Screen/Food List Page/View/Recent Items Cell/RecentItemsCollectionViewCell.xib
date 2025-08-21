@@ -18,16 +18,16 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hH-qX-p6t">
-                        <rect key="frame" x="21" y="8" width="374" height="96"/>
+                        <rect key="frame" x="21" y="16" width="374" height="88"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hakkanoodles" translatesAutoresizingMaskIntoConstraints="NO" id="0DN-mi-Klb">
-                                <rect key="frame" x="0.0" y="0.0" width="75" height="96"/>
+                                <rect key="frame" x="0.0" y="0.0" width="75" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="hzE-Qy-U1z"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JVT-WA-ROq">
-                                <rect key="frame" x="97.000000000000014" y="19" width="186.33333333333337" height="58"/>
+                                <rect key="frame" x="97.000000000000014" y="15" width="186.33333333333337" height="58"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mulberry Pizza by Josh" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7c-B6-thH">
                                         <rect key="frame" x="0.0" y="0.0" width="186.33333333333334" height="21"/>
@@ -93,7 +93,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1hH-qX-p6t" secondAttribute="trailing" constant="21" id="EtY-Gv-jaz"/>
-                <constraint firstItem="1hH-qX-p6t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="lfN-eM-kZE"/>
+                <constraint firstItem="1hH-qX-p6t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="lfN-eM-kZE"/>
                 <constraint firstAttribute="bottom" secondItem="1hH-qX-p6t" secondAttribute="bottom" constant="8" id="uAb-mN-eVu"/>
                 <constraint firstItem="1hH-qX-p6t" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21" id="w3T-y0-uMY"/>
             </constraints>
