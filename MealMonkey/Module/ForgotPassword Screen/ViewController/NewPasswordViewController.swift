@@ -17,6 +17,7 @@ class NewPasswordViewController: UIViewController {
     @IBOutlet weak var txtNewPassword: UITextField!
     
     // MARK: - Properties
+    var email: String?
     var isPasswordVisible: Bool = false   // Used to toggle password visibility
     
     // MARK: - Lifecycle
@@ -51,9 +52,37 @@ class NewPasswordViewController: UIViewController {
     
     /// Handles submit button tap → navigates to Feature screen
     @IBAction func btnSubmit(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "FeatureStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(identifier: "FeatureViewController") as? FeatureViewController {
-            self.navigationController?.pushViewController(mlvc, animated: true)
+        guard let email = self.email else{return}
+        
+        let newPassword = txtNewPassword.text ?? ""
+        let confirmPassword = txtConfirmPassword.text ?? ""
+        
+        switch true {
+        case newPassword.isEmpty:
+            UIAlertController.showAlert(title: "New Password is missing", message: "Please enter your New Password", viewController: self)
+            return
+        case confirmPassword.isEmpty:
+            UIAlertController.showAlert(title: "Confirm Password is missing", message: "Please enter your Confirm Password", viewController: self)
+        case newPassword != confirmPassword:
+            UIAlertController.showAlert(title: "Mismatch", message: "Passwords do not match", viewController: self)
+        default : break
+        }
+        
+        let success = CoreDataHelper.shared.updateUser(oldEmail: email,
+                                                       newEmail: nil,
+                                                       name: nil,
+                                                       mobile: nil,
+                                                       address: nil,
+                                                       password: newPassword,
+                                                       imageData: nil)
+        if success{
+            let storyboard = UIStoryboard(name: "FeatureStoryboard", bundle: nil)
+            if let mlvc = storyboard.instantiateViewController(identifier: "FeatureViewController") as? FeatureViewController {
+                self.navigationController?.pushViewController(mlvc, animated: true)
+            }
+        }
+        else {
+            UIAlertController.showAlert(title: "Error", message: "Failed to change the password", viewController: self)
         }
     }
     

@@ -265,6 +265,7 @@ meals and more!</string>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
                                 <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                <color key="color" name="LoginButton"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFm-JP-0mb"/>

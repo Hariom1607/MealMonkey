@@ -63,22 +63,29 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
-        // ✅ If valid, show success alert
-        let alert = UIAlertController(
-            title: "OTP Sent",
-            message: "An OTP has been sent to \(email)",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            // Navigate to OTP screen after user taps OK
-            let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-            if let otpVC = storyboard.instantiateViewController(identifier: "OtpViewController") as? OtpViewController {
-                self.navigationController?.pushViewController(otpVC, animated: true)
-            }
-        }))
-        
-        // Present alert
-        self.present(alert, animated: true)
+        if let _ = CoreDataHelper.shared.fetchUser(email: email){
+            
+            // ✅ If valid, show success alert
+            
+            let alert = UIAlertController(
+                title: "OTP Sent",
+                message: "An OTP has been sent to \(email)",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                // Navigate to OTP screen after user taps OK
+                let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+                if let otpVC = storyboard.instantiateViewController(identifier: "OtpViewController") as? OtpViewController {
+                    otpVC.email = email
+                    self.navigationController?.pushViewController(otpVC, animated: true)
+                }
+            }))
+            
+            // Present alert
+            self.present(alert, animated: true)
+        }
+        else {
+            UIAlertController.showAlert(title: "Invalid Email", message: "No Account found with this email", viewController: self)
+        }
     }
 }
