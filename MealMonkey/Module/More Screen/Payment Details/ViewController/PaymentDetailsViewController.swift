@@ -31,8 +31,9 @@ class PaymentDetailsViewController: UIViewController {
     @IBOutlet weak var tblCardDetails: UITableView!    // TableView for saved cards
     
     // MARK: - Properties
-    var arrCards: [String] = []   // Stores saved card numbers
-    // ⚠️ Currently only card numbers are stored, ideally should be masked and secured
+    
+    var savedCards: [Card] = []
+    var currentUser: User?    // you should already have logged-in user reference
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -65,27 +66,31 @@ class PaymentDetailsViewController: UIViewController {
         viewScroll.layer.shadowOffset = CGSize(width: 0, height: -2)
         viewScroll.layer.shadowRadius = 10
         
-        // Load previously saved cards
-        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
-            arrCards = savedCards
+        loadCurrentUser()
+        loadSavedCards()
+    }
+    
+    private func loadCurrentUser() {
+        if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+            print("📩 Logged in email from UserDefaults = \(email)")
+            currentUser = CoreDataHelper.shared.fetchUser(byEmail: email)
+            print("✅ Current user loaded: \(currentUser?.email ?? "nil")")
+        } else {
+            print("⚠️ No email found in UserDefaults")
         }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewAddCard.isHidden = true
-        // Refresh saved cards
-        if let savedCards = UserDefaults.standard.array(forKey: "savedCards") as? [String] {
-            arrCards = savedCards
-        }
-        updateEmptyLabel()
-        tblCardDetails.reloadData()
+        loadSavedCards()
     }
     
     // MARK: - Helpers
     /// Show "No cards available" label if arrCards is empty
     func updateEmptyLabel() {
-        let isEmpty = arrCards.isEmpty
+        let isEmpty = savedCards.isEmpty
         lblEmpty.isHidden = !isEmpty
         tblCardDetails.isHidden = isEmpty
     }
@@ -112,6 +117,8 @@ class PaymentDetailsViewController: UIViewController {
     // MARK: - Actions
     /// Opens the Add Card popup with animation
     @IBAction func btnAddNewCardAction(_ sender: Any) {
+        CardHelper.clearCardInputs(in: self)
+        
         lblEmpty.isHidden = true
         viewAddCard.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         viewAddCard.isHidden = false
@@ -121,31 +128,69 @@ class PaymentDetailsViewController: UIViewController {
             self.viewBack.isHidden = false
         }
         self.navigationController?.navigationBar.backgroundColor  = UIColor(named: "Transparentcolor")
+        // 👇 This makes sure the cursor is always at the first field
+        DispatchQueue.main.async {
+            self.txtCardNumber.becomeFirstResponder()
+        }
     }
     
     /// Validates input and saves a new card
     @IBAction func btnAddCardViewAction(_ sender: Any) {
-        // Basic input validations
-        guard let cardNumber = txtCardNumber.text, cardNumber.count == 16 else {
-            showAlert(message: "Card number must be exactly 16 digits.")
-            return
-        }
-        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2 else {
-            showAlert(message: "Expiry month must be 2 digits.")
-            return
-        }
-        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2 else {
-            showAlert(message: "Expiry year must be 2 digits.")
+        guard let firstName = txtFirstName.text, !firstName.isEmpty,
+              let lastName = txtLastName.text, !lastName.isEmpty,
+              let cardNumber = txtCardNumber.text, !cardNumber.isEmpty,
+              let expMonth = Int16(txtExpiryMonth.text ?? ""),
+              let expYear = Int16(txtExpiryYear.text ?? ""),
+              let cvv = txtSecurityCode.text, !cvv.isEmpty else {
+            showAlert(message: "Please fill all fields correctly.")
             return
         }
         
-        // Save card
-        arrCards.append(cardNumber)
-        saveCardsToDefaults()
-        tblCardDetails.reloadData()
+        // ✅ Central validation
+        if let error = CardHelper.validateCardInputs(cardNumber: cardNumber,
+                                          expMonth: expMonth,
+                                          expYear: expYear,
+                                          cvv: cvv,
+                                          firstName: firstName,
+                                          lastName: lastName) {
+            showAlert(message: error)
+            return
+        }
         
-        // Close popup after saving
-        btnRemoveAddCardView(sender)
+        guard let user = currentUser else {
+            showAlert(message: "User not found")
+            return
+        }
+        
+        // ✅ Duplicate check
+        if savedCards.contains(where: { $0.cardNumber == cardNumber }) {
+            showAlert(message: "This card is already saved.")
+            return
+        }
+        
+        // Save new card
+        CoreDataHelper.shared.saveCard(
+            for: user,
+            number: cardNumber,
+            expiryMonth: expMonth,
+            expiryYear: expYear,
+            firstName: firstName,
+            lastName: lastName
+        )
+        
+        loadSavedCards()
+        updateEmptyLabel()
+        viewAddCard.isHidden = true
+        viewBack.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func loadSavedCards() {
+        if let user = currentUser {
+            savedCards = CoreDataHelper.shared.fetchCards(for: user)
+            tblCardDetails.reloadData()
+            updateEmptyLabel()
+        }
     }
     
     /// Closes the Add Card popup with animation

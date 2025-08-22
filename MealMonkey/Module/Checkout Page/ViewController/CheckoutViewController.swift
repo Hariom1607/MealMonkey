@@ -38,10 +38,11 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var txtExpiryMonth: UITextField!          // TextField for expiry month
     
     // MARK: - Properties
-    var arrCards: [String] = []              // Stores saved card numbers
     var selectedPaymentIndex: Int = 0        // Default: Cash on Delivery is selected
     var orderProducts: [ProductModel] = []   // List of products in current order
     let deliveryCost: Double = 5.0           // Fixed delivery cost
+    var savedCards: [Card] = []
+    var currentUser: User?
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -57,9 +58,6 @@ class CheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load saved cards from UserDefaults
-        arrCards = getSavedCards()
         
         // Style all input fields and buttons
         let allViews = [btnSendOrder!, btnTrackOrder!, btnAddNewCardPopUp!, txtLastName!, txtFirstName!, txtCardNumber!, txtExpiryYear!, txtExpiryMonth!, txtSecurityCode!]
@@ -83,6 +81,24 @@ class CheckoutViewController: UIViewController {
         tblPaymentDetails.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "CardTableViewCell")
         tblPaymentDetails.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
         tblPaymentDetails.register(UINib(nibName: "UpiTableViewCell", bundle: nil), forCellReuseIdentifier: "UpiTableViewCell")
+        
+        // Load saved cards from CoreData
+        loadCurrentUser()
+        loadSavedCards()
+    }
+    
+    // MARK: - Load User + Cards
+    private func loadCurrentUser() {
+        if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+            currentUser = CoreDataHelper.shared.fetchUser(byEmail: email)
+        }
+    }
+    
+    private func loadSavedCards() {
+        if let user = currentUser {
+            savedCards = CoreDataHelper.shared.fetchCards(for: user)
+            tblPaymentDetails.reloadData()
+        }
     }
     
     // MARK: - Navigation
@@ -109,40 +125,52 @@ class CheckoutViewController: UIViewController {
     // MARK: - Add New Card
     /// Add new card popup → validates and saves card
     @IBAction func btnAddNewCardPopUpAction(_ sender: Any) {
-        // Validate card number (must be 16 digits)
-        guard let cardNumber = txtCardNumber.text, cardNumber.count == 16, CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: cardNumber)) else {
-            showAlert(message: "Card number must be exactly 16 digits.")
+        guard let firstName = txtFirstName.text, !firstName.isEmpty,
+              let lastName = txtLastName.text, !lastName.isEmpty,
+              let cardNumber = txtCardNumber.text, !cardNumber.isEmpty,
+              let expMonth = Int16(txtExpiryMonth.text ?? ""),
+              let expYear = Int16(txtExpiryYear.text ?? ""),
+              let cvv = txtSecurityCode.text, !cvv.isEmpty else {
+            showAlert(message: "Please fill all fields correctly.")
             return
         }
         
-        // Validate expiry month (must be 2 digits)
-        guard let expiryMonth = txtExpiryMonth.text, expiryMonth.count == 2, CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: expiryMonth)) else {
-            showAlert(message: "Expiry month must be 2 digits.")
+        // Validate using helper
+        if let error = CardHelper.validateCardInputs(cardNumber: cardNumber,
+                                                     expMonth: expMonth,
+                                                     expYear: expYear,
+                                                     cvv: cvv,
+                                                     firstName: firstName,
+                                                     lastName: lastName) {
+            showAlert(message: error)
             return
         }
         
-        // Validate expiry year (must be 2 digits)
-        guard let expiryYear = txtExpiryYear.text, expiryYear.count == 2, CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: expiryYear)) else {
-            showAlert(message: "Expiry year must be 2 digits.")
+        guard let user = currentUser else {
+            showAlert(message: "User not found")
             return
         }
         
-        // Add valid card to array
-        arrCards.append(cardNumber)
+        if savedCards.contains(where: { $0.cardNumber == cardNumber }) {
+            showAlert(message: "This card already exists.")
+            return
+        }
         
-        // Save updated array to UserDefaults
-        UserDefaults.standard.set(arrCards, forKey: "savedCards")
+        // Save new card
+        CoreDataHelper.shared.saveCard(
+            for: user,
+            number: cardNumber,
+            expiryMonth: expMonth,
+            expiryYear: expYear,
+            firstName: firstName,
+            lastName: lastName
+        )
         
-        // Reload payment options list
-        tblPaymentDetails.reloadData()
-        
-        // Close Add Card popup
+        loadSavedCards()
         btnCloseCardViewAction(sender)
         
-        // Clear card fields
-        txtCardNumber.text = ""
-        txtExpiryMonth.text = ""
-        txtExpiryYear.text = ""
+        // Clear fields
+        CardHelper.clearCardInputs(in: self)
     }
     
     /// Close Add Card popup

@@ -126,7 +126,7 @@ class CoreDataHelper {
             return false
         }
     }
-
+    
     // Fetch user by email (duplicate function with logging)
     func fetchUser(email: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
@@ -295,4 +295,46 @@ class CoreDataHelper {
         }
     }
     
+    // MARK: - Save Card
+    func saveCard(for user: User,
+                  number: String,
+                  expiryMonth: Int16,
+                  expiryYear: Int16,
+                  firstName: String,
+                  lastName: String) {
+        
+        let card = Card(context: context)
+        card.id = UUID()
+        card.cardNumber = number
+        card.expiryMonth = expiryMonth
+        card.expiryYear = expiryYear
+        card.firstName = firstName
+        card.lastName = lastName
+        card.user = user
+        
+        do {
+            try context.save()
+            print("✅ Card saved successfully")
+        } catch {
+            print("❌ Failed to save card: \(error)")
+        }
+    }
+    
+    // MARK: - Fetch Cards
+    func fetchCards(for user: User) -> [Card] {
+        return (user.cards as? Set<Card>)?.sorted { ($0.firstName ?? "") < ($1.firstName ?? "") } ?? []
+    }
+    
+    // MARK: - Delete Card
+    func deleteCard(_ card: Card) {
+        context.delete(card)
+        do {
+            try context.save()
+            print("✅ Card deleted successfully")
+        } catch {
+            print("❌ Failed to delete card: \(error)")
+        }
+    }
 }
+
+

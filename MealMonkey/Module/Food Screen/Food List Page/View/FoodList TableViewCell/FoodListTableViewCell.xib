@@ -11,27 +11,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="330" id="KGk-i7-Jjw" customClass="FoodListTableViewCell" customModule="MealMonkey" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="345" height="330"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="320" id="KGk-i7-Jjw" customClass="FoodListTableViewCell" customModule="MealMonkey" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="477" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="345" height="330"/>
+                <rect key="frame" x="0.0" y="0.0" width="477" height="320"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkW-HC-Gvw">
-                        <rect key="frame" x="0.0" y="0.0" width="345" height="330"/>
+                        <rect key="frame" x="0.0" y="0.0" width="477" height="320"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VD2-cj-DJJ">
-                                <rect key="frame" x="17" y="10" width="307" height="187"/>
+                                <rect key="frame" x="17" y="0.0" width="439" height="177"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Popular Restaurents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7o-Pc-IGc">
-                                        <rect key="frame" x="0.0" y="0.0" width="262" height="187"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="177"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                         <color key="textColor" name="LoginLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHD-4W-j4H">
-                                        <rect key="frame" x="262" y="0.0" width="45" height="187"/>
+                                        <rect key="frame" x="394" y="0.0" width="45" height="177"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                         <color key="tintColor" name="LoginButton"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -43,7 +43,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BzG-PT-KmP">
-                                <rect key="frame" x="0.0" y="207" width="345" height="113"/>
+                                <rect key="frame" x="0.0" y="177" width="477" height="113"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="113" id="SUp-Qp-JlZ"/>
@@ -60,13 +60,12 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="BzG-PT-KmP" secondAttribute="trailing" id="8Lu-xq-oUp"/>
-                            <constraint firstItem="VD2-cj-DJJ" firstAttribute="top" secondItem="YkW-HC-Gvw" secondAttribute="top" constant="10" id="HQW-nx-lPi"/>
-                            <constraint firstAttribute="bottom" secondItem="BzG-PT-KmP" secondAttribute="bottom" constant="10" id="e7p-9S-D76"/>
+                            <constraint firstItem="VD2-cj-DJJ" firstAttribute="top" secondItem="YkW-HC-Gvw" secondAttribute="top" id="HQW-nx-lPi"/>
+                            <constraint firstAttribute="bottom" secondItem="BzG-PT-KmP" secondAttribute="bottom" constant="30" id="e7p-9S-D76"/>
                             <constraint firstItem="BzG-PT-KmP" firstAttribute="leading" secondItem="YkW-HC-Gvw" secondAttribute="leading" id="prM-Cb-WCn"/>
-                            <constraint firstItem="BzG-PT-KmP" firstAttribute="top" secondItem="VD2-cj-DJJ" secondAttribute="bottom" constant="10" id="wi3-B5-KJd"/>
+                            <constraint firstItem="BzG-PT-KmP" firstAttribute="top" secondItem="VD2-cj-DJJ" secondAttribute="bottom" id="wi3-B5-KJd"/>
                             <constraint firstItem="VD2-cj-DJJ" firstAttribute="leading" secondItem="YkW-HC-Gvw" secondAttribute="leading" constant="17" id="xcT-it-8Ba"/>
                             <constraint firstAttribute="trailing" secondItem="VD2-cj-DJJ" secondAttribute="trailing" constant="21" id="zDB-6i-msb"/>
                         </constraints>
@@ -86,7 +85,7 @@
                 <outlet property="collViewHeight" destination="SUp-Qp-JlZ" id="JjV-L0-7x7"/>
                 <outlet property="lblCollViewHeading" destination="K7o-Pc-IGc" id="GBW-Ej-Y4a"/>
             </connections>
-            <point key="canvasLocation" x="20.610687022900763" y="-57.74647887323944"/>
+            <point key="canvasLocation" x="121.37404580152672" y="-61.267605633802823"/>
         </tableViewCell>
     </objects>
     <resources>
