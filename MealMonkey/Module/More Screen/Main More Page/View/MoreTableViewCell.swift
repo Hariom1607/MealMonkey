@@ -21,6 +21,7 @@ class MoreTableViewCell: UITableViewCell {
     /// Icon image view for the menu item
     @IBOutlet weak var imgIconMore: UIImageView!
     
+    @IBOutlet weak var btnNavigate: UIButton!
     
     // MARK: - Lifecycle
     
@@ -38,6 +39,8 @@ class MoreTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Default selection handling
+        btnNavigate.layer.cornerRadius = btnNavigate.frame.size.width / 2
+        btnNavigate.clipsToBounds = true
     }
     
     // MARK: - Configuration

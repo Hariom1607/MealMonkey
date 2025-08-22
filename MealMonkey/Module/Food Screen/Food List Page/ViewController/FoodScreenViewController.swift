@@ -10,20 +10,20 @@ import UIKit
 class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate {
     
     // MARK: - Outlets
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var lblCurrentLocation: UILabel!
-    @IBOutlet weak var tblRecentItems: UITableView!
-    @IBOutlet weak var txtSearchFood: UITextField!
-    @IBOutlet weak var btnCurrentLocation: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!   // Loader for API data fetch
+    @IBOutlet weak var lblCurrentLocation: UILabel!                  // Shows current selected location
+    @IBOutlet weak var tblRecentItems: UITableView!                  // Table for showing recent items & products
+    @IBOutlet weak var txtSearchFood: UITextField!                   // Search bar for filtering products
+    @IBOutlet weak var btnCurrentLocation: UIButton!                 // Button for selecting current location
     
     // MARK: - Properties
-    var selectedCategory: ProductCategory = .All
-    var arrProductData: [ProductModel] = []           // Full product list
-    var objProductCategory: ProductModel?             // (unused, maybe safe to remove if not needed)
-    var recentItems: [ProductModel] = []              // Recently viewed/ordered products
+    var selectedCategory: ProductCategory = .All                     // Currently selected category
+    var arrProductData: [ProductModel] = []                          // Full product list from API
+    var objProductCategory: ProductModel?                            // (unused, can be removed if not required)
+    var recentItems: [ProductModel] = []                             // Recently viewed/ordered products
     
-    var filteredProducts: [ProductModel] = []         // Filtered based on search/category
-    var filteredCategories: [ProductCategory] = []    // Filtered categories based on search
+    var filteredProducts: [ProductModel] = []                        // Filtered product list (search/category based)
+    var filteredCategories: [ProductCategory] = []                   // Filtered category list (search based)
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -51,11 +51,30 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         } else {
             lblCurrentLocation.text = "Select your location"
         }
+        
+        // Setup UI & delegates
+        setupUI()
+        setupTableView()
+        setupSearchBar()
+        
+        // 👇 Initially hide table and other UI
+        tblRecentItems.isHidden = true
+        txtSearchFood.isHidden = true
+        btnCurrentLocation.isHidden = true
+        lblCurrentLocation.isHidden = true
+        
+        // Show loader
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        
+        // Fetch products from API
+        loadProducts()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initial setup
         setupUI()
         setupTableView()
         setupSearchBar()
@@ -64,6 +83,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         // Initialize with all categories
         filteredCategories = ProductCategory.allCases
         
+        // Configure table view dynamic height
         tblRecentItems.rowHeight = UITableView.automaticDimension
         tblRecentItems.estimatedRowHeight = 200
         
@@ -73,6 +93,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     // MARK: - UI Setup
     private func setupUI() {
+        // Style search field
         styleViews([txtSearchFood], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding([txtSearchFood])
         
@@ -83,38 +104,17 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             setLeftAlignedTitle("Good Morning")
         }
         
+        // Add cart button in nav bar
         setCartButton(target: self, action: #selector(btnCartTapped))
     }
     
+    // Show loader & fetch products
     private func showLoader() {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        tblRecentItems.isHidden = true
-    }
-
-    private func hideLoader() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
-        tblRecentItems.isHidden = false
-    }
-
-    private func setupTableView() {
-        tblRecentItems.register(UINib(nibName: "FoodListTableViewCell", bundle: nil),
-                                forCellReuseIdentifier: "FoodListTableViewCell")
-        tblRecentItems.rowHeight = UITableView.automaticDimension
-        tblRecentItems.estimatedRowHeight = 200
-    }
-    
-    private func setupSearchBar() {
-        txtSearchFood.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
-    }
-    
-    // MARK: - API
-    private func loadProducts() {
         ProductAPIHelper.shared.fetchProducts { [weak self] products in
             guard let self = self else { return }
             
-            DispatchQueue.main.async {
+            // Artificial delay for loader visibility
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.hideLoader()
                 
                 if let products = products {
@@ -129,7 +129,53 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         }
     }
     
+    // Hide loader and show content
+    private func hideLoader() {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
+        
+        // 👇 Show other UI after loader hides
+        tblRecentItems.isHidden = false
+        txtSearchFood.isHidden = false
+        btnCurrentLocation.isHidden = false
+        lblCurrentLocation.isHidden = false
+    }
+    
+    // Configure table view
+    private func setupTableView() {
+        tblRecentItems.register(UINib(nibName: "FoodListTableViewCell", bundle: nil),
+                                forCellReuseIdentifier: "FoodListTableViewCell")
+        tblRecentItems.rowHeight = UITableView.automaticDimension
+        tblRecentItems.estimatedRowHeight = 200
+    }
+    
+    // Add search bar text change listener
+    private func setupSearchBar() {
+        txtSearchFood.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
+    }
+    
+    // MARK: - API
+    private func loadProducts() {
+        ProductAPIHelper.shared.fetchProducts { [weak self] products in
+            guard let self = self else { return }
+            
+            // Artificial delay for loader visibility
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.hideLoader()
+                
+                if let products = products {
+                    self.arrProductData = products
+                    self.filteredProducts = products
+                    self.tblRecentItems.reloadData()
+                } else {
+                    print("❌ No products fetched from API")
+                }
+            }
+        }
+    }
+    
     // MARK: - Actions
+    // Search text change handler
     @objc func searchTextChanged(_ textField: UITextField) {
         let searchText = textField.text?.lowercased() ?? ""
         
@@ -153,6 +199,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         tblRecentItems.reloadData()
     }
     
+    // Cart button tapped → navigate to cart screen
     @objc func btnCartTapped() {
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
@@ -160,12 +207,14 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         }
     }
     
+    // Current location button tapped
     @IBAction func btnCurrentLocationAction(_ sender: Any) {
         // TODO: Implement location picker
         print("📍 Current Location button tapped")
     }
     
     // MARK: - FoodListTableViewCellDelegate
+    // Product tapped → show detail screen
     func foodListTableViewCell(_ cell: FoodListTableViewCell, didSelectProduct product: ProductModel) {
         // Add to recent items
         RecentItemsHelper.shared.addProduct(product)
@@ -182,6 +231,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         tblRecentItems.reloadData()
     }
     
+    // Category tapped → reload table with selected category
     func foodListTableViewCell(_ cell: FoodListTableViewCell, didSelectCategory category: ProductCategory) {
         selectedCategory = category
         DispatchQueue.main.async {

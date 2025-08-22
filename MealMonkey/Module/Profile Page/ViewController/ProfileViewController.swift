@@ -77,7 +77,8 @@ class ProfileViewController: UIViewController {
         if let imageData = user.imageData {
             imgUser.image = UIImage(data: imageData)
         } else {
-            imgUser.image = UIImage(named: "defaultProfile") // fallback
+            imgUser.image = UIImage(systemName: "person.crop.circle") // fallback
+            imgUser.tintColor = .gray
         }
     }
     

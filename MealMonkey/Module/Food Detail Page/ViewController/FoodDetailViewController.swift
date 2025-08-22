@@ -65,7 +65,7 @@ class FoodDetailViewController: UIViewController {
         activityIndicator.isHidden = false
         
         // Simulate network/data loading for 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             self.showUIElementsAfterLoading()

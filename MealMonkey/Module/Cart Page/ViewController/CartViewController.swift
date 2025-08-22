@@ -93,10 +93,10 @@ class CartViewController: UIViewController {
                 foodItem.name = item.name
                 foodItem.price = item.price
                 foodItem.imageName = item.image
-                foodItem.category = ""              // TODO: map category if available
+                foodItem.category = item.category ?? ""
                 foodItem.quantity = Int16(item.quantity)
-                foodItem.productDescription = ""    // TODO: map description if available
-                
+                foodItem.productDescription = item.type ?? ""
+
                 order.addToProducts(foodItem)
             }
             

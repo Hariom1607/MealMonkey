@@ -197,7 +197,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMR-tx-7nG">
                                                                         <rect key="frame" x="0.0" y="0.0" width="351" height="45"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="- Select the size of portion -" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqX-P8-GZ2">
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="- Select the size of portion -" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqX-P8-GZ2">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="303.33333333333331" height="45"/>
                                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
@@ -221,7 +221,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-fZ-NDC">
                                                                         <rect key="frame" x="0.0" y="59" width="351" height="45"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="- Select the ingredients -" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZf-fr-4yr">
+                                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="- Select the ingredients -" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZf-fr-4yr">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="303.33333333333331" height="45"/>
                                                                                 <color key="backgroundColor" name="TextFieldBackground"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

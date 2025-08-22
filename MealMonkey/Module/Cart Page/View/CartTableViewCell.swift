@@ -34,6 +34,22 @@ class CartTableViewCell: UITableViewCell {
         imgProduct.image = UIImage(named: cartItem.image ?? "")
         lblFoodPrice.text = "$\(String(format: "%.2f", cartItem.price))"
         lblQty.text = "QTY: \(cartItem.quantity)"
+        
+        // ✅ Show Category using Enum
+        if let categoryString = cartItem.category,
+           let category = ProductCategory(rawValue: categoryString) {
+            lblFoodCategory.text = category.rawValue
+        } else {
+            lblFoodCategory.text = "Unknown"
+        }
+        
+        // ✅ Show Type using Enum
+        if let typeString = cartItem.type,
+           let type = ProductType(rawValue: typeString) {
+            lblFoodType.text = type.rawValue
+        } else {
+            lblFoodType.text = "Unknown"
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

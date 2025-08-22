@@ -26,7 +26,7 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
         // Set category-specific image
         switch category {
         case .All:
-            imgFoodCategory.image = UIImage(named: "ic_butternaan")
+            imgFoodCategory.image = UIImage(named: "ic_AppLogo")
         case .Punjabi:
             imgFoodCategory.image = UIImage(named: "ic_paneertikka")
         case .Chinese:

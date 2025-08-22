@@ -10,7 +10,9 @@ import UIKit
 class CheckoutViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var viewAddCardTopCorner: UIView!
     @IBOutlet weak var btnAddCard: UIButton!                 // Button to open Add Card popup
+    @IBOutlet weak var viewPlaceOrderTopCorner: UIView!
     @IBOutlet weak var btnCloseThankyouView: UIButton!       // Button to close Thank You view
     @IBOutlet weak var sendOrderView: UIView!                // View displayed after sending order
     @IBOutlet weak var viewTransparent: UIView!              // Transparent overlay for popups
@@ -61,6 +63,8 @@ class CheckoutViewController: UIViewController {
         let allViews = [btnSendOrder!, btnTrackOrder!, btnAddNewCardPopUp!, txtLastName!, txtFirstName!, txtCardNumber!, txtExpiryYear!, txtExpiryMonth!, txtSecurityCode!]
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding(allViews)
+        
+        roundCorners(of: [viewAddCardTopCorner, viewPlaceOrderTopCorner])
         
         // Update subtotal, delivery, discount, and total labels
         updateOrderSummary()

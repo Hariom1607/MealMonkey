@@ -17,6 +17,7 @@ class OtpViewController: UIViewController {
     @IBOutlet weak var txt2: UITextField!            // OTP 2nd digit field
     @IBOutlet weak var txt1: UITextField!            // OTP 1st digit field
     
+    var email: String?
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,7 @@ class OtpViewController: UIViewController {
     @IBAction func btnNextAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
         if let mlvc = storyboard.instantiateViewController(identifier: "NewPasswordViewController") as? NewPasswordViewController {
+            mlvc.email = email
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }

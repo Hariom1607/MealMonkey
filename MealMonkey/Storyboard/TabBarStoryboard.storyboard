@@ -263,9 +263,9 @@ meals and more!</string>
                                     <constraint firstAttribute="trailing" secondItem="u1Y-De-riK" secondAttribute="trailing" constant="21" id="xvA-R7-EgM"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
-                                <rect key="frame" x="186" y="416" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                <color key="color" name="LoginButton"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFm-JP-0mb"/>
@@ -273,7 +273,9 @@ meals and more!</string>
                         <constraints>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="top" secondItem="NFm-JP-0mb" secondAttribute="top" id="2Ru-AN-yx7"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="leading" secondItem="NFm-JP-0mb" secondAttribute="leading" id="3KI-2f-fbC"/>
+                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerY" secondItem="qzj-Xt-7cD" secondAttribute="centerY" id="8NL-Ji-YoC"/>
                             <constraint firstItem="NFm-JP-0mb" firstAttribute="bottom" secondItem="Flp-Yh-k8T" secondAttribute="bottom" id="KZY-2V-YMM"/>
+                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerX" secondItem="qzj-Xt-7cD" secondAttribute="centerX" id="Yl5-5O-q4l"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="trailing" secondItem="NFm-JP-0mb" secondAttribute="trailing" id="oz8-aU-ZAe"/>
                         </constraints>
                     </view>
@@ -316,15 +318,22 @@ meals and more!</string>
                                                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-9q-uIq">
                                                                         <rect key="frame" x="0.0" y="0.6666666666666643" width="102" height="100.66666666666669"/>
                                                                     </imageView>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image_Camera" translatesAutoresizingMaskIntoConstraints="NO" id="JMY-6r-pX2">
+                                                                        <rect key="frame" x="0.0" y="79" width="102" height="23"/>
+                                                                    </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="7TN-9q-uIq" secondAttribute="trailing" id="0xX-Zr-jYN"/>
                                                                     <constraint firstItem="7TN-9q-uIq" firstAttribute="top" secondItem="cYc-Bw-f9n" secondAttribute="top" id="3wr-bj-aOf"/>
                                                                     <constraint firstAttribute="width" constant="102" id="7Q7-C5-6cM"/>
+                                                                    <constraint firstItem="JMY-6r-pX2" firstAttribute="top" secondItem="cYc-Bw-f9n" secondAttribute="top" constant="79" id="A27-Av-e5H"/>
                                                                     <constraint firstItem="7TN-9q-uIq" firstAttribute="leading" secondItem="cYc-Bw-f9n" secondAttribute="leading" id="BzJ-v8-qAZ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="JMY-6r-pX2" secondAttribute="bottom" id="IlQ-wC-Uc2"/>
                                                                     <constraint firstAttribute="bottom" secondItem="7TN-9q-uIq" secondAttribute="bottom" id="PD7-kD-yej"/>
                                                                     <constraint firstAttribute="height" constant="102" id="drk-kM-dx8"/>
+                                                                    <constraint firstItem="JMY-6r-pX2" firstAttribute="leading" secondItem="cYc-Bw-f9n" secondAttribute="leading" id="tJK-Ig-n7L"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="JMY-6r-pX2" secondAttribute="trailing" id="uht-ZK-3mH"/>
                                                                 </constraints>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qs9-u9-8sG">
@@ -486,7 +495,7 @@ meals and more!</string>
                         <outlet property="txtEmail" destination="e9h-rV-tLg" id="X9f-LP-Nyd"/>
                         <outlet property="txtMobileNo" destination="nLv-dI-ddg" id="pWE-VK-qvs"/>
                         <outlet property="txtName" destination="RTL-38-gI3" id="UOG-q3-yAw"/>
-                        <outlet property="viewImg" destination="7TN-9q-uIq" id="q9k-hk-pdJ"/>
+                        <outlet property="viewImg" destination="cYc-Bw-f9n" id="CCZ-T8-2oY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDm-1B-dlm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -502,7 +511,7 @@ meals and more!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="yPR-1k-B6D">
-                                <rect key="frame" x="21" y="175" width="351" height="560"/>
+                                <rect key="frame" x="0.0" y="175" width="393" height="560"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="5kR-OF-PkP" id="GhA-SC-0mU"/>
@@ -516,8 +525,8 @@ meals and more!</string>
                         <constraints>
                             <constraint firstItem="yPR-1k-B6D" firstAttribute="top" secondItem="vlp-sA-bkt" secondAttribute="top" constant="13" id="HsB-mG-iDa"/>
                             <constraint firstItem="vlp-sA-bkt" firstAttribute="bottom" secondItem="yPR-1k-B6D" secondAttribute="bottom" id="IUz-ew-6S9"/>
-                            <constraint firstItem="vlp-sA-bkt" firstAttribute="trailing" secondItem="yPR-1k-B6D" secondAttribute="trailing" constant="21" id="Ln9-aA-lBL"/>
-                            <constraint firstItem="yPR-1k-B6D" firstAttribute="leading" secondItem="vlp-sA-bkt" secondAttribute="leading" constant="21" id="t8O-jf-8hb"/>
+                            <constraint firstItem="vlp-sA-bkt" firstAttribute="trailing" secondItem="yPR-1k-B6D" secondAttribute="trailing" id="Ln9-aA-lBL"/>
+                            <constraint firstItem="yPR-1k-B6D" firstAttribute="leading" secondItem="vlp-sA-bkt" secondAttribute="leading" id="t8O-jf-8hb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AIt-JC-Pk3"/>
@@ -612,6 +621,7 @@ meals and more!</string>
         <image name="ic_More" width="30.333333969116211" height="35"/>
         <image name="ic_Offers" width="36.333332061767578" height="35"/>
         <image name="ic_home" width="31" height="29.333333969116211"/>
+        <image name="ic_image_Camera" width="86.333335876464844" height="23.666666030883789"/>
         <image name="ic_menu" width="32.333332061767578" height="33"/>
         <image name="ic_profile" width="37.333332061767578" height="35"/>
         <image name="pencil" catalog="system" width="128" height="113"/>

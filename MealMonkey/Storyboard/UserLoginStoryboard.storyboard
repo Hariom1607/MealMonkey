@@ -839,7 +839,7 @@ link to  create a new password via email</string>
                                             <constraint firstAttribute="height" constant="56" id="r5r-fB-7LK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="2r3-bV-Qs7" id="5w7-sz-090"/>
                                         </connections>
@@ -851,7 +851,7 @@ link to  create a new password via email</string>
                                             <constraint firstAttribute="height" constant="56" id="fTn-LS-HGQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="2r3-bV-Qs7" id="1p5-hb-u93"/>
                                         </connections>
