@@ -15,6 +15,10 @@ class MoreViewController: UIViewController {
     // Outlet for the More screen's table view
     @IBOutlet weak var tblMore: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.updateCartBadge()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
