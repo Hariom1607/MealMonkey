@@ -210,6 +210,12 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     // Current location button tapped
     @IBAction func btnCurrentLocationAction(_ sender: Any) {
         // TODO: Implement location picker
+        
+        // Navigate to detail screen
+        let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
         print("📍 Current Location button tapped")
     }
     

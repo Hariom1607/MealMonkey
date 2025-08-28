@@ -27,6 +27,10 @@ class DessertsViewController: UIViewController {
         fetchProducts()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.updateCartBadge()
+    }
+    
     // MARK: - UI Setup
     private func setupUI() {
         // Search box styling

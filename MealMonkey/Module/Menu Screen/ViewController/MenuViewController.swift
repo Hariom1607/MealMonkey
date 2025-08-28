@@ -18,6 +18,11 @@ class MenuViewController: UIViewController {
     
     /// Data source for the table (Food, Beverages, Desserts)
     var menuItems: [Menu] = []
+    var filteredMenuItems: [Menu] = []   // For search
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.updateCartBadge()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +44,10 @@ class MenuViewController: UIViewController {
                          forCellReuseIdentifier: "MenuTableViewCell")
         
         // ✅ Load static menu data
+        txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         menuItems = Menu.populateMenu()
+        filteredMenuItems = menuItems
+        updateEmptyState()
     }
     
     /// Opens CartViewController when cart button is tapped
@@ -48,5 +56,21 @@ class MenuViewController: UIViewController {
         if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
+    }
+    
+    // ✅ Search Filtering
+    @objc func searchTextChanged(_ textField: UITextField) {
+        let searchText = textField.text?.lowercased() ?? ""
+        
+        if searchText.isEmpty {
+            filteredMenuItems = menuItems
+        } else {
+            filteredMenuItems = menuItems.filter { menu in
+                return menu.strName.lowercased().contains(searchText)
+            }
+        }
+        
+        tblMenu.reloadData()
+        updateEmptyState()
     }
 }

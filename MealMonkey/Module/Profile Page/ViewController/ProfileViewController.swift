@@ -22,6 +22,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var imgUser: UIImageView!        // User profile image
     
     // MARK: - Lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.updateCartBadge()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

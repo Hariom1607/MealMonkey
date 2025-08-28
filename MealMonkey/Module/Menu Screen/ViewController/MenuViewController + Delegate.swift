@@ -13,7 +13,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// Number of rows = number of menu categories (Food, Beverages, Desserts)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+        return filteredMenuItems.count
     }
     
     /// Configure each menu cell (category name, quantity, image)
@@ -23,7 +23,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell",
                                                  for: indexPath) as! MenuTableViewCell
         
-        let items = menuItems[indexPath.row]
+        let items = filteredMenuItems[indexPath.row]   // Use filtered
         
         // Set menu title (Food, Beverages, Desserts)
         cell.lblName.text = items.strName
@@ -50,20 +50,38 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// Handle category selection → navigate to `DessertsViewController`
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selected = filteredMenuItems[indexPath.row]  // ✅ Use filtered
+        
         let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "DessertsViewController")
             as? DessertsViewController {
             
             // Assign correct category based on row tapped
-            switch indexPath.row {
-            case 0: vc.selectedCategory = .food
-            case 1: vc.selectedCategory = .Beverages
-            case 2: vc.selectedCategory = .Desserts
+            switch selected.strName.lowercased() {
+            case "food": vc.selectedCategory = .food
+            case "beverages": vc.selectedCategory = .Beverages
+            case "desserts": vc.selectedCategory = .Desserts
             default: return
             }
             
             // Push to product listing screen
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func updateEmptyState() {
+        if filteredMenuItems.isEmpty {
+            let noDataLabel = UILabel(frame: CGRect(x: 0,
+                                                    y: 0,
+                                                    width: tblMenu.bounds.size.width,
+                                                    height: tblMenu.bounds.size.height))
+            noDataLabel.text = "No results found"
+            noDataLabel.textAlignment = .center
+            noDataLabel.textColor = .gray
+            noDataLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            tblMenu.backgroundView = noDataLabel
+        } else {
+            tblMenu.backgroundView = nil
         }
     }
 }

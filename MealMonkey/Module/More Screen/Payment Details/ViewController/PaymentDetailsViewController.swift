@@ -80,7 +80,6 @@ class PaymentDetailsViewController: UIViewController {
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewAddCard.isHidden = true

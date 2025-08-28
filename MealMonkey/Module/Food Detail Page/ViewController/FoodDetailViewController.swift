@@ -10,7 +10,6 @@ import UIKit
 class FoodDetailViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var btnWishlist: UIButton!
     @IBOutlet weak var btnDropDownPortions: UIButton!
     @IBOutlet weak var btnDropDownIngredients: UIButton!
@@ -41,7 +40,20 @@ class FoodDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Reset nav bar appearance
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black
+        ]
+        
+        // Re-apply custom nav items
+        setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
+        setCartButton(target: self, action: #selector(cartBtnTapped))
         updateWishlistButton() // Refresh wishlist state when screen appears
+        updateCartBadge()
     }
     
     override func viewDidLoad() {
@@ -59,23 +71,12 @@ class FoodDetailViewController: UIViewController {
         viewFoodDetailContent.clipsToBounds = true
         
         
-        // Initial setup
-        hideUIElementsBeforeLoading()
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
+        // Configure product UI directly
+        configureUI()
+        updateWishlistButton()
+        setCartButton(target: self, action: #selector(self.cartBtnTapped))
         
-        // Simulate network/data loading for 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-            self.showUIElementsAfterLoading()
-            
-            // Refresh UI with product data
-            self.configureUI()
-            self.updateWishlistButton()
-        }
-        
-        // Styling dropdowns & text fields with rounded corners
+        // Styling dropdowns & text fields
         styleViews([btnDropDownPortions!, btnDropDownIngredients!, txtSizeOfPortions!, txtSelectIngridients!], cornerRadius: 4, borderWidth: 0, borderColor: UIColor.white.cgColor)
         btnDropDownIngredients.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         btnDropDownPortions.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -87,13 +88,8 @@ class FoodDetailViewController: UIViewController {
         lblNimberOfPortion.text = "\(quantity)"
         btnPortionReduce.isEnabled = false
         
-        // Setup navigation buttons (back & cart)
+        // Setup navigation buttons
         setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
-        setCartButton(target: self, action: #selector(cartBtnTapped))
-        
-        // Configure product UI
-        configureUI()
-        setupUI()
     }
     
     // MARK: - UI Setup
@@ -103,22 +99,6 @@ class FoodDetailViewController: UIViewController {
         lblFoodDescription.text = product.strProductDescription
         imgFood.image = UIImage(named: product.strProductImage)
         updatePriceAndQuantityUI()
-    }
-    
-    // Hide UI elements until data is loaded
-    private func hideUIElementsBeforeLoading() {
-        viewFoodDetailContent.isHidden = true
-        btnAddtoCart.isHidden = true
-        btnWishlist.isHidden = true
-        imgFood.isHidden = true
-    }
-    
-    // Show UI elements once loading is done
-    private func showUIElementsAfterLoading() {
-        viewFoodDetailContent.isHidden = false
-        btnAddtoCart.isHidden = false
-        btnWishlist.isHidden = false
-        imgFood.isHidden = false
     }
     
     /// Updates wishlist button (filled heart if product is in wishlist)
@@ -170,6 +150,9 @@ class FoodDetailViewController: UIViewController {
               let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
         
         CoreDataHelper.shared.addCartItem(product: product, quantity: quantity, userEmail: currentUserEmail)
+        
+        //  Update the cart badge instantly
+        self.updateCartBadge()
         
         // Show confirmation alert
         let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
