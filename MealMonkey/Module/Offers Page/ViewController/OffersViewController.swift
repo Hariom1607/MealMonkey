@@ -29,15 +29,15 @@ class OffersViewController: UIViewController {
         btnCheckOffers.layer.cornerRadius = 7.42
         
         // Register custom table view cell for reuse
-        tblOffers.register(UINib(nibName: "OffersTableViewCell", bundle: nil), forCellReuseIdentifier: "OffersTableViewCell")
+        tblOffers.register(UINib(nibName: Main.cells.offersCell, bundle: nil), forCellReuseIdentifier: Main.cells.offersCell)
         
         setLeftAlignedTitle("Latest Offers")
         setCartButton(target: self, action: #selector(cartBtnTapped))
     }
     
     @objc func cartBtnTapped() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

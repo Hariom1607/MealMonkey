@@ -33,7 +33,7 @@ class MyOrderViewController: UIViewController {
         btnCheckout.layer.cornerRadius = 28
         
         // Register custom cell for table view
-        tblMyOrders.register(UINib(nibName: "MyOrderTableViewCell", bundle: nil), forCellReuseIdentifier: "MyOrderTableViewCell")
+        tblMyOrders.register(UINib(nibName: Main.cells.myOrderCell, bundle: nil), forCellReuseIdentifier: Main.cells.myOrderCell)
         
         // Calculate and display totals initially
         calculateTotals()
@@ -59,8 +59,8 @@ class MyOrderViewController: UIViewController {
     
     /// Navigates to checkout screen with current order details
     @IBAction func btnCheckOutAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.aboutUs, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.viewController.checkout) as? CheckoutViewController {
             mlvc.orderProducts = self.orderProducts // Pass order details to checkout screen
             self.navigationController?.pushViewController(mlvc, animated: true)
         }

@@ -19,13 +19,13 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
         switch indexPath.row {
         case 0:
             // Case 0 → Cash on Delivery cell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CashOnDeliveryTableViewCell", for: indexPath) as! CashOnDeliveryTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.checkoutCashCell, for: indexPath) as! CashOnDeliveryTableViewCell
             cell.btnCashOnDeliverySelection.isSelected = (selectedPaymentIndex == 0)
             return cell
             
         case 1..<(1 + savedCards.count):
             // Cases 1...N → Card cells (from arrCards)
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CardTableViewCell", for: indexPath) as! CardTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.checkoutCardCell, for: indexPath) as! CardTableViewCell
             let cardIndex = indexPath.row - 1
             let card = savedCards[cardIndex]
             cell.lblCardNumber.text = CardHelper.maskedCardNumber(card.cardNumber ?? "")
@@ -34,7 +34,7 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
             
         case 1 + savedCards.count:
             // Last case → UPI cell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UpiTableViewCell", for: indexPath) as! UpiTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.checkoutUpiCell, for: indexPath) as! UpiTableViewCell
             cell.btnUpiSelection.isSelected = (selectedPaymentIndex == indexPath.row)
             return cell
             

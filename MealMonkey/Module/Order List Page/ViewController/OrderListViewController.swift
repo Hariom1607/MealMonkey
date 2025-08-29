@@ -25,7 +25,7 @@ class OrderListViewController: UIViewController {
         setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(backBtnTapped))
         
         // Register custom table view cell for displaying order items
-        tblOrderList.register(UINib(nibName: "OrderListTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderListTableViewCell")
+        tblOrderList.register(UINib(nibName: Main.cells.orderListCell, bundle: nil), forCellReuseIdentifier: Main.cells.orderListCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {

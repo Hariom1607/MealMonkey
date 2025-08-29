@@ -127,8 +127,8 @@ class SignupViewController: UIViewController {
     
     /// Navigate back to login screen
     @IBAction func btnBackToLogin(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if ((storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController) != nil){
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+        if ((storyboard.instantiateViewController(withIdentifier: Main.viewController.login) as? LoginViewController) != nil){
             self.navigationController?.popViewController(animated: true)
         }
     }

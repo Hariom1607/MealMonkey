@@ -8,33 +8,41 @@
 import Foundation
 import UIKit
 
-extension AboutUsViewController: UITableViewDelegate, UITableViewDataSource{
+// MARK: - Extension for AboutUsViewController to handle UITableView Delegate & DataSource
+extension AboutUsViewController: UITableViewDelegate, UITableViewDataSource {
     
+    // Number of rows in the table view section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrCurrent.count
+        return arrCurrent.count   // total items = count of arrCurrent
     }
     
+    // Cell configuration for each row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AboutUsTableViewCell", for: indexPath) as! AboutUsTableViewCell
+        // Dequeue reusable cell of type AboutUsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.aboutUsCell, for: indexPath) as! AboutUsTableViewCell
         
+        // Configure cell content based on objPagetype
         switch objPagetype {
         
         case .AboutUs:
+            // Setup AboutUs cell UI
             cell.configureAboutUsCell(about: arrCurrent[indexPath.row])
             
         case .Notifications:
+            // Setup Notification cell UI
             cell.configureNotificationCell(
                 about: arrCurrent[indexPath.row]
-                
             )
             
         case .Inbox:
+            // Setup Inbox cell UI
             cell.configureInboxCell(about: arrCurrent[indexPath.row])
             
         default:
-            break
+            break   // Do nothing for other cases
         }
-        return cell
+        
+        return cell   // Return configured cell
     }
 }

@@ -43,9 +43,9 @@ class SplashViewController: UIViewController {
     
     /// Show login screen (when no active user session found)
     private func showLogin() {
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
         
-        if let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+        if let loginVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.login) as? LoginViewController {
             
             // Replace rootViewController with Login inside a UINavigationController
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -60,9 +60,9 @@ class SplashViewController: UIViewController {
     
     /// Show main app tab bar (when user is already logged in)
     private func showMainTabBar() {
-        let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
+        let storyboard = UIStoryboard(name: Main.storyboards.tabBar, bundle: nil)
         
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.viewController.menuTabBar) as? UITabBarController {
             
             // 👉 Set the default tab (example: index 0 = Menu, index 1 = Home, etc.)
             tabBarController.selectedIndex = 2   // Change this to the index of your Home tab

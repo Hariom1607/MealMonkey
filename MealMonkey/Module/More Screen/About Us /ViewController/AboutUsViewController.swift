@@ -37,8 +37,8 @@ class AboutUsViewController: UIViewController {
         
         // Register reusable cell
         tblAboutUs.register(
-            UINib(nibName: "AboutUsTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "AboutUsTableViewCell"
+            UINib(nibName: Main.cells.aboutUsCell, bundle: nil),
+            forCellReuseIdentifier: Main.cells.aboutUsCell
         )
         
         // Configure UI and load appropriate data based on page type
@@ -76,26 +76,42 @@ class AboutUsViewController: UIViewController {
     
     /// Placeholder for cart action on **Payment screen**
     @objc func cartPaymentTapped() {
-        // TODO: Implement Payment cart action
-    }
+        // Navigate to CartViewController when cart button is tapped
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }    }
     
     /// Placeholder for cart action on **My Orders screen**
     @objc func cartMyOrdersTapped() {
-        // TODO: Implement My Orders cart action
-    }
+        // Navigate to CartViewController when cart button is tapped
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }    }
     
     /// Cart button action for **Notifications page**
     @objc func cartNotificationsTapped() {
-        // TODO: Implement Notifications cart action
-    }
+        // Navigate to CartViewController when cart button is tapped
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }    }
     
     /// Cart button action for **Inbox page**
     @objc func cartInboxTapped() {
-        // TODO: Implement Inbox cart action
-    }
+        // Navigate to CartViewController when cart button is tapped
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }    }
     
     /// Cart button action for **About Us page**
     @objc func cartAboutUsTapped() {
-        // TODO: Implement About Us cart action
+        // Navigate to CartViewController when cart button is tapped
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
+            self.navigationController?.pushViewController(menuVC, animated: true)
+        }
     }
 }

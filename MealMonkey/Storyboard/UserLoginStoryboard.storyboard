@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -660,48 +661,11 @@ continue to reset your password</string>
                                         <color key="textColor" name="ExtraLabel"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="V4n-sL-aHx">
-                                        <rect key="frame" x="13" y="215" width="325" height="56"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eWZ-Bz-PyS">
-                                                <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackground"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" textContentType="one-time-code"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8zq-wq-bEG">
-                                                <rect key="frame" x="88.333333333333329" y="0.0" width="60.333333333333329" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackground"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLL-Ij-64C">
-                                                <rect key="frame" x="176.66666666666666" y="0.0" width="60" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackground"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="*" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5WV-Zw-hNC">
-                                                <rect key="frame" x="264.66666666666669" y="0.0" width="60.333333333333314" height="56"/>
-                                                <color key="backgroundColor" name="TextFieldBackground"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="35"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="8yA-48-fQe"/>
-                                        </constraints>
-                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haO-P5-RRj">
-                                        <rect key="frame" x="13" y="307" width="325" height="56"/>
+                                        <rect key="frame" x="13" y="295" width="325" height="56"/>
                                         <color key="backgroundColor" name="LoginButton"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="5dL-sc-sOs"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="hD6-ZS-MCs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -712,7 +676,7 @@ continue to reset your password</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oys-CZ-9tT">
-                                        <rect key="frame" x="80.333333333333329" y="396" width="190.33333333333337" height="17"/>
+                                        <rect key="frame" x="80.333333333333329" y="384" width="190.33333333333337" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="c3u-f5-PfL"/>
                                         </constraints>
@@ -761,21 +725,28 @@ continue to reset your password</string>
                                             <action selector="btnOtpRegenerationAction:" destination="UuH-lN-t8e" eventType="touchUpInside" id="T2m-Pa-hBN"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9D-6B-IxM" customClass="DPOTPView" customModule="DPOTPView">
+                                        <rect key="frame" x="13" y="215" width="325" height="44"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="hY7-wk-5GD"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="V4n-sL-aHx" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="CvD-8M-SpM"/>
                                     <constraint firstItem="haO-P5-RRj" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="DAf-Ne-bpo"/>
                                     <constraint firstAttribute="trailing" secondItem="haO-P5-RRj" secondAttribute="trailing" constant="13" id="HtR-A6-yec"/>
                                     <constraint firstItem="Oys-CZ-9tT" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="KTM-VR-Vfk"/>
                                     <constraint firstItem="Oys-CZ-9tT" firstAttribute="top" secondItem="haO-P5-RRj" secondAttribute="bottom" constant="33" id="V3O-Vb-LMQ"/>
                                     <constraint firstItem="HtD-va-Upb" firstAttribute="top" secondItem="ohi-UU-uJs" secondAttribute="top" constant="47" id="Vlr-yJ-RrY"/>
-                                    <constraint firstItem="V4n-sL-aHx" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="f5j-sb-C9b"/>
+                                    <constraint firstItem="d9D-6B-IxM" firstAttribute="top" secondItem="yTv-Lw-2et" secondAttribute="bottom" constant="53" id="ZDq-Jj-KVI"/>
                                     <constraint firstItem="yTv-Lw-2et" firstAttribute="top" secondItem="HtD-va-Upb" secondAttribute="bottom" constant="13" id="fR7-vc-r5c"/>
+                                    <constraint firstItem="d9D-6B-IxM" firstAttribute="leading" secondItem="ohi-UU-uJs" secondAttribute="leading" constant="13" id="fV0-GX-qfJ"/>
                                     <constraint firstItem="HtD-va-Upb" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="iGA-cB-Scz"/>
-                                    <constraint firstItem="haO-P5-RRj" firstAttribute="top" secondItem="V4n-sL-aHx" secondAttribute="bottom" constant="36" id="pAQ-xc-EKS"/>
-                                    <constraint firstAttribute="trailing" secondItem="V4n-sL-aHx" secondAttribute="trailing" constant="13" id="qN1-z1-OPO"/>
                                     <constraint firstItem="yTv-Lw-2et" firstAttribute="centerX" secondItem="ohi-UU-uJs" secondAttribute="centerX" id="s3W-Yd-DpV"/>
+                                    <constraint firstItem="haO-P5-RRj" firstAttribute="top" secondItem="d9D-6B-IxM" secondAttribute="bottom" constant="36" id="t3R-oT-Hei"/>
+                                    <constraint firstAttribute="trailing" secondItem="d9D-6B-IxM" secondAttribute="trailing" constant="13" id="yan-63-EoB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -791,10 +762,7 @@ continue to reset your password</string>
                     <connections>
                         <outlet property="btnNext" destination="haO-P5-RRj" id="WJk-Rr-KYy"/>
                         <outlet property="btnOtpRegeneration" destination="Oys-CZ-9tT" id="I8f-N8-iwi"/>
-                        <outlet property="txt1" destination="eWZ-Bz-PyS" id="82a-Yd-lHK"/>
-                        <outlet property="txt2" destination="8zq-wq-bEG" id="oZt-EA-XzE"/>
-                        <outlet property="txt3" destination="GLL-Ij-64C" id="idH-Es-NDZ"/>
-                        <outlet property="txt4" destination="5WV-Zw-hNC" id="2Up-9C-gek"/>
+                        <outlet property="viewOtp" destination="d9D-6B-IxM" id="M8D-ie-Z0r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wlc-eI-Ai9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

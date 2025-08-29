@@ -30,7 +30,7 @@ class CartViewController: UIViewController {
         setLeftAlignedTitleWithBack("Cart", target: self, action: #selector(backBtnTapped))
         
         // Register custom cell
-        tblCart.register(UINib(nibName: "CartTableViewCell", bundle: nil), forCellReuseIdentifier: "CartTableViewCell")
+        tblCart.register(UINib(nibName: Main.cells.cartCell, bundle: nil), forCellReuseIdentifier: Main.cells.cartCell)
         
     }
     

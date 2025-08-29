@@ -49,8 +49,8 @@ class DessertsViewController: UIViewController {
         setCartButton(target: self, action: #selector(btnCartTapped))
         
         // Register custom table view cell
-        tblDesserts.register(UINib(nibName: "DessertsTableViewCell", bundle: nil),
-                             forCellReuseIdentifier: "DessertsTableViewCell")
+        tblDesserts.register(UINib(nibName: Main.cells.menuDessertCell, bundle: nil),
+                             forCellReuseIdentifier: Main.cells.menuDessertCell)
     }
     
     // MARK: - API Call
@@ -85,8 +85,8 @@ class DessertsViewController: UIViewController {
     }
     
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let cartVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(cartVC, animated: true)
         }
     }

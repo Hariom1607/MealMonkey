@@ -6,16 +6,14 @@
 //
 
 import UIKit
+import DPOTPView
 
 class OtpViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var btnOtpRegeneration: UIButton! // Button to regenerate OTP
     @IBOutlet weak var btnNext: UIButton!            // Button to proceed after OTP verification
-    @IBOutlet weak var txt4: UITextField!            // OTP 4th digit field
-    @IBOutlet weak var txt3: UITextField!            // OTP 3rd digit field
-    @IBOutlet weak var txt2: UITextField!            // OTP 2nd digit field
-    @IBOutlet weak var txt1: UITextField!            // OTP 1st digit field
+    @IBOutlet weak var viewOtp: DPOTPView!
     
     var email: String?
     // MARK: - View Lifecycle
@@ -25,24 +23,25 @@ class OtpViewController: UIViewController {
         // Set navigation bar title with back button
         setLeftAlignedTitleWithBack("OTP", target: self, action: #selector(otpBackBtnTapped))
         
-        // Group all textfields into an array for styling
-        let allviews = [txt1!, txt2!, txt3!, txt4!]
-        
-        // Apply rounded corners & styles to OTP textfields
-        styleViews(allviews, cornerRadius: 12, borderWidth: 0, borderColor: UIColor.black.cgColor)
-        
-        // Add padding inside textfields
-        setTextFieldPadding(allviews, left: 15, right: 22)
-        
-        // Configure each OTP textfield
-        for tf in allviews {
-            tf.delegate = self               // Assign delegate for input handling
-            tf.keyboardType = .numberPad     // Show number pad keyboard
-            tf.textAlignment = .center       // Center align OTP digits
-        }
-        
         // Round corners for Next button
         btnNext.layer.cornerRadius = 28
+        
+        setupOtpView()
+    }
+    
+    func setupOtpView() {
+        
+        viewOtp.count = 5
+        viewOtp.spacing = 10
+        viewOtp.fontTextField = UIFont(name: "HelveticaNeue-Bold", size: CGFloat(25.0))!
+        viewOtp.dismissOnLastEntry = true
+        viewOtp.borderColorTextField = .black
+        viewOtp.selectedBorderColorTextField = .blue
+        viewOtp.borderWidthTextField = 2
+        viewOtp.backGroundColorTextField = .textFieldBackground
+        viewOtp.cornerRadiusTextField = 8
+        viewOtp.isCursorHidden = true
+        
     }
     
     // MARK: - Button Actions
@@ -65,8 +64,8 @@ class OtpViewController: UIViewController {
     
     /// Next button tap → navigate to new password screen
     @IBAction func btnNextAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(identifier: "NewPasswordViewController") as? NewPasswordViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(identifier: Main.viewController.newPassword) as? NewPasswordViewController {
             mlvc.email = email
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
@@ -76,56 +75,21 @@ class OtpViewController: UIViewController {
 // MARK: - UITextField Delegate
 extension OtpViewController: UITextFieldDelegate {
     
-    /// Handles OTP textfield input behavior
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func dpOTPViewAddText(_ text: String, at position: Int) {
+        print("addText:- " + text + " at:- \(position)" )
+    }
+    
+    func dpOTPViewRemoveText(_ text: String, at position: Int) {
+        print("removeText:- " + text + " at:- \(position)" )
+    }
+    
+    func dpOTPViewChangePositionAt(_ position: Int) {
+        print("at:-\(position)")
+    }
+    func dpOTPViewBecomeFirstResponder() {
         
-        // Allow only numbers
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        guard allowedCharacters.isSuperset(of: characterSet) else {
-            return false
-        }
+    }
+    func dpOTPViewResignFirstResponder() {
         
-        // Prevent multiple characters pasted at once
-        if string.count > 1 {
-            return false
-        }
-        
-        // Case: Entering a digit
-        if string.count == 1 {
-            textField.text = string
-            
-            // Auto move to next textfield
-            switch textField {
-            case txt1:
-                txt2.becomeFirstResponder()
-            case txt2:
-                txt3.becomeFirstResponder()
-            case txt3:
-                txt4.becomeFirstResponder()
-            case txt4:
-                txt4.resignFirstResponder() // Close keyboard on last digit
-            default:
-                break
-            }
-            return false
-        }
-        // Case: Backspace pressed (string is empty)
-        else if string.isEmpty {
-            switch textField {
-            case txt4:
-                txt3.becomeFirstResponder()
-            case txt3:
-                txt2.becomeFirstResponder()
-            case txt2:
-                txt1.becomeFirstResponder()
-            default:
-                break
-            }
-            textField.text = "" // Clear the field
-            return false
-        }
-        
-        return true
     }
 }

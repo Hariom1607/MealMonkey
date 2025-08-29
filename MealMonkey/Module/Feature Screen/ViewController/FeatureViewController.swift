@@ -39,7 +39,7 @@ class FeatureViewController: UIViewController {
         btnNext.setTitle("Next", for: .normal)
         
         // Register custom collection view cell
-        colView.register(UINib(nibName: "FeatureCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FeatureCollectionViewCell")
+        colView.register(UINib(nibName: Main.cells.featureCell, bundle: nil), forCellWithReuseIdentifier: Main.cells.featureCell)
     }
     
     // MARK: - Helpers
@@ -69,8 +69,8 @@ class FeatureViewController: UIViewController {
         }
         else {
             // Navigate to Menu screen after last feature
-            let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-            if let menuVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+            if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.login) as? LoginViewController {
                 self.navigationController?.pushViewController(menuVC, animated: true)
             }
         }

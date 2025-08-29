@@ -78,9 +78,9 @@ class CheckoutViewController: UIViewController {
         setLeftAlignedTitleWithBack("Checkout", target: self, action: #selector(backBtnTapped))
         
         // Register custom cells for payment options
-        tblPaymentDetails.register(UINib(nibName: "CardTableViewCell", bundle: nil), forCellReuseIdentifier: "CardTableViewCell")
-        tblPaymentDetails.register(UINib(nibName: "CashOnDeliveryTableViewCell", bundle: nil), forCellReuseIdentifier: "CashOnDeliveryTableViewCell")
-        tblPaymentDetails.register(UINib(nibName: "UpiTableViewCell", bundle: nil), forCellReuseIdentifier: "UpiTableViewCell")
+        tblPaymentDetails.register(UINib(nibName: Main.cells.checkoutCardCell, bundle: nil), forCellReuseIdentifier:Main.cells.checkoutCardCell)
+        tblPaymentDetails.register(UINib(nibName: Main.cells.checkoutCashCell, bundle: nil), forCellReuseIdentifier: Main.cells.checkoutCashCell)
+        tblPaymentDetails.register(UINib(nibName: Main.cells.checkoutUpiCell, bundle: nil), forCellReuseIdentifier: Main.cells.checkoutUpiCell)
         
         // Load saved cards from CoreData
         loadCurrentUser()
@@ -110,8 +110,8 @@ class CheckoutViewController: UIViewController {
     // MARK: - Location
     /// Opens Map screen to change delivery location
     @IBAction func btnChangeLocationAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-        if let mapVC = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.aboutUs, bundle: nil)
+        if let mapVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.map) as? MapViewController {
             
             // Pass closure to update delivery address label when location is selected
             mapVC.onLocationSelected = { [weak self] address in
@@ -175,7 +175,6 @@ class CheckoutViewController: UIViewController {
     
     /// Close Add Card popup
     @IBAction func btnCloseCardViewAction(_ sender: Any) {
-        self.navigationController?.navigationBar.backgroundColor  = UIColor.white
         UIView.animate(withDuration: 0.3, animations: {
             self.addCardView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
             self.viewTransparent.isHidden = true
@@ -183,6 +182,10 @@ class CheckoutViewController: UIViewController {
             self.addCardView.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
         }
+        
+        // Enable back button and reset nav bar color
+        self.navigationItem.hidesBackButton = false
+        self.navigationController?.navigationBar.backgroundColor  = UIColor.white
     }
     
     // MARK: - Order Actions
@@ -219,14 +222,17 @@ class CheckoutViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = true
             self.viewTransparent.isHidden = false
         }
+        
+        // Disable back button and set nav bar color
+        self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.backgroundColor  = UIColor(named: "Transparentcolor")
     }
     
     // MARK: - Navigation after Order
     /// Navigate back to Home tab after order placed
     @IBAction func btnBackToHomeAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+        let storyboard = UIStoryboard(name: Main.storyboards.tabBar, bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.viewController.menuTabBar) as? UITabBarController {
             
             tabBarController.selectedIndex = 2   // Select Home tab
             
