@@ -20,7 +20,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
     /// Configures and returns a cell for each row in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue reusable custom cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListTableViewCell", for: indexPath) as! OrderListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.orderListCell, for: indexPath) as! OrderListTableViewCell
         
         // Get the specific order (array of products) for this row
         let order = orders[indexPath.row]
@@ -46,8 +46,8 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
     
     /// Handles selection of a table row (navigates to order details screen)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-        if let detailVC = storyboard.instantiateViewController(withIdentifier: "MyOrderViewController") as? MyOrderViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.aboutUs, bundle: nil)
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.myOrder) as? MyOrderViewController {
             // Pass selected order (all its products) to the detail screen
             detailVC.orderProducts = orders[indexPath.row]
             self.navigationController?.pushViewController(detailVC, animated: true)

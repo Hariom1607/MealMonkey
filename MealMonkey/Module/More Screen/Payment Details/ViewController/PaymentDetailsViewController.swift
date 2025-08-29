@@ -49,7 +49,7 @@ class PaymentDetailsViewController: UIViewController {
         setTextFieldPadding(allviews)
         
         // Register custom table view cell
-        tblCardDetails.register(UINib(nibName: "PaymentDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentDetailsTableViewCell")
+        tblCardDetails.register(UINib(nibName: Main.cells.paymentDetailCell, bundle: nil), forCellReuseIdentifier: Main.cells.paymentDetailCell)
         
         // Hide popup + background overlay by default
         viewAddCard.isHidden = true
@@ -107,8 +107,8 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     @objc func btnCartPressed() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

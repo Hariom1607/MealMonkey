@@ -23,8 +23,8 @@ class MoreViewController: UIViewController {
         super.viewDidLoad()
         
         // Register custom table view cell
-        tblMore.register(UINib(nibName: "MoreTableViewCell", bundle: nil),
-                         forCellReuseIdentifier: "MoreTableViewCell")
+        tblMore.register(UINib(nibName: Main.cells.morePageCell, bundle: nil),
+                         forCellReuseIdentifier: Main.cells.morePageCell)
         
         // Set navigation title
         setLeftAlignedTitle("More")
@@ -36,8 +36,8 @@ class MoreViewController: UIViewController {
     // MARK: - Cart Button Action
     @objc func cartButtonTapped() {
         // Navigate to CartViewController when cart button is tapped
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

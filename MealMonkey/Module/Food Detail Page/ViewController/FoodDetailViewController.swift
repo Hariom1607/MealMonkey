@@ -70,7 +70,6 @@ class FoodDetailViewController: UIViewController {
         viewFoodDetailContent.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewFoodDetailContent.clipsToBounds = true
         
-        
         // Configure product UI directly
         configureUI()
         updateWishlistButton()
@@ -137,8 +136,8 @@ class FoodDetailViewController: UIViewController {
     }
     
     @objc func cartBtnTapped() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }

@@ -20,7 +20,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell",
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.menuCell,
                                                  for: indexPath) as! MenuTableViewCell
         
         let items = filteredMenuItems[indexPath.row]   // Use filtered
@@ -52,8 +52,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selected = filteredMenuItems[indexPath.row]  // ✅ Use filtered
         
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "DessertsViewController")
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: Main.viewController.desserts)
             as? DessertsViewController {
             
             // Assign correct category based on row tapped

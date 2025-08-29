@@ -55,8 +55,8 @@ class LoginViewController: UIViewController {
     // MARK: - Navigation
     /// Switch to main TabBar after successful login
     private func showMainTabBar() {
-        let storyboard = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MenuTabViewController") as? UITabBarController {
+        let storyboard = UIStoryboard(name: Main.storyboards.tabBar, bundle: nil)
+        if let tabBarController = storyboard.instantiateViewController(withIdentifier: Main.viewController.menuTabBar) as? UITabBarController {
             
             // Default open tab at index 2
             tabBarController.selectedIndex = 2
@@ -122,8 +122,8 @@ class LoginViewController: UIViewController {
     
     /// Navigate to Forgot Password screen
     @IBAction func btnForgotPasswordAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.viewController.forgotPassword) as? ForgotPasswordViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }
@@ -148,8 +148,8 @@ class LoginViewController: UIViewController {
     
     /// Navigate to Signup screen
     @IBAction func btnSignupAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        if let mlvc = storyboard.instantiateViewController(withIdentifier: "SignupViewController") as? SignupViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+        if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.viewController.signup) as? SignupViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
     }

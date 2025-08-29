@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,23 +12,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PopularFoodCollectionViewCell" customModule="MealMonkey" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="351" height="365"/>
+            <rect key="frame" x="0.0" y="0.0" width="535" height="290"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="351" height="365"/>
+                <rect key="frame" x="0.0" y="0.0" width="535" height="290"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVB-Po-XOz">
-                        <rect key="frame" x="0.0" y="33" width="351" height="332"/>
+                        <rect key="frame" x="0.0" y="33" width="535" height="257"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_hakkanoodles" translatesAutoresizingMaskIntoConstraints="NO" id="Ip5-XW-RjY">
-                                <rect key="frame" x="0.0" y="0.0" width="351" height="283"/>
+                                <rect key="frame" x="0.0" y="0.0" width="535" height="208"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nZx-jT-MgQ">
-                                <rect key="frame" x="21" y="291" width="309" height="39"/>
+                                <rect key="frame" x="21" y="216" width="493" height="39"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minute by tuk tuk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqn-cj-x4f">
-                                        <rect key="frame" x="0.0" y="0.0" width="309" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="493" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="THX-bU-K2K"/>
                                         </constraints>
@@ -36,7 +37,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="a8i-tG-rno">
-                                        <rect key="frame" x="0.0" y="25" width="309" height="14"/>
+                                        <rect key="frame" x="0.0" y="25" width="493" height="14"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="exi-gs-UOV">
                                                 <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="14"/>
@@ -65,7 +66,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Western Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdv-hq-Fwi">
-                                                <rect key="frame" x="152.66666666666663" y="0.0" width="156.33333333333337" height="14"/>
+                                                <rect key="frame" x="152.66666666666666" y="0.0" width="340.33333333333337" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                 <color key="textColor" name="LabelOffer"/>
                                                 <nil key="highlightedColor"/>
@@ -95,14 +96,14 @@
                 <constraint firstAttribute="bottom" secondItem="MVB-Po-XOz" secondAttribute="bottom" id="u1c-zA-oe7"/>
                 <constraint firstItem="MVB-Po-XOz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xhp-qD-TI0"/>
             </constraints>
-            <size key="customSize" width="351" height="365"/>
+            <size key="customSize" width="535" height="290"/>
             <connections>
                 <outlet property="imgfood" destination="Ip5-XW-RjY" id="MpS-1e-mTk"/>
                 <outlet property="lblFoodName" destination="qqn-cj-x4f" id="EHe-cG-KeX"/>
                 <outlet property="lblFoodRating" destination="ro5-y8-eps" id="Jvj-B5-Vxg"/>
                 <outlet property="lblFoodType" destination="Mdv-hq-Fwi" id="scL-ei-hIo"/>
             </connections>
-            <point key="canvasLocation" x="159.54198473282443" y="-13.732394366197184"/>
+            <point key="canvasLocation" x="249.61832061068702" y="-33.098591549295776"/>
         </collectionViewCell>
     </objects>
     <resources>

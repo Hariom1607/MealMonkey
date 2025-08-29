@@ -90,8 +90,8 @@ class ProfileViewController: UIViewController {
     // MARK: - Navigation Buttons
     /// Navigates to the Cart screen
     @objc func profileCartBtn() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
@@ -118,8 +118,8 @@ class ProfileViewController: UIViewController {
         defaults.synchronize()
         
         // Navigate back to login screen
-        let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.login)
         let navController = UINavigationController(rootViewController: loginVC)
         navController.navigationBar.isHidden = true
         

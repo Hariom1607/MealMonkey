@@ -74,8 +74,8 @@ class ForgotPasswordViewController: UIViewController {
             )
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 // Navigate to OTP screen after user taps OK
-                let storyboard = UIStoryboard(name: "UserLoginStoryboard", bundle: nil)
-                if let otpVC = storyboard.instantiateViewController(identifier: "OtpViewController") as? OtpViewController {
+                let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
+                if let otpVC = storyboard.instantiateViewController(identifier: Main.viewController.otp) as? OtpViewController {
                     otpVC.email = email
                     self.navigationController?.pushViewController(otpVC, animated: true)
                 }

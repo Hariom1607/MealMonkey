@@ -25,8 +25,8 @@ class WishlistViewController: UIViewController {
         
         // Register custom cell (WishlistTableViewCell)
         tblWishlist.register(
-            UINib(nibName: "WishlistTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "WishlistTableViewCell"
+            UINib(nibName: Main.cells.wishlistCell, bundle: nil),
+            forCellReuseIdentifier: Main.cells.wishlistCell
         )
         
         // Load wishlist data from CoreData

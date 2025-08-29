@@ -76,8 +76,8 @@ class NewPasswordViewController: UIViewController {
                                                        password: newPassword,
                                                        imageData: nil)
         if success{
-            let storyboard = UIStoryboard(name: "FeatureStoryboard", bundle: nil)
-            if let mlvc = storyboard.instantiateViewController(identifier: "FeatureViewController") as? FeatureViewController {
+            let storyboard = UIStoryboard(name: Main.storyboards.feature, bundle: nil)
+            if let mlvc = storyboard.instantiateViewController(identifier: Main.viewController.feature) as? FeatureViewController {
                 self.navigationController?.pushViewController(mlvc, animated: true)
             }
         }

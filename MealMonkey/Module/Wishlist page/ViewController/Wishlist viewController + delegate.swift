@@ -11,7 +11,7 @@ extension WishlistViewController: UITableViewDelegate, UITableViewDataSource {
     // Configure each cell with product details
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue reusable WishlistTableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WishlistTableViewCell", for: indexPath) as! WishlistTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.wishlistCell, for: indexPath) as! WishlistTableViewCell
         
         // Get product for current row
         let product = wishlistProducts[indexPath.row]

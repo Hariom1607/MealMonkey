@@ -40,8 +40,8 @@ class MenuViewController: UIViewController {
         styleViews(allviews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         // ✅ Register custom table view cell
-        tblMenu.register(UINib(nibName: "MenuTableViewCell", bundle: nil),
-                         forCellReuseIdentifier: "MenuTableViewCell")
+        tblMenu.register(UINib(nibName: Main.cells.menuCell, bundle: nil),
+                         forCellReuseIdentifier: Main.cells.menuCell)
         
         // ✅ Load static menu data
         txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
@@ -52,8 +52,8 @@ class MenuViewController: UIViewController {
     
     /// Opens CartViewController when cart button is tapped
     @objc func cartBtnTapped() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
