@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -263,29 +264,33 @@ meals and more!</string>
                                     <constraint firstAttribute="trailing" secondItem="u1Y-De-riK" secondAttribute="trailing" constant="21" id="xvA-R7-EgM"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-rc-4kp">
-                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
-                                <color key="color" name="LoginButton"/>
-                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ha-OU-AMN" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="166.66666666666666" y="396" width="60" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Adc-SC-JTQ"/>
+                                    <constraint firstAttribute="height" constant="60" id="Ybi-Z8-rES"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFm-JP-0mb"/>
                         <color key="tintColor" name="LoginButton"/>
                         <constraints>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="top" secondItem="NFm-JP-0mb" secondAttribute="top" id="2Ru-AN-yx7"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="leading" secondItem="NFm-JP-0mb" secondAttribute="leading" id="3KI-2f-fbC"/>
-                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerY" secondItem="qzj-Xt-7cD" secondAttribute="centerY" id="8NL-Ji-YoC"/>
+                            <constraint firstItem="3ha-OU-AMN" firstAttribute="centerX" secondItem="qzj-Xt-7cD" secondAttribute="centerX" id="CFA-Tn-dWn"/>
                             <constraint firstItem="NFm-JP-0mb" firstAttribute="bottom" secondItem="Flp-Yh-k8T" secondAttribute="bottom" id="KZY-2V-YMM"/>
-                            <constraint firstItem="qjh-rc-4kp" firstAttribute="centerX" secondItem="qzj-Xt-7cD" secondAttribute="centerX" id="Yl5-5O-q4l"/>
+                            <constraint firstItem="3ha-OU-AMN" firstAttribute="centerY" secondItem="qzj-Xt-7cD" secondAttribute="centerY" id="ly9-DQ-ue4"/>
                             <constraint firstItem="Flp-Yh-k8T" firstAttribute="trailing" secondItem="NFm-JP-0mb" secondAttribute="trailing" id="oz8-aU-ZAe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lDr-ah-WHh"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="qjh-rc-4kp" id="bQD-Lw-YcD"/>
                         <outlet property="btnCurrentLocation" destination="Wvp-o4-anD" id="MJl-rn-v3k"/>
                         <outlet property="lblCurrentLocation" destination="h5H-7b-nwm" id="WW9-FX-Lrb"/>
                         <outlet property="tblRecentItems" destination="NSr-bd-q93" id="dtb-pg-Vft"/>
                         <outlet property="txtSearchFood" destination="u1Y-De-riK" id="xCz-bE-0NT"/>
+                        <outlet property="viewActivityIndicator" destination="3ha-OU-AMN" id="I9l-Qz-BNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bW5-WV-2w3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

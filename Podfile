@@ -7,7 +7,9 @@ target 'MealMonkey' do
   # Pods for MealMonkey
   pod 'Alamofire'     # Networking
   pod 'SDWebImage'    # Image caching
-  pod 'DPOTPView'
+  pod 'DPOTPView'     # otp
+  pod 'NVActivityIndicatorView'   #ActivityIndicator
+  pod 'lottie-ios'    #Empty Label
   # pod 'Firebase/Core' # Uncomment if you want Firebase
 end
 

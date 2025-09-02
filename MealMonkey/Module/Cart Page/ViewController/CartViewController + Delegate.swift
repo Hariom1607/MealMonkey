@@ -42,7 +42,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Refresh cart after deletion
             self.cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
-            self.updateEmptyLabel()
+            self.updateEmptyState()
             self.tblCart.reloadData()
         }
         

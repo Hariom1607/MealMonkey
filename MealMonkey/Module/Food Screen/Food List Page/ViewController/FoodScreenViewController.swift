@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate {
     
     // MARK: - Outlets
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!   // Loader for API data fetch
+    @IBOutlet weak var viewActivityIndicator: NVActivityIndicatorView!
     @IBOutlet weak var lblCurrentLocation: UILabel!                  // Shows current selected location
     @IBOutlet weak var tblRecentItems: UITableView!                  // Table for showing recent items & products
     @IBOutlet weak var txtSearchFood: UITextField!                   // Search bar for filtering products
@@ -64,8 +65,9 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         lblCurrentLocation.isHidden = true
         
         // Show loader
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
+        viewActivityIndicator.startAnimating()
+        viewActivityIndicator.isHidden = false
+        viewActivityIndicator.tintColor = .loginButton
         
         // Fetch products from API
         loadProducts()
@@ -73,6 +75,9 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewActivityIndicator.type = .ballSpinFadeLoader   // pick any style you like
+        viewActivityIndicator.color = .loginButton        // or your brand color
         
         // Initial setup
         setupUI()
@@ -114,7 +119,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             guard let self = self else { return }
             
             // Artificial delay for loader visibility
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.hideLoader()
                 
                 if let products = products {
@@ -131,8 +136,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     // Hide loader and show content
     private func hideLoader() {
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
+        viewActivityIndicator.stopAnimating()
+        viewActivityIndicator.isHidden = true
         
         // 👇 Show other UI after loader hides
         tblRecentItems.isHidden = false
@@ -160,7 +165,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
             guard let self = self else { return }
             
             // Artificial delay for loader visibility
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 self.hideLoader()
                 
                 if let products = products {

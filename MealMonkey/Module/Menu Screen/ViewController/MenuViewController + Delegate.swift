@@ -71,17 +71,10 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func updateEmptyState() {
         if filteredMenuItems.isEmpty {
-            let noDataLabel = UILabel(frame: CGRect(x: 0,
-                                                    y: 0,
-                                                    width: tblMenu.bounds.size.width,
-                                                    height: tblMenu.bounds.size.height))
-            noDataLabel.text = "No results found"
-            noDataLabel.textAlignment = .center
-            noDataLabel.textColor = .gray
-            noDataLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-            tblMenu.backgroundView = noDataLabel
+            tblMenu.setEmptyView(animationName: "Menu",
+                                 message: "No results found 🔍")
         } else {
-            tblMenu.backgroundView = nil
+            tblMenu.restore()
         }
     }
 }
