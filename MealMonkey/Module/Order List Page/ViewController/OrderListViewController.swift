@@ -11,7 +11,6 @@ import UIKit
 class OrderListViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var lblEmpty: UILabel!          // Label shown when there are no orders
     @IBOutlet weak var tblOrderList: UITableView!  // Table view displaying orders
     
     // MARK: - Properties
@@ -62,9 +61,12 @@ class OrderListViewController: UIViewController {
     // MARK: - UI Helpers
     /// Show/hide empty label based on whether orders exist
     func updateEmptyLabel() {
-        let isEmpty = orders.isEmpty
-        lblEmpty.isHidden = !isEmpty
-        tblOrderList.isHidden = isEmpty
+        if orders.isEmpty {
+            tblOrderList.setEmptyView(animationName: "OrderList",
+                                      message: "You have no orders yet 🍴")
+        } else {
+            tblOrderList.restore()
+        }
     }
     
     // MARK: - Actions

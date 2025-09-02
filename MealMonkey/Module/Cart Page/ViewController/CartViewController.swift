@@ -7,14 +7,17 @@
 
 import UIKit
 import CoreData
+import Lottie
 
 /// Handles cart display and order placement
 class CartViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var lblEmpty: UILabel!
     @IBOutlet weak var btnPlaceOrder: UIButton!
     @IBOutlet weak var tblCart: UITableView!
+    
+    private var emptyAnimationView: LottieAnimationView?
+    private var emptyStackView: UIStackView?
     
     /// Cart items for current user
     var cartItems: [CartItem] = []
@@ -31,7 +34,6 @@ class CartViewController: UIViewController {
         
         // Register custom cell
         tblCart.register(UINib(nibName: Main.cells.cartCell, bundle: nil), forCellReuseIdentifier: Main.cells.cartCell)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,17 +43,22 @@ class CartViewController: UIViewController {
         if let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") {
             cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
         }
-        
-        updateEmptyLabel()
+        updateEmptyState()
         tblCart.reloadData()
     }
     
     // MARK: - Helpers
     
-    /// Show/hide empty cart label & button
-    func updateEmptyLabel() {
-        lblEmpty.isHidden = !cartItems.isEmpty
-        btnPlaceOrder.isHidden = cartItems.isEmpty
+    func updateEmptyState() {
+        if cartItems.isEmpty {
+            let emptyView = EmptyStateView(animationName: "Add to cart",
+                                           message: "Your cart is empty")
+            tblCart.backgroundView = emptyView
+            btnPlaceOrder.isHidden = true
+        } else {
+            tblCart.backgroundView = nil
+            btnPlaceOrder.isHidden = false
+        }
     }
     
     // MARK: - Actions
@@ -108,7 +115,7 @@ class CartViewController: UIViewController {
             // Clear cart
             CoreDataHelper.shared.clearCart(for: currentUserEmail)
             cartItems.removeAll()
-            updateEmptyLabel()
+            updateEmptyState()
             tblCart.reloadData()
             
             // Success alert

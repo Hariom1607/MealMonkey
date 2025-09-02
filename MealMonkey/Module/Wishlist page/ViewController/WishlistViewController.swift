@@ -9,7 +9,6 @@ class WishlistViewController: UIViewController {
     var currentUserEmail: String = ""             // Logged-in user's email
     
     // MARK: - Outlets
-    @IBOutlet weak var lblEmpty: UILabel!         // Label shown when wishlist is empty
     @IBOutlet weak var tblWishlist: UITableView!  // TableView displaying wishlist products
     
     // MARK: - Lifecycle
@@ -51,14 +50,20 @@ class WishlistViewController: UIViewController {
     
     // MARK: - Data Loading
     func loadWishlist() {
-        // Fetch wishlist products from CoreData for logged-in user
+        // Fetch wishlist products
         wishlistProducts = CoreDataHelper.shared.fetchWishlistProducts(for: currentUserEmail)
         
-        // Reload table view with fetched products
+        // Reload table
         tblWishlist.reloadData()
         
-        // Show or hide "Empty Wishlist" label
-        lblEmpty.isHidden = !wishlistProducts.isEmpty
-        tblWishlist.isHidden = wishlistProducts.isEmpty
+        // Show empty state
+        if wishlistProducts.isEmpty {
+            tblWishlist.setEmptyView(
+                animationName: "Wishlist",  // your Lottie JSON file name
+                message: "Your wishlist is empty"
+            )
+        } else {
+            tblWishlist.restore()
+        }
     }
 }

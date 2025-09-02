@@ -1,6 +1,10 @@
 PODS:
   - Alamofire (5.10.2)
   - DPOTPView (1.5.12)
+  - lottie-ios (4.5.2)
+  - NVActivityIndicatorView (5.2.0):
+    - NVActivityIndicatorView/Base (= 5.2.0)
+  - NVActivityIndicatorView/Base (5.2.0)
   - SDWebImage (5.21.2):
     - SDWebImage/Core (= 5.21.2)
   - SDWebImage/Core (5.21.2)
@@ -8,19 +12,25 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - DPOTPView
+  - lottie-ios
+  - NVActivityIndicatorView
   - SDWebImage
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - DPOTPView
+    - lottie-ios
+    - NVActivityIndicatorView
     - SDWebImage
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   DPOTPView: 28d8a0a84a2ff4b1e4a7712065aba1cbb14e2704
+  lottie-ios: 96784afc26ea031d3e2b6cae342a4b8915072489
+  NVActivityIndicatorView: fe52a6a68664c2df8991d7d9e3d86d8d19453c53
   SDWebImage: 9f177d83116802728e122410fb25ad88f5c7608a
 
-PODFILE CHECKSUM: 37eee764239e7d178a0030a07d398882a6d75714
+PODFILE CHECKSUM: 42d79218ec3df49bf13711c9f6d175d9316a24e4
 
 COCOAPODS: 1.16.2

@@ -12,7 +12,6 @@ import UIKit
 class PaymentDetailsViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var lblEmpty: UILabel!              // Label shown when no cards are saved
     @IBOutlet weak var ScrollView: UIScrollView!       // Scroll view for content
     @IBOutlet weak var viewBack: UIView!               // Background overlay for add card popup
     @IBOutlet weak var viewMain: UIView!               // Main container view
@@ -88,11 +87,17 @@ class PaymentDetailsViewController: UIViewController {
     
     // MARK: - Helpers
     /// Show "No cards available" label if arrCards is empty
-    func updateEmptyLabel() {
-        let isEmpty = savedCards.isEmpty
-        lblEmpty.isHidden = !isEmpty
-        tblCardDetails.isHidden = isEmpty
+    func updateEmptyState() {
+        if savedCards.isEmpty {
+            tblCardDetails.setEmptyView(
+                animationName: "Payment Failed", // your Lottie JSON file
+                message: "No saved cards yet.\nAdd one to continue."
+            )
+        } else {
+            tblCardDetails.restore()
+        }
     }
+
     
     /// Simple alert for invalid card input
     func showAlert(message: String) {
@@ -118,7 +123,6 @@ class PaymentDetailsViewController: UIViewController {
     @IBAction func btnAddNewCardAction(_ sender: Any) {
         CardHelper.clearCardInputs(in: self)
         
-        lblEmpty.isHidden = true
         viewAddCard.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         viewAddCard.isHidden = false
         UIView.animate(withDuration: 0.3) {
@@ -178,7 +182,7 @@ class PaymentDetailsViewController: UIViewController {
         )
         
         loadSavedCards()
-        updateEmptyLabel()
+        updateEmptyState()
         viewAddCard.isHidden = true
         viewBack.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
@@ -188,7 +192,7 @@ class PaymentDetailsViewController: UIViewController {
         if let user = currentUser {
             savedCards = CoreDataHelper.shared.fetchCards(for: user)
             tblCardDetails.reloadData()
-            updateEmptyLabel()
+            updateEmptyState()
         }
     }
     
@@ -201,7 +205,7 @@ class PaymentDetailsViewController: UIViewController {
         }) { _ in
             self.viewAddCard.isHidden = true
             self.tabBarController?.tabBar.isHidden = false
-            self.updateEmptyLabel()
+            self.updateEmptyState()
         }
     }
     
