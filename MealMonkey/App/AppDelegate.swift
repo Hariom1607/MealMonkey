@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
         // Initialize Core Data stack with "Food Model"
-        let container = NSPersistentContainer(name: "Food Model")
+        let container = NSPersistentContainer(name: Main.model.food)
         
         // Enable automatic lightweight migrations
         if let storeDescription = container.persistentStoreDescriptions.first {

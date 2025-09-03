@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         // Load the Splash storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // 👈 Replace "Main" with the storyboard that contains SplashViewController
-        let splashVC = storyboard.instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
+        let storyboard = UIStoryboard(name: Main.storyboards.main, bundle: nil) // 👈 Replace "Main" with the storyboard that contains SplashViewController
+        let splashVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.splash) as! SplashViewController
         
         // Set Splash as the first screen
         window?.rootViewController = splashVC

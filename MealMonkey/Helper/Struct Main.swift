@@ -239,7 +239,6 @@ struct Main {
         static let unknown = "Unknown" // Default unknown text
     }
     
-    
     // MARK: - UI Constants
     // Generic UI constants used across the app
     struct UI {
@@ -373,6 +372,10 @@ struct Main {
         // Eye icons for show/hide password
         static let eye = "eye"
         static let eyeSlash = "eye.slash"
+    }
+    
+    struct model {
+        static let food = "Food Model"
     }
     
     // MARK: - Keys
