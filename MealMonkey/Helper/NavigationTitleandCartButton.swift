@@ -19,11 +19,11 @@ extension UIViewController {
         
         // Decide color based on screen
         let textColor: UIColor = (self is FoodDetailViewController) ? .white :
-        (UIColor(named: "NavigationColor") ?? .black)
+        (UIColor(named: Main.Colors.navigationcolor) ?? .black)
         
         let backButton = UIButton(type: .system)
         backButton.tintColor = textColor
-        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.setImage(UIImage(systemName: Main.Colors.navigationBackBtnColor), for: .normal)
         backButton.setTitle("  \(title)", for: .normal) // space between icon & text
         backButton.setTitleColor(textColor, for: .normal)
         backButton.titleLabel?.font = font
@@ -56,7 +56,7 @@ extension UIViewController {
         
         // Decide color based on screen
         let textColor: UIColor = (self is FoodDetailViewController) ? .white :
-        (UIColor(named: "NavigationColor") ?? .black)
+        (UIColor(named: Main.Colors.navigationcolor) ?? .black)
         
         let titleLabel = UILabel()
         titleLabel.text = title
@@ -81,10 +81,10 @@ extension UIViewController {
     // Add cart button on the right side of navigation bar
     func setCartButton(target: Any?, action: Selector) {
         let tintColor: UIColor = (self is FoodDetailViewController) ? .white :
-        (UIColor(named: "NavigationColor") ?? .black)
+        (UIColor(named: Main.Colors.navigationcolor) ?? .black)
         
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "cart.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(UIImage(systemName: Main.images.cartFill)?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = tintColor
         button.addTarget(target, action: action, for: .touchUpInside)
         
@@ -112,7 +112,7 @@ extension UIViewController {
         guard let btn = self.navigationItem.rightBarButtonItem?.customView as? UIButton,
               let badge = btn.viewWithTag(999) as? UILabel else { return }
         
-        if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+        if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             let cartItems = CoreDataHelper.shared.fetchCart(for: email)
             let totalQty = cartItems.reduce(0) { $0 + $1.quantity }
             

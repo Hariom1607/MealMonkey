@@ -27,13 +27,12 @@ class PopularFoodCollectionViewCell: UICollectionViewCell {
     func configure(with item: ProductModel) {
         lblFoodName.text = item.strProductName
         lblFoodRating.text = "\(item.floatProductRating)"
-        lblFoodType.text = item.objProductType.rawValue.capitalized
+        lblFoodType.text = item.objProductCategory.rawValue.capitalized
         
-        // Load image safely, fallback to placeholder if image not found
         if let image = UIImage(named: item.strProductImage), !item.strProductImage.isEmpty {
             imgfood.image = image
         } else {
-            imgfood.image = UIImage(named: "placeholder_food") // <- provide default asset
+            imgfood.image = UIImage(named: Main.images.placeholder)
         }
     }
 }

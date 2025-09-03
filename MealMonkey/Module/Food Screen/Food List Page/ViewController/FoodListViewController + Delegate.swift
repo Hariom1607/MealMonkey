@@ -18,10 +18,10 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "FoodListTableViewCell",
+            withIdentifier: Main.cells.homeFoosListCell,   // ✅ replaced string
             for: indexPath
         ) as? FoodListTableViewCell else {
-            fatalError("❌ Could not dequeue FoodListTableViewCell")
+            fatalError("❌ Could not dequeue \(Main.cells.homeFoosListCell)")   // ✅ replaced string
         }
         
         cell.delegate = self
@@ -44,7 +44,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1: // 🔹 Popular (dynamic height)
             cell.collectionType = .popular
-            cell.lblCollViewHeading.text = "Popular"
+            cell.lblCollViewHeading.text = Main.Labels.popular   // ✅ replaced string
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             
@@ -62,7 +62,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 2: // 🔹 Most Popular (fixed height)
             cell.collectionType = .mostPopular
-            cell.lblCollViewHeading.text = "Most Popular"
+            cell.lblCollViewHeading.text = Main.Labels.mostPopular   // ✅ replaced string
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             cell.collViewHeight.constant = 185
@@ -81,7 +81,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 3: // 🔹 Recent Items (dynamic height)
             cell.collectionType = .RecentItems
-            cell.lblCollViewHeading.text = "Recent Items"
+            cell.lblCollViewHeading.text = Main.Labels.recentItems   // ✅ replaced string
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             cell.products = recentItems
@@ -111,7 +111,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let context = appDelegate.persistentContainer.viewContext
         
         // Get current logged-in user email
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUser") else {
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUser) else {   // ✅ replaced string
             print("⚠️ No current user found in UserDefaults")
             return
         }
@@ -130,7 +130,7 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
                 user = User(context: context)
                 user.id = UUID()
                 user.email = currentUserEmail
-                user.name = UserDefaults.standard.string(forKey: "userName")
+                user.name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName)   // ✅ replaced string
             }
             
             // Create a new Order

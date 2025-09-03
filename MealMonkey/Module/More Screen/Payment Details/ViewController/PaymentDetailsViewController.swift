@@ -12,52 +12,46 @@ import UIKit
 class PaymentDetailsViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var ScrollView: UIScrollView!       // Scroll view for content
-    @IBOutlet weak var viewBack: UIView!               // Background overlay for add card popup
-    @IBOutlet weak var viewMain: UIView!               // Main container view
-    @IBOutlet weak var viewScroll: UIView!             // Scrollable section with rounded top corners
-    @IBOutlet weak var btnAddCardView: UIButton!       // "Add card" button inside the popup
-    @IBOutlet weak var switchRemoveCard: UISwitch!     // Switch to remove card (currently unused)
-    @IBOutlet weak var txtLastName: UITextField!       // Cardholder last name input
-    @IBOutlet weak var txtFirstName: UITextField!      // Cardholder first name input
-    @IBOutlet weak var txtSecurityCode: UITextField!   // CVV / Security code input
-    @IBOutlet weak var txtExpiryYear: UITextField!     // Expiry year input
-    @IBOutlet weak var txtExpiryMonth: UITextField!    // Expiry month input
-    @IBOutlet weak var txtCardNumber: UITextField!     // Card number input
-    @IBOutlet weak var btnCloseAddCardView: UIButton!  // Close button for popup
-    @IBOutlet weak var viewAddCard: UIView!            // Popup view for adding a card
-    @IBOutlet weak var btnAddNewCard: UIButton!        // Button to open "Add card" popup
-    @IBOutlet weak var tblCardDetails: UITableView!    // TableView for saved cards
+    @IBOutlet weak var ScrollView: UIScrollView!
+    @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var viewMain: UIView!
+    @IBOutlet weak var viewScroll: UIView!
+    @IBOutlet weak var btnAddCardView: UIButton!
+    @IBOutlet weak var switchRemoveCard: UISwitch!
+    @IBOutlet weak var txtLastName: UITextField!
+    @IBOutlet weak var txtFirstName: UITextField!
+    @IBOutlet weak var txtSecurityCode: UITextField!
+    @IBOutlet weak var txtExpiryYear: UITextField!
+    @IBOutlet weak var txtExpiryMonth: UITextField!
+    @IBOutlet weak var txtCardNumber: UITextField!
+    @IBOutlet weak var btnCloseAddCardView: UIButton!
+    @IBOutlet weak var viewAddCard: UIView!
+    @IBOutlet weak var btnAddNewCard: UIButton!
+    @IBOutlet weak var tblCardDetails: UITableView!
     
     // MARK: - Properties
-    
     var savedCards: [Card] = []
-    var currentUser: User?    // you should already have logged-in user reference
+    var currentUser: User?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Setup navigation bar with back + cart button
-        setLeftAlignedTitleWithBack("Payment Details", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.Labels.paymentDetails, target: self, action: #selector(backBtnTapped))
         setCartButton(target: self, action: #selector(btnCartPressed))
         
-        // Style all form inputs and buttons
         let allviews = [btnAddNewCard!, txtLastName!, txtFirstName!, txtCardNumber!, txtExpiryYear!, txtExpiryMonth!, txtSecurityCode!, btnAddCardView!]
         styleViews(allviews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding(allviews)
         
-        // Register custom table view cell
         tblCardDetails.register(UINib(nibName: Main.cells.paymentDetailCell, bundle: nil), forCellReuseIdentifier: Main.cells.paymentDetailCell)
         
-        // Hide popup + background overlay by default
         viewAddCard.isHidden = true
         viewBack.isHidden = true
         
-        // Transparent background for scrollview
         ScrollView.backgroundColor = .clear
         
-        // Style scrollable section (rounded + shadow)
         viewScroll.layer.cornerRadius = 20
         viewScroll.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         viewScroll.layer.shadowColor = UIColor.black.cgColor
@@ -70,7 +64,7 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     private func loadCurrentUser() {
-        if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+        if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             print("📩 Logged in email from UserDefaults = \(email)")
             currentUser = CoreDataHelper.shared.fetchUser(byEmail: email)
             print("✅ Current user loaded: \(currentUser?.email ?? "nil")")
@@ -86,23 +80,20 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    /// Show "No cards available" label if arrCards is empty
     func updateEmptyState() {
         if savedCards.isEmpty {
             tblCardDetails.setEmptyView(
-                animationName: "Payment Failed", // your Lottie JSON file
-                message: "No saved cards yet.\nAdd one to continue."
+                animationName: Main.Animations.paymentFailed,
+                message: Main.Messages.noSavedCards
             )
         } else {
             tblCardDetails.restore()
         }
     }
 
-    
-    /// Simple alert for invalid card input
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Main.Alerts.invalidInput, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default))
         present(alert, animated: true)
     }
     
@@ -119,7 +110,6 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    /// Opens the Add Card popup with animation
     @IBAction func btnAddNewCardAction(_ sender: Any) {
         CardHelper.clearCardInputs(in: self)
         
@@ -130,14 +120,12 @@ class PaymentDetailsViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = true
             self.viewBack.isHidden = false
         }
-        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: "Transparentcolor")
-        // 👇 This makes sure the cursor is always at the first field
+        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: Main.Colors.transparent)
         DispatchQueue.main.async {
             self.txtCardNumber.becomeFirstResponder()
         }
     }
     
-    /// Validates input and saves a new card
     @IBAction func btnAddCardViewAction(_ sender: Any) {
         guard let firstName = txtFirstName.text, !firstName.isEmpty,
               let lastName = txtLastName.text, !lastName.isEmpty,
@@ -145,33 +133,32 @@ class PaymentDetailsViewController: UIViewController {
               let expMonth = Int16(txtExpiryMonth.text ?? ""),
               let expYear = Int16(txtExpiryYear.text ?? ""),
               let cvv = txtSecurityCode.text, !cvv.isEmpty else {
-            showAlert(message: "Please fill all fields correctly.")
+            showAlert(message: Main.ValidationMessages.invalidCardInput)
             return
         }
         
-        // ✅ Central validation
-        if let error = CardHelper.validateCardInputs(cardNumber: cardNumber,
-                                          expMonth: expMonth,
-                                          expYear: expYear,
-                                          cvv: cvv,
-                                          firstName: firstName,
-                                          lastName: lastName) {
+        if let error = CardHelper.validateCardInputs(
+            cardNumber: cardNumber,
+            expMonth: expMonth,
+            expYear: expYear,
+            cvv: cvv,
+            firstName: firstName,
+            lastName: lastName
+        ) {
             showAlert(message: error)
             return
         }
         
         guard let user = currentUser else {
-            showAlert(message: "User not found")
+            showAlert(message: Main.Messages.userNotFound)
             return
         }
         
-        // ✅ Duplicate check
         if savedCards.contains(where: { $0.cardNumber == cardNumber }) {
-            showAlert(message: "This card is already saved.")
+            showAlert(message: Main.Messages.cardAlreadySaved)
             return
         }
         
-        // Save new card
         CoreDataHelper.shared.saveCard(
             for: user,
             number: cardNumber,
@@ -196,7 +183,6 @@ class PaymentDetailsViewController: UIViewController {
         }
     }
     
-    /// Closes the Add Card popup with animation
     @IBAction func btnRemoveAddCardView(_ sender: Any) {
         self.navigationController?.navigationBar.backgroundColor  = UIColor.white
         UIView.animate(withDuration: 0.3, animations: {
@@ -209,6 +195,5 @@ class PaymentDetailsViewController: UIViewController {
         }
     }
     
-    /// Placeholder for remove card switch (not implemented yet)
     @IBAction func switchValueChanged(_ sender: Any) { }
 }

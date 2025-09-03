@@ -29,7 +29,6 @@ class AboutUsViewController: UIViewController {
     /// Holds the data to be displayed in the tableView (changes based on page type)
     var arrCurrent: [AboutModel] = []
     
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -43,25 +42,25 @@ class AboutUsViewController: UIViewController {
         
         // Configure UI and load appropriate data based on page type
         switch objPagetype {
-            
         case .Notifications:
-            // Navigation setup
-            setLeftAlignedTitleWithBack("Notifications", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.Labels.notifications,
+                                        target: self,
+                                        action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartNotificationsTapped))
-            
-            // Load data
             arrCurrent = AboutModel.addNotificationData()
             
         case .Inbox:
-            setLeftAlignedTitleWithBack("Inbox", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.Labels.inbox,
+                                        target: self,
+                                        action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartInboxTapped))
-            
             arrCurrent = AboutModel.addInboxData()
             
         case .AboutUs:
-            setLeftAlignedTitleWithBack("About Us", target: self, action: #selector(backButtonTapped))
+            setLeftAlignedTitleWithBack(Main.Labels.aboutUs,
+                                        target: self,
+                                        action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartAboutUsTapped))
-            
             arrCurrent = AboutModel.addAboutData()
         }
     }

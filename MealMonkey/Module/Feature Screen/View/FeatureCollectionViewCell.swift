@@ -9,7 +9,7 @@ import UIKit
 
 // Custom UICollectionViewCell to display a feature's image
 class FeatureCollectionViewCell: UICollectionViewCell {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var imgFeature: UIImageView!   // Image view to display the feature
     

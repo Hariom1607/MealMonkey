@@ -29,17 +29,17 @@ class Menu {
     /// Returns a sample menu list (used to populate UI)
     class func populateMenu() -> [Menu] {
         return [
-            Menu(imageName: "ic_1x_FoodMenu",
-                 strName: "Food",
-                 strQuantity: "120 Items"),
+            Menu(imageName: Main.images.foodMenu,
+                 strName: Main.MenuCategories.food,
+                 strQuantity: Main.MenuCounts.food),
             
-            Menu(imageName: "ic_1x_BeveragesMenu",
-                 strName: "Beverages",
-                 strQuantity: "220 Items"),
+            Menu(imageName: Main.images.beveragesMenu,
+                 strName: Main.MenuCategories.beverages,
+                 strQuantity: Main.MenuCounts.beverages),
             
-            Menu(imageName: "ic_1x_DesertMenu",  // ⚠️ Typo? Should it be "DessertMenu"?
-                 strName: "Desserts",
-                 strQuantity: "155 Items")
+            Menu(imageName: Main.images.dessertsMenu,
+                 strName: Main.MenuCategories.desserts,
+                 strQuantity: Main.MenuCounts.desserts)
         ]
     }
 }

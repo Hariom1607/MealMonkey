@@ -59,7 +59,7 @@ class CoreDataHelper {
     // Verify user credentials
     func verifyUser(email: String, password: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@ AND password == %@", email, password)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.emailandPassword, email, password)
         do {
             return try context.fetch(request).first
         } catch {
@@ -71,7 +71,7 @@ class CoreDataHelper {
     // Fetch user by email
     func fetchUser(byEmail email: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", email)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.email, email)
         return try? context.fetch(request).first
     }
     
@@ -85,7 +85,7 @@ class CoreDataHelper {
                     imageData: Data?) -> Bool {
         
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", oldEmail)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.email, oldEmail)
         
         do {
             if let user = try context.fetch(request).first {
@@ -113,9 +113,9 @@ class CoreDataHelper {
     func isEmailTaken(_ email: String, excluding oldEmail: String? = nil) -> Bool {
         let request: NSFetchRequest<User> = User.fetchRequest()
         if let oldEmail = oldEmail {
-            request.predicate = NSPredicate(format: "email == %@ AND email != %@", email, oldEmail)
+            request.predicate = NSPredicate(format: Main.PredicateFormats.emailandemail, email, oldEmail)
         } else {
-            request.predicate = NSPredicate(format: "email == %@", email)
+            request.predicate = NSPredicate(format: Main.PredicateFormats.email, email)
         }
         
         do {
@@ -130,7 +130,7 @@ class CoreDataHelper {
     // Fetch user by email (duplicate function with logging)
     func fetchUser(email: String) -> User? {
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", email)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.email, email)
         
         do {
             return try context.fetch(request).first
@@ -145,7 +145,7 @@ class CoreDataHelper {
     // Fetch wishlist products for a user
     func fetchWishlistProducts(for userEmail: String) -> [ProductModel] {
         let fetchRequest: NSFetchRequest<Wishlist_Item> = Wishlist_Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
+        fetchRequest.predicate = NSPredicate(format: Main.PredicateFormats.userEmail, userEmail)
         
         do {
             let wishlistItems = try context.fetch(fetchRequest)
@@ -162,7 +162,7 @@ class CoreDataHelper {
     // Check if product is in wishlist
     func isInWishlist(productId: Int, userEmail: String) -> Bool {
         let fetchRequest: NSFetchRequest<Wishlist_Item> = Wishlist_Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userEmail == %@ AND productId == %d", userEmail, productId)
+        fetchRequest.predicate = NSPredicate(format: Main.PredicateFormats.userEmailandProductId, userEmail, productId)
         
         do {
             return try context.count(for: fetchRequest) > 0
@@ -187,7 +187,7 @@ class CoreDataHelper {
     // Remove product from wishlist
     func removeFromWishlist(productId: Int, userEmail: String) {
         let fetchRequest: NSFetchRequest<Wishlist_Item> = Wishlist_Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userEmail == %@ AND productId == %d", userEmail, productId)
+        fetchRequest.predicate = NSPredicate(format: Main.PredicateFormats.userEmailandProductId, userEmail, productId)
         
         do {
             let results = try context.fetch(fetchRequest)
@@ -204,7 +204,7 @@ class CoreDataHelper {
     // Fetch wishlist product IDs for a user
     func fetchWishlistProductIds(userEmail: String) -> [Int] {
         let fetchRequest: NSFetchRequest<Wishlist_Item> = Wishlist_Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
+        fetchRequest.predicate = NSPredicate(format: Main.PredicateFormats.userEmail, userEmail)
         
         do {
             return try context.fetch(fetchRequest).map { Int($0.productId) }
@@ -220,7 +220,7 @@ class CoreDataHelper {
     func addCartItem(product: ProductModel, quantity: Int, userEmail: String) {
         let context = context
         let request: NSFetchRequest<User> = User.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@", userEmail)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.email, userEmail)
         
         do {
             guard let user = try context.fetch(request).first else { return }
@@ -251,7 +251,7 @@ class CoreDataHelper {
     func fetchCart(for userEmail: String) -> [CartItem] {
         let context = persistentContainer.viewContext
         let request: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        request.predicate = NSPredicate(format: "user.email == %@", userEmail)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.useremail, userEmail)
         
         do {
             return try context.fetch(request)
@@ -265,7 +265,7 @@ class CoreDataHelper {
     func deleteCartItem(productId: Int, userEmail: String) {
         let context = persistentContainer.viewContext
         let request: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        request.predicate = NSPredicate(format: "user.email == %@ AND id == %d", userEmail, productId)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.useremailandId, userEmail, productId)
         
         do {
             let items = try context.fetch(request)
@@ -282,7 +282,7 @@ class CoreDataHelper {
     func clearCart(for userEmail: String) {
         let context = persistentContainer.viewContext
         let request: NSFetchRequest<CartItem> = CartItem.fetchRequest()
-        request.predicate = NSPredicate(format: "user.email == %@", userEmail)
+        request.predicate = NSPredicate(format: Main.PredicateFormats.useremail, userEmail)
         
         do {
             let items = try context.fetch(request)

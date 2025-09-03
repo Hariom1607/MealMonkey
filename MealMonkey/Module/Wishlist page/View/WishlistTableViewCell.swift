@@ -39,7 +39,7 @@ class WishlistTableViewCell: UITableViewCell {
         lblType.text = product.objProductType.rawValue
         
         // Load product image
-        if product.strProductImage.hasPrefix("http") {
+        if product.strProductImage.hasPrefix(Main.images.http) {
             // Case: Remote URL image
             if let imageUrl = URL(string: product.strProductImage) {
                 URLSession.shared.dataTask(with: imageUrl) { [weak self] data, _, _ in
@@ -50,19 +50,19 @@ class WishlistTableViewCell: UITableViewCell {
                     } else {
                         // Fallback placeholder if loading fails
                         DispatchQueue.main.async {
-                            self?.imgProduct.image = UIImage(named: "placeholder")
+                            self?.imgProduct.image = UIImage(named: Main.images.placeholder)
                         }
                     }
                 }.resume()
             }
         } else {
             // Case: Local asset image
-            imgProduct.image = UIImage(named: product.strProductImage) ?? UIImage(named: "placeholder")
+            imgProduct.image = UIImage(named: product.strProductImage) ?? UIImage(named: Main.images.placeholder)
         }
         
         // ✅ Check CoreData to determine wishlist state and update heart button
         let isInWishlist = CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: userEmail)
-        btnWishlist.setImage(UIImage(systemName: isInWishlist ? "heart.fill" : "heart"), for: .normal)
+        btnWishlist.setImage(UIImage(systemName: isInWishlist ? Main.images.heartfill : Main.images.heart), for: .normal)
     }
     
     // MARK: - Wishlist Button Action
@@ -71,11 +71,11 @@ class WishlistTableViewCell: UITableViewCell {
         if CoreDataHelper.shared.isInWishlist(productId: productId, userEmail: userEmail) {
             // Remove from wishlist
             CoreDataHelper.shared.removeFromWishlist(productId: productId, userEmail: userEmail)
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+            btnWishlist.setImage(UIImage(systemName: Main.images.heart), for: .normal)
         } else {
             // Add to wishlist
             CoreDataHelper.shared.addToWishlist(productId: productId, userEmail: userEmail)
-            btnWishlist.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            btnWishlist.setImage(UIImage(systemName: Main.images.heartfill), for: .normal)
         }
         
         // Notify parent view controller to refresh UI (if needed)

@@ -30,7 +30,7 @@ class CartViewController: UIViewController {
         styleViews([btnPlaceOrder!], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         // Add title + back button
-        setLeftAlignedTitleWithBack("Cart", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.cart, target: self, action: #selector(backBtnTapped))
         
         // Register custom cell
         tblCart.register(UINib(nibName: Main.cells.cartCell, bundle: nil), forCellReuseIdentifier: Main.cells.cartCell)
@@ -40,7 +40,7 @@ class CartViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Fetch cart items for logged-in user
-        if let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") {
+        if let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             cartItems = CoreDataHelper.shared.fetchCart(for: currentUserEmail)
         }
         updateEmptyState()
@@ -51,8 +51,9 @@ class CartViewController: UIViewController {
     
     func updateEmptyState() {
         if cartItems.isEmpty {
-            let emptyView = EmptyStateView(animationName: "Add to cart",
-                                           message: "Your cart is empty")
+            let emptyView = EmptyStateView(animationName: Main.EmptyState.cartAnimation,
+                                           message: Main.EmptyState.cartEmptyMessage)
+            
             tblCart.backgroundView = emptyView
             btnPlaceOrder.isHidden = true
         } else {
@@ -65,7 +66,7 @@ class CartViewController: UIViewController {
     
     /// Place order button tapped
     @IBAction func btnPlaceOrderAction(_ sender: Any) {
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail"),
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail),
               let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         // Refresh cart
@@ -73,10 +74,11 @@ class CartViewController: UIViewController {
         
         // Check empty cart
         if cartItems.isEmpty {
-            let alert = UIAlertController(title: "Cart is Empty",
-                                          message: "Please add items to your cart before placing an order.",
+            let alert = UIAlertController(title: Main.Alerts.cartEmptyTitle,
+                                          message: Main.Alerts.cartEmptyMessage,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
+            
             present(alert, animated: true)
             return
         }
@@ -103,7 +105,7 @@ class CartViewController: UIViewController {
                 foodItem.category = item.category ?? ""
                 foodItem.quantity = Int16(item.quantity)
                 foodItem.productDescription = item.type ?? ""
-
+                
                 order.addToProducts(foodItem)
             }
             
@@ -119,18 +121,20 @@ class CartViewController: UIViewController {
             tblCart.reloadData()
             
             // Success alert
-            let alert = UIAlertController(title: "Order Placed",
-                                          message: "Your order has been placed successfully!",
+            let alert = UIAlertController(title: Main.Alerts.orderPlacedTitle,
+                                          message: Main.Alerts.orderPlacedMessage,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
             present(alert, animated: true)
             
         } catch {
             print("❌ Failed to save order: \(error.localizedDescription)")
-            let alert = UIAlertController(title: "Error",
-                                          message: "Failed to place order. Please try again.",
+            let alert = UIAlertController(title: Main.Alerts.orderErrorTitle,
+                                          message: Main.Alerts.orderErrorMessage,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            
+            alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
             present(alert, animated: true)
         }
     }

@@ -50,7 +50,7 @@ class SignupViewController: UIViewController {
     @IBAction func btnEyePasswordAction(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.images.eye : Main.images.eyeSlash
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
@@ -60,7 +60,7 @@ class SignupViewController: UIViewController {
     @IBAction func btnEyeConfirmPasswordAction(_ sender: Any) {
         isPasswordVisible = !isPasswordVisible
         txtConfirmPassword.isSecureTextEntry = !isPasswordVisible
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.images.eye : Main.images.eyeSlash
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
@@ -78,31 +78,31 @@ class SignupViewController: UIViewController {
         // ✅ Step 1: Validations
         switch true {
         case username.isEmpty:
-            UIAlertController.showAlert(title: "Name Missing", message: "Please enter your name", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.NameMissing, message: Main.ValidationMessages.nameMissing, viewController: self)
             return
         case email.isEmpty:
-            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
             return
         case !isValidEmail(email):
-            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
             return
         case mobileNo.isEmpty:
-            UIAlertController.showAlert(title: "Mobile Missing", message: "Please enter your mobile number", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.MobileMissing, message: Main.ValidationMessages.mobileMissing, viewController: self)
             return
         case address.isEmpty:
-            UIAlertController.showAlert(title: "Address Missing", message: "Please enter your address", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.AddressMissing, message: Main.ValidationMessages.addressMissing, viewController: self)
             return
         case password.isEmpty:
-            UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing, message: Main.ValidationMessages.passwordMissing, viewController: self)
             return
         case !isValidPassword(password):
-            UIAlertController.showAlert(title: "Invalid Password", message: "Please enter a stronger password", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.InvalidPassword, message: Main.ValidationMessages.invalidPassword, viewController: self)
             return
         case confirmPassword.isEmpty:
-            UIAlertController.showAlert(title: "Confirm Password Missing", message: "Please re-enter password", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.ConfirmPasswordMissing, message: Main.ValidationMessages.confirmPasswordMissing, viewController: self)
             return
         case password != confirmPassword:
-            UIAlertController.showAlert(title: "Passwords Do Not Match", message: "Password and confirm password must match", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMismatch, message: Main.ValidationMessages.passwordMismatch, viewController: self)
             return
         default: break
         }
@@ -116,12 +116,12 @@ class SignupViewController: UIViewController {
             mobile: mobileNo
         ) {
             // If successful → show success and pop back to login screen
-            showAlert("✅ Signup successful! Please login.") {
+            showAlert(Main.Messages.signupSuccess) {
                 self.navigationController?.popViewController(animated: true)
             }
         } else {
             // If email already exists → show error
-            showAlert("⚠️ User already exists, try logging in.")
+            showAlert(Main.Messages.userExists)
         }
     }
     
@@ -137,8 +137,8 @@ class SignupViewController: UIViewController {
     
     /// Reusable alert function
     private func showAlert(_ message: String, completion: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: "Signup", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+        let alert = UIAlertController(title: Main.Alerts.signup, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default) { _ in
             completion?()
         })
         present(alert, animated: true)

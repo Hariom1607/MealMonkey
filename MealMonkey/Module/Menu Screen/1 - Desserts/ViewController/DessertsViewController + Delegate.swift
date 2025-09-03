@@ -13,8 +13,8 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
     // Number of rows = number of filtered products
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredProducts.isEmpty {
-            tableView.setEmptyView(animationName: "Walking Orange",
-                                   message: "No items found")
+            tableView.setEmptyView(animationName: Main.EmptyState.dessertsAnimation,
+                                   message: Main.EmptyState.noItemsFound)
         } else {
             tableView.restore()
         }
@@ -26,7 +26,7 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "DessertsTableViewCell",
+            withIdentifier: Main.cells.menuDessertCell,
             for: indexPath
         ) as? DessertsTableViewCell else {
             return UITableViewCell() // Fallback in case of casting failure
@@ -45,9 +45,9 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
         RecentItemsHelper.shared.addProduct(selectedProduct)
         
         // ✅ Navigate to FoodDetailViewController
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
         if let detailVC = storyboard.instantiateViewController(
-            withIdentifier: "FoodDetailViewController"
+            withIdentifier: Main.viewController.foodDetail
         ) as? FoodDetailViewController {
             
             detailVC.product = selectedProduct

@@ -27,8 +27,8 @@ class MoreViewController: UIViewController {
                          forCellReuseIdentifier: Main.cells.morePageCell)
         
         // Set navigation title
-        setLeftAlignedTitle("More")
-        
+        setLeftAlignedTitle(Main.Labels.more)
+
         // Add cart button to navigation bar
         setCartButton(target: self, action: #selector(cartButtonTapped))
     }

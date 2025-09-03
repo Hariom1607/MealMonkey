@@ -77,7 +77,6 @@ class AboutUsTableViewCell: UITableViewCell {
         // Show star button for inbox messages
         btnStar.isHidden = false
     }
-    
 }
 
 /// Enum used to distinguish which type of page/cell is being displayed

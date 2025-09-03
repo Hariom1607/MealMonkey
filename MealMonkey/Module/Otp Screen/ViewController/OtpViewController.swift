@@ -21,7 +21,7 @@ class OtpViewController: UIViewController {
         super.viewDidLoad()
         
         // Set navigation bar title with back button
-        setLeftAlignedTitleWithBack("OTP", target: self, action: #selector(otpBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.otp, target: self, action: #selector(otpBackBtnTapped))
         
         // Round corners for Next button
         btnNext.layer.cornerRadius = 28
@@ -30,10 +30,9 @@ class OtpViewController: UIViewController {
     }
     
     func setupOtpView() {
-        
         viewOtp.count = 5
         viewOtp.spacing = 10
-        viewOtp.fontTextField = UIFont(name: "HelveticaNeue-Bold", size: CGFloat(25.0))!
+        viewOtp.fontTextField = UIFont(name: Main.Colors.fontTextfield, size: CGFloat(25.0))!
         viewOtp.dismissOnLastEntry = true
         viewOtp.borderColorTextField = .black
         viewOtp.selectedBorderColorTextField = .blue
@@ -54,11 +53,11 @@ class OtpViewController: UIViewController {
     /// Regenerate OTP button tap → show alert
     @IBAction func btnOtpRegenerationAction(_ sender: Any) {
         let alert = UIAlertController(
-            title: "OTP Sent",
-            message: "A new OTP has been sent to your registered mobile number.",
+            title: Main.AlertTitle.otpSent,
+            message: Main.ValidationMessages.otpSentMobile,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     

@@ -16,7 +16,7 @@ class WishlistViewController: UIViewController {
         super.viewDidLoad()
         
         // Get current user email from UserDefaults
-        currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") ?? ""
+        currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) ?? ""
         
         // Setup TableView
         tblWishlist.delegate = self
@@ -32,7 +32,7 @@ class WishlistViewController: UIViewController {
         loadWishlist()
         
         // Set navigation title with back button
-        setLeftAlignedTitleWithBack("WishList", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.wishList, target: self, action: #selector(backBtnTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,8 +59,8 @@ class WishlistViewController: UIViewController {
         // Show empty state
         if wishlistProducts.isEmpty {
             tblWishlist.setEmptyView(
-                animationName: "Wishlist",  // your Lottie JSON file name
-                message: "Your wishlist is empty"
+                animationName: Main.EmptyState.wishlistjson,  // your Lottie JSON file name
+                message: Main.EmptyState.wishlistEmptyMessage
             )
         } else {
             tblWishlist.restore()

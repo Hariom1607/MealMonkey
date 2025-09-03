@@ -21,10 +21,11 @@ class OrderListViewController: UIViewController {
         super.viewDidLoad()
         
         // Set navigation bar title with a back button
-        setLeftAlignedTitleWithBack("Order List", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.Labels.orderList, target: self, action: #selector(backBtnTapped))
         
         // Register custom table view cell for displaying order items
-        tblOrderList.register(UINib(nibName: Main.cells.orderListCell, bundle: nil), forCellReuseIdentifier: Main.cells.orderListCell)
+        tblOrderList.register(UINib(nibName: Main.cells.orderListCell, bundle: nil),
+                              forCellReuseIdentifier: Main.cells.orderListCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,8 +63,8 @@ class OrderListViewController: UIViewController {
     /// Show/hide empty label based on whether orders exist
     func updateEmptyLabel() {
         if orders.isEmpty {
-            tblOrderList.setEmptyView(animationName: "OrderList",
-                                      message: "You have no orders yet 🍴")
+            tblOrderList.setEmptyView(animationName: Main.images.orderListAnimation,
+                                      message: Main.Messages.noOrders)
         } else {
             tblOrderList.restore()
         }

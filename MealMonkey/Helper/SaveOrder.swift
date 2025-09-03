@@ -26,9 +26,9 @@ func saveOrder(for products: [Food_Items], totalPrice: Double) {
     }
     
     // Link order to current logged-in user
-    let currentEmail = UserDefaults.standard.string(forKey: "currentUser")
+    let currentEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUser)
     let request: NSFetchRequest<User> = User.fetchRequest()
-    request.predicate = NSPredicate(format: "email == %@", currentEmail ?? "")
+    request.predicate = NSPredicate(format: Main.PredicateFormats.email , currentEmail ?? "")
     
     do {
         let users = try context.fetch(request)
@@ -49,8 +49,8 @@ func fetchOrdersForCurrentUser() -> [Order] {
     let context = appDelegate.persistentContainer.viewContext
     
     let request: NSFetchRequest<Order> = Order.fetchRequest()
-    let currentEmail = UserDefaults.standard.string(forKey: "currentUser") ?? ""
-    request.predicate = NSPredicate(format: "users.email == %@", currentEmail)
+    let currentEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUser) ?? ""
+    request.predicate = NSPredicate(format: Main.PredicateFormats.useremail , currentEmail)
     
     do {
         let orders = try context.fetch(request)

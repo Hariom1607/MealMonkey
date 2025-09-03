@@ -28,7 +28,7 @@ class ForgotPasswordViewController: UIViewController {
         txtEmail.setPadding(left: 34, right: 34)
         
         // Set navigation bar title with a back button
-        setLeftAlignedTitleWithBack("Forgot Password", target: self, action: #selector(backButtonTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.forgotPassword, target: self, action: #selector(backButtonTapped))
     }
     
     // MARK: - Navigation
@@ -46,8 +46,8 @@ class ForgotPasswordViewController: UIViewController {
         // ✅ Check if email field is empty
         if email.isEmpty {
             UIAlertController.showAlert(
-                title: "Email Missing",
-                message: "Please enter your email",
+                title: Main.AlertTitle.EmailMissing,
+                message: Main.ValidationMessages.emailMissing,
                 viewController: self
             )
             return
@@ -56,8 +56,8 @@ class ForgotPasswordViewController: UIViewController {
         // ✅ Validate email format
         if !isValidEmail(email) {
             UIAlertController.showAlert(
-                title: "Invalid Email",
-                message: "Please enter a valid email address",
+                title: Main.AlertTitle.InvalidEmail,
+                message: Main.ValidationMessages.invalidEmail,
                 viewController: self
             )
             return
@@ -68,11 +68,11 @@ class ForgotPasswordViewController: UIViewController {
             // ✅ If valid, show success alert
             
             let alert = UIAlertController(
-                title: "OTP Sent",
+                title: Main.AlertTitle.otpSent,
                 message: "An OTP has been sent to \(email)",
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: { _ in
                 // Navigate to OTP screen after user taps OK
                 let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
                 if let otpVC = storyboard.instantiateViewController(identifier: Main.viewController.otp) as? OtpViewController {
@@ -85,7 +85,7 @@ class ForgotPasswordViewController: UIViewController {
             self.present(alert, animated: true)
         }
         else {
-            UIAlertController.showAlert(title: "Invalid Email", message: "No Account found with this email", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.noAccFoundEmail, viewController: self)
         }
     }
 }

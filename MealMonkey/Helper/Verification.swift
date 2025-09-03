@@ -10,15 +10,15 @@ import UIKit
 
 // Validate password strength: must contain uppercase, lowercase, digit, special char, min 8 chars
 func isValidPassword(_ password: String) -> Bool {
-    let passwordRegex = #"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$"#
-    let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+    let passwordRegex = Main.ValidationPatterns.password
+    let passwordPredicate = NSPredicate(format: Main.PredicateFormats.matches , passwordRegex)
     return passwordPredicate.evaluate(with: password)
 }
 
 // Validate email format
 func isValidEmail(_ email: String) -> Bool {
     let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
-    let emailRegEx = #"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,64}$"#
-    let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+    let emailRegEx = Main.ValidationPatterns.email
+    let predicate = NSPredicate(format: Main.PredicateFormats.matches , emailRegEx)
     return predicate.evaluate(with: trimmed)
 }

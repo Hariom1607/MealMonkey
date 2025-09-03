@@ -27,8 +27,8 @@ class UpiTableViewCell: UITableViewCell {
                    borderColor: UIColor.black.cgColor)
         
         // Configure UPI selection button
-        btnUpiSelection.setImage(UIImage(systemName: "circle"), for: .normal)
-        btnUpiSelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+        btnUpiSelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
+        btnUpiSelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
         btnUpiSelection.tintColor = .loginButton
         btnUpiSelection.backgroundColor = .clear
         btnUpiSelection.layer.cornerRadius = btnUpiSelection.frame.height / 2

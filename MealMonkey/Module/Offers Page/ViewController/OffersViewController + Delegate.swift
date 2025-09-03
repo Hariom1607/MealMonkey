@@ -19,7 +19,7 @@ extension OffersViewController: UITableViewDelegate, UITableViewDataSource{
     // Configure each cell in the table view
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue reusable cell of type OffersTableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OffersTableViewCell", for: indexPath) as! OffersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.offersCell, for: indexPath) as! OffersTableViewCell
         // Get the corresponding offer from the array
         let offer = arrOffers[indexPath.row]
         // Configure the cell with the offer details

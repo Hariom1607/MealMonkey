@@ -92,8 +92,8 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     func showAlert(message: String) {
         // Generic alert for validation errors
-        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        let alert = UIAlertController(title: Main.AlertTitle.invalidInput, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: nil))
         present(alert, animated: true)
     }
     

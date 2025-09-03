@@ -28,19 +28,15 @@ class RecentItemsCollectionViewCell: UICollectionViewCell {
     /// Configures the cell with a `ProductModel`
     func configure(with item: ProductModel) {
         lblFoodName.text = item.strProductName
-        lblFoodType.text = item.objProductType.rawValue.capitalized
+        lblFoodType.text = item.objProductCategory.rawValue.capitalized
         
-        // Format rating to 1 decimal place (e.g. 4.0, 3.5)
         lblFoodRating.text = String(format: "%.1f", item.floatProductRating)
-        
-        // Show total number of ratings in a readable format
         lblTotalNoOfRatings.text = "\(item.intTotalNumberOfRatings) ratings"
         
-        // Load food image safely with fallback
         if let image = UIImage(named: item.strProductImage), !item.strProductImage.isEmpty {
             imgFood.image = image
         } else {
-            imgFood.image = UIImage(named: "placeholder_food") // <- add a default asset in assets
+            imgFood.image = UIImage(named: Main.images.placeholder)
         }
     }
 }

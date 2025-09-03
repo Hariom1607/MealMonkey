@@ -27,7 +27,7 @@ class MyOrderViewController: UIViewController {
         super.viewDidLoad()
         
         // Setup navigation bar with title and back button
-        setLeftAlignedTitleWithBack("My Order", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.myOrder, target: self, action: #selector(backBtnTapped))
         
         // Round checkout button for better UI
         btnCheckout.layer.cornerRadius = 28

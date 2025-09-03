@@ -26,8 +26,8 @@ class CashOnDeliveryTableViewCell: UITableViewCell {
                    borderColor: UIColor.black.cgColor)
         
         // Configure selection button
-        btnCashOnDeliverySelection.setImage(UIImage(systemName: "circle"), for: .normal)
-        btnCashOnDeliverySelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+        btnCashOnDeliverySelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
+        btnCashOnDeliverySelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
         btnCashOnDeliverySelection.tintColor = .loginButton
         btnCashOnDeliverySelection.backgroundColor = .clear
         btnCashOnDeliverySelection.layer.cornerRadius = btnCashOnDeliverySelection.frame.height / 2

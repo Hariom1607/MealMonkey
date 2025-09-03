@@ -20,7 +20,7 @@ extension PaymentDetailsViewController: UITableViewDelegate, UITableViewDataSour
     
     /// Configures and returns a card cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentDetailsTableViewCell", for: indexPath) as! PaymentDetailsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.paymentDetailCell, for: indexPath) as! PaymentDetailsTableViewCell
         
         let card = savedCards[indexPath.row]
         // Mask card number before displaying

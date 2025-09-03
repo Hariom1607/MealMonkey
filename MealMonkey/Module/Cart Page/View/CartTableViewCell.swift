@@ -40,7 +40,7 @@ class CartTableViewCell: UITableViewCell {
            let category = ProductCategory(rawValue: categoryString) {
             lblFoodCategory.text = category.rawValue
         } else {
-            lblFoodCategory.text = "Unknown"
+            lblFoodCategory.text = Main.Labels.unknown
         }
         
         // ✅ Show Type using Enum
@@ -48,7 +48,7 @@ class CartTableViewCell: UITableViewCell {
            let type = ProductType(rawValue: typeString) {
             lblFoodType.text = type.rawValue
         } else {
-            lblFoodType.text = "Unknown"
+            lblFoodType.text = Main.Labels.unknown
         }
     }
     

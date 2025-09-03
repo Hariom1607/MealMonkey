@@ -31,7 +31,7 @@ class MenuViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         
         // ✅ Set title ("Menu") and add cart button to nav bar
-        setLeftAlignedTitle("Menu")
+        setLeftAlignedTitle(Main.backBtnTitle.menu)
         setCartButton(target: self, action: #selector(cartBtnTapped))
         
         // ✅ Style search field with padding and rounded corners

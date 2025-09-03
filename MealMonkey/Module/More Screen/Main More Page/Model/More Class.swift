@@ -43,17 +43,17 @@ class More: NSObject {
     
     /// Predefined list of items displayed in the "More" section
     static let items: [More] = [
-        More(imgSection: "ic_1x_PaymentDetails",
-             title: "Payment Details"),
-        More(imgSection: "ic_1x_MyOrders",
-             title: "My Orders"),
-        More(imgSection: "ic_1x_Notifications",
-             title: "Notifications"),
-        More(imgSection: "ic_1x_Inbox",
-             title: "Inbox"),
-        More(imgSection: "heart.fill", // Example of SF Symbol
-             title: "Wishlist"),
-        More(imgSection: "ic_1x_aboutus",
-             title: "About Us")
+        More(imgSection: Main.images.paymentDetails,
+             title: Main.Labels.paymentDetails),
+        More(imgSection: Main.images.myOrders,
+             title: Main.Labels.myOrders),
+        More(imgSection: Main.images.notifications,
+             title: Main.Labels.notifications),
+        More(imgSection: Main.images.inbox,
+             title: Main.Labels.inbox),
+        More(imgSection: Main.images.heartfill, // SF Symbol already exists in Main
+             title: Main.Labels.wishlist),
+        More(imgSection: Main.images.aboutUs,
+             title: Main.Labels.aboutUs)
     ]
 }

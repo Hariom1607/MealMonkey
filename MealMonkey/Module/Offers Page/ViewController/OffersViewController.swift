@@ -26,12 +26,13 @@ class OffersViewController: UIViewController {
         super.viewDidLoad()
     
         // Round the corners of the "Check Offers" button
-        btnCheckOffers.layer.cornerRadius = 7.42
+        btnCheckOffers.layer.cornerRadius = Main.UI.cornerRadiusSmall
         
         // Register custom table view cell for reuse
-        tblOffers.register(UINib(nibName: Main.cells.offersCell, bundle: nil), forCellReuseIdentifier: Main.cells.offersCell)
+        tblOffers.register(UINib(nibName: Main.cells.offersCell, bundle: nil),
+                           forCellReuseIdentifier: Main.cells.offersCell)
         
-        setLeftAlignedTitle("Latest Offers")
+        setLeftAlignedTitle(Main.Labels.latestOffers)
         setCartButton(target: self, action: #selector(cartBtnTapped))
     }
     
@@ -41,9 +42,9 @@ class OffersViewController: UIViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
+    
     // Action for "Check Offers" button tap
     @IBAction func btnCheckOffersAction(_ sender: Any) {
         // Currently empty - can be used to navigate to another screen or show more offers
     }
-    
 }

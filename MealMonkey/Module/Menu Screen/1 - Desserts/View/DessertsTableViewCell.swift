@@ -32,13 +32,12 @@ class DessertsTableViewCell: UITableViewCell {
     // MARK: - Configuration
     func configure(with product: ProductModel) {
         imgProduct.image = UIImage(named: product.strProductImage)
-        lblCategoryName.text = product.objProductCategory.rawValue   // ✅ show readable string
-        lblRestaurantName.text = "Meal Monkey" // Hardcoded → consider fetching from model later
+        lblCategoryName.text = product.objProductCategory.rawValue
+        lblRestaurantName.text = Main.Restaurants.mealMonkey   // centralized
         lblRating.text = String(format: "%.1f", product.floatProductRating)
         lblProductName.text = product.strProductName
-        imgShade.image = UIImage(named: "ic_shadeDesserts")
+        imgShade.image = UIImage(named: Main.images.shadeDesserts)
         
-        // Optional: Accessibility
         lblProductName.accessibilityLabel = "Dessert name: \(product.strProductName)"
         lblRating.accessibilityLabel = "Rating: \(product.floatProductRating) stars"
     }

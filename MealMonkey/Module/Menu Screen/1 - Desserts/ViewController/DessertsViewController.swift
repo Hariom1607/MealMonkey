@@ -33,22 +33,19 @@ class DessertsViewController: UIViewController {
     
     // MARK: - UI Setup
     private func setupUI() {
-        // Search box styling
         txtSearch.layer.cornerRadius = 28
         txtSearch.setPadding(left: 34, right: 34)
         txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
-        // Set navigation title dynamically based on category
         let titleText: String
         switch selectedCategory {
-        case .food: titleText = "Food"
-        case .Beverages: titleText = "Beverages"
-        case .Desserts: titleText = "Desserts"
+        case .food: titleText = Main.MenuCategories.food
+        case .Beverages: titleText = Main.MenuCategories.beverages
+        case .Desserts: titleText = Main.MenuCategories.desserts
         }
         setLeftAlignedTitleWithBack(titleText, target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))
         
-        // Register custom table view cell
         tblDesserts.register(UINib(nibName: Main.cells.menuDessertCell, bundle: nil),
                              forCellReuseIdentifier: Main.cells.menuDessertCell)
     }

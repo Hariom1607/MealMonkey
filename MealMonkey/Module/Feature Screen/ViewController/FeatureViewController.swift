@@ -36,7 +36,7 @@ class FeatureViewController: UIViewController {
         
         // Initialize with first feature
         updateLabels(for: 0)
-        btnNext.setTitle("Next", for: .normal)
+        btnNext.setTitle(Main.Labels.next, for: .normal)
         
         // Register custom collection view cell
         colView.register(UINib(nibName: Main.cells.featureCell, bundle: nil), forCellWithReuseIdentifier: Main.cells.featureCell)
@@ -52,7 +52,8 @@ class FeatureViewController: UIViewController {
         currentIndex = index
         
         // Change button title to "Done" on last feature
-        btnNext.setTitle(index == features.count - 1 ? "Done" : "Next", for: .normal)
+        btnNext.setTitle(index == features.count - 1 ? Main.Labels.done : Main.Labels.next, for: .normal)
+        
     }
     
     // MARK: - Actions

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 // MARK: - UITableView Delegate & DataSource Implementation
-extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
+extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// Returns the number of rows in the table (equal to number of orders)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,9 +32,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
         let totalPrice = order.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 0)) }
         
         // Configure cell labels
-        cell.lblOrderNo.text = "Order No : \(indexPath.row + 1)"
+        cell.lblOrderNo.text = Main.Labels.orderNoPrefix + "\(indexPath.row + 1)"
         cell.lblProductName.text = allProductNames
-        cell.lblTotalPrice.text = "$\(String(format: "%.2f", totalPrice))"
+        cell.lblTotalPrice.text = Main.Labels.currencySymbol + "\(String(format: "%.2f", totalPrice))"
         
         // Display first product's image as the order preview image
         if let imgName = order.first?.strProductImage {
@@ -63,7 +63,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource{
         let context = appDelegate.persistentContainer.viewContext
         
         // Get current user email from UserDefaults
-        guard let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return [] }
+        guard let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else { return [] }
         
         // Create fetch request for Order entity, filtered by user email
         let request: NSFetchRequest<Order> = Order.fetchRequest()

@@ -25,10 +25,10 @@ class SplashViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
             // Check if user is already logged in (from UserDefaults)
-            let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+            let isLoggedIn = UserDefaults.standard.bool(forKey: Main.UserDefaultsKeys.isLoggedIn)
             
             if isLoggedIn,
-               let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+               let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
                 // ✅ Auto-login case
                 print("✅ Auto-login user: \(email)")
                 self.showMainTabBar()

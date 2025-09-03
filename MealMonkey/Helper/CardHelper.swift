@@ -33,20 +33,20 @@ class CardHelper {
                                    firstName: String,
                                    lastName: String) -> String? {
         if cardNumber.count != 16 || !CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: cardNumber)) {
-            return "Card number must be 16 digits."
+            return Main.ValidationMessages.invalidCardInput
         }
         if expMonth < 1 || expMonth > 12 {
-            return "Expiry month must be between 01 and 12."
+            return Main.ValidationMessages.invalidCardInput
         }
         let currentYear = Calendar.current.component(.year, from: Date()) % 100
         if expYear < currentYear {
-            return "Card has expired."
+            return Main.ValidationMessages.invalidCardInput
         }
         if cvv.count < 3 || cvv.count > 4 {
-            return "Security code (CVV) must be 3 or 4 digits."
+            return Main.ValidationMessages.invalidCardInput
         }
         if firstName.isEmpty || lastName.isEmpty {
-            return "First and Last name are required."
+            return Main.ValidationMessages.invalidCardInput
         }
         return nil
     }

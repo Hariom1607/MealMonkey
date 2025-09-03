@@ -36,7 +36,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         setTextFieldPadding([txtSearchAddress])
         
         // Custom nav bar title with back button
-        setLeftAlignedTitleWithBack("Change Address", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.map, target: self, action: #selector(backBtnTapped))
         
         // Configure map and location manager
         mapView.delegate = self
@@ -71,7 +71,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Center on user location only once
         if let location = locations.last, !hasCenteredOnUser {
             currentLocation = location
-            addCustomPin(at: location, title: "Your Current Location")
+            addCustomPin(at: location, title: Main.map.currentLocation)
             hasCenteredOnUser = true
         }
     }
@@ -90,7 +90,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Convert screen tap → coordinates
         let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        addCustomPin(at: newLocation, title: "Selected Location")
+        addCustomPin(at: newLocation, title: Main.map.selectedLocation)
     }
     
     // MARK: - Add Custom Pin + Address
@@ -124,9 +124,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             
             // Save address + coords in UserDefaults
-            UserDefaults.standard.set(fullAddress, forKey: "currentAddress")
-            UserDefaults.standard.set(location.coordinate.latitude, forKey: "currentLatitude")
-            UserDefaults.standard.set(location.coordinate.longitude, forKey: "currentLongitude")
+            UserDefaults.standard.set(fullAddress, forKey: Main.map.currentAddressKey)
+            UserDefaults.standard.set(location.coordinate.latitude, forKey: Main.map.latitudeKey)
+            UserDefaults.standard.set(location.coordinate.longitude, forKey: Main.map.longitudeKey)
             
             // Pass selected address back (if callback provided)
             self.onLocationSelected?(fullAddress)
@@ -164,7 +164,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             // Create new annotation view
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view?.canShowCallout = false // disable default bubble
-            view?.image = UIImage(named: "Ic_Location_Pin")
+            view?.image = UIImage(named: Main.map.locationPin)
             
             // Add double-tap recognizer → show bubble
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleAnnotationDoubleTap(_:)))
@@ -203,7 +203,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func showBubble(for annotationView: MKAnnotationView, annotation: MKAnnotation) {
-        let titleText = (annotation.title ?? "Location") ?? "Location"
+        let titleText = (annotation.title ?? Main.map.defaultLocation) ?? Main.map.defaultLocation
         let addressText = (annotation.subtitle ?? "") ?? ""
         
         // Layout constants
@@ -302,7 +302,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             guard let self = self,
                   let placemark = placemarks?.first,
                   let location = placemark.location else { return }
-            self.addCustomPin(at: location, title: "Searched Location")
+            self.addCustomPin(at: location, title: Main.map.searchedLocation)
         }
     }
     
@@ -313,17 +313,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                                             latitudinalMeters: 1000,
                                             longitudinalMeters: 1000)
             mapView.setRegion(region, animated: true)
-            addCustomPin(at: location, title: "Your Current Location")
+            addCustomPin(at: location, title: Main.map.currentLocation)
         }
     }
     
     @IBAction func btnShowSavedAddressAction(_ sender: Any) {
         // Load saved address from UserDefaults
-        let lat = UserDefaults.standard.double(forKey: "currentLatitude")
-        let lon = UserDefaults.standard.double(forKey: "currentLongitude")
+        let lat = UserDefaults.standard.double(forKey: Main.map.latitudeKey)
+        let lon = UserDefaults.standard.double(forKey: Main.map.longitudeKey)
         if lat != 0 && lon != 0 {
             let savedLocation = CLLocation(latitude: lat, longitude: lon)
-            addCustomPin(at: savedLocation, title: "Saved Location")
+            addCustomPin(at: savedLocation, title: Main.map.savedLocation)
         }
     }
 }

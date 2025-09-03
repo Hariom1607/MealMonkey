@@ -73,19 +73,26 @@ class FoodListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Set collection view delegate & datasource
         collViewFood.dataSource = self
         collViewFood.delegate = self
         
-        // Register all required collection view cells
-        collViewFood.register(UINib(nibName: "FoodCategoryCollectionViewCell", bundle: nil),
-                              forCellWithReuseIdentifier: "FoodCategoryCollectionViewCell")
-        collViewFood.register(UINib(nibName: "PopularFoodCollectionViewCell", bundle: nil),
-                              forCellWithReuseIdentifier: "PopularFoodCollectionViewCell")
-        collViewFood.register(UINib(nibName: "MostPopularCollectionViewCell", bundle: nil),
-                              forCellWithReuseIdentifier: "MostPopularCollectionViewCell")
-        collViewFood.register(UINib(nibName: "RecentItemsCollectionViewCell", bundle: nil),
-                              forCellWithReuseIdentifier: "RecentItemsCollectionViewCell")
+        // Register all required collection view cells using struct constants
+        collViewFood.register(
+            UINib(nibName: Main.cells.homeFoodCategoryCell, bundle: nil),
+            forCellWithReuseIdentifier: Main.cells.homeFoodCategoryCell
+        )
+        collViewFood.register(
+            UINib(nibName: Main.cells.homePopulatFoodCell, bundle: nil),
+            forCellWithReuseIdentifier: Main.cells.homePopulatFoodCell
+        )
+        collViewFood.register(
+            UINib(nibName: Main.cells.homeMostPopulatFoodCell, bundle: nil),
+            forCellWithReuseIdentifier: Main.cells.homeMostPopulatFoodCell
+        )
+        collViewFood.register(
+            UINib(nibName: Main.cells.homeRecentItemsCell, bundle: nil),
+            forCellWithReuseIdentifier: Main.cells.homeRecentItemsCell
+        )
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -114,26 +121,38 @@ extension FoodListTableViewCell: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionType {
         case .category:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoodCategoryCollectionViewCell", for: indexPath) as! FoodCategoryCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Main.cells.homeFoodCategoryCell,
+                for: indexPath
+            ) as! FoodCategoryCollectionViewCell
             let category = categories[indexPath.row]
             cell.configure(with: category)
             return cell
             
         case .popular:
             let product = products[indexPath.row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularFoodCollectionViewCell", for: indexPath) as! PopularFoodCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Main.cells.homePopulatFoodCell,
+                for: indexPath
+            ) as! PopularFoodCollectionViewCell
             cell.configure(with: product)
             return cell
             
         case .mostPopular:
             let product = products[indexPath.row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MostPopularCollectionViewCell", for: indexPath) as! MostPopularCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Main.cells.homeMostPopulatFoodCell,
+                for: indexPath
+            ) as! MostPopularCollectionViewCell
             cell.configure(with: product)
             return cell
             
         case .RecentItems:
             let product = products[indexPath.row]
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentItemsCollectionViewCell", for: indexPath) as! RecentItemsCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Main.cells.homeRecentItemsCell,
+                for: indexPath
+            ) as! RecentItemsCollectionViewCell
             cell.configure(with: product)
             return cell
         }

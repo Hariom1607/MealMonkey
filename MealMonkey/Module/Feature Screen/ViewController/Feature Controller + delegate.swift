@@ -18,7 +18,7 @@ extension FeatureViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     /// Configure and return feature cell for given index
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureCollectionViewCell", for: indexPath) as! FeatureCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Main.cells.featureCell, for: indexPath) as! FeatureCollectionViewCell
         let model = features[indexPath.item]
         cell.configure(with: model) // Pass data model to cell
         return cell

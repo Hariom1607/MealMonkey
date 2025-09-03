@@ -31,18 +31,18 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // Load saved user data from UserDefaults into textfields
-        txtName.text = UserDefaults.standard.string(forKey: "userName")
-        txtEmail.text = UserDefaults.standard.string(forKey: "userEmail")
-        txtMobileNo.text = UserDefaults.standard.string(forKey: "userMobile")
-        txtAddress.text = UserDefaults.standard.string(forKey: "userAddress")
+        txtName.text = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName)
+        txtEmail.text = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName)
+        txtMobileNo.text = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userMobile)
+        txtAddress.text = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userAddress)
         
         // Update welcome message
-        if let name = UserDefaults.standard.string(forKey: "userName") {
+        if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName) {
             lblWelcomeMsg.text = "Welcome, \(name)"
         }
         
         // Set navigation bar title & cart button
-        setLeftAlignedTitle("Profile")
+        setLeftAlignedTitle(Main.backBtnTitle.profile)
         setCartButton(target: self, action: #selector(profileCartBtn))
         
         // Round profile image container
@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Load Profile
     /// Loads the profile of the current logged-in user from CoreData or UserDefaults
     func loadUserProfile() {
-        guard let email = UserDefaults.standard.string(forKey: "currentUserEmail"),
+        guard let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail),
               let user = CoreDataHelper.shared.fetchUser(email: email) else { return }
         
         txtName.text = user.name
@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
         if let imageData = user.imageData {
             imgUser.image = UIImage(data: imageData)
         } else {
-            imgUser.image = UIImage(systemName: "person.crop.circle") // fallback
+            imgUser.image = UIImage(systemName: Main.images.defaultUser) // fallback
             imgUser.tintColor = .gray
         }
     }
@@ -113,8 +113,8 @@ class ProfileViewController: UIViewController {
     /// Sign Out button action
     @IBAction func btnSignOutAction(_ sender: Any) {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "currentUserEmail")
-        defaults.set(false, forKey: "isLoggedIn") // ✅ Mark user as logged out
+        defaults.removeObject(forKey: Main.UserDefaultsKeys.currentUserEmail)
+        defaults.set(false, forKey: Main.UserDefaultsKeys.isLoggedIn) // ✅ Mark user as logged out
         defaults.synchronize()
         
         // Navigate back to login screen
@@ -133,7 +133,7 @@ class ProfileViewController: UIViewController {
     
     /// Save User button action → Updates user info in CoreData and UserDefaults
     @IBAction func btnSaveUserAction(_ sender: Any) {
-        guard let oldEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
+        guard let oldEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else { return }
         
         // Collect updated user details
         let name = txtName.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -144,10 +144,10 @@ class ProfileViewController: UIViewController {
         
         // ✅ Specific check for empty email
         if newEmail.isEmpty {
-            let alert = UIAlertController(title: "Validation Error",
-                                          message: "Email cannot be empty.",
+            let alert = UIAlertController(title: Main.Alerts.validationError,
+                                          message: Main.Messages.emailEmpty,
                                           preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: { _ in
                 // Restore the old email into textfield
                 self.txtEmail.text = oldEmail
             }))
@@ -157,8 +157,8 @@ class ProfileViewController: UIViewController {
         
         // ✅ General empty field validation
         if name.isEmpty || mobile.isEmpty || address.isEmpty {
-            UIAlertController.showAlert(title: "Validation Error",
-                                        message: "All fields must be filled before saving.",
+            UIAlertController.showAlert(title: Main.Alerts.validationError,
+                                        message: Main.Messages.emptyFields,
                                         viewController: self)
             return
         }
@@ -167,8 +167,8 @@ class ProfileViewController: UIViewController {
         if newEmail != oldEmail &&
             CoreDataHelper.shared.isEmailTaken(newEmail, excluding: oldEmail) {
             
-            UIAlertController.showAlert(title: "Error",
-                                        message: "This email is already registered. Please use another one.",
+            UIAlertController.showAlert(title: Main.Alerts.error,
+                                        message: Main.Messages.emailExists,
                                         viewController: self)
             return
         }
@@ -183,18 +183,18 @@ class ProfileViewController: UIViewController {
                                             imageData: imageData) {
             // ✅ Update UserDefaults
             let defaults = UserDefaults.standard
-            defaults.set(name, forKey: "userName")
-            defaults.set(newEmail, forKey: "userEmail")
-            defaults.set(mobile, forKey: "userMobile")
-            defaults.set(address, forKey: "userAddress")
-            defaults.set(newEmail, forKey: "currentUserEmail")
+            defaults.set(name, forKey: Main.UserDefaultsKeys.userName)
+            defaults.set(newEmail, forKey: Main.UserDefaultsKeys.userEmail)
+            defaults.set(mobile, forKey: Main.UserDefaultsKeys.userMobile)
+            defaults.set(address, forKey: Main.UserDefaultsKeys.userAddress)
+            defaults.set(newEmail, forKey: Main.UserDefaultsKeys.currentUserEmail)
             defaults.synchronize()
             
             // Refresh UI
             loadUserProfile()
-            UIAlertController.showAlert(title: "Success", message: "Profile updated successfully!", viewController: self)
+            UIAlertController.showAlert(title: Main.Alerts.success, message: Main.Messages.profileUpdated, viewController: self)
         } else {
-            UIAlertController.showAlert(title: "Error", message: "Failed to update profile.", viewController: self)
+            UIAlertController.showAlert(title: Main.Alerts.error, message: Main.Messages.profileUpdateFailed, viewController: self)
         }
     }
 }

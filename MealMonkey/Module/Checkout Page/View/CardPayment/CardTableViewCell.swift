@@ -25,8 +25,8 @@ class CardTableViewCell: UITableViewCell {
                    borderColor: UIColor.black.cgColor)
         
         // Configure selection button with two states: normal & selected
-        btnCardSelection.setImage(UIImage(systemName: "circle"), for: .normal)
-        btnCardSelection.setImage(UIImage(systemName: "circle.fill"), for: .selected)
+        btnCardSelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
+        btnCardSelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
         btnCardSelection.tintColor = .loginButton  // custom color (defined in UIColor extension)
         btnCardSelection.backgroundColor = .clear
         btnCardSelection.layer.cornerRadius = btnCardSelection.frame.height / 2

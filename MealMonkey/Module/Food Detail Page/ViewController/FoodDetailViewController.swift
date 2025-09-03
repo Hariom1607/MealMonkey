@@ -50,7 +50,7 @@ class FoodDetailViewController: UIViewController {
         ]
         
         // Re-apply custom nav items
-        setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.Labels.foodDetail, target: self, action: #selector(detailBackBtnTapped))
         setCartButton(target: self, action: #selector(cartBtnTapped))
         updateWishlistButton() // Refresh wishlist state when screen appears
         updateCartBadge()
@@ -87,8 +87,6 @@ class FoodDetailViewController: UIViewController {
         lblNimberOfPortion.text = "\(quantity)"
         btnPortionReduce.isEnabled = false
         
-        // Setup navigation buttons
-        setLeftAlignedTitleWithBack("Food Detail", target: self, action: #selector(detailBackBtnTapped))
     }
     
     // MARK: - UI Setup
@@ -103,12 +101,12 @@ class FoodDetailViewController: UIViewController {
     /// Updates wishlist button (filled heart if product is in wishlist)
     private func updateWishlistButton() {
         guard let product = product,
-              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else {
-            btnWishlist.setImage(UIImage(systemName: "heart"), for: .normal)
+              let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else {
+            btnWishlist.setImage(UIImage(systemName: Main.images.heart), for: .normal)
             return
         }
         let filled = CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: currentUserEmail)
-        btnWishlist.setImage(UIImage(systemName: filled ? "heart.fill" : "heart"), for: .normal)
+        btnWishlist.setImage(UIImage(systemName: filled ? Main.images.heartfill : Main.images.heart), for: .normal)
     }
     
     /// Configures product details (name, description, image)
@@ -124,8 +122,8 @@ class FoodDetailViewController: UIViewController {
     func updatePriceAndQuantityUI() {
         guard let product = product else { return }
         let total = product.doubleProductPrice * Double(quantity)
-        lblFoodPrize.text = "$\(String(format: "%.2f", product.doubleProductPrice))"
-        lblTotalPice.text = "$\(String(format: "%.2f", total))"
+        lblFoodPrize.text = "$ \(String(format: "%.2f", product.doubleProductPrice))"
+        lblTotalPice.text = "$ \(String(format: "%.2f", total))"
         lblNimberOfPortion.text = "\(quantity)"
         btnPortionReduce.isEnabled = quantity > 1
     }
@@ -146,7 +144,7 @@ class FoodDetailViewController: UIViewController {
     /// Add product to cart in CoreData
     @IBAction func btnAddToCartAction(_ sender: Any) {
         guard let product = product,
-              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
+              let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else { return }
         
         CoreDataHelper.shared.addCartItem(product: product, quantity: quantity, userEmail: currentUserEmail)
         
@@ -154,8 +152,8 @@ class FoodDetailViewController: UIViewController {
         self.updateCartBadge()
         
         // Show confirmation alert
-        let alert = UIAlertController(title: "Success", message: "Added to cart!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: Main.Labels.success, message: Main.Labels.addedToCart, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
         present(alert, animated: true)
     }
     
@@ -176,7 +174,7 @@ class FoodDetailViewController: UIViewController {
     /// Toggle wishlist state (add/remove)
     @IBAction func btnWishlistAction(_ sender: Any) {
         guard let product = product,
-              let currentUserEmail = UserDefaults.standard.string(forKey: "currentUserEmail") else { return }
+              let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else { return }
         
         if CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: currentUserEmail) {
             CoreDataHelper.shared.removeFromWishlist(productId: product.intId, userEmail: currentUserEmail)
@@ -206,16 +204,16 @@ class FoodDetailViewController: UIViewController {
         // Save updated cart in UserDefaults
         let cartDictArray = appDelegate.arrCart.map { product -> [String: Any] in
             return [
-                "intId": product.intId,
-                "strProductName": product.strProductName,
-                "strProductDescription": product.strProductDescription,
-                "doubleProductPrice": product.doubleProductPrice,
-                "strProductImage": product.strProductImage,
-                "intProductQty": product.intProductQty ?? 1,
-                "floatProductRating": product.floatProductRating,
-                "intTotalNumberOfRatings": product.intTotalNumberOfRatings,
-                "objProductCategory": product.objProductCategory.rawValue,
-                "objProductType": product.objProductType.rawValue
+                Main.Keys.intId: product.intId,
+                Main.Keys.strProductName: product.strProductName,
+                Main.Keys.strProductDescription: product.strProductDescription,
+                Main.Keys.doubleProductPrice: product.doubleProductPrice,
+                Main.Keys.strProductImage: product.strProductImage,
+                Main.Keys.intProductQty: product.intProductQty ?? 1,
+                Main.Keys.floatProductRating: product.floatProductRating,
+                Main.Keys.intTotalNumberOfRatings: product.intTotalNumberOfRatings,
+                Main.Keys.objProductCategory: product.objProductCategory.rawValue,
+                Main.Keys.objProductType: product.objProductType.rawValue
             ]
         }
     }

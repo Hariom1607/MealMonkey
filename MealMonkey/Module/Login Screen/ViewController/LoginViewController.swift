@@ -81,16 +81,16 @@ class LoginViewController: UIViewController {
         // ✅ Step 1: Validations
         switch true {
         case email.isEmpty:
-            UIAlertController.showAlert(title: "Email Missing", message: "Please enter your email", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
             return
         case !isValidEmail(email):
-            UIAlertController.showAlert(title: "Invalid Email", message: "Please enter a valid email address", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
             return
         case password.isEmpty:
-            UIAlertController.showAlert(title: "Password Missing", message: "Please enter your password", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing, message: Main.ValidationMessages.passwordMissing, viewController: self)
             return
         case !isValidPassword(password):
-            UIAlertController.showAlert(title: "Invalid Password", message: "Please enter a valid password", viewController: self)
+            UIAlertController.showAlert(title: Main.AlertTitle.InvalidPassword, message: Main.ValidationMessages.invalidPassword, viewController: self)
             return
         default: break
         }
@@ -98,23 +98,23 @@ class LoginViewController: UIViewController {
         // Check credentials against Core Data
         if let user = CoreDataHelper.shared.verifyUser(email: email, password: password) {
             // ✅ Save login state
-            UserDefaults.standard.set(true, forKey: "isLoggedIn")
-            UserDefaults.standard.set(email, forKey: "currentUserEmail")
+            UserDefaults.standard.set(true, forKey: Main.UserDefaultsKeys.isLoggedIn)
+            UserDefaults.standard.set(email, forKey: Main.UserDefaultsKeys.currentUserEmail)
             
             if let name = user.name {
-                UserDefaults.standard.set(name, forKey: "currentUserName")
+                UserDefaults.standard.set(name, forKey: Main.UserDefaultsKeys.currentUserName)
             }
             UserDefaults.standard.synchronize()
             
-            print("✅ Login successful: \(email)")
+            print( Main.AlertTitle.loginSuccessful,(email))
             // ✅ Only go to main tab bar if login succeeds
             showMainTabBar()
         }
         else {
             // 🚨 Wrong credentials
             UIAlertController.showAlert(
-                title: "Login Failed",
-                message: "Invalid email or password. Please sign up if you don't have an account.",
+                title: Main.AlertTitle.loginFailed,
+                message: Main.Messages.loginFailed,
                 viewController: self
             )
         }
@@ -134,7 +134,7 @@ class LoginViewController: UIViewController {
         txtPassword.isSecureTextEntry = !isPasswordVisible
         
         // Change eye icon accordingly
-        let imageName = isPasswordVisible ? "eye" : "eye.slash"
+        let imageName = isPasswordVisible ? Main.images.eye : Main.images.eyeSlash
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }

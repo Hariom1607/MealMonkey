@@ -49,10 +49,10 @@ class CheckoutViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Always update delivery location label before view appears
-        if let address = UserDefaults.standard.string(forKey: "currentAddress") {
+        if let address = UserDefaults.standard.string(forKey: Main.map.currentAddressKey) {
             lblCurrentLocation.text = address
         } else {
-            lblCurrentLocation.text = "Select your location"
+            lblCurrentLocation.text = Main.Labels.selectLocation
         }
     }
     
@@ -75,7 +75,7 @@ class CheckoutViewController: UIViewController {
         viewTransparent.isHidden = true
         
         // Set navigation bar title with back button
-        setLeftAlignedTitleWithBack("Checkout", target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.backBtnTitle.checkout, target: self, action: #selector(backBtnTapped))
         
         // Register custom cells for payment options
         tblPaymentDetails.register(UINib(nibName: Main.cells.checkoutCardCell, bundle: nil), forCellReuseIdentifier:Main.cells.checkoutCardCell)
@@ -89,7 +89,7 @@ class CheckoutViewController: UIViewController {
     
     // MARK: - Load User + Cards
     private func loadCurrentUser() {
-        if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+        if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             currentUser = CoreDataHelper.shared.fetchUser(byEmail: email)
         }
     }
@@ -131,7 +131,7 @@ class CheckoutViewController: UIViewController {
               let expMonth = Int16(txtExpiryMonth.text ?? ""),
               let expYear = Int16(txtExpiryYear.text ?? ""),
               let cvv = txtSecurityCode.text, !cvv.isEmpty else {
-            showAlert(message: "Please fill all fields correctly.")
+            showAlert(message: Main.ValidationMessages.invalidCardInput)
             return
         }
         
@@ -147,12 +147,12 @@ class CheckoutViewController: UIViewController {
         }
         
         guard let user = currentUser else {
-            showAlert(message: "User not found")
+            showAlert(message: Main.Messages.userNotFound)
             return
         }
         
         if savedCards.contains(where: { $0.cardNumber == cardNumber }) {
-            showAlert(message: "This card already exists.")
+            showAlert(message: Main.Messages.cardAlreadySaved)
             return
         }
         
@@ -198,7 +198,7 @@ class CheckoutViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = true
             self.viewTransparent.isHidden = false
         }
-        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: "Transparentcolor")
+        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: Main.Colors.transparent)
     }
     
     /// Close Thank You popup
@@ -225,7 +225,7 @@ class CheckoutViewController: UIViewController {
         
         // Disable back button and set nav bar color
         self.navigationItem.hidesBackButton = true
-        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: "Transparentcolor")
+        self.navigationController?.navigationBar.backgroundColor  = UIColor(named: Main.Colors.transparent)
     }
     
     // MARK: - Navigation after Order

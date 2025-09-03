@@ -57,10 +57,10 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             as? DessertsViewController {
             
             // Assign correct category based on row tapped
-            switch selected.strName.lowercased() {
-            case "food": vc.selectedCategory = .food
-            case "beverages": vc.selectedCategory = .Beverages
-            case "desserts": vc.selectedCategory = .Desserts
+            switch selected.strName {
+            case Main.MenuCategories.food: vc.selectedCategory = .food
+            case Main.MenuCategories.beverages: vc.selectedCategory = .Beverages
+            case Main.MenuCategories.desserts: vc.selectedCategory = .Desserts
             default: return
             }
             
@@ -71,8 +71,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func updateEmptyState() {
         if filteredMenuItems.isEmpty {
-            tblMenu.setEmptyView(animationName: "Menu",
-                                 message: "No results found 🔍")
+            tblMenu.setEmptyView(animationName: Main.Animations.menu,
+                                 message: Main.Messages.noMenuResults)
         } else {
             tblMenu.restore()
         }

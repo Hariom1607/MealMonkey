@@ -17,7 +17,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             // Only set it temporarily
             imgUser.image = selectedImage
             // ✅ Save image to CoreData for the current user
-            if let email = UserDefaults.standard.string(forKey: "currentUserEmail") {
+            if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
                 let imageData = selectedImage.jpegData(compressionQuality: 0.8)
                 CoreDataHelper.shared.updateUser(oldEmail: email,
                                                  newEmail: email,

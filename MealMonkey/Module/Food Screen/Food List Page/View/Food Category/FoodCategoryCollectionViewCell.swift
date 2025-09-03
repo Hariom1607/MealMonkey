@@ -23,20 +23,19 @@ class FoodCategoryCollectionViewCell: UICollectionViewCell {
     func configure(with category: ProductCategory) {
         lblFoodCategory.text = category.rawValue
         
-        // Set category-specific image
         switch category {
         case .All:
-            imgFoodCategory.image = UIImage(named: "ic_AppLogo")
+            imgFoodCategory.image = UIImage(named: Main.images.appLogo)
         case .Punjabi:
-            imgFoodCategory.image = UIImage(named: "ic_paneertikka")
+            imgFoodCategory.image = UIImage(named: Main.images.punjabi)
         case .Chinese:
-            imgFoodCategory.image = UIImage(named: "ic_hakkanoodles")
+            imgFoodCategory.image = UIImage(named: Main.images.chinese)
         case .Gujarati:
-            imgFoodCategory.image = UIImage(named: "Ic_Khaman_Dhokla")
+            imgFoodCategory.image = UIImage(named: Main.images.gujarati)
         case .SouthIndian:
-            imgFoodCategory.image = UIImage(named: "ic_masaladosa")
+            imgFoodCategory.image = UIImage(named: Main.images.southIndian)
         case .WesternFood:
-            imgFoodCategory.image = UIImage(named: "ic_margherita_pizza")
+            imgFoodCategory.image = UIImage(named: Main.images.westernFood)
         }
     }
 }

@@ -31,7 +31,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         super.viewWillAppear(animated)
         
         // ✅ Always fetch the latest logged-in user from CoreData instead of stale UserDefaults
-        if let email = UserDefaults.standard.string(forKey: "currentUserEmail"),
+        if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail),
            let user = CoreDataHelper.shared.fetchUser(email: email),
            let name = user.name, !name.isEmpty {
             
@@ -47,7 +47,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         tblRecentItems.reloadData()
         
         // ✅ Update current location label from UserDefaults
-        if let address = UserDefaults.standard.string(forKey: "currentAddress"), !address.isEmpty {
+        if let address = UserDefaults.standard.string(forKey: Main.map.currentAddressKey), !address.isEmpty {
             lblCurrentLocation.text = address
         } else {
             lblCurrentLocation.text = "Select your location"
@@ -103,7 +103,7 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         setTextFieldPadding([txtSearchFood])
         
         // Try name directly from UserDefaults first
-        if let name = UserDefaults.standard.string(forKey: "currentUserName"), !name.isEmpty {
+        if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserName), !name.isEmpty {
             setLeftAlignedTitle("Good Morning \(name)")
         } else {
             setLeftAlignedTitle("Good Morning")
@@ -148,8 +148,10 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     // Configure table view
     private func setupTableView() {
-        tblRecentItems.register(UINib(nibName: "FoodListTableViewCell", bundle: nil),
-                                forCellReuseIdentifier: "FoodListTableViewCell")
+        tblRecentItems.register(
+            UINib(nibName: Main.cells.homeFoosListCell, bundle: nil),
+            forCellReuseIdentifier: Main.cells.homeFoosListCell
+        )
         tblRecentItems.rowHeight = UITableView.automaticDimension
         tblRecentItems.estimatedRowHeight = 200
     }
@@ -206,8 +208,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     
     // Cart button tapped → navigate to cart screen
     @objc func btnCartTapped() {
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let menuVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
@@ -217,8 +219,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         // TODO: Implement location picker
         
         // Navigate to detail screen
-        let storyboard = UIStoryboard(name: "AboutUsStoryboard", bundle: nil)
-        if let detailVC = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.aboutUs, bundle: nil)
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.map) as? MapViewController {
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
         print("📍 Current Location button tapped")
@@ -231,8 +233,8 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         RecentItemsHelper.shared.addProduct(product)
         
         // Navigate to detail screen
-        let storyboard = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-        if let detailVC = storyboard.instantiateViewController(withIdentifier: "FoodDetailViewController") as? FoodDetailViewController {
+        let storyboard = UIStoryboard(name: Main.storyboards.menu, bundle: nil)
+        if let detailVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.foodDetail) as? FoodDetailViewController {
             detailVC.product = product
             self.navigationController?.pushViewController(detailVC, animated: true)
         }

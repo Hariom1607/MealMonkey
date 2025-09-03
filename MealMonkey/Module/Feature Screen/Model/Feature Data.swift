@@ -26,16 +26,16 @@ class Feature: NSObject{
     // MARK: - Static Data Source
     // Example features used to populate onboarding screens or feature highlights
     static let features: [Feature] = [
-        Feature(imageName: "ic_1x_Find food you love",
-                title: "Find Food You Love",
-                subTitle: "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"),
+        Feature(imageName: Main.images.featureFindFood,
+                title: Main.FeatureTexts.findFoodTitle,
+                subTitle: Main.FeatureTexts.findFoodSubTitle),
         
-        Feature(imageName: "ic_1x_Delivery vector",
-                title: "Fast Delivery",
-                subTitle: "Fast food delivery to your home, office wherever you are"),
+        Feature(imageName: Main.images.featureFastDelivery,
+                title: Main.FeatureTexts.fastDeliveryTitle,
+                subTitle: Main.FeatureTexts.fastDeliverySubTitle),
         
-        Feature(imageName: "ic_1x_Live tracking vector",
-                title: "Live Tracking",
-                subTitle: "Real time tracking of your food on the app once you placed the order")
+        Feature(imageName: Main.images.featureLiveTracking,
+                title: Main.FeatureTexts.liveTrackingTitle,
+                subTitle: Main.FeatureTexts.liveTrackingSubTitle)
     ]
 }
