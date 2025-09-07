@@ -44,7 +44,8 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1: // 🔹 Popular (dynamic height)
             cell.collectionType = .popular
-            cell.lblCollViewHeading.text = Main.Labels.popular   // ✅ replaced string
+            cell.lblCollViewHeading.text = Localized("label_foodscreen_section_popular")
+            cell.btnViewAll.setTitle(Localized("label_foodscreen_btn_view_all"), for: .normal)
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             
@@ -62,7 +63,8 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 2: // 🔹 Most Popular (fixed height)
             cell.collectionType = .mostPopular
-            cell.lblCollViewHeading.text = Main.Labels.mostPopular   // ✅ replaced string
+            cell.lblCollViewHeading.text = Localized("label_foodscreen_section_most_popular")
+            cell.btnViewAll.setTitle(Localized("label_foodscreen_btn_view_all"), for: .normal)
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             cell.collViewHeight.constant = 185
@@ -81,7 +83,8 @@ extension FoodScreenViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 3: // 🔹 Recent Items (dynamic height)
             cell.collectionType = .RecentItems
-            cell.lblCollViewHeading.text = Main.Labels.recentItems   // ✅ replaced string
+            cell.lblCollViewHeading.text = Localized("label_foodscreen_section_recent")
+            cell.btnViewAll.setTitle(Localized("label_foodscreen_btn_view_all"), for: .normal)
             cell.lblCollViewHeading.isHidden = false
             cell.btnViewAll.isHidden = false
             cell.products = recentItems

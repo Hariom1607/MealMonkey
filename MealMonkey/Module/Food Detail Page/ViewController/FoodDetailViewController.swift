@@ -10,6 +10,12 @@ import UIKit
 class FoodDetailViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lbl4StarRatings: UILabel!
+    @IBOutlet weak var lblTotalPriceTitle: UILabel!
+    @IBOutlet weak var lblperPortion: UILabel!
+    @IBOutlet weak var lblDescriptionTitle: UILabel!
+    @IBOutlet weak var lblCustomizeYourOrder: UILabel!
+    @IBOutlet weak var lblNumberOfPortions: UILabel!
     @IBOutlet weak var btnWishlist: UIButton!
     @IBOutlet weak var btnDropDownPortions: UIButton!
     @IBOutlet weak var btnDropDownIngredients: UIButton!
@@ -50,7 +56,7 @@ class FoodDetailViewController: UIViewController {
         ]
         
         // Re-apply custom nav items
-        setLeftAlignedTitleWithBack(Main.Labels.foodDetail, target: self, action: #selector(detailBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.Labels.foodDetailNavTitle, target: self, action: #selector(detailBackBtnTapped))
         setCartButton(target: self, action: #selector(cartBtnTapped))
         updateWishlistButton() // Refresh wishlist state when screen appears
         updateCartBadge()
@@ -87,6 +93,21 @@ class FoodDetailViewController: UIViewController {
         lblNimberOfPortion.text = "\(quantity)"
         btnPortionReduce.isEnabled = false
         
+        // Set localized button titles
+        btnAddtoCart.setTitle(Main.Labels.btnAddToCart, for: .normal)
+        btnPortionIncrease.setTitle(Main.Labels.btnPortionIncrease, for: .normal)
+        btnPortionReduce.setTitle(Main.Labels.btnPortionDecrease, for: .normal)
+        
+        // Set text fields placeholder
+        txtSelectIngridients.placeholder = Main.Labels.txtSelectIngredients
+        txtSizeOfPortions.placeholder = Main.Labels.txtSizeOfPortions
+        
+        lbl4StarRatings.text = Main.Labels.fourStarRatings
+        lblTotalPriceTitle.text = Main.Labels.totalPriceTitle
+        lblperPortion.text = Main.Labels.perPortion
+        lblDescriptionTitle.text = Main.Labels.descriptionTitle
+        lblCustomizeYourOrder.text = Main.Labels.customizeYourOrder
+        lblNumberOfPortions.text = Main.Labels.numberOfPortions
     }
     
     // MARK: - UI Setup
@@ -147,12 +168,9 @@ class FoodDetailViewController: UIViewController {
               let currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) else { return }
         
         CoreDataHelper.shared.addCartItem(product: product, quantity: quantity, userEmail: currentUserEmail)
-        
-        //  Update the cart badge instantly
         self.updateCartBadge()
         
-        // Show confirmation alert
-        let alert = UIAlertController(title: Main.Labels.success, message: Main.Labels.addedToCart, preferredStyle: .alert)
+        let alert = UIAlertController(title: Main.Labels.success, message: Main.Labels.alertItemAdded, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
         present(alert, animated: true)
     }

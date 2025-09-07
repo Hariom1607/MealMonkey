@@ -22,6 +22,17 @@ class FeatureViewController: UIViewController {
     var currentIndex: Int = 0                   // Tracks current page index
     
     // MARK: - Lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set button title for current index
+        btnNext.setTitle(currentIndex == 2 ? Localized("label_done") : Localized("label_next"), for: .normal)
+        
+        // Update first page labels
+        updateLabels(for: currentIndex)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +41,7 @@ class FeatureViewController: UIViewController {
         
         // Button styling
         btnNext.layer.cornerRadius = 28
+        btnNext.setTitle(Main.FeatureTexts.next, for: .normal)
         
         // Setup page control
         pageControl.numberOfPages = features.count
@@ -45,15 +57,25 @@ class FeatureViewController: UIViewController {
     // MARK: - Helpers
     /// Updates labels and page control for given feature index
     func updateLabels(for index: Int) {
-        let model = features[index]
-        lblTitle.text = model.title
-        lblSubTitle.text = model.subTitle
+        switch index {
+        case 0:
+            lblTitle.text = Localized("feature_find_food_title")
+            lblSubTitle.text = Localized("feature_find_food_subtitle")
+        case 1:
+            lblTitle.text = Localized("feature_fast_delivery_title")
+            lblSubTitle.text = Localized("feature_fast_delivery_subtitle")
+        case 2:
+            lblTitle.text = Localized("feature_live_tracking_title")
+            lblSubTitle.text = Localized("feature_live_tracking_subtitle")
+        default:
+            break
+        }
+
         pageControl.currentPage = index
         currentIndex = index
-        
-        // Change button title to "Done" on last feature
-        btnNext.setTitle(index == features.count - 1 ? Main.Labels.done : Main.Labels.next, for: .normal)
-        
+
+        // Localize button
+        btnNext.setTitle(index == 2 ? Localized("label_done") : Localized("label_next"), for: .normal)
     }
     
     // MARK: - Actions

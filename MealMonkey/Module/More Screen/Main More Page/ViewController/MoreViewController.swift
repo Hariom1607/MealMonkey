@@ -10,13 +10,21 @@ import UIKit
 class MoreViewController: UIViewController {
     
     // Array of items for the "More" section (from More model)
-    let arrTitles: [More] = More.items
+    var arrTitles: [More] = []
     
     // Outlet for the More screen's table view
     @IBOutlet weak var tblMore: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.updateCartBadge()
+        arrTitles = More.items
+        if arrTitles.count > 6 {
+            arrTitles[6] = More(imgSection: Main.images.language,
+                                title: Main.Labels.moreLanguages)
+        }
+        tblMore.reloadData()
     }
     
     override func viewDidLoad() {
@@ -27,7 +35,7 @@ class MoreViewController: UIViewController {
                          forCellReuseIdentifier: Main.cells.morePageCell)
         
         // Set navigation title
-        setLeftAlignedTitle(Main.Labels.more)
+        setLeftAlignedTitle(Main.Labels.moreNavTitle)
 
         // Add cart button to navigation bar
         setCartButton(target: self, action: #selector(cartButtonTapped))

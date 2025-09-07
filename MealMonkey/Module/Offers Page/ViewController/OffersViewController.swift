@@ -10,6 +10,7 @@ import UIKit
 class OffersViewController: UIViewController {
     
     // Outlet for "Check Offers" button
+    @IBOutlet weak var lblfindDiscount: UILabel! // Find discounts, Offers special meals and more!
     @IBOutlet weak var btnCheckOffers: UIButton!
     // Outlet for table view that displays list of offers
     @IBOutlet weak var tblOffers: UITableView!
@@ -32,8 +33,10 @@ class OffersViewController: UIViewController {
         tblOffers.register(UINib(nibName: Main.cells.offersCell, bundle: nil),
                            forCellReuseIdentifier: Main.cells.offersCell)
         
-        setLeftAlignedTitle(Main.Labels.latestOffers)
+        setLeftAlignedTitle(Main.OfferLabels.navTitle)
         setCartButton(target: self, action: #selector(cartBtnTapped))
+        lblfindDiscount.text = Main.OfferLabels.findDiscounts
+        btnCheckOffers.setTitle(Main.OfferLabels.btnCheckOffers, for: .normal)
     }
     
     @objc func cartBtnTapped() {

@@ -10,7 +10,19 @@ import UIKit
 class CheckoutViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblYoucanremovethiscardatanytime: UILabel!
+    @IBOutlet weak var lblExpiry: UILabel!
+    @IBOutlet weak var lblAddCreditDebitCard: UILabel!
+    @IBOutlet weak var lblDescriptionThankyoupage: UILabel! // Your Order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your Order
+    @IBOutlet weak var lblForYouOrder: UILabel!
+    @IBOutlet weak var lblThankYou: UILabel!
+    @IBOutlet weak var lblDeliveryAddress: UILabel!
+    @IBOutlet weak var lblPaymentMethod: UILabel!
+    @IBOutlet weak var lblSubTotalTitle: UILabel!
     @IBOutlet weak var viewAddCardTopCorner: UIView!
+    @IBOutlet weak var lblDeliveryCostTitle: UILabel!
+    @IBOutlet weak var lblDiscountTitle: UILabel!
+    @IBOutlet weak var lblTotalTitle: UILabel!
     @IBOutlet weak var btnAddCard: UIButton!                 // Button to open Add Card popup
     @IBOutlet weak var viewPlaceOrderTopCorner: UIView!
     @IBOutlet weak var btnCloseThankyouView: UIButton!       // Button to close Thank You view
@@ -48,13 +60,20 @@ class CheckoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Always update delivery location label before view appears
+        // Refresh all localized texts
+        setupLocalization()
+        
+        // Update delivery location
         if let address = UserDefaults.standard.string(forKey: Main.map.currentAddressKey) {
             lblCurrentLocation.text = address
         } else {
             lblCurrentLocation.text = Main.Labels.selectLocation
         }
+        
+        // Update subtotal, delivery cost, discount, and total
+        updateOrderSummary()
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +83,38 @@ class CheckoutViewController: UIViewController {
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding(allViews)
         
+        // Add Card placeholders
+        txtFirstName.placeholder = Main.Labels.firstName
+        txtLastName.placeholder = Main.Labels.lastName
+        txtCardNumber.placeholder = Main.Labels.cardNumber
+        txtExpiryMonth.placeholder = Main.Labels.expiryMonth
+        txtExpiryYear.placeholder = Main.Labels.expiryYear
+        txtSecurityCode.placeholder = Main.Labels.securityCode
+        
+        // Apply localized labels
+        lblYoucanremovethiscardatanytime.text = Main.Labels.checkoutYouCanRemoveCard
+        lblExpiry.text = Main.Labels.checkoutExpiry
+        lblAddCreditDebitCard.text = Main.Labels.checkoutAddCreditDebitCard
+        lblDescriptionThankyoupage.text = Main.Labels.checkoutDescriptionThankYou
+        lblForYouOrder.text = Main.Labels.checkoutForYourOrder
+        lblThankYou.text = Main.Labels.checkoutThankYou
+        
+        // Reuse My Order labels
+        lblDeliveryAddress.text = Main.Labels.myOrderAddress
+        lblPaymentMethod.text = Main.Labels.myOrderMealMonkey // If you want a more suitable label, create a new key
+        lblSubTotalTitle.text = Main.Labels.myOrderSubTotalTitle
+        lblDeliveryCostTitle.text = Main.Labels.myOrderDeliveryCostTitle
+        
+        // Buttons
+        btnAddCard.setTitle(Main.Labels.btnAddCard, for: .normal)
+        btnSendOrder.setTitle(Main.Labels.btnSendOrder, for: .normal)
+        btnCloseThankyouView.setTitle(Main.Labels.btnClose, for: .normal)
+        btnBackToHome.setTitle(Main.Labels.btnBackToHome, for: .normal)
+        btnTrackOrder.setTitle(Main.Labels.btnTrackOrder, for: .normal)
+        btnAddNewCardPopUp.setTitle(Main.Labels.addNewCard, for: .normal)
+        btnCloseAddCardView.setTitle(Main.Labels.closeAddCardView, for: .normal)
+        btnLocationChange.setTitle(Main.Labels.btnLocationChange, for: .normal)
+
         roundCorners(of: [viewAddCardTopCorner, viewPlaceOrderTopCorner])
         
         // Update subtotal, delivery, discount, and total labels
@@ -75,7 +126,7 @@ class CheckoutViewController: UIViewController {
         viewTransparent.isHidden = true
         
         // Set navigation bar title with back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.checkout, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.BackBtnTitle.checkout, target: self, action: #selector(backBtnTapped))
         
         // Register custom cells for payment options
         tblPaymentDetails.register(UINib(nibName: Main.cells.checkoutCardCell, bundle: nil), forCellReuseIdentifier:Main.cells.checkoutCardCell)
@@ -87,6 +138,31 @@ class CheckoutViewController: UIViewController {
         loadSavedCards()
     }
     
+    private func setupLocalization() {
+        // Buttons
+        btnSendOrder.setTitle(Main.Labels.btnSendOrder, for: .normal)
+        btnTrackOrder.setTitle(Main.Labels.btnTrackOrder, for: .normal)
+        btnAddCard.setTitle(Main.Labels.btnAddCard, for: .normal)
+        btnBackToHome.setTitle(Main.Labels.btnBackToHome, for: .normal)
+        btnCloseThankyouView.setTitle(Main.Labels.btnClose, for: .normal)
+        btnAddNewCardPopUp.setTitle(Main.Labels.addNewCard, for: .normal)
+        btnCloseAddCardView.setTitle(Main.Labels.closeAddCardView, for: .normal)
+        btnLocationChange.setTitle(Main.Labels.btnLocationChange, for: .normal)
+        
+        // Labels
+        lblYoucanremovethiscardatanytime.text = Main.Labels.checkoutYouCanRemoveCard
+        lblExpiry.text = Main.Labels.checkoutExpiry
+        lblAddCreditDebitCard.text = Main.Labels.checkoutAddCreditDebitCard
+        lblDescriptionThankyoupage.text = Main.Labels.checkoutDescriptionThankYou
+        lblForYouOrder.text = Main.Labels.checkoutForYourOrder
+        lblThankYou.text = Main.Labels.checkoutThankYou
+        lblDeliveryAddress.text = Main.Labels.myOrderAddress
+        lblPaymentMethod.text = Main.Labels.myOrderMealMonkey
+        lblSubTotalTitle.text = Main.Labels.myOrderSubTotalTitle
+        lblDeliveryCostTitle.text = Main.Labels.myOrderDeliveryCostTitle
+        lblTotalTitle.text = Main.Labels.myOrderTotal
+    }
+
     // MARK: - Load User + Cards
     private func loadCurrentUser() {
         if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
@@ -131,7 +207,7 @@ class CheckoutViewController: UIViewController {
               let expMonth = Int16(txtExpiryMonth.text ?? ""),
               let expYear = Int16(txtExpiryYear.text ?? ""),
               let cvv = txtSecurityCode.text, !cvv.isEmpty else {
-            showAlert(message: Main.ValidationMessages.invalidCardInput)
+            showAlert(message: Main.Labels.invalidInput)
             return
         }
         
@@ -147,12 +223,12 @@ class CheckoutViewController: UIViewController {
         }
         
         guard let user = currentUser else {
-            showAlert(message: Main.Messages.userNotFound)
+            showAlert(message: Main.Labels.userNotFound)
             return
         }
         
         if savedCards.contains(where: { $0.cardNumber == cardNumber }) {
-            showAlert(message: Main.Messages.cardAlreadySaved)
+            showAlert(message: Main.Labels.cardAlreadySaved)
             return
         }
         

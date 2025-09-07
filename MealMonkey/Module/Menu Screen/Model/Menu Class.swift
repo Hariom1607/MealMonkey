@@ -30,15 +30,15 @@ class Menu {
     class func populateMenu() -> [Menu] {
         return [
             Menu(imageName: Main.images.foodMenu,
-                 strName: Main.MenuCategories.food,
+                 strName: Main.MenuLabels.categoryFood,
                  strQuantity: Main.MenuCounts.food),
             
             Menu(imageName: Main.images.beveragesMenu,
-                 strName: Main.MenuCategories.beverages,
+                 strName: Main.MenuLabels.categoryBeverages,
                  strQuantity: Main.MenuCounts.beverages),
             
             Menu(imageName: Main.images.dessertsMenu,
-                 strName: Main.MenuCategories.desserts,
+                 strName: Main.MenuLabels.categoryDesserts,
                  strQuantity: Main.MenuCounts.desserts)
         ]
     }

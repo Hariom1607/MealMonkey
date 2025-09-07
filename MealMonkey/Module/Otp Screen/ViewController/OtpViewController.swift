@@ -11,6 +11,8 @@ import DPOTPView
 class OtpViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblSubTitle: UILabel! // Please check your mobile number 071*****12 continue to reset your password
+    @IBOutlet weak var lblOtpTitle: UILabel! // We have sent an OTP to your Mobile
     @IBOutlet weak var btnOtpRegeneration: UIButton! // Button to regenerate OTP
     @IBOutlet weak var btnNext: UIButton!            // Button to proceed after OTP verification
     @IBOutlet weak var viewOtp: DPOTPView!
@@ -20,8 +22,15 @@ class OtpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Localize labels and buttons
+        lblOtpTitle.text = Main.OTP.otpTitle
+        lblSubTitle.text = Main.OTP.otpSubTitle
+        btnOtpRegeneration.setTitle(Main.OTP.btnRegenerate, for: .normal)
+        btnNext.setTitle(Main.OTP.btnNext, for: .normal)
+        
+        
         // Set navigation bar title with back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.otp, target: self, action: #selector(otpBackBtnTapped))
+        setLeftAlignedTitleWithBack(Main.BackBtnTitle.otp, target: self, action: #selector(otpBackBtnTapped))
         
         // Round corners for Next button
         btnNext.layer.cornerRadius = 28
@@ -53,12 +62,12 @@ class OtpViewController: UIViewController {
     /// Regenerate OTP button tap → show alert
     @IBAction func btnOtpRegenerationAction(_ sender: Any) {
         let alert = UIAlertController(
-            title: Main.AlertTitle.otpSent,
-            message: Main.ValidationMessages.otpSentMobile,
+            title: Main.OTP.alertOtpSent,
+            message: Main.OTP.otpSubTitle,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: Main.OTP.okBtn, style: .default))
+        self.present(alert, animated: true)
     }
     
     /// Next button tap → navigate to new password screen

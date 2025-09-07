@@ -43,21 +43,21 @@ class AboutUsViewController: UIViewController {
         // Configure UI and load appropriate data based on page type
         switch objPagetype {
         case .Notifications:
-            setLeftAlignedTitleWithBack(Main.Labels.notifications,
+            setLeftAlignedTitleWithBack(Main.Labels.notificationsNavTitle,
                                         target: self,
                                         action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartNotificationsTapped))
             arrCurrent = AboutModel.addNotificationData()
             
         case .Inbox:
-            setLeftAlignedTitleWithBack(Main.Labels.inbox,
+            setLeftAlignedTitleWithBack(Main.Labels.inboxNavTitle,
                                         target: self,
                                         action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartInboxTapped))
             arrCurrent = AboutModel.addInboxData()
             
         case .AboutUs:
-            setLeftAlignedTitleWithBack(Main.Labels.aboutUs,
+            setLeftAlignedTitleWithBack(Main.Labels.aboutUsNavTitle,
                                         target: self,
                                         action: #selector(backButtonTapped))
             setCartButton(target: self, action: #selector(cartAboutUsTapped))

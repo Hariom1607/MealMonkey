@@ -11,6 +11,8 @@ class SignupViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var lblAddYOurDetailsToSignUpPage: UILabel!
+    @IBOutlet weak var lblSignUpTitle: UILabel!
     @IBOutlet weak var btnEyeConfirmPassword: UIButton!   // Button to toggle confirm password visibility
     @IBOutlet weak var stackConfirmPassword: UIStackView! // StackView wrapping confirm password field
     @IBOutlet weak var stackPassword: UIStackView!        // StackView wrapping password field
@@ -42,6 +44,21 @@ class SignupViewController: UIViewController {
         // Add custom padding for password fields
         txtPassword.setPadding(left: 34, right: 5)
         txtConfirmPassword.setPadding(left: 34, right: 5)
+        
+        // MARK: - Localization
+        lblAddYOurDetailsToSignUpPage.text = Main.Signup.lblAddYourDetails
+        lblSignUpTitle.text = Main.Signup.lblSignupTitle
+        
+        txtName.placeholder = Main.Signup.txtNamePlaceholder
+        txtEmail.placeholder = Main.Signup.txtEmailPlaceholder
+        txtMobileNo.placeholder = Main.Signup.txtMobilePlaceholder
+        txtAddress.placeholder = Main.Signup.txtAddressPlaceholder
+        txtPassword.placeholder = Main.Signup.txtPasswordPlaceholder
+        txtConfirmPassword.placeholder = Main.Signup.txtConfirmPasswordPlaceholder
+        
+        btnSignup.setTitle(Main.Signup.btnSignup, for: .normal)
+        btnBackToLogin.setTitle(Main.Signup.btnBackToLogin, for: .normal)
+        btnBackToLogin.tintColor = UIColor.gray
     }
     
     // MARK: - Actions
@@ -76,35 +93,67 @@ class SignupViewController: UIViewController {
         let mobileNo = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
         // ✅ Step 1: Validations
+//        switch true {
+//        case username.isEmpty:
+//            UIAlertController.showAlert(title: Main.AlertTitle.NameMissing, message: Main.ValidationMessages.nameMissing, viewController: self)
+//            return
+//        case email.isEmpty:
+//            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
+//            return
+//        case !isValidEmail(email):
+//            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
+//            return
+//        case mobileNo.isEmpty:
+//            UIAlertController.showAlert(title: Main.AlertTitle.MobileMissing, message: Main.ValidationMessages.mobileMissing, viewController: self)
+//            return
+//        case address.isEmpty:
+//            UIAlertController.showAlert(title: Main.AlertTitle.AddressMissing, message: Main.ValidationMessages.addressMissing, viewController: self)
+//            return
+//        case password.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing, message: Main.ValidationMessages.passwordMissing, viewController: self)
+        //            return
+        //        case !isValidPassword(password):
+        //            UIAlertController.showAlert(title: Main.AlertTitle.InvalidPassword, message: Main.ValidationMessages.invalidPassword, viewController: self)
+        //            return
+        //        case confirmPassword.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.ConfirmPasswordMissing, message: Main.ValidationMessages.confirmPasswordMissing, viewController: self)
+        //            return
+        //        case password != confirmPassword:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMismatch, message: Main.ValidationMessages.passwordMismatch, viewController: self)
+        //            return
+        //        default: break
+        //        }
+        
         switch true {
         case username.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.NameMissing, message: Main.ValidationMessages.nameMissing, viewController: self)
+            showAlert(Main.Signup.alertNameMissing)
             return
         case email.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
+            showAlert(Main.Signup.alertEmailMissing)
             return
         case !isValidEmail(email):
-            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
+            showAlert(Main.Signup.alertInvalidEmail)
             return
         case mobileNo.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.MobileMissing, message: Main.ValidationMessages.mobileMissing, viewController: self)
+            showAlert(Main.Signup.alertMobileMissing)
             return
         case address.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.AddressMissing, message: Main.ValidationMessages.addressMissing, viewController: self)
+            showAlert(Main.Signup.alertAddressMissing)
             return
         case password.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing, message: Main.ValidationMessages.passwordMissing, viewController: self)
+            showAlert(Main.Signup.alertPasswordMissing)
             return
         case !isValidPassword(password):
-            UIAlertController.showAlert(title: Main.AlertTitle.InvalidPassword, message: Main.ValidationMessages.invalidPassword, viewController: self)
+            showAlert(Main.Signup.alertInvalidPassword)
             return
         case confirmPassword.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.ConfirmPasswordMissing, message: Main.ValidationMessages.confirmPasswordMissing, viewController: self)
+            showAlert(Main.Signup.alertConfirmPasswordMissing)
             return
         case password != confirmPassword:
-            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMismatch, message: Main.ValidationMessages.passwordMismatch, viewController: self)
+            showAlert(Main.Signup.alertPasswordMismatch)
             return
-        default: break
+        default:
+            break
         }
         
         // ✅ Step 2: Save user to CoreData
@@ -116,13 +165,12 @@ class SignupViewController: UIViewController {
             mobile: mobileNo
         ) {
             // If successful → show success and pop back to login screen
-            showAlert(Main.Messages.signupSuccess) {
+            showAlert(Main.Signup.alertSignupSuccess) {
                 self.navigationController?.popViewController(animated: true)
             }
         } else {
             // If email already exists → show error
-            showAlert(Main.Messages.userExists)
-        }
+            showAlert(Main.Signup.alertUserExists)        }
     }
     
     /// Navigate back to login screen

@@ -25,10 +25,45 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.updateCartBadge()
+        
+        // Update navigation title
+        setLeftAlignedTitle(Localized("label_profile_nav_title"))
+        
+        // Update placeholders (localized)
+        txtName.placeholder = Localized("label_profile_name_placeholder")
+        txtEmail.placeholder = Localized("label_profile_email_placeholder")
+        txtMobileNo.placeholder = Localized("label_profile_mobile_placeholder")
+        txtAddress.placeholder = Localized("label_profile_address_placeholder")
+        
+        // Update buttons
+        btnSaveUser.setTitle(Localized("label_profile_btn_save"), for: .normal)
+        btnSignOut.setTitle(Localized("label_profile_btn_signout"), for: .normal)
+        btnEditProfile.setTitle(Localized("label_profile_btn_edit"), for: .normal)
+        
+        // Update user data from UserDefaults/CoreData
+        loadUserProfile()
+        
+        // Update welcome message dynamically
+        if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName), !name.isEmpty {
+            lblWelcomeMsg.text = String(format: Localized("label_profile_welcome"), name)
+        } else {
+            lblWelcomeMsg.text = String(format: Localized("label_profile_welcome"), "")
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // ✅ Localized placeholders
+        txtName.placeholder = Main.Labels.profileNamePlaceholder
+        txtEmail.placeholder = Main.Labels.profileEmailPlaceholder
+        txtMobileNo.placeholder = Main.Labels.profileMobilePlaceholder
+        txtAddress.placeholder = Main.Labels.profileAddressPlaceholder
+        
+        // ✅ Localized buttons
+        btnSaveUser.setTitle(Main.Labels.profileBtnSave, for: .normal)
+        btnSignOut.setTitle(Main.Labels.profileBtnSignOut, for: .normal)
+        btnEditProfile.setTitle(Main.Labels.profileBtnEdit, for: .normal)
         
         // Load saved user data from UserDefaults into textfields
         txtName.text = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName)
@@ -42,7 +77,7 @@ class ProfileViewController: UIViewController {
         }
         
         // Set navigation bar title & cart button
-        setLeftAlignedTitle(Main.backBtnTitle.profile)
+        setLeftAlignedTitle(Main.Labels.profileNavTitle)
         setCartButton(target: self, action: #selector(profileCartBtn))
         
         // Round profile image container
@@ -60,6 +95,13 @@ class ProfileViewController: UIViewController {
         // Enable profile image tap gesture to open image picker
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
         imgUser.addGestureRecognizer(tapGesture)
+        
+        // ✅ Welcome message
+        if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName), !name.isEmpty {
+            lblWelcomeMsg.text = String(format: Main.Labels.profileWelcome, name)
+        } else {
+            lblWelcomeMsg.text = String(format: Main.Labels.profileWelcome, "")
+        }
         
         // Load user profile from CoreData or UserDefaults
         loadUserProfile()

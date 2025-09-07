@@ -42,18 +42,22 @@ class More: NSObject {
     // MARK: - Static Items
     
     /// Predefined list of items displayed in the "More" section
-    static let items: [More] = [
-        More(imgSection: Main.images.paymentDetails,
-             title: Main.Labels.paymentDetails),
-        More(imgSection: Main.images.myOrders,
-             title: Main.Labels.myOrders),
-        More(imgSection: Main.images.notifications,
-             title: Main.Labels.notifications),
-        More(imgSection: Main.images.inbox,
-             title: Main.Labels.inbox),
-        More(imgSection: Main.images.heartfill, // SF Symbol already exists in Main
-             title: Main.Labels.wishlist),
-        More(imgSection: Main.images.aboutUs,
-             title: Main.Labels.aboutUs)
-    ]
+    static var items: [More] {
+        return [
+            More(imgSection: Main.images.paymentDetails,
+                 title: Main.Labels.morePaymentDetails),
+            More(imgSection: Main.images.myOrders,
+                 title: Main.Labels.moreMyOrders),
+            More(imgSection: Main.images.notifications,
+                 title: Main.Labels.moreNotifications),
+            More(imgSection: Main.images.inbox,
+                 title: Main.Labels.moreInbox),
+            More(imgSection: Main.images.heartfill,
+                 title: Main.Labels.moreWishlist),
+            More(imgSection: Main.images.aboutUs,
+                 title: Main.Labels.moreAboutUs),
+            More(imgSection: Main.images.language,
+                 title: Main.Labels.moreLanguages)
+        ]
+    }
 }

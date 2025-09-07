@@ -1,0 +1,48 @@
+
+/* Class = "UIButton"; normalTitle = "Sign Out"; ObjectID = "29O-M9-fkh"; */
+"29O-M9-fkh.normalTitle" = "Sign Out";
+
+/* Class = "UIButton"; configuration.title = "Save"; ObjectID = "61C-vW-a79"; */
+"61C-vW-a79.configuration.title" = "Save";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "61C-vW-a79"; */
+"61C-vW-a79.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Find discounts, Offers special\nmeals and more!"; ObjectID = "7et-br-7QS"; */
+"7et-br-7QS.text" = "Find discounts, Offers special\nmeals and more!";
+
+/* Class = "UITextField"; placeholder = "Address"; ObjectID = "QXD-Jo-lbw"; */
+"QXD-Jo-lbw.placeholder" = "Address";
+
+/* Class = "UIButton"; normalTitle = "Edit Profile"; ObjectID = "Qs9-u9-8sG"; */
+"Qs9-u9-8sG.normalTitle" = "Edit Profile";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "RTL-38-gI3"; */
+"RTL-38-gI3.placeholder" = "Name";
+
+/* Class = "UIButton"; normalTitle = "Check Offers"; ObjectID = "TNP-mu-qQ9"; */
+"TNP-mu-qQ9.normalTitle" = "Check Offers";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Wvp-o4-anD"; */
+"Wvp-o4-anD.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "e9h-rV-tLg"; */
+"e9h-rV-tLg.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Current Location"; ObjectID = "h5H-7b-nwm"; */
+"h5H-7b-nwm.text" = "Current Location";
+
+/* Class = "UITextField"; placeholder = "Mobile No"; ObjectID = "nLv-dI-ddg"; */
+"nLv-dI-ddg.placeholder" = "Mobile No";
+
+/* Class = "UILabel"; text = "Delivering to"; ObjectID = "ptN-JR-WaT"; */
+"ptN-JR-WaT.text" = "Delivering to";
+
+/* Class = "UITextField"; placeholder = "Search Food"; ObjectID = "u1Y-De-riK"; */
+"u1Y-De-riK.placeholder" = "Search Food";
+
+/* Class = "UILabel"; text = "Hii there Emilia!"; ObjectID = "vmR-6B-eEM"; */
+"vmR-6B-eEM.text" = "Hii there Emilia!";
+
+/* Class = "UITextField"; placeholder = "Search food"; ObjectID = "zxH-Ao-KE8"; */
+"zxH-Ao-KE8.placeholder" = "Search food";

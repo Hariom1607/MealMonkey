@@ -27,10 +27,11 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         
         // Style button
+        btnPlaceOrder.setTitle(Main.CartPage.placeOrderButton, for: .normal)
         styleViews([btnPlaceOrder!], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         // Add title + back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.cart, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.CartPage.navTitle, target: self, action: #selector(backBtnTapped))
         
         // Register custom cell
         tblCart.register(UINib(nibName: Main.cells.cartCell, bundle: nil), forCellReuseIdentifier: Main.cells.cartCell)
@@ -52,8 +53,7 @@ class CartViewController: UIViewController {
     func updateEmptyState() {
         if cartItems.isEmpty {
             let emptyView = EmptyStateView(animationName: Main.EmptyState.cartAnimation,
-                                           message: Main.EmptyState.cartEmptyMessage)
-            
+                                           message: Main.CartPage.emptyMessage)
             tblCart.backgroundView = emptyView
             btnPlaceOrder.isHidden = true
         } else {
@@ -120,22 +120,22 @@ class CartViewController: UIViewController {
             updateEmptyState()
             tblCart.reloadData()
             
-            // Success alert
-            let alert = UIAlertController(title: Main.Alerts.orderPlacedTitle,
-                                          message: Main.Alerts.orderPlacedMessage,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
-            present(alert, animated: true)
+            // Order Placed
+            let successAlert = UIAlertController(title: Main.CartPage.orderPlacedTitle,
+                                                 message: Main.CartPage.orderPlacedMessage,
+                                                 preferredStyle: .alert)
+            successAlert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
+
+            present(successAlert, animated: true)
             
         } catch {
             print("❌ Failed to save order: \(error.localizedDescription)")
-            let alert = UIAlertController(title: Main.Alerts.orderErrorTitle,
-                                          message: Main.Alerts.orderErrorMessage,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
-            present(alert, animated: true)
+            // Order Error
+            let errorAlert = UIAlertController(title: Main.CartPage.orderErrorTitle,
+                                               message: Main.CartPage.orderErrorMessage,
+                                               preferredStyle: .alert)
+            errorAlert.addAction(UIAlertAction(title: Main.Labels.ok, style: .default))
+            present(errorAlert, animated: true)
         }
     }
     

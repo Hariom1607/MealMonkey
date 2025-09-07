@@ -10,6 +10,7 @@ import UIKit
 /// Custom cell representing the "Cash on Delivery" payment option
 class CashOnDeliveryTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var lblCashOnDelivery: UILabel!
     @IBOutlet weak var viewCash: UIView!                       // Container view
     @IBOutlet weak var btnCashOnDeliverySelection: UIButton!   // Selection button
     

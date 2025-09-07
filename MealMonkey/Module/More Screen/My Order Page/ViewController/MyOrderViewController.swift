@@ -16,18 +16,55 @@ class MyOrderViewController: UIViewController {
     @IBOutlet weak var lblSubTotal: UILabel!       // Label for showing subtotal (without delivery cost)
     @IBOutlet weak var btnAddNotes: UIButton!      // Button for adding special notes (optional feature)
     @IBOutlet weak var btnCheckout: UIButton!      // Button to proceed to checkout
+    @IBOutlet weak var lblTotalTitle: UILabel!
     @IBOutlet weak var tblMyOrders: UITableView!   // TableView listing all ordered products
     
+    @IBOutlet weak var lblAddress: UILabel!
+    @IBOutlet weak var lblMealMonkey: UILabel!
+    @IBOutlet weak var lblDeliveryCostTitle: UILabel!
+    @IBOutlet weak var lblSubTotalTitle: UILabel!
+    @IBOutlet weak var lblDeliveryInstruction: UILabel!
     // MARK: - Properties
     var orderProducts: [ProductModel] = []         // Array holding ordered products
     let deliveryCost: Double = 5.0                 // Fixed delivery charge (can be dynamic later)
     
     // MARK: - Lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Update navigation title
+        setLeftAlignedTitleWithBack(Main.Labels.myOrderNavTitle, target: self, action: #selector(backBtnTapped))
+        
+        // Update buttons
+        btnCheckout.setTitle(Main.Labels.myOrderCheckout, for: .normal)
+        btnAddNotes.setTitle(Main.Labels.myOrderAddNotes, for: .normal)
+        
+        // Update static labels
+        lblAddress.text = Main.Labels.myOrderAddress
+        lblMealMonkey.text = Main.Labels.myOrderMealMonkey
+        lblDeliveryCostTitle.text = Main.Labels.myOrderDeliveryCostTitle
+        lblSubTotalTitle.text = Main.Labels.myOrderSubTotalTitle
+        lblDeliveryInstruction.text = Main.Labels.myOrderDeliveryInstruction
+        
+        // Recalculate totals with localized labels
+        calculateTotals()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnCheckout.setTitle(Main.Labels.myOrderCheckout, for: .normal)
+        btnAddNotes.setTitle(Main.Labels.myOrderAddNotes, for: .normal)
+        
+        lblAddress.text = Main.Labels.myOrderAddress
+        lblMealMonkey.text = Main.Labels.myOrderMealMonkey
+        lblDeliveryCostTitle.text = Main.Labels.myOrderDeliveryCostTitle
+        lblSubTotalTitle.text = Main.Labels.myOrderSubTotalTitle
+        lblDeliveryInstruction.text = Main.Labels.myOrderDeliveryInstruction
+        
         // Setup navigation bar with title and back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.myOrder, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.Labels.myOrderNavTitle, target: self, action: #selector(backBtnTapped))
         
         // Round checkout button for better UI
         btnCheckout.layer.cornerRadius = 28
@@ -43,11 +80,11 @@ class MyOrderViewController: UIViewController {
     
     /// Calculates subtotal, adds delivery cost, and updates labels
     func calculateTotals() {
-        let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty!)) }
+        let subtotal = orderProducts.reduce(0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 1)) }
         
-        lblSubTotal.text = "$\(String(format: "%.2f", subtotal))"
-        lblDeliveryCost.text = "$\(String(format: "%.2f", deliveryCost))"
-        lblTotal.text = "$\(String(format: "%.2f", subtotal + deliveryCost))"
+        lblSubTotal.text = "\(Main.Labels.myOrderSubTotal): \(Main.Labels.currencySymbol)\(String(format: "%.2f", subtotal))"
+        lblDeliveryCost.text = "\(Main.Labels.myOrderDeliveryCost): \(Main.Labels.currencySymbol)\(String(format: "%.2f", deliveryCost))"
+        lblTotal.text = "\(Main.Labels.myOrderTotal): \(Main.Labels.currencySymbol)\(String(format: "%.2f", subtotal + deliveryCost))"
     }
     
     // MARK: - Actions

@@ -37,12 +37,20 @@ class DessertsViewController: UIViewController {
         txtSearch.setPadding(left: 34, right: 34)
         txtSearch.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         
+        // Search placeholder for the selected category
+        switch selectedCategory {
+        case .food: txtSearch.placeholder = Main.MenuLabels.searchFoodPlaceholder
+        case .Beverages: txtSearch.placeholder = Main.MenuLabels.searchBeveragesPlaceholder
+        case .Desserts: txtSearch.placeholder = Main.MenuLabels.searchDessertsPlaceholder
+        }
+        
         let titleText: String
         switch selectedCategory {
-        case .food: titleText = Main.MenuCategories.food
-        case .Beverages: titleText = Main.MenuCategories.beverages
-        case .Desserts: titleText = Main.MenuCategories.desserts
+        case .food: titleText = Main.MenuLabels.categoryFood
+        case .Beverages: titleText = Main.MenuLabels.categoryBeverages
+        case .Desserts: titleText = Main.MenuLabels.categoryDesserts
         }
+        
         setLeftAlignedTitleWithBack(titleText, target: self, action: #selector(dessertBackBtn))
         setCartButton(target: self, action: #selector(btnCartTapped))
         

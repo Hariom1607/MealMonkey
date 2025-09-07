@@ -13,6 +13,7 @@ import Contacts
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblChooseaSavedAddress: UILabel!
     @IBOutlet weak var btnShowtheSavedAddress: UIButton!
     @IBOutlet weak var btnSearchAddress: UIButton!
     @IBOutlet weak var txtSearchAddress: UITextField!
@@ -24,6 +25,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var currentLocation: CLLocation?
     var onLocationSelected: ((String) -> Void)?
     var hasCenteredOnUser = false
+    var riderAnimationData: RiderAnimationData?
+    
+    let restaurantLocation = CLLocationCoordinate2D(latitude: 23.0070, longitude: 72.5645) // Manek Chowk, Ahmedabad
+    var riderAnnotation: RiderAnnotation?
     
     private let bubbleTag = 999 // Used to identify & remove custom bubble views
     
@@ -31,12 +36,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lblChooseaSavedAddress.text = Main.map.lblChooseSavedAddress
+        txtSearchAddress.placeholder = Main.map.txtSearchPlaceholder
+
         // Style search box
         styleViews([txtSearchAddress], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding([txtSearchAddress])
         
         // Custom nav bar title with back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.map, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.BackBtnTitle.map, target: self, action: #selector(backBtnTapped))
         
         // Configure map and location manager
         mapView.delegate = self
@@ -47,7 +55,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        // We draw our own pin & bubble → disable default user location pin
+        // Disable default user location pin
         mapView.showsUserLocation = false
         
         // Enable gestures
@@ -61,6 +69,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.addGestureRecognizer(tapGesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Check if a saved location exists
+        let lat = UserDefaults.standard.double(forKey: Main.map.latitudeKey)
+        let lon = UserDefaults.standard.double(forKey: Main.map.longitudeKey)
+        
+        if lat != 0 && lon != 0 {
+            let savedCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            let savedLocation = CLLocation(latitude: lat, longitude: lon)
+            addCustomPin(at: savedLocation, title: Main.map.selectedLocation)
+        } else if let location = currentLocation {
+            // Fall back to user’s current location
+            addCustomPin(at: location, title: Main.map.currentLocation)
+        }
+        
+        let routeLat = UserDefaults.standard.double(forKey: "LastRouteLat")
+        let routeLon = UserDefaults.standard.double(forKey: "LastRouteLon")
+        
+        if routeLat != 0 && routeLon != 0 {
+            let destination = CLLocationCoordinate2D(latitude: routeLat, longitude: routeLon)
+            showRouteFromRestaurant(to: destination)
+        }
+    }
+    
     // MARK: - Navigation
     @objc func backBtnTapped() {
         self.navigationController?.popViewController(animated: true)
@@ -68,13 +101,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     // MARK: - CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // Center on user location only once
         if let location = locations.last, !hasCenteredOnUser {
             currentLocation = location
-            addCustomPin(at: location, title: Main.map.currentLocation)
+            
+            let lat = UserDefaults.standard.double(forKey: Main.map.latitudeKey)
+            let lon = UserDefaults.standard.double(forKey: Main.map.longitudeKey)
+            
+            if lat == 0 && lon == 0 {
+                addCustomPin(at: location, title: Main.map.currentLocation)
+            }
+            
             hasCenteredOnUser = true
         }
     }
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("❌ Failed to get location:", error.localizedDescription)
@@ -83,11 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // MARK: - Map Tap Handler
     @objc func handleMapTap(_ gesture: UITapGestureRecognizer) {
         let point = gesture.location(in: mapView)
-        
-        // If tap was on a pin → ignore (pin handles its own gestures)
         if let _ = mapView.hitTest(point, with: nil) as? MKAnnotationView { return }
-        
-        // Convert screen tap → coordinates
         let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
         let newLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         addCustomPin(at: newLocation, title: Main.map.selectedLocation)
@@ -96,22 +132,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // MARK: - Add Custom Pin + Address
     func addCustomPin(at location: CLLocation, title: String) {
         let geocoder = CLGeocoder()
-        
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let self = self else { return }
             guard let placemark = placemarks?.first else { return }
             
-            // Format address string
             var fullAddress = ""
             if let postalAddress = placemark.postalAddress {
-                // Best formatted address
                 let formatter = CNPostalAddressFormatter()
                 formatter.style = .mailingAddress
-                fullAddress = formatter
-                    .string(from: postalAddress)
-                    .replacingOccurrences(of: "\n", with: ", ")
+                fullAddress = formatter.string(from: postalAddress).replacingOccurrences(of: "\n", with: ", ")
             } else {
-                // Fallback if no postalAddress
                 fullAddress = [
                     placemark.subThoroughfare,
                     placemark.thoroughfare,
@@ -123,37 +153,158 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 ].compactMap { $0 }.joined(separator: ", ")
             }
             
-            // Save address + coords in UserDefaults
             UserDefaults.standard.set(fullAddress, forKey: Main.map.currentAddressKey)
             UserDefaults.standard.set(location.coordinate.latitude, forKey: Main.map.latitudeKey)
             UserDefaults.standard.set(location.coordinate.longitude, forKey: Main.map.longitudeKey)
             
-            // Pass selected address back (if callback provided)
             self.onLocationSelected?(fullAddress)
-            
-            // Remove old pins, add new one
             self.mapView.removeAnnotations(self.mapView.annotations)
+            
             let annotation = MKPointAnnotation()
             annotation.coordinate = location.coordinate
             annotation.title = title
             annotation.subtitle = fullAddress
             self.mapView.addAnnotation(annotation)
             
-            // Center on new pin
-            let region = MKCoordinateRegion(center: location.coordinate,
-                                            latitudinalMeters: 1000,
-                                            longitudinalMeters: 1000)
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             self.mapView.setRegion(region, animated: true)
         }
     }
     
-    // MARK: - MKMapViewDelegate
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        // Remove bubble when pin is deselected
-        view.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
+    // MARK: - Show Route and Animate Rider
+    func showRouteFromRestaurant(to destination: CLLocationCoordinate2D) {
+        mapView.removeOverlays(mapView.overlays)
+        if let rider = riderAnnotation {
+            mapView.removeAnnotation(rider)
+        }
+        
+        let restaurantPlacemark = MKPlacemark(coordinate: restaurantLocation)
+        let userPlacemark = MKPlacemark(coordinate: destination)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: restaurantPlacemark)
+        request.destination = MKMapItem(placemark: userPlacemark)
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { [weak self] response, error in
+            guard let self = self, let route = response?.routes.first else { return }
+            
+            // Draw route
+            self.mapView.addOverlay(route.polyline)
+            
+            // Distance & ETA
+            let distanceInKm = route.distance / 1000
+            let timeInMin = route.expectedTravelTime / 60
+            
+            // Show alert
+            let alert = UIAlertController(title: "Rider Info",
+                                          message: "Distance: \(String(format: "%.2f", distanceInKm)) km\nEstimated time: \(String(format: "%.0f", timeInMin)) min",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+            
+            // Add rider at restaurant
+            let rider = RiderAnnotation(coordinate: self.restaurantLocation)
+            self.riderAnnotation = rider
+            self.mapView.addAnnotation(rider)
+            
+            // Animate rider in real-time along route
+            self.animateRider(rider: rider, route: route)
+        }
+    }
+    
+    func animateRider(rider: RiderAnnotation, route: MKRoute) {
+        let coords = route.polyline.coordinates
+        guard coords.count > 1 else { return }
+        
+        let totalTime = route.expectedTravelTime
+        let totalDistance = route.distance
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(updateRiderPosition))
+        displayLink.add(to: .main, forMode: .common)
+        
+        riderAnimationData = RiderAnimationData(
+            rider: rider,
+            coordinates: coords,
+            totalDistance: totalDistance,
+            startTime: CACurrentMediaTime(),
+            totalTime: totalTime,
+            displayLink: displayLink
+        )
+    }
+    
+    @objc func updateRiderPosition() {
+        guard let data = riderAnimationData else { return }
+        
+        let elapsed = CACurrentMediaTime() - data.startTime
+        if elapsed >= data.totalTime {
+            data.rider.coordinate = data.coordinates.last!
+            data.displayLink.invalidate()
+            riderAnimationData = nil
+            return
+        }
+        
+        // Calculate distance along route
+        let targetDistance = (elapsed / data.totalTime) * data.totalDistance
+        var coveredDistance: CLLocationDistance = 0
+        
+        for i in 0..<(data.coordinates.count - 1) {
+            let start = CLLocation(latitude: data.coordinates[i].latitude, longitude: data.coordinates[i].longitude)
+            let end = CLLocation(latitude: data.coordinates[i + 1].latitude, longitude: data.coordinates[i + 1].longitude)
+            let segmentDistance = end.distance(from: start)
+            
+            if coveredDistance + segmentDistance >= targetDistance {
+                let remaining = targetDistance - coveredDistance
+                let fraction = remaining / segmentDistance
+                let lat = start.coordinate.latitude + (end.coordinate.latitude - start.coordinate.latitude) * fraction
+                let lon = start.coordinate.longitude + (end.coordinate.longitude - start.coordinate.longitude) * fraction
+                data.rider.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                
+                // Rotate scooter smoothly
+                if let view = mapView.view(for: data.rider) {
+                    let angle = bearing(from: start.coordinate, to: end.coordinate)
+                    view.transform = CGAffineTransform(rotationAngle: angle)
+                }
+                break
+            }
+            
+            coveredDistance += segmentDistance
+        }
+    }
+    
+    // MARK: - MapKit Helpers
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: polyline)
+            renderer.strokeColor = UIColor.systemOrange
+            renderer.lineWidth = 5
+            return renderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is RiderAnnotation {
+            let identifier = "Rider"
+            var view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            if view == nil {
+                view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                let originalImage = UIImage(named: "ic_scooter")!
+                let size = CGSize(width: 60, height: 60) // small like real apps
+                UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+                originalImage.draw(in: CGRect(origin: .zero, size: size))
+                let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                view?.image = resizedImage
+                view?.canShowCallout = false
+            } else {
+                view?.annotation = annotation
+            }
+            return view
+        }
+        
         // Skip default user location
         if annotation is MKUserLocation { return nil }
         
@@ -161,169 +312,90 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         var view = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if view == nil {
-            // Create new annotation view
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view?.canShowCallout = false // disable default bubble
+            view?.canShowCallout = false
             view?.image = UIImage(named: Main.map.locationPin)
-            
-            // Add double-tap recognizer → show bubble
-            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleAnnotationDoubleTap(_:)))
-            doubleTap.numberOfTapsRequired = 2
-            doubleTap.cancelsTouchesInView = true
-            view?.addGestureRecognizer(doubleTap)
         } else {
-            // Reuse annotation view
             view?.annotation = annotation
-            
-            // Ensure it has a double-tap recognizer
-            if view?.gestureRecognizers?.contains(where: {
-                guard let tap = $0 as? UITapGestureRecognizer else { return false }
-                return tap.numberOfTapsRequired == 2
-            }) == false {
-                let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleAnnotationDoubleTap(_:)))
-                doubleTap.numberOfTapsRequired = 2
-                doubleTap.cancelsTouchesInView = true
-                view?.addGestureRecognizer(doubleTap)
-            }
         }
         
-        // Remove any existing bubble before reusing
         view?.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
         return view
     }
     
-    // MARK: - Bubble Handling
-    @objc private func handleAnnotationDoubleTap(_ gr: UITapGestureRecognizer) {
-        guard let view = gr.view as? MKAnnotationView,
-              let annotation = view.annotation else { return }
+    // MARK: - Helper: Bearing
+    func bearing(from start: CLLocationCoordinate2D, to end: CLLocationCoordinate2D) -> CGFloat {
+        let lat1 = start.latitude.toRadians()
+        let lon1 = start.longitude.toRadians()
+        let lat2 = end.latitude.toRadians()
+        let lon2 = end.longitude.toRadians()
         
-        // Remove existing bubble → toggling behavior
-        view.subviews.filter { $0.tag == bubbleTag }.forEach { $0.removeFromSuperview() }
-        showBubble(for: view, annotation: annotation)
-    }
-    
-    private func showBubble(for annotationView: MKAnnotationView, annotation: MKAnnotation) {
-        let titleText = (annotation.title ?? Main.map.defaultLocation) ?? Main.map.defaultLocation
-        let addressText = (annotation.subtitle ?? "") ?? ""
-        
-        // Layout constants
-        let bubbleWidth: CGFloat = 220
-        let pointerHeight: CGFloat = 10
-        let cornerRadius: CGFloat = 10
-        let paddingH: CGFloat = 10
-        let paddingTop: CGFloat = 8
-        let paddingBottom: CGFloat = 10
-        let labelSpacing: CGFloat = 4
-        
-        let titleFont = UIFont.boldSystemFont(ofSize: 14)
-        let bodyFont = UIFont.systemFont(ofSize: 12)
-        
-        // Dynamically calculate text height
-        let maxTextWidth = bubbleWidth - (paddingH * 2)
-        let addrBounds = (addressText as NSString).boundingRect(
-            with: CGSize(width: maxTextWidth, height: .greatestFiniteMagnitude),
-            options: [.usesLineFragmentOrigin, .usesFontLeading],
-            attributes: [.font: bodyFont],
-            context: nil
-        )
-        let titleHeight: CGFloat = ceil(titleFont.lineHeight)
-        let addressHeight: CGFloat = ceil(addrBounds.height)
-        let bubbleHeight = paddingTop + titleHeight + labelSpacing + addressHeight + paddingBottom
-        
-        // Container view (bubble + pointer)
-        let containerHeight = bubbleHeight + pointerHeight
-        let container = UIView(frame: CGRect(
-            x: (annotationView.bounds.width - bubbleWidth)/2,
-            y: -containerHeight - 4, // position above pin
-            width: bubbleWidth,
-            height: containerHeight
-        ))
-        container.backgroundColor = .clear
-        container.tag = bubbleTag
-        container.alpha = 0
-        container.transform = CGAffineTransform(translationX: 0, y: 8) // start animation below
-        
-        // Bubble rectangle
-        let bubbleView = UIView(frame: CGRect(x: 0, y: 0, width: bubbleWidth, height: bubbleHeight))
-        bubbleView.backgroundColor = UIColor(red: 252/255, green: 96/255, blue: 17/255, alpha: 1.0) // Orange color #FC6011
-        bubbleView.layer.cornerRadius = cornerRadius
-        bubbleView.clipsToBounds = true
-        
-        // Title label
-        let titleLabel = UILabel(frame: CGRect(x: paddingH, y: paddingTop, width: maxTextWidth, height: titleHeight))
-        titleLabel.textColor = .white
-        titleLabel.font = titleFont
-        titleLabel.text = titleText
-        bubbleView.addSubview(titleLabel)
-        
-        // Address label (multi-line)
-        let addressLabel = UILabel(frame: CGRect(x: paddingH,
-                                                 y: paddingTop + titleHeight + labelSpacing,
-                                                 width: maxTextWidth,
-                                                 height: addressHeight))
-        addressLabel.textColor = .white
-        addressLabel.font = bodyFont
-        addressLabel.numberOfLines = 0
-        addressLabel.lineBreakMode = .byWordWrapping
-        addressLabel.text = addressText
-        bubbleView.addSubview(addressLabel)
-        
-        // Pointer triangle
-        let pointerLayer = CAShapeLayer()
-        let path = UIBezierPath()
-        let pointerWidth: CGFloat = 16
-        let tipX = bubbleWidth / 2
-        path.move(to: CGPoint(x: tipX - pointerWidth/2, y: bubbleHeight))
-        path.addLine(to: CGPoint(x: tipX, y: bubbleHeight + pointerHeight))
-        path.addLine(to: CGPoint(x: tipX + pointerWidth/2, y: bubbleHeight))
-        path.close()
-        pointerLayer.path = path.cgPath
-        pointerLayer.fillColor = bubbleView.backgroundColor?.cgColor
-        
-        // Assemble bubble + pointer
-        container.addSubview(bubbleView)
-        container.layer.addSublayer(pointerLayer)
-        annotationView.addSubview(container)
-        
-        // Animate bubble appearance
-        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut]) {
-            container.alpha = 1
-            container.transform = .identity
-        }
+        let y = sin(lon2 - lon1) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(lon2 - lon1)
+        return CGFloat(atan2(y, x))
     }
     
     // MARK: - Actions
     @IBAction func btnSearchAddressAction(_ sender: Any) {
         guard let address = txtSearchAddress.text, !address.isEmpty else { return }
-        
-        // Geocode typed address → drop pin
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { [weak self] placemarks, _ in
-            guard let self = self,
-                  let placemark = placemarks?.first,
-                  let location = placemark.location else { return }
+            guard let self = self, let placemark = placemarks?.first, let location = placemark.location else { return }
             self.addCustomPin(at: location, title: Main.map.searchedLocation)
         }
     }
     
     @IBAction func btnRedirectToCurrentLocationAction(_ sender: Any) {
-        // Zoom to user's last known location
         if let location = currentLocation {
-            let region = MKCoordinateRegion(center: location.coordinate,
-                                            latitudinalMeters: 1000,
-                                            longitudinalMeters: 1000)
+            let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapView.setRegion(region, animated: true)
             addCustomPin(at: location, title: Main.map.currentLocation)
         }
     }
     
     @IBAction func btnShowSavedAddressAction(_ sender: Any) {
-        // Load saved address from UserDefaults
-        let lat = UserDefaults.standard.double(forKey: Main.map.latitudeKey)
-        let lon = UserDefaults.standard.double(forKey: Main.map.longitudeKey)
-        if lat != 0 && lon != 0 {
-            let savedLocation = CLLocation(latitude: lat, longitude: lon)
-            addCustomPin(at: savedLocation, title: Main.map.savedLocation)
-        }
+        guard let lat = UserDefaults.standard.value(forKey: Main.map.latitudeKey) as? Double,
+              let lon = UserDefaults.standard.value(forKey: Main.map.longitudeKey) as? Double,
+              lat != 0, lon != 0 else { return }
+        
+        let userLocation = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        
+        // Save as last route destination
+        UserDefaults.standard.set(lat, forKey: "LastRouteLat")
+        UserDefaults.standard.set(lon, forKey: "LastRouteLon")
+        
+        showRouteFromRestaurant(to: userLocation)
     }
+    
+}
+
+// MARK: - Extensions
+extension MKPolyline {
+    var coordinates: [CLLocationCoordinate2D] {
+        var coords = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: self.pointCount)
+        self.getCoordinates(&coords, range: NSRange(location: 0, length: self.pointCount))
+        return coords
+    }
+}
+
+extension Double {
+    func toRadians() -> Double { return self * .pi / 180 }
+}
+
+// MARK: - Rider Annotation
+class RiderAnnotation: NSObject, MKAnnotation {
+    dynamic var coordinate: CLLocationCoordinate2D
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+        super.init()
+    }
+}
+
+struct RiderAnimationData {
+    let rider: RiderAnnotation
+    let coordinates: [CLLocationCoordinate2D]
+    let totalDistance: CLLocationDistance
+    let startTime: CFTimeInterval
+    let totalTime: TimeInterval
+    let displayLink: CADisplayLink
 }

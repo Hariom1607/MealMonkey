@@ -183,6 +183,7 @@ meals and more!</string>
                     <navigationItem key="navigationItem" id="j7L-nC-XFz"/>
                     <connections>
                         <outlet property="btnCheckOffers" destination="TNP-mu-qQ9" id="E5t-2j-qeG"/>
+                        <outlet property="lblfindDiscount" destination="7et-br-7QS" id="fn3-8I-z3P"/>
                         <outlet property="tblOffers" destination="StD-dy-OUC" id="b6d-VD-xkT"/>
                     </connections>
                 </viewController>
@@ -288,6 +289,7 @@ meals and more!</string>
                     <connections>
                         <outlet property="btnCurrentLocation" destination="Wvp-o4-anD" id="MJl-rn-v3k"/>
                         <outlet property="lblCurrentLocation" destination="h5H-7b-nwm" id="WW9-FX-Lrb"/>
+                        <outlet property="lblDeliveringTo" destination="ptN-JR-WaT" id="uqb-mM-bq5"/>
                         <outlet property="tblRecentItems" destination="NSr-bd-q93" id="dtb-pg-Vft"/>
                         <outlet property="txtSearchFood" destination="u1Y-De-riK" id="xCz-bE-0NT"/>
                         <outlet property="viewActivityIndicator" destination="3ha-OU-AMN" id="I9l-Qz-BNc"/>
