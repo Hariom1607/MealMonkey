@@ -1,0 +1,210 @@
+
+/* Class = "UILabel"; text = "Meal Monkey"; ObjectID = "0dA-Jc-iH6"; */
+"0dA-Jc-iH6.text" = "Meal Monkey";
+
+/* Class = "UILabel"; text = "$2"; ObjectID = "0g3-qQ-Rdg"; */
+"0g3-qQ-Rdg.text" = "$2";
+
+/* Class = "UIButton"; configuration.title = "X"; ObjectID = "1PI-as-pbE"; */
+"1PI-as-pbE.configuration.title" = "X";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1PI-as-pbE"; */
+"1PI-as-pbE.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Search Address"; ObjectID = "1UZ-KP-8qw"; */
+"1UZ-KP-8qw.placeholder" = "Search Address";
+
+/* Class = "UIButton"; configuration.title = "Add Card"; ObjectID = "1cJ-dW-GN9"; */
+"1cJ-dW-GN9.configuration.title" = "Add Card";
+
+/* Class = "UIButton"; normalTitle = "Add Card"; ObjectID = "1cJ-dW-GN9"; */
+"1cJ-dW-GN9.normalTitle" = "Add Card";
+
+/* Class = "UITextField"; placeholder = "Card Number"; ObjectID = "5sK-Dn-XBP"; */
+"5sK-Dn-XBP.placeholder" = "Card Number";
+
+/* Class = "UILabel"; text = "653 Nostrand Ave., \nBrooklyn, NY 11216"; ObjectID = "63E-gM-B4i"; */
+"63E-gM-B4i.text" = "653 Nostrand Ave., \nBrooklyn, NY 11216";
+
+/* Class = "UILabel"; text = "Sub Total"; ObjectID = "6DO-dp-KZ6"; */
+"6DO-dp-KZ6.text" = "Sub Total";
+
+/* Class = "UILabel"; text = "You can remove this card\nat anytime "; ObjectID = "6SU-qf-87F"; */
+"6SU-qf-87F.text" = "You can remove this card\nat anytime ";
+
+/* Class = "UILabel"; text = "Delivery Address"; ObjectID = "71V-jw-LIm"; */
+"71V-jw-LIm.text" = "Delivery Address";
+
+/* Class = "UIButton"; normalTitle = "Add Card"; ObjectID = "7tk-u9-PmB"; */
+"7tk-u9-PmB.normalTitle" = "Add Card";
+
+/* Class = "UILabel"; text = "Your Order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your Order"; ObjectID = "96b-Q9-L63"; */
+"96b-Q9-L63.text" = "Your Order is now being processed. We will let you know once the order is picked from the outlet. Check the status of your Order";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "AQI-2I-hbz"; */
+"AQI-2I-hbz.placeholder" = "First Name";
+
+/* Class = "UILabel"; text = "Discount"; ObjectID = "HWB-ao-G4n"; */
+"HWB-ao-G4n.text" = "Discount";
+
+/* Class = "UILabel"; text = "Expiry"; ObjectID = "J0E-gu-7Eg"; */
+"J0E-gu-7Eg.text" = "Expiry";
+
+/* Class = "UITextField"; placeholder = "YY"; ObjectID = "Kgd-6w-SOv"; */
+"Kgd-6w-SOv.placeholder" = "YY";
+
+/* Class = "UILabel"; text = "Add Credit/Debit Card"; ObjectID = "LTx-fx-HUY"; */
+"LTx-fx-HUY.text" = "Add Credit/Debit Card";
+
+/* Class = "UILabel"; text = "You can remove this card\nat anytime "; ObjectID = "LZ5-zO-5LK"; */
+"LZ5-zO-5LK.text" = "You can remove this card\nat anytime ";
+
+/* Class = "UIButton"; configuration.title = "Send Order"; ObjectID = "Ln1-he-BZ2"; */
+"Ln1-he-BZ2.configuration.title" = "Send Order";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ln1-he-BZ2"; */
+"Ln1-he-BZ2.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Add Another Credit/Debit Card"; ObjectID = "MFx-sT-sen"; */
+"MFx-sT-sen.configuration.title" = "Add Another Credit/Debit Card";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "MFx-sT-sen"; */
+"MFx-sT-sen.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Customize your payment method"; ObjectID = "Nnl-97-25s"; */
+"Nnl-97-25s.text" = "Customize your payment method";
+
+/* Class = "UILabel"; text = "Delivery Instructions"; ObjectID = "O4B-XO-x3R"; */
+"O4B-XO-x3R.text" = "Delivery Instructions";
+
+/* Class = "UITextField"; placeholder = "MM"; ObjectID = "Rgg-y0-lff"; */
+"Rgg-y0-lff.placeholder" = "MM";
+
+/* Class = "UIButton"; configuration.title = "X"; ObjectID = "Sn8-fQ-dfI"; */
+"Sn8-fQ-dfI.configuration.title" = "X";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Sn8-fQ-dfI"; */
+"Sn8-fQ-dfI.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Sub Total"; ObjectID = "W43-wk-A9b"; */
+"W43-wk-A9b.text" = "Sub Total";
+
+/* Class = "UILabel"; text = "Choose a saved place"; ObjectID = "Wat-KZ-UQC"; */
+"Wat-KZ-UQC.text" = "Choose a saved place";
+
+/* Class = "UIButton"; configuration.title = "X"; ObjectID = "XfZ-M5-tst"; */
+"XfZ-M5-tst.configuration.title" = "X";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "XfZ-M5-tst"; */
+"XfZ-M5-tst.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "$68"; ObjectID = "Xfn-ir-d7F"; */
+"Xfn-ir-d7F.text" = "$68";
+
+/* Class = "UIButton"; normalTitle = "Add Notes"; ObjectID = "YBy-MH-a2q"; */
+"YBy-MH-a2q.normalTitle" = "Add Notes";
+
+/* Class = "UILabel"; text = "Payment method"; ObjectID = "ZLL-LY-Ciy"; */
+"ZLL-LY-Ciy.text" = "Payment method";
+
+/* Class = "UILabel"; text = "(124 ratings)"; ObjectID = "a8j-5A-Kxs"; */
+"a8j-5A-Kxs.text" = "(124 ratings)";
+
+/* Class = "UILabel"; text = "-$66"; ObjectID = "abx-40-Jof"; */
+"abx-40-Jof.text" = "-$66";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eBZ-4c-9CZ"; */
+"eBZ-4c-9CZ.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "Card Number"; ObjectID = "ewA-Bp-CeB"; */
+"ewA-Bp-CeB.placeholder" = "Card Number";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "exI-Ws-ceK"; */
+"exI-Ws-ceK.text" = "Total";
+
+/* Class = "UITextField"; placeholder = "Security Code"; ObjectID = "frE-LB-1sQ"; */
+"frE-LB-1sQ.placeholder" = "Security Code";
+
+/* Class = "UILabel"; text = "$2"; ObjectID = "hOi-u8-hg2"; */
+"hOi-u8-hg2.text" = "$2";
+
+/* Class = "UIButton"; normalTitle = "Back to home"; ObjectID = "hdj-mH-KbO"; */
+"hdj-mH-KbO.normalTitle" = "Back to home";
+
+/* Class = "UILabel"; text = "Delivery Cost"; ObjectID = "iSs-WX-5ef"; */
+"iSs-WX-5ef.text" = "Delivery Cost";
+
+/* Class = "UIButton"; configuration.title = "Track My Order"; ObjectID = "jeA-wt-NE0"; */
+"jeA-wt-NE0.configuration.title" = "Track My Order";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jeA-wt-NE0"; */
+"jeA-wt-NE0.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Total"; ObjectID = "kHU-lz-JWO"; */
+"kHU-lz-JWO.text" = "Total";
+
+/* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "kL2-ON-SJ2"; */
+"kL2-ON-SJ2.placeholder" = "Last Name";
+
+/* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "kns-d3-BxL"; */
+"kns-d3-BxL.placeholder" = "Last Name";
+
+/* Class = "UILabel"; text = "Expiry"; ObjectID = "lYr-xS-Mw1"; */
+"lYr-xS-Mw1.text" = "Expiry";
+
+/* Class = "UILabel"; text = "No 03, 4th Lane, India"; ObjectID = "m3D-66-LD4"; */
+"m3D-66-LD4.text" = "No 03, 4th Lane, India";
+
+/* Class = "UILabel"; text = "Add Credit/Debit Card"; ObjectID = "mHw-cC-tWa"; */
+"mHw-cC-tWa.text" = "Add Credit/Debit Card";
+
+/* Class = "UILabel"; text = "for your order"; ObjectID = "moE-Zg-rez"; */
+"moE-Zg-rez.text" = "for your order";
+
+/* Class = "UILabel"; text = "$68"; ObjectID = "oB7-6r-Mfv"; */
+"oB7-6r-Mfv.text" = "$68";
+
+/* Class = "UITextField"; placeholder = "YY"; ObjectID = "py0-Fl-38s"; */
+"py0-Fl-38s.placeholder" = "YY";
+
+/* Class = "UILabel"; text = "$70"; ObjectID = "r7y-al-PIg"; */
+"r7y-al-PIg.text" = "$70";
+
+/* Class = "UIButton"; normalTitle = "Add Card"; ObjectID = "sBi-07-DcD"; */
+"sBi-07-DcD.normalTitle" = "Add Card";
+
+/* Class = "UIButton"; configuration.title = "Change"; ObjectID = "tSn-ou-5YI"; */
+"tSn-ou-5YI.configuration.title" = "Change";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "tSn-ou-5YI"; */
+"tSn-ou-5YI.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "uNT-ff-m85"; */
+"uNT-ff-m85.placeholder" = "First Name";
+
+/* Class = "UILabel"; text = "-$4"; ObjectID = "uPN-op-RTI"; */
+"uPN-op-RTI.text" = "-$4";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "x43-NO-d0h"; */
+"x43-NO-d0h.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Delivery Cost"; ObjectID = "xma-ve-Mo3"; */
+"xma-ve-Mo3.text" = "Delivery Cost";
+
+/* Class = "UILabel"; text = "Thank You!"; ObjectID = "xwW-LR-yrF"; */
+"xwW-LR-yrF.text" = "Thank You!";
+
+/* Class = "UILabel"; text = "4.9"; ObjectID = "yTL-n7-PjC"; */
+"yTL-n7-PjC.text" = "4.9";
+
+/* Class = "UITextField"; placeholder = "Security Code"; ObjectID = "yY4-tu-aqE"; */
+"yY4-tu-aqE.placeholder" = "Security Code";
+
+/* Class = "UIButton"; configuration.title = "Checkout"; ObjectID = "ylD-XQ-J6Z"; */
+"ylD-XQ-J6Z.configuration.title" = "Checkout";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "ylD-XQ-J6Z"; */
+"ylD-XQ-J6Z.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "MM"; ObjectID = "zwa-7H-Xdl"; */
+"zwa-7H-Xdl.placeholder" = "MM";

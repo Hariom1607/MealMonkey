@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"; ObjectID = "3TD-D8-VWM"; */
+"3TD-D8-VWM.text" = "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep";
+
+/* Class = "UILabel"; text = "Find Food You Love"; ObjectID = "8xf-pu-Stc"; */
+"8xf-pu-Stc.text" = "Find Food You Love";
+
+/* Class = "UIButton"; configuration.title = "Next"; ObjectID = "XL1-Q0-83a"; */
+"XL1-Q0-83a.configuration.title" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "XL1-Q0-83a"; */
+"XL1-Q0-83a.normalTitle" = "Button";

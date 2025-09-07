@@ -11,6 +11,7 @@ import NVActivityIndicatorView
 class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblDeliveringTo: UILabel!
     @IBOutlet weak var viewActivityIndicator: NVActivityIndicatorView!
     @IBOutlet weak var lblCurrentLocation: UILabel!                  // Shows current selected location
     @IBOutlet weak var tblRecentItems: UITableView!                  // Table for showing recent items & products
@@ -30,17 +31,33 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // ✅ Always fetch the latest logged-in user from CoreData instead of stale UserDefaults
+        // Refresh all labels with current localization
+        lblDeliveringTo.text = Localized("label_foodscreen_delivering_to")
+        txtSearchFood.placeholder = Localized("label_foodscreen_search_placeholder")
+        lblCurrentLocation.text = UserDefaults.standard.string(forKey: Main.map.currentAddressKey)?.isEmpty == false
+        ? UserDefaults.standard.string(forKey: Main.map.currentAddressKey)
+        : Localized("label_foodscreen_location_placeholder")
+        
         if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail),
            let user = CoreDataHelper.shared.fetchUser(email: email),
            let name = user.name, !name.isEmpty {
-            
-            // Update navigation bar title with user's name
-            setLeftAlignedTitle("Good Morning \(name)")
+            let greeting = String(format: Localized("label_foodscreen_nav_greeting_user"), name)
+            setLeftAlignedTitle(greeting)
         } else {
-            // Fallback if no user found or name is empty
-            setLeftAlignedTitle("Good Morning")
+            setLeftAlignedTitle(Localized("label_foodscreen_nav_greeting"))
         }
+        
+        lblDeliveringTo.text = Localized("label_foodscreen_delivering_to")
+        
+        // ✅ Update location placeholder / text dynamically
+        if let address = UserDefaults.standard.string(forKey: Main.map.currentAddressKey), !address.isEmpty {
+            lblCurrentLocation.text = address
+        } else {
+            lblCurrentLocation.text = Localized("label_foodscreen_location_placeholder")
+        }
+        
+        // ✅ Update search bar placeholder
+        txtSearchFood.placeholder = Localized("label_foodscreen_search_placeholder")
         
         // ✅ Refresh recent items list every time screen appears
         recentItems = RecentItemsHelper.shared.getRecentItems()
@@ -104,9 +121,10 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         
         // Try name directly from UserDefaults first
         if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserName), !name.isEmpty {
-            setLeftAlignedTitle("Good Morning \(name)")
+            let greeting = String(format: Main.Labels.foodscreenNavGreetingUser, name)
+            setLeftAlignedTitle(greeting)
         } else {
-            setLeftAlignedTitle("Good Morning")
+            setLeftAlignedTitle(Main.Labels.foodscreenNavGreeting)
         }
         
         // Add cart button in nav bar

@@ -22,8 +22,12 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.morePageCell, for: indexPath) as! MoreTableViewCell
         let item = arrTitles[indexPath.row]
         
-        // Set title and icon for the current More item
-        cell.lblTitleMore.text = item.title
+        // Force language row to always fetch latest localized string
+        if indexPath.row == 6 {
+            cell.lblTitleMore.text = Localized("label_more_languages")
+        } else {
+            cell.lblTitleMore.text = item.title
+        }
         cell.imgIconMore.image = item.imgSection
         cell.imgIconMore.tintColor = .loginLabel
         
@@ -78,6 +82,12 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(plvc, animated: true)
             }
             print("Sixth row selected")
+            
+        case 6: // Languages
+            let langVC = LanguageSelectionViewController()
+            let nav = UINavigationController(rootViewController: langVC)
+            nav.modalPresentationStyle = .pageSheet // iOS 15 bottom sheet style
+            self.present(nav, animated: true)
             
         default: // Any other rows
             print("Other row selected")

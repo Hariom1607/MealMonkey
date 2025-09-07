@@ -10,6 +10,8 @@ import UIKit
 class NewPasswordViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblTitleNewPassword: UILabel!
+    @IBOutlet weak var lblSubTitle: UILabel! //Please enter your email to receive a link to  create a new password via email
     @IBOutlet weak var btnEyeConfirmPassword: UIButton!
     @IBOutlet weak var btnEyePassword: UIButton!
     @IBOutlet weak var btnSubmit: UIButton!
@@ -23,6 +25,13 @@ class NewPasswordViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set localized texts
+        lblTitleNewPassword.text = Main.NewPassword.title
+        lblSubTitle.text = Main.NewPassword.subtitle
+        txtNewPassword.placeholder = Main.NewPassword.newPasswordPlaceholder
+        txtConfirmPassword.placeholder = Main.NewPassword.confirmPasswordPlaceholder
+        btnSubmit.setTitle(Main.NewPassword.btnSubmit, for: .normal)
         
         // Apply rounded style to fields and buttons
         let allViews = [
@@ -56,17 +65,17 @@ class NewPasswordViewController: UIViewController {
         
         switch true {
         case newPassword.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing,
-                                        message: Main.ValidationMessages.passwordMissing,
+            UIAlertController.showAlert(title: Main.NewPassword.alertPasswordMissing,
+                                        message: Main.NewPassword.validationPasswordMissing,
                                         viewController: self)
             return
         case confirmPassword.isEmpty:
-            UIAlertController.showAlert(title: Main.AlertTitle.ConfirmPasswordMissing,
-                                        message: Main.ValidationMessages.confirmPasswordMissing,
+            UIAlertController.showAlert(title: Main.NewPassword.alertConfirmPasswordMissing,
+                                        message: Main.NewPassword.validationConfirmPasswordMissing,
                                         viewController: self)
         case newPassword != confirmPassword:
-            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMismatch,
-                                        message: Main.ValidationMessages.passwordMismatch,
+            UIAlertController.showAlert(title: Main.NewPassword.alertPasswordMismatch,
+                                        message: Main.NewPassword.validationPasswordMismatch,
                                         viewController: self)
         default:
             break
@@ -90,9 +99,11 @@ class NewPasswordViewController: UIViewController {
                 self.navigationController?.pushViewController(mlvc, animated: true)
             }
         } else {
-            UIAlertController.showAlert(title: Main.Alerts.error,
-                                        message: Main.Messages.profileUpdateFailed,
-                                        viewController: self)
+            UIAlertController.showAlert(
+                title: Main.NewPassword.alertError,
+                message: Main.NewPassword.alertProfileUpdateFailed,
+                viewController: self
+            )
         }
     }
     

@@ -1,0 +1,72 @@
+
+/* Class = "UITextField"; placeholder = "Search Food"; ObjectID = "0K0-Zb-aw2"; */
+"0K0-Zb-aw2.placeholder" = "Search Food";
+
+/* Class = "UILabel"; text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare leo non mollis id cursus. Eu euismod faucibus in leo malesuada"; ObjectID = "1ur-19-fvs"; */
+"1ur-19-fvs.text" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare leo non mollis id cursus. Eu euismod faucibus in leo malesuada";
+
+/* Class = "UILabel"; text = "/ per Portion"; ObjectID = "5P4-s3-gL6"; */
+"5P4-s3-gL6.text" = "/ per Portion";
+
+/* Class = "UIButton"; configuration.title = "Place Order"; ObjectID = "5jO-PX-pb1"; */
+"5jO-PX-pb1.configuration.title" = "Place Order";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "5jO-PX-pb1"; */
+"5jO-PX-pb1.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Total Price"; ObjectID = "DGG-Qt-o28"; */
+"DGG-Qt-o28.text" = "Total Price";
+
+/* Class = "UILabel"; text = "   4 Star Ratings"; ObjectID = "Fas-RQ-4e1"; */
+"Fas-RQ-4e1.text" = "   4 Star Ratings";
+
+/* Class = "UILabel"; text = "Customize your Order"; ObjectID = "HEp-da-0tJ"; */
+"HEp-da-0tJ.text" = "Customize your Order";
+
+/* Class = "UITextField"; placeholder = "- Select the ingredients -"; ObjectID = "HZf-fr-4yr"; */
+"HZf-fr-4yr.placeholder" = "- Select the ingredients -";
+
+/* Class = "UILabel"; text = "Rs. 750"; ObjectID = "ILx-vG-KXs"; */
+"ILx-vG-KXs.text" = "Rs. 750";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "L9o-nm-FYV"; */
+"L9o-nm-FYV.text" = "Description";
+
+/* Class = "UILabel"; text = "LKR 1500"; ObjectID = "LiN-8D-lRe"; */
+"LiN-8D-lRe.text" = "LKR 1500";
+
+/* Class = "UIButton"; configuration.title = "-"; ObjectID = "Odw-a8-ibm"; */
+"Odw-a8-ibm.configuration.title" = "-";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Odw-a8-ibm"; */
+"Odw-a8-ibm.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Add To Cart"; ObjectID = "Uze-tf-2Vr"; */
+"Uze-tf-2Vr.normalTitle" = "Add To Cart";
+
+/* Class = "UILabel"; text = "Tandoori Chicken Pizza"; ObjectID = "WCe-dr-KZQ"; */
+"WCe-dr-KZQ.text" = "Tandoori Chicken Pizza";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "Zt7-rw-8gR"; */
+"Zt7-rw-8gR.text" = "1";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "bk3-zj-KY3"; */
+"bk3-zj-KY3.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "eRb-QC-EJa"; */
+"eRb-QC-EJa.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "- Select the size of portion -"; ObjectID = "fqX-P8-GZ2"; */
+"fqX-P8-GZ2.placeholder" = "- Select the size of portion -";
+
+/* Class = "UIButton"; configuration.title = "+"; ObjectID = "fvN-eP-Px1"; */
+"fvN-eP-Px1.configuration.title" = "+";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fvN-eP-Px1"; */
+"fvN-eP-Px1.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kdG-MF-va2"; */
+"kdG-MF-va2.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Number of Portions"; ObjectID = "oj1-Zm-MJP"; */
+"oj1-Zm-MJP.text" = "Number of Portions";

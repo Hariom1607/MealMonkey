@@ -27,11 +27,14 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        txtSearch.placeholder = Main.MenuLabels.searchPlaceholder
+        txtSearch.setPadding(left: 34, right: 34)
+        
         // ✅ Show navigation bar for this screen
         self.navigationController?.isNavigationBarHidden = false
         
         // ✅ Set title ("Menu") and add cart button to nav bar
-        setLeftAlignedTitle(Main.backBtnTitle.menu)
+        setLeftAlignedTitle(Main.BackBtnTitle.menu)
         setCartButton(target: self, action: #selector(cartBtnTapped))
         
         // ✅ Style search field with padding and rounded corners

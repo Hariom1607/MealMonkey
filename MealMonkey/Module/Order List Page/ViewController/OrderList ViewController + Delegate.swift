@@ -19,24 +19,17 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     
     /// Configures and returns a cell for each row in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Dequeue reusable custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.orderListCell, for: indexPath) as! OrderListTableViewCell
         
-        // Get the specific order (array of products) for this row
         let order = orders[indexPath.row]
-        
-        // Combine all product names into a single string (comma separated)
         let allProductNames = order.map { $0.strProductName }.joined(separator: ", ")
-        
-        // Calculate total price of the order (price × quantity)
         let totalPrice = order.reduce(0.0) { $0 + ($1.doubleProductPrice * Double($1.intProductQty ?? 0)) }
         
-        // Configure cell labels
-        cell.lblOrderNo.text = Main.Labels.orderNoPrefix + "\(indexPath.row + 1)"
+        // Use localized strings
+        cell.lblOrderNo.text = Main.OrderListPage.orderNoPrefix + "\(indexPath.row + 1)"
         cell.lblProductName.text = allProductNames
-        cell.lblTotalPrice.text = Main.Labels.currencySymbol + "\(String(format: "%.2f", totalPrice))"
+        cell.lblTotalPrice.text = Main.OrderListPage.currencySymbol + String(format: "%.2f", totalPrice)
         
-        // Display first product's image as the order preview image
         if let imgName = order.first?.strProductImage {
             cell.imgOrder.image = UIImage(named: imgName)
         }

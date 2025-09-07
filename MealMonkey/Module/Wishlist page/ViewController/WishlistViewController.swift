@@ -32,7 +32,7 @@ class WishlistViewController: UIViewController {
         loadWishlist()
         
         // Set navigation title with back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.wishList, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.BackBtnTitle.wishList, target: self, action: #selector(backBtnTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +60,7 @@ class WishlistViewController: UIViewController {
         if wishlistProducts.isEmpty {
             tblWishlist.setEmptyView(
                 animationName: Main.EmptyState.wishlistjson,  // your Lottie JSON file name
-                message: Main.EmptyState.wishlistEmptyMessage
+                message: Main.WishlistLabels.wishlistEmptyMessage
             )
         } else {
             tblWishlist.restore()

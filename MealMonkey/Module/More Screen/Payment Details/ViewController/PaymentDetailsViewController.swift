@@ -12,6 +12,10 @@ import UIKit
 class PaymentDetailsViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblExpiry: UILabel!
+    @IBOutlet weak var lblAddCreditDEbitCard: UILabel!
+    @IBOutlet weak var lblCustomizeYourPaymentMethod: UILabel!
+    @IBOutlet weak var lblYouCanRemoveThisCard: UILabel!
     @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var viewMain: UIView!
@@ -38,7 +42,7 @@ class PaymentDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         // Setup navigation bar with back + cart button
-        setLeftAlignedTitleWithBack(Main.Labels.paymentDetails, target: self, action: #selector(backBtnTapped))
+        setLeftAlignedTitleWithBack(Main.PaymentLabels.paymentNavTitle, target: self, action: #selector(backBtnTapped))
         setCartButton(target: self, action: #selector(btnCartPressed))
         
         let allviews = [btnAddNewCard!, txtLastName!, txtFirstName!, txtCardNumber!, txtExpiryYear!, txtExpiryMonth!, txtSecurityCode!, btnAddCardView!]
@@ -61,8 +65,37 @@ class PaymentDetailsViewController: UIViewController {
         
         loadCurrentUser()
         loadSavedCards()
+        
+        setupLocalization()
     }
     
+    private func setupLocalization() {
+        // Navigation title
+        setLeftAlignedTitleWithBack(Main.PaymentLabels.paymentNavTitle, target: self, action: #selector(backBtnTapped))
+        
+        // Buttons
+        btnAddNewCard.setTitle(Main.PaymentLabels.addNewCard, for: .normal)
+        btnAddCardView.setTitle(Main.PaymentLabels.addCard, for: .normal)
+        btnCloseAddCardView.setTitle(Main.PaymentLabels.closeAddCardView, for: .normal)
+        
+        // TextFields placeholders
+        txtFirstName.placeholder = Main.PaymentLabels.firstName
+        txtLastName.placeholder = Main.PaymentLabels.lastName
+        txtCardNumber.placeholder = Main.PaymentLabels.cardNumber
+        txtExpiryMonth.placeholder = Main.PaymentLabels.expiryMonth
+        txtExpiryYear.placeholder = Main.PaymentLabels.expiryYear
+        txtSecurityCode.placeholder = Main.PaymentLabels.securityCode
+        
+        // Labels
+        lblExpiry.text = Main.PaymentLabels.expiry         
+        lblAddCreditDEbitCard.text = Main.PaymentLabels.addCreditDebitCard
+        lblCustomizeYourPaymentMethod.text = Main.PaymentLabels.customizePaymentMethod
+        lblYouCanRemoveThisCard.text = Main.PaymentLabels.youCanRemoveThisCard
+        
+        // Switch label
+        switchRemoveCard.accessibilityLabel = Main.PaymentLabels.removeCardSwitch
+    }
+
     private func loadCurrentUser() {
         if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             print("📩 Logged in email from UserDefaults = \(email)")
@@ -77,6 +110,7 @@ class PaymentDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         viewAddCard.isHidden = true
         loadSavedCards()
+        setupLocalization()
     }
     
     // MARK: - Helpers
@@ -92,8 +126,8 @@ class PaymentDetailsViewController: UIViewController {
     }
 
     func showAlert(message: String) {
-        let alert = UIAlertController(title: Main.Alerts.invalidInput, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default))
+        let alert = UIAlertController(title: Main.PaymentLabels.invalidInput, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Main.PaymentLabels.ok, style: .default))
         present(alert, animated: true)
     }
     

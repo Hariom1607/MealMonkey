@@ -10,10 +10,15 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: - Outlets
+    
+    
+    @IBOutlet weak var lblOrloginWith: UILabel!
+    @IBOutlet weak var lblAddYourDetailToLogin: UILabel!
+    @IBOutlet weak var lblLogin: UILabel!
     @IBOutlet weak var btnEye: UIButton!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
-    @IBOutlet weak var btnSignup: UIButton!
+    @IBOutlet weak var btnSignup: UIButton! // Don't have an Account? Sign Up
     @IBOutlet weak var btnGoogleLogin: UIButton!
     @IBOutlet weak var btnFacebookLogin: UIButton!
     @IBOutlet weak var btnForgotPassword: UIButton!
@@ -26,6 +31,36 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        lblOrloginWith.text = Main.Login.lblOrLoginWith
+        lblAddYourDetailToLogin.text = Main.Login.lblAddDetailToLogin
+        lblLogin.text = Main.Login.lblLogin
+        
+        txtEmail.placeholder = Main.Login.txtEmailPlaceholder
+        txtPassword.placeholder = Main.Login.txtPasswordPlaceholder
+        
+        btnSignup.setTitle(Main.Login.btnSignup, for: .normal)
+        btnGoogleLogin.setTitle(Main.Login.btnGoogleLogin, for: .normal)
+        btnFacebookLogin.setTitle(Main.Login.btnFacebookLogin, for: .normal)
+        btnForgotPassword.setTitle(Main.Login.btnForgotPassword, for: .normal)
+        btnLogin.setTitle(Main.Login.btnLogin, for: .normal)
+        btnSignup.tintColor = UIColor.gray
+//        let fullText = Main.Login.btnSignup
+//        let attributedString = NSMutableAttributedString(string: fullText)
+//
+//        // Find range of "Sign Up" in the string
+//        if let signUpRange = fullText.range(of: "Sign Up") {
+//            let nsRange = NSRange(signUpRange, in: fullText)
+//            
+//            // Set orange color for "Sign Up"
+//            attributedString.addAttribute(.foregroundColor, value: UIColor.loginButton, range: nsRange)
+//        }
+//
+//        // Set grey color for the rest
+//        attributedString.addAttribute(.foregroundColor, value: UIColor.systemGray, range: NSRange(location: 0, length: fullText.count))
+
+        // Assign to button
+//        btnSignup.setAttributedTitle(attributedString, for: .normal)
+
         // Apply rounded style to all inputs and buttons
         let allViews = [
             txtEmail!,

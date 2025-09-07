@@ -19,6 +19,10 @@ class PaymentDetailsTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     @IBOutlet weak var ViewCardCell: UIView!       // Container view for the card cell
+    
+    
+    @IBOutlet weak var lblCashCardondelivery: UILabel!
+    @IBOutlet weak var lblOtherMethods: UILabel!
     @IBOutlet weak var btnDeleteCard: UIButton!    // Button to delete the card
     @IBOutlet weak var lblCardNumber: UILabel!     // Label to display masked card number
     
@@ -33,7 +37,10 @@ class PaymentDetailsTableViewCell: UITableViewCell {
         btnDeleteCard.layer.cornerRadius = btnDeleteCard.frame.size.height / 2
         btnDeleteCard.layer.borderColor = UIColor.loginButton.cgColor
         btnDeleteCard.layer.borderWidth = 1
-    }
+        
+        btnDeleteCard.setTitle(Main.PaymentLabels.removeCardSwitch, for: .normal)
+        lblCashCardondelivery.text = Main.PaymentLabels.cashOnDelivery
+        lblOtherMethods.text = Main.PaymentLabels.otherPaymentMethods    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

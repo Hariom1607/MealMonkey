@@ -384,6 +384,10 @@ at anytime </string>
                         <outlet property="btnAddCardView" destination="7tk-u9-PmB" id="Vg6-Gj-sRV"/>
                         <outlet property="btnAddNewCard" destination="MFx-sT-sen" id="AXZ-EC-eBI"/>
                         <outlet property="btnCloseAddCardView" destination="Sn8-fQ-dfI" id="czO-9P-YaG"/>
+                        <outlet property="lblAddCreditDEbitCard" destination="LTx-fx-HUY" id="Duu-PO-p5H"/>
+                        <outlet property="lblCustomizeYourPaymentMethod" destination="Nnl-97-25s" id="KIg-ih-wxI"/>
+                        <outlet property="lblExpiry" destination="lYr-xS-Mw1" id="4h8-yJ-ywE"/>
+                        <outlet property="lblYouCanRemoveThisCard" destination="LZ5-zO-5LK" id="8DO-1e-jn7"/>
                         <outlet property="switchRemoveCard" destination="jiZ-9A-4n0" id="3ts-sO-QJ2"/>
                         <outlet property="tblCardDetails" destination="F2w-um-rxD" id="jOo-hW-Fnu"/>
                         <outlet property="txtCardNumber" destination="ewA-Bp-CeB" id="aGS-Nr-esu"/>
@@ -715,9 +719,15 @@ at anytime </string>
                     <connections>
                         <outlet property="btnAddNotes" destination="YBy-MH-a2q" id="5K6-0i-CXL"/>
                         <outlet property="btnCheckout" destination="ylD-XQ-J6Z" id="OEM-En-UC6"/>
+                        <outlet property="lblAddress" destination="m3D-66-LD4" id="AIv-LG-zYQ"/>
                         <outlet property="lblDeliveryCost" destination="hOi-u8-hg2" id="SvG-VQ-k8R"/>
-                        <outlet property="lblSubTotal" destination="oB7-6r-Mfv" id="MqX-pa-nI7"/>
+                        <outlet property="lblDeliveryCostTitle" destination="iSs-WX-5ef" id="VDu-0s-TDd"/>
+                        <outlet property="lblDeliveryInstruction" destination="O4B-XO-x3R" id="I3s-SM-hL1"/>
+                        <outlet property="lblMealMonkey" destination="0dA-Jc-iH6" id="Lz0-hI-fol"/>
+                        <outlet property="lblSubTotal" destination="oB7-6r-Mfv" id="h25-ie-xY2"/>
+                        <outlet property="lblSubTotalTitle" destination="6DO-dp-KZ6" id="FQn-2T-rnQ"/>
                         <outlet property="lblTotal" destination="r7y-al-PIg" id="guJ-bo-i9J"/>
+                        <outlet property="lblTotalTitle" destination="exI-Ws-ceK" id="ECs-uX-w7g"/>
                         <outlet property="tblMyOrders" destination="YD2-lK-zrV" id="W4i-cZ-z2p"/>
                     </connections>
                 </viewController>
@@ -1357,11 +1367,23 @@ at anytime </string>
                         <outlet property="btnLocationChange" destination="tSn-ou-5YI" id="Hhs-HM-cXa"/>
                         <outlet property="btnSendOrder" destination="Ln1-he-BZ2" id="q9r-5f-HGh"/>
                         <outlet property="btnTrackOrder" destination="jeA-wt-NE0" id="XgW-6E-A4A"/>
+                        <outlet property="lblAddCreditDebitCard" destination="mHw-cC-tWa" id="lcp-Fe-X5X"/>
                         <outlet property="lblCurrentLocation" destination="63E-gM-B4i" id="tVa-OJ-H5z"/>
+                        <outlet property="lblDeliveryAddress" destination="71V-jw-LIm" id="jCm-JW-gU1"/>
                         <outlet property="lblDeliveryCost" destination="0g3-qQ-Rdg" id="gYr-hu-05i"/>
+                        <outlet property="lblDeliveryCostTitle" destination="xma-ve-Mo3" id="roz-t8-VD0"/>
+                        <outlet property="lblDescriptionThankyoupage" destination="96b-Q9-L63" id="pEX-10-Pyz"/>
                         <outlet property="lblDiscount" destination="uPN-op-RTI" id="LQJ-uo-j0o"/>
+                        <outlet property="lblDiscountTitle" destination="HWB-ao-G4n" id="uyL-ty-I54"/>
+                        <outlet property="lblExpiry" destination="J0E-gu-7Eg" id="vyF-IL-Dn1"/>
+                        <outlet property="lblForYouOrder" destination="moE-Zg-rez" id="Ydh-d5-cyq"/>
+                        <outlet property="lblPaymentMethod" destination="ZLL-LY-Ciy" id="4Dt-cd-015"/>
                         <outlet property="lblSubTotal" destination="Xfn-ir-d7F" id="1Ih-5P-Ouo"/>
+                        <outlet property="lblSubTotalTitle" destination="W43-wk-A9b" id="eLW-Ey-YUB"/>
+                        <outlet property="lblThankYou" destination="xwW-LR-yrF" id="iWV-1g-Mfc"/>
                         <outlet property="lblTotal" destination="abx-40-Jof" id="lzD-z8-3by"/>
+                        <outlet property="lblTotalTitle" destination="kHU-lz-JWO" id="WNb-CS-jI5"/>
+                        <outlet property="lblYoucanremovethiscardatanytime" destination="6SU-qf-87F" id="Fjt-il-OcN"/>
                         <outlet property="sendOrderView" destination="oSB-nk-UfU" id="1K7-Rw-D0U"/>
                         <outlet property="tblPaymentDetails" destination="UuM-xI-Fjv" id="a6u-E2-Is5"/>
                         <outlet property="txtCardNumber" destination="5sK-Dn-XBP" id="Cyu-sV-Vt7"/>
@@ -1498,6 +1520,7 @@ at anytime </string>
                         <outlet property="btnRedirectToCurrentLocation" destination="waL-Za-NV8" id="r1V-y7-RJD"/>
                         <outlet property="btnSearchAddress" destination="x43-NO-d0h" id="mdh-98-Lr2"/>
                         <outlet property="btnShowtheSavedAddress" destination="eBZ-4c-9CZ" id="3hX-5r-kGa"/>
+                        <outlet property="lblChooseaSavedAddress" destination="Wat-KZ-UQC" id="5lY-oa-8pK"/>
                         <outlet property="mapView" destination="WYx-um-ufj" id="lWA-Xz-4TD"/>
                         <outlet property="txtSearchAddress" destination="1UZ-KP-8qw" id="NsO-4J-e8f"/>
                     </connections>
@@ -1546,10 +1569,10 @@ at anytime </string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -10,10 +10,30 @@ import UIKit
 class ForgotPasswordViewController: UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var lblTitleForgotPassword: UILabel!
+    @IBOutlet weak var subTitile: UILabel! //Please enter your email to receive a link to  create a new password via email
     @IBOutlet weak var btnSend: UIButton!
     @IBOutlet weak var txtEmail: UITextField!
     
     // MARK: - Lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Update navigation title
+        setLeftAlignedTitleWithBack(Localized("lbl_forgotpassword_nav_title"), target: self, action: #selector(backButtonTapped))
+        
+        // Update labels
+        lblTitleForgotPassword.text = Localized("lbl_forgotpassword_title")
+        subTitile.text = Localized("lbl_forgotpassword_subtitle")
+        
+        // Update textfield placeholder
+        txtEmail.placeholder = Localized("txtfield_email_placeholder")
+        
+        // Update button title
+        btnSend.setTitle(Localized("btn_send"), for: .normal)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,10 +45,14 @@ class ForgotPasswordViewController: UIViewController {
         styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         
         // Add padding inside the email text field
+        txtEmail?.placeholder = Main.ForgotPassword.txtEmailPlaceholder
         txtEmail.setPadding(left: 34, right: 34)
         
         // Set navigation bar title with a back button
-        setLeftAlignedTitleWithBack(Main.backBtnTitle.forgotPassword, target: self, action: #selector(backButtonTapped))
+        setLeftAlignedTitleWithBack(Main.ForgotPassword.navTitle, target: self, action: #selector(backButtonTapped))
+        lblTitleForgotPassword.text = Main.ForgotPassword.title
+        subTitile.text = Main.ForgotPassword.subtitle
+
     }
     
     // MARK: - Navigation
@@ -46,8 +70,8 @@ class ForgotPasswordViewController: UIViewController {
         // ✅ Check if email field is empty
         if email.isEmpty {
             UIAlertController.showAlert(
-                title: Main.AlertTitle.EmailMissing,
-                message: Main.ValidationMessages.emailMissing,
+                title: Main.ForgotPassword.alertEmailMissing,
+                message: Main.ForgotPassword.validationEmailMissing,
                 viewController: self
             )
             return
@@ -56,12 +80,13 @@ class ForgotPasswordViewController: UIViewController {
         // ✅ Validate email format
         if !isValidEmail(email) {
             UIAlertController.showAlert(
-                title: Main.AlertTitle.InvalidEmail,
-                message: Main.ValidationMessages.invalidEmail,
+                title: Main.ForgotPassword.alertInvalidEmail,
+                message: Main.ForgotPassword.validationInvalidEmail,
                 viewController: self
             )
             return
         }
+        
         
         if let _ = CoreDataHelper.shared.fetchUser(email: email){
             
@@ -72,7 +97,7 @@ class ForgotPasswordViewController: UIViewController {
                 message: "An OTP has been sent to \(email)",
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: Main.AlertTitle.okBtn, style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: Main.ForgotPassword.okBtn, style: .default, handler: { _ in
                 // Navigate to OTP screen after user taps OK
                 let storyboard = UIStoryboard(name: Main.storyboards.userlogin, bundle: nil)
                 if let otpVC = storyboard.instantiateViewController(identifier: Main.viewController.otp) as? OtpViewController {
@@ -85,7 +110,11 @@ class ForgotPasswordViewController: UIViewController {
             self.present(alert, animated: true)
         }
         else {
-            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.noAccFoundEmail, viewController: self)
+            UIAlertController.showAlert(
+                title: Main.ForgotPassword.alertInvalidEmail,
+                message: Main.ForgotPassword.noAccountFound,
+                viewController: self
+            )
         }
     }
 }

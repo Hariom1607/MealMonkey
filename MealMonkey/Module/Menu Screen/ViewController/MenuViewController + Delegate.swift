@@ -58,10 +58,14 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Assign correct category based on row tapped
             switch selected.strName {
-            case Main.MenuCategories.food: vc.selectedCategory = .food
-            case Main.MenuCategories.beverages: vc.selectedCategory = .Beverages
-            case Main.MenuCategories.desserts: vc.selectedCategory = .Desserts
-            default: return
+            case Main.MenuLabels.categoryFood:
+                vc.selectedCategory = .food
+            case Main.MenuLabels.categoryBeverages:
+                vc.selectedCategory = .Beverages   // keep whatever enum case you have
+            case Main.MenuLabels.categoryDesserts:
+                vc.selectedCategory = .Desserts
+            default:
+                return
             }
             
             // Push to product listing screen
@@ -72,7 +76,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func updateEmptyState() {
         if filteredMenuItems.isEmpty {
             tblMenu.setEmptyView(animationName: Main.Animations.menu,
-                                 message: Main.Messages.noMenuResults)
+                                 message: Main.MenuLabels.noResults)
         } else {
             tblMenu.restore()
         }

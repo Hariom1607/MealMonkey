@@ -1,0 +1,459 @@
+/* 
+  Localizable.strings
+  MealMonkey
+
+  Created by Hariom Sharma on 06/09/25.
+  
+*/
+
+//More Page
+
+label_more_nav_title = "المزيد";
+label_more_payment_details = "تفاصيل الدفع";
+label_more_my_orders = "طلباتي";
+label_more_notifications = "الإشعارات";
+label_more_inbox = "صندوق الوارد";
+label_more_wishlist = "قائمة الرغبات";
+label_more_about_us = "معلومات عنا";
+
+// AboutUs Page
+label_aboutus_nav_title = "معلومات عنا";
+label_aboutus_text_1 = "مهمتنا هي تقديم تجربة تسوق سلسة وبديهية...";
+label_aboutus_text_2 = "نحن ملتزمون بالحفاظ على معايير عالية من الأداء والشفافية...";
+label_aboutus_text_3 = "ملاحظاتك مهمة. إذا كان لديك أي أسئلة أو اقتراحات...";
+label_aboutus_text_4 = "نعتقد أن التكنولوجيا يجب أن تخدم الناس. لهذا السبب نقوم دائمًا بالتحسين...";
+label_aboutus_text_5 = "الأمان هو أولويتنا. نستخدم بروتوكولات قياسية في الصناعة...";
+label_aboutus_text_6 = "نحن نقدر إمكانية الوصول والشمولية. تم تصميم منصتنا لتكون قابلة للاستخدام للجميع...";
+label_aboutus_text_7 = "الاستدامة مهمة بالنسبة لنا. نحن ندعم الممارسات الصديقة للبيئة...";
+
+// ===================== Inbox =====================
+label_inbox_nav_title = "صندوق الوارد";
+label_inbox_promotions_title = "عروض مِيل مونكي";
+label_inbox_promotions_date = "6 يوليو";
+label_inbox_promotions_desc = "احصل على خصم 20٪ على وجبتك القادمة!";
+
+label_inbox_orderupdate_title = "تحديث الطلب";
+label_inbox_orderupdate_date = "6 يوليو";
+label_inbox_orderupdate_desc = "يتم تحضير طلبك من قبل المطعم.";
+
+label_inbox_deliveryreminders_title = "تذكير بالتوصيل";
+label_inbox_deliveryreminders_date = "6 يوليو";
+label_inbox_deliveryreminders_desc = "عامل التوصيل في الطريق إليك.";
+
+label_inbox_welcome_title = "مرحبًا بك في مِيل مونكي";
+label_inbox_welcome_date = "6 يوليو";
+label_inbox_welcome_desc = "شكرًا لانضمامك إلينا! ابدأ باكتشاف الوجبات.";
+
+label_inbox_experience_title = "قيّم تجربتك";
+label_inbox_experience_date = "6 يوليو";
+label_inbox_experience_desc = "كيف كانت تجربة طلبك الأخيرة؟";
+
+label_inbox_flashsale_title = "تخفيضات فلاش";
+label_inbox_flashsale_date = "6 يوليو";
+label_inbox_flashsale_desc = "استمتع بخصم 30٪ على جميع طلبات الباستا اليوم فقط.";
+
+label_inbox_newrestaurants_title = "مطاعم جديدة";
+label_inbox_newrestaurants_date = "6 يوليو";
+label_inbox_newrestaurants_desc = "اكتشف المطاعم الرائجة في منطقتك.";
+
+label_inbox_referearn_title = "أحِل واربح";
+label_inbox_referearn_date = "6 يوليو";
+label_inbox_referearn_desc = "ادعُ أصدقاءك واربح 100 روبية رصيد!";
+
+label_inbox_weekendspecial_title = "عرض نهاية الأسبوع";
+label_inbox_weekendspecial_date = "6 يوليو";
+label_inbox_weekendspecial_desc = "حلويات مجانية عند الطلبات فوق 499 روبية.";
+
+label_inbox_tips_title = "نصائح مِيل مونكي";
+label_inbox_tips_date = "6 يوليو";
+label_inbox_tips_desc = "خصص طلباتك مع التعليمات الخاصة.";
+
+label_inbox_ordercancel_title = "تم إلغاء الطلب";
+label_inbox_ordercancel_date = "6 يوليو";
+label_inbox_ordercancel_desc = "تم إلغاء طلبك كما طلبت.";
+
+label_inbox_loyaltyprogram_title = "برنامج الولاء";
+label_inbox_loyaltyprogram_date = "6 يوليو";
+label_inbox_loyaltyprogram_desc = "اجمع نقاط مِيل مونكي مع كل عملية شراء.";
+
+label_inbox_securityupdate_title = "تحديث الأمان";
+label_inbox_securityupdate_date = "6 يوليو";
+label_inbox_securityupdate_desc = "تم تغيير كلمة المرور الخاصة بك مؤخرًا.";
+
+label_inbox_accountverified_title = "تم التحقق من الحساب";
+label_inbox_accountverified_date = "6 يوليو";
+label_inbox_accountverified_desc = "تم التحقق من حسابك بنجاح.";
+
+label_inbox_limiteddeal_title = "عرض لفترة محدودة";
+label_inbox_limiteddeal_date = "6 يوليو";
+label_inbox_limiteddeal_desc = "خصم 50 روبية على طلبات البرياني اليوم.";
+
+
+// ===================== Notifications =====================
+label_notifications_nav_title = "الإشعارات";
+label_notifications_orderplaced_msg = "تم الطلب بنجاح";
+label_notifications_orderplaced_time = "الآن";
+
+label_notifications_paymentconfirmed_msg = "تم تأكيد دفعتك";
+label_notifications_paymentconfirmed_time = "منذ 5 دقائق";
+
+label_notifications_foodprepared_msg = "يتم تحضير طعامك";
+label_notifications_foodprepared_time = "منذ 10 دقائق";
+
+label_notifications_agentassigned_msg = "تم تعيين عامل التوصيل";
+label_notifications_agentassigned_time = "منذ 30 دقيقة";
+
+label_notifications_orderonway_msg = "طلبك في الطريق";
+label_notifications_orderonway_time = "منذ ساعة";
+
+label_notifications_discount_msg = "خصم خاص متاح!";
+label_notifications_discount_time = "منذ ساعتين";
+
+label_notifications_appupdate_msg = "قم بتنزيل تحديث تطبيقنا الجديد";
+label_notifications_appupdate_time = "منذ 3 ساعات";
+
+label_notifications_referfriend_msg = "أحِل صديقًا واربح";
+label_notifications_referfriend_time = "منذ 5 ساعات";
+
+label_notifications_limiteddeal_msg = "عرض محدود سينتهي قريبًا";
+label_notifications_limiteddeal_time = "منذ 12 ساعة";
+
+label_notifications_deliverydone_msg = "اكتملت عملية التوصيل";
+label_notifications_deliverydone_time = "منذ يوم";
+
+label_notifications_ratemeal_msg = "قيّم وجبتك الأخيرة";
+label_notifications_ratemeal_time = "منذ يومين";
+
+label_notifications_weekendoffer_msg = "عرض نهاية الأسبوع لك فقط";
+label_notifications_weekendoffer_time = "منذ 3 أيام";
+
+label_notifications_freedelivery_msg = "توصيل مجاني للطلبات فوق 299 روبية";
+label_notifications_freedelivery_time = "منذ 5 أيام";
+
+label_notifications_thanks_msg = "شكرًا لكونك معنا!";
+label_notifications_thanks_time = "منذ 6 أيام";
+
+label_notifications_newrestaurants_msg = "تمت إضافة مطاعم جديدة بالقرب منك";
+label_notifications_newrestaurants_time = "منذ أسبوع";
+
+// Payment Page
+label_payment_nav_title = "تفاصيل الدفع";
+
+label_expiry = "تاريخ الانتهاء:";
+label_add_credit_debit_card = "إضافة بطاقة ائتمان/خصم";
+label_customize_payment_method = "تخصيص طريقة الدفع الخاصة بك";
+label_you_can_remove_this_card = "يمكنك إزالة هذه البطاقة";
+label_cash_on_delivery = "الدفع عند الاستلام";
+label_other_methods = "طرق الدفع الأخرى";
+
+// Buttons
+label_add_new_card = "إضافة بطاقة جديدة";
+label_add_card = "إضافة بطاقة";
+label_close_add_card_view = "إغلاق";
+
+// TextFields / Placeholders
+label_first_name = "الاسم الأول";
+label_last_name = "اسم العائلة";
+label_card_number = "رقم البطاقة";
+label_expiry_month = "شهر الانتهاء";
+label_expiry_year = "سنة الانتهاء";
+label_security_code = "رمز الأمان";
+
+// Alerts / Messages
+label_alert_invalid_input = "يرجى ملء جميع الحقول بشكل صحيح.";
+label_alert_user_not_found = "المستخدم غير موجود.";
+label_alert_card_already_saved = "هذه البطاقة محفوظة بالفعل.";
+
+// Empty State
+label_no_saved_cards = "لا توجد بطاقات محفوظة بعد.\nأضف واحدة للمتابعة.";
+
+// Switch / Other UI
+label_remove_card_switch = "إزالة البطاقة";
+
+// Common Buttons / Labels
+label_ok = "حسنًا";
+label_next = "التالي";
+label_done = "تم";
+label_select_location = "اختر موقعك";
+label_unknown = "غير معروف";
+
+// NAvigation Title
+
+label_back_checkout = "الدفع";
+label_back_cart = "عربة التسوق";
+label_back_otp = "رمز التحقق";
+label_back_forgot_password = "نسيت كلمة المرور";
+label_back_wishlist = "قائمة الرغبات";
+label_back_profile = "الملف الشخصي";
+label_back_my_order = "طلباتي";
+label_back_menu = "القائمة";
+label_back_map = "تغيير العنوان";
+
+// Wishlist
+
+label_wishlist_empty_message = "قائمة رغباتك فارغة.";
+label_wishlist_remove = "إزالة من قائمة الرغبات";
+label_wishlist_add = "أضف إلى قائمة الرغبات";
+
+//Menu Page
+
+label_menu_search_placeholder = "ابحث عن الطعام أو المشروبات";
+label_menu_no_results = "لم يتم العثور على عناصر في القائمة.";
+label_menu_items_count = "%d عنصر";
+label_menu_category_food = "طعام";
+label_menu_category_beverages = "مشروبات";
+label_menu_category_desserts = "حلويات";
+
+// Search Placeholders
+label_menu_search_food_placeholder = "ابحث عن الطعام";
+label_menu_search_beverages_placeholder = "ابحث عن المشروبات";
+label_menu_search_desserts_placeholder = "ابحث عن الحلويات";
+
+// No Results Messages
+label_menu_no_food_results = "لم يتم العثور على أي عناصر طعام.";
+label_menu_no_beverages_results = "لم يتم العثور على أي عناصر مشروبات.";
+label_menu_no_desserts_results = "لم يتم العثور على أي عناصر حلويات.";
+
+// Item Counts
+label_menu_food_items_count = "%d عنصر";
+label_menu_beverages_items_count = "%d عنصر";
+label_menu_desserts_items_count = "%d عنصر";
+
+// Food Detail Page
+label_food_detail_nav_title = "تفاصيل الطعام";
+
+label_success = "نجاح";
+label_added_to_cart = "تمت إضافة العنصر إلى السلة";
+label_ok = "حسناً";
+
+label_btn_add_to_cart = "أضف إلى السلة";
+label_btn_portion_increase = "+";
+label_btn_portion_decrease = "-";
+
+label_txt_select_ingredients = "اختر المكونات";
+label_txt_size_of_portions = "اختر الحجم";
+
+label_alert_item_added = "تمت إضافة العنصر إلى سلتك!";
+
+label_4_star_ratings = "تقييم 4 نجوم";
+label_total_price_title = "السعر الإجمالي";
+label_per_portion = "لكل حصة/";
+label_description_title = "الوصف";
+label_customize_your_order = "تخصيص طلبك";
+label_number_of_portions = "عدد الحصص";
+
+// ===================== Offer Page =====================
+label_offers_nav_title = "أحدث العروض";
+label_find_discounts = "اكتشف الخصومات، الوجبات الخاصة والمزيد!";
+label_btn_check_offers = "تحقق من العروض";
+
+label_offer_cafe_name_cafe_de_noires = "كافيه دي نوارس";
+label_offer_cafe_name_isso = "إيسو";
+label_offer_cafe_name_cafe_beans = "كافيه بينز";
+
+label_offer_default_ratings = "(124 تقييم)";
+label_offer_default_restaurant_type = "مقهى";
+label_offer_default_food_type = "طعام غربي";
+
+// ===================== Food Screen Page =====================
+label_foodscreen_nav_greeting = "صباح الخير";
+label_foodscreen_nav_greeting_user = "صباح الخير %@";
+
+label_foodscreen_location_placeholder = "اختر موقعك";
+label_foodscreen_search_placeholder = "ابحث عن الطعام أو المشروبات";
+
+label_foodscreen_section_popular = "شائع";
+label_foodscreen_section_most_popular = "الأكثر شيوعاً";
+label_foodscreen_section_recent = "العناصر الأخيرة";
+
+label_foodscreen_btn_view_all = "عرض الكل";
+label_foodscreen_delivering_to = "التوصيل إلى";
+
+//Profile Page
+label_profile_nav_title = "الملف الشخصي";
+label_profile_welcome = "مرحبًا، %@";
+
+label_profile_name_placeholder = "أدخل اسمك";
+label_profile_email_placeholder = "أدخل بريدك الإلكتروني";
+label_profile_mobile_placeholder = "أدخل رقم هاتفك";
+label_profile_address_placeholder = "أدخل عنوانك";
+
+label_profile_btn_save = "حفظ";
+label_profile_btn_signout = "تسجيل الخروج";
+label_profile_btn_edit = "تعديل الملف الشخصي";
+
+// ===================== Cart Page =====================
+label_cart_nav_title = "سلة التسوق";
+label_cart_empty_message = "سلة التسوق فارغة!";
+label_cart_empty_title = "سلة فارغة";
+label_cart_place_order_btn = "إتمام الطلب";
+
+label_cart_order_placed_title = "تم الطلب!";
+label_cart_order_placed_message = "تم تقديم طلبك بنجاح.";
+
+label_cart_order_error_title = "فشل الطلب!";
+label_cart_order_error_message = "حدث خطأ أثناء تقديم الطلب. حاول مرة أخرى.";
+
+label_cart_qty = "الكمية: %@";
+
+/* Order List Page */
+label_order_list_nav_title = "طلباتي";
+label_order_list_order_no_prefix = "رقم الطلب: ";
+label_order_list_currency_symbol = "د.إ";  // or appropriate currency symbol
+label_order_list_no_orders = "لم تقم بأي طلبات بعد.";
+
+/* My Order Page */
+label_my_order_nav_title = "طلباتي";
+label_my_order_subtotal = "المجموع الفرعي";
+label_my_order_delivery_cost = "تكلفة التوصيل";
+label_my_order_total = "المجموع";
+label_my_order_add_notes = "إضافة ملاحظات";
+label_my_order_checkout = "الدفع";
+label_currency_symbol = "د.إ";
+label_my_order_address = "عنوان التسليم";
+label_my_order_meal_monkey = "ميل مانكي";
+label_my_order_delivery_cost_title = "تكلفة التوصيل";
+label_my_order_subtotal_title = "المجموع الفرعي";
+label_my_order_delivery_instruction = "تعليمات التوصيل";
+
+/* Checkout Page Labels */
+label_checkout_you_can_remove_card = "يمكنك إزالة هذه البطاقة في أي وقت.";
+label_checkout_expiry = "انتهاء الصلاحية";
+label_checkout_add_credit_debit_card = "إضافة بطاقة ائتمان/خصم";
+label_checkout_description_thank_you = "تم الآن معالجة طلبك. سنعلمك بمجرد أن يتم استلامه من الفرع. تحقق من حالة طلبك.";
+label_checkout_for_your_order = "لطلبك";
+label_checkout_thank_you = "شكراً لك";
+
+/* Buttons */
+btn_checkout_add_card = "أضف بطاقة";
+btn_checkout_send_order = "إرسال الطلب";
+btn_checkout_close = "إغلاق";
+btn_checkout_back_to_home = "العودة إلى الصفحة الرئيسية";
+btn_checkout_track_order = "تتبع الطلب";
+btn_location_change = "تغيير";
+
+/* Map related titles and addresses */
+lbl_choose_a_saved_address = "اختر عنوان محفوظ";
+txt_search_placeholder = "أدخل العنوان";
+
+//Login Page
+/* Labels */
+lbl_or_login_with = "أو تسجيل الدخول بواسطة";
+lbl_add_your_detail_to_login = "أضف بياناتك لتسجيل الدخول";
+lbl_login = "تسجيل الدخول";
+
+/* TextField Placeholders */
+txt_email_placeholder = "البريد الإلكتروني";
+txt_password_placeholder = "كلمة المرور";
+
+/* Buttons */
+btn_eye = "إظهار/إخفاء كلمة المرور";
+btn_signup_text = "ليس لديك حساب؟ سجل الآن";
+btn_google_login = "تسجيل الدخول عبر Google";
+btn_facebook_login = "تسجيل الدخول عبر Facebook";
+btn_forgot_password = "نسيت كلمة المرور؟";
+btn_login = "تسجيل الدخول";
+
+/* Alert Titles */
+alert_login_successful = "تم تسجيل الدخول بنجاح";
+alert_login_failed = "فشل تسجيل الدخول";
+alert_email_missing = "البريد الإلكتروني مفقود";
+alert_invalid_email = "البريد الإلكتروني غير صالح";
+alert_password_missing = "كلمة المرور مفقودة";
+alert_invalid_password = "كلمة المرور غير صالحة";
+
+/* Validation Messages */
+validation_email_missing = "الرجاء إدخال البريد الإلكتروني.";
+validation_invalid_email = "الرجاء إدخال بريد إلكتروني صالح.";
+validation_password_missing = "الرجاء إدخال كلمة المرور.";
+validation_invalid_password = "يجب أن تكون كلمة المرور 6 أحرف على الأقل.";
+
+//SignUp Page
+lbl_add_your_details_signup = "أضف بياناتك للتسجيل";
+lbl_signup_title = "اشتراك";
+
+txtfield_name_placeholder = "أدخل اسمك";
+txtfield_email_placeholder = "أدخل بريدك الإلكتروني";
+txtfield_mobile_placeholder = "أدخل رقم جوالك";
+txtfield_address_placeholder = "أدخل عنوانك";
+txtfield_password_placeholder = "أدخل كلمة المرور";
+txtfield_confirm_password_placeholder = "تأكيد كلمة المرور";
+
+btn_signup_action = "اشتراك";
+btn_back_to_login = "العودة إلى تسجيل الدخول";
+btn_eye_password = "إظهار/إخفاء كلمة المرور";
+btn_eye_confirm_password = "إظهار/إخفاء تأكيد كلمة المرور";
+
+alert_signup_success = "تم التسجيل بنجاح";
+alert_user_exists = "المستخدم موجود بالفعل";
+alert_name_missing = "الاسم مطلوب";
+alert_email_missing = "البريد الإلكتروني مطلوب";
+alert_invalid_email = "يرجى إدخال بريد إلكتروني صالح";
+alert_mobile_missing = "رقم الجوال مطلوب";
+alert_address_missing = "العنوان مطلوب";
+alert_password_missing = "كلمة المرور مطلوبة";
+alert_invalid_password = "يجب أن تكون كلمة المرور 6 أحرف على الأقل";
+alert_confirm_password_missing = "تأكيد كلمة المرور مطلوب";
+alert_password_mismatch = "كلمتا المرور غير متطابقتين";
+
+// Forgot Password Page
+lbl_forgotpassword_nav_title = "نسيت كلمة المرور";
+lbl_forgotpassword_title = "نسيت كلمة المرور";
+lbl_forgotpassword_subtitle = "يرجى إدخال بريدك الإلكتروني لتلقي رابط لإنشاء كلمة مرور جديدة عبر البريد الإلكتروني.";
+txtfield_email_placeholder = "أدخل بريدك الإلكتروني";
+btn_send = "إرسال";
+
+// Alerts / Messages
+alert_email_missing = "البريد الإلكتروني مفقود";
+validation_email_missing = "يرجى إدخال بريدك الإلكتروني.";
+alert_invalid_email = "بريد إلكتروني غير صالح";
+validation_invalid_email = "يرجى إدخال بريد إلكتروني صالح.";
+alert_otp_sent = "تم إرسال رمز التحقق";
+alert_ok = "حسناً";
+validation_no_account_email = "لم يتم العثور على حساب بهذا البريد الإلكتروني.";
+
+// New Password Page
+lbl_newpassword_nav_title = "كلمة مرور جديدة";
+lbl_newpassword_title = "إنشاء كلمة مرور جديدة";
+lbl_newpassword_subtitle = "يرجى إدخال كلمة المرور الجديدة وتأكيدها أدناه.";
+txt_newpassword_placeholder = "أدخل كلمة المرور الجديدة";
+txt_confirm_password_placeholder = "تأكيد كلمة المرور";
+btn_submit_newpassword = "إرسال";
+
+// Alerts / Messages
+alert_password_missing = "كلمة المرور مفقودة";
+validation_password_missing = "يرجى إدخال كلمة المرور الجديدة.";
+alert_confirm_password_missing = "تأكيد كلمة المرور مفقود";
+validation_confirm_password_missing = "يرجى تأكيد كلمة المرور.";
+alert_password_mismatch = "كلمة المرور غير متطابقة";
+validation_password_mismatch = "كلمتا المرور غير متطابقتين.";
+alert_profile_update_failed = "فشل تحديث الملف الشخصي";
+alert_error = "خطأ";
+
+// OTP Page
+lbl_otp_title = "لقد أرسلنا رمز OTP إلى هاتفك المحمول";
+lbl_otp_subtitle = "يرجى التحقق من رقم هاتفك 071*****12 لمتابعة إعادة تعيين كلمة المرور";
+btn_otp_regeneration = "إعادة إرسال OTP";
+btn_otp_next = "التالي";
+
+// Alerts / Messages
+alert_otp_sent = "تم إرسال OTP";
+alert_ok = "حسناً";
+validation_no_account_email = "لم يتم العثور على حساب بهذا البريد الإلكتروني.";
+
+// Feature Page Titles
+feature_find_food_title = "اعثر على الطعام الذي تحبه";
+feature_fast_delivery_title = "توصيل سريع";
+feature_live_tracking_title = "التتبع المباشر";
+
+// Feature Page Subtitles
+feature_find_food_subtitle = "اكتشف أفضل الأطعمة من أكثر من 1000 مطعم وتوصيل سريع إلى باب منزلك";
+feature_fast_delivery_subtitle = "توصيل الطعام بسرعة إلى منزلك أو مكتبك أينما كنت";
+feature_live_tracking_subtitle = "تتبع طلبك في الوقت الفعلي بعد تقديمه";
+
+// Buttons
+label_next = "التالي";
+label_done = "تم";
+
+label_more_languages = "اللغات";
+label_more_languages_title = "اختر اللغة";

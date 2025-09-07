@@ -13,8 +13,10 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
     // Number of rows = number of filtered products
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filteredProducts.isEmpty {
-            tableView.setEmptyView(animationName: Main.EmptyState.dessertsAnimation,
-                                   message: Main.EmptyState.noItemsFound)
+            tableView.setEmptyView(
+                animationName: Main.EmptyState.dessertsAnimation,
+                message: Main.EmptyState.noItemsFound(for: "desserts") // <-- dynamic
+            )
         } else {
             tableView.restore()
         }

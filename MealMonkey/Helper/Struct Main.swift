@@ -1,4 +1,5 @@
-import CoreFoundation
+import Foundation
+import UIKit
 
 // Main struct containing all constants and configurations
 struct Main {
@@ -44,6 +45,8 @@ struct Main {
         static let circle = "circle" // Generic circle UI element
         static let circleFill = "circle.fill" // Filled circle for selection
         static let cartFill = "cart.fill" // Filled cart icon
+        static let language = "globe" // 👈 Or your custom asset
+        
     }
     
     // MARK: - TableView / CollectionView Cells
@@ -107,6 +110,103 @@ struct Main {
         static let splash = "SplashViewController" // Splash screen
         static let menuTabBar = "MenuTabViewController" // Tab bar with menu options
         static let wishlist = "WishlistViewController" // Wishlist screen
+    }
+    
+    struct Login {
+        // Labels
+        static var lblOrLoginWith: String { Localized("lbl_or_login_with") }
+        static var lblAddDetailToLogin: String { Localized("lbl_add_your_detail_to_login") }
+        static var lblLogin: String { Localized("lbl_login") }
+        
+        // TextField Placeholders
+        static var txtEmailPlaceholder: String { Localized("txt_email_placeholder") }
+        static var txtPasswordPlaceholder: String { Localized("txt_password_placeholder") }
+        
+        // Buttons
+        static var btnEye: String { Localized("btn_eye") }
+        static var btnSignup: String { Localized("btn_signup_text") }
+        static var btnGoogleLogin: String { Localized("btn_google_login") }
+        static var btnFacebookLogin: String { Localized("btn_facebook_login") }
+        static var btnForgotPassword: String { Localized("btn_forgot_password") }
+        static var btnLogin: String { Localized("btn_login") }
+        
+        // Alerts
+        static var alertLoginSuccessful: String { Localized("alert_login_successful") }
+        static var alertLoginFailed: String { Localized("alert_login_failed") }
+        static var alertEmailMissing: String { Localized("alert_email_missing") }
+        static var alertInvalidEmail: String { Localized("alert_invalid_email") }
+        static var alertPasswordMissing: String { Localized("alert_password_missing") }
+        static var alertInvalidPassword: String { Localized("alert_invalid_password") }
+        
+        // Validation messages
+        static var validationEmailMissing: String { Localized("validation_email_missing") }
+        static var validationInvalidEmail: String { Localized("validation_invalid_email") }
+        static var validationPasswordMissing: String { Localized("validation_password_missing") }
+        static var validationInvalidPassword: String { Localized("validation_invalid_password") }
+    }
+    
+    struct Signup {
+        // Labels
+        static var lblAddYourDetails: String { Localized("lbl_add_your_details_signup") }
+        static var lblSignupTitle: String { Localized("lbl_signup_title") }
+        
+        // TextFields Placeholders
+        static var txtNamePlaceholder: String { Localized("txtfield_name_placeholder") }
+        static var txtEmailPlaceholder: String { Localized("txtfield_email_placeholder") }
+        static var txtMobilePlaceholder: String { Localized("txtfield_mobile_placeholder") }
+        static var txtAddressPlaceholder: String { Localized("txtfield_address_placeholder") }
+        static var txtPasswordPlaceholder: String { Localized("txtfield_password_placeholder") }
+        static var txtConfirmPasswordPlaceholder: String { Localized("txtfield_confirm_password_placeholder") }
+        
+        // Buttons
+        static var btnSignup: String { Localized("btn_signup_action") }
+        static var btnBackToLogin: String { Localized("btn_back_to_login") }
+        static var btnEyePassword: String { Localized("btn_eye_password") }
+        static var btnEyeConfirmPassword: String { Localized("btn_eye_confirm_password") }
+        
+        // Alerts
+        static var alertSignupSuccess: String { Localized("alert_signup_success") }
+        static var alertUserExists: String { Localized("alert_user_exists") }
+        static var alertNameMissing: String { Localized("alert_name_missing") }
+        static var alertEmailMissing: String { Localized("alert_email_missing") }
+        static var alertInvalidEmail: String { Localized("alert_invalid_email") }
+        static var alertMobileMissing: String { Localized("alert_mobile_missing") }
+        static var alertAddressMissing: String { Localized("alert_address_missing") }
+        static var alertPasswordMissing: String { Localized("alert_password_missing") }
+        static var alertInvalidPassword: String { Localized("alert_invalid_password") }
+        static var alertConfirmPasswordMissing: String { Localized("alert_confirm_password_missing") }
+        static var alertPasswordMismatch: String { Localized("alert_password_mismatch") }
+    }
+    
+    struct ForgotPassword {
+        // Labels / Placeholders
+        static var navTitle: String { Localized("lbl_forgotpassword_nav_title") }
+        static var title: String { Localized("lbl_forgotpassword_title") }
+        static var subtitle: String { Localized("lbl_forgotpassword_subtitle") }
+        static var txtEmailPlaceholder: String { Localized("txtfield_email_placeholder") }
+        static var btnSend: String { Localized("btn_send") }
+        
+        // Alerts / Validation
+        static var alertEmailMissing: String { Localized("alert_email_missing") }
+        static var validationEmailMissing: String { Localized("validation_email_missing") }
+        static var alertInvalidEmail: String { Localized("alert_invalid_email") }
+        static var validationInvalidEmail: String { Localized("validation_invalid_email") }
+        static var alertOtpSent: String { Localized("alert_otp_sent") }
+        static var okBtn: String { Localized("alert_ok") }
+        static var noAccountFound: String { Localized("validation_no_account_email") }
+    }
+    
+    struct OTP {
+        // Labels / Buttons
+        static var otpTitle: String { Localized("lbl_otp_title") }
+        static var otpSubTitle: String { Localized("lbl_otp_subtitle") }
+        static var btnRegenerate: String { Localized("btn_otp_regeneration") }
+        static var btnNext: String { Localized("btn_otp_next") }
+        
+        // Alerts / Validation
+        static var alertOtpSent: String { Localized("alert_otp_sent") }
+        static var okBtn: String { Localized("alert_ok") }
+        static var noAccountFound: String { Localized("validation_no_account_email") }
     }
     
     // MARK: - UserDefaults Keys
@@ -197,16 +297,16 @@ struct Main {
     
     // MARK: - Back Button Titles
     // Titles displayed on back buttons in navigation bars
-    struct backBtnTitle {
-        static let forgotPassword = "Forgot Password" // Back button title for forgot password
-        static let wishList = "WishList" // Back button title for wishlist
-        static let profile = "Profile" // Back button title for profile
-        static let myOrder = "My Order" // Back button title for my orders
-        static let menu = "Menu" // Back button title for menu
-        static let map = "Change Address" // Back button title for map screen
-        static let checkout = "Checkout" // Back button title for checkout
-        static let cart = "Cart" // Back button title for cart
-        static let otp = "OTP" // Back button title for OTP screen
+    struct BackBtnTitle {
+        static var forgotPassword: String { Localized("label_back_forgot_password") }
+        static var wishList: String { Localized("label_back_wishlist") }
+        static var profile: String { Localized("label_back_profile") }
+        static var myOrder: String { Localized("label_back_my_order") }
+        static var menu: String { Localized("label_back_menu") }
+        static var map: String { Localized("label_back_map") }
+        static var checkout: String { Localized("label_back_checkout") }
+        static var cart: String { Localized("label_back_cart") }
+        static var otp: String { Localized("label_back_otp") }
     }
     
     // MARK: - Labels
@@ -217,7 +317,6 @@ struct Main {
         static let orderList = "Order List" // Order list screen title
         static let latestOffers = "Latest Offers" // Offers section title
         static let orderNoPrefix = "Order No : " // Prefix for order numbers
-        static let currencySymbol = "$" // Currency symbol
         static let paymentDetails = "Payment Details" // Payment details screen label
         static let more = "More" // More screen label
         static let myOrders = "My Orders" // My orders label
@@ -230,13 +329,117 @@ struct Main {
         static let mostPopular = "Most Popular" // Most popular section label
         static let recentItems = "Recent Items" // Recent items section label
         static let foodDetail = "Food Detail" // Food detail screen label
-        static let success = "Success" // Success label
-        static let addedToCart = "Added to cart!" // Feedback for cart addition
-        static let ok = "OK" // Default OK label
         static let next = "Next" // Next button label
         static let done = "Done" // Done button label
         static let selectLocation = "Select your location" // Location selection prompt
         static let unknown = "Unknown" // Default unknown text
+        
+        static let moreLanguages = Localized("label_more_languages") // ✅ Localized
+        static var moreNavTitle: String { Localized("label_more_nav_title") }
+        static var morePaymentDetails: String { Localized("label_more_payment_details") }
+        static var moreMyOrders: String { Localized("label_more_my_orders") }
+        static var moreNotifications: String { Localized("label_more_notifications") }
+        static var moreInbox: String { Localized("label_more_inbox") }
+        static var moreWishlist: String { Localized("label_more_wishlist") }
+        static var moreAboutUs: String { Localized("label_more_about_us") }
+        
+        static var aboutUsNavTitle: String { Localized("label_aboutus_nav_title") }
+        static var inboxNavTitle: String { Localized("label_inbox_nav_title") }
+        static var notificationsNavTitle: String { Localized("label_notifications_nav_title") }
+        
+        static var paymentNavTitle: String { Localized("label_payment_nav_title") }
+        static var addNewCard: String { Localized("label_add_new_card") }
+        static var addCard: String { Localized("label_add_card") }
+        static var closeAddCardView: String { Localized("label_close_add_card_view") }
+        static var firstName: String { Localized("label_first_name") }
+        static var lastName: String { Localized("label_last_name") }
+        static var cardNumber: String { Localized("label_card_number") }
+        static var expiryMonth: String { Localized("label_expiry_month") }
+        static var expiryYear: String { Localized("label_expiry_year") }
+        static var securityCode: String { Localized("label_security_code") }
+        static var invalidInput: String { Localized("label_alert_invalid_input") }
+        static var userNotFound: String { Localized("label_alert_user_not_found") }
+        static var cardAlreadySaved: String { Localized("label_alert_card_already_saved") }
+        static var noSavedCards: String { Localized("label_no_saved_cards") }
+        static var removeCardSwitch: String { Localized("label_remove_card_switch") }
+        
+        // MARK: - Food Detail Page
+        static var foodDetailNavTitle: String { Localized("label_food_detail_nav_title") }
+        
+        static var success: String { Localized("label_success") }
+        static var addedToCart: String { Localized("label_added_to_cart") }
+        static var ok: String { Localized("label_ok") }
+        
+        static var btnAddToCart: String { Localized("label_btn_add_to_cart") }
+        static var btnPortionIncrease: String { Localized("label_btn_portion_increase") }
+        static var btnPortionDecrease: String { Localized("label_btn_portion_decrease") }
+        
+        static var txtSelectIngredients: String { Localized("label_txt_select_ingredients") }
+        static var txtSizeOfPortions: String { Localized("label_txt_size_of_portions") }
+        
+        static var alertItemAdded: String { Localized("label_alert_item_added") }
+        
+        static var fourStarRatings: String { Localized("label_4_star_ratings") }
+        static var totalPriceTitle: String { Localized("label_total_price_title") }
+        static var perPortion: String { Localized("label_per_portion") }
+        static var descriptionTitle: String { Localized("label_description_title") }
+        static var customizeYourOrder: String { Localized("label_customize_your_order") }
+        static var numberOfPortions: String { Localized("label_number_of_portions") }
+        
+        // ===================== Food Screen Page =====================
+        static let foodscreenNavGreeting = Localized("label_foodscreen_nav_greeting")
+        static let foodscreenNavGreetingUser = Localized("label_foodscreen_nav_greeting_user")
+        static let foodscreenLocationPlaceholder = Localized("label_foodscreen_location_placeholder")
+        static let foodscreenSearchPlaceholder = Localized("label_foodscreen_search_placeholder")
+        static let foodscreenSectionPopular = Localized("label_foodscreen_section_popular")
+        static let foodscreenSectionMostPopular = Localized("label_foodscreen_section_most_popular")
+        static let foodscreenSectionRecent = Localized("label_foodscreen_section_recent")
+        static let foodscreenBtnViewAll = Localized("label_foodscreen_btn_view_all")
+        static let foodscreenDeliveringTo = Localized("label_foodscreen_delivering_to")
+        
+        // ===================== Profile Page =====================
+        static let profileNavTitle = Localized("label_profile_nav_title")
+        static let profileWelcome = Localized("label_profile_welcome")
+        
+        static let profileNamePlaceholder = Localized("label_profile_name_placeholder")
+        static let profileEmailPlaceholder = Localized("label_profile_email_placeholder")
+        static let profileMobilePlaceholder = Localized("label_profile_mobile_placeholder")
+        static let profileAddressPlaceholder = Localized("label_profile_address_placeholder")
+        
+        static let profileBtnSave = Localized("label_profile_btn_save")
+        static let profileBtnSignOut = Localized("label_profile_btn_signout")
+        static let profileBtnEdit = Localized("label_profile_btn_edit")
+        
+        // My Order Page
+        static var myOrderNavTitle: String { Localized("label_my_order_nav_title") }
+        static var myOrderSubTotal: String { Localized("label_my_order_subtotal") }
+        static var myOrderDeliveryCost: String { Localized("label_my_order_delivery_cost") }
+        static var myOrderTotal: String { Localized("label_my_order_total") }
+        static var myOrderAddNotes: String { Localized("label_my_order_add_notes") }
+        static var myOrderCheckout: String { Localized("label_my_order_checkout") }
+        static var currencySymbol: String { Localized("label_currency_symbol") }
+        static var myOrderAddress: String { Localized("label_my_order_address") }
+        static var myOrderMealMonkey: String { Localized("label_my_order_meal_monkey") }
+        static var myOrderDeliveryCostTitle: String { Localized("label_my_order_delivery_cost_title") }
+        static var myOrderSubTotalTitle: String { Localized("label_my_order_subtotal_title") }
+        static var myOrderDeliveryInstruction: String { Localized("label_my_order_delivery_instruction") }
+        
+        // Checkout-specific labels
+        static var checkoutYouCanRemoveCard: String { Localized("label_checkout_you_can_remove_card") }
+        static var checkoutExpiry: String { Localized("label_checkout_expiry") }
+        static var checkoutAddCreditDebitCard: String { Localized("label_checkout_add_credit_debit_card") }
+        static var checkoutDescriptionThankYou: String { Localized("label_checkout_description_thank_you") }
+        static var checkoutForYourOrder: String { Localized("label_checkout_for_your_order") }
+        static var checkoutThankYou: String { Localized("label_checkout_thank_you") }
+        
+        // Checkout buttons
+        static var btnAddCard: String { Localized("btn_checkout_add_card") }
+        static var btnSendOrder: String { Localized("btn_checkout_send_order") }
+        static var btnClose: String { Localized("btn_checkout_close") }
+        static var btnBackToHome: String { Localized("btn_checkout_back_to_home") }
+        static var btnTrackOrder: String { Localized("btn_checkout_track_order") }
+        static var btnLocationChange: String { Localized("btn_location_change") }
+        
     }
     
     // MARK: - UI Constants
@@ -250,20 +453,44 @@ struct Main {
     struct Offers {
         // Café de Noires
         static let cafeDeNoiresImage = "ic_Café de Noires" // Image for Café de Noires
-        static let cafeDeNoiresName = "Café de Noires" // Display name for Café de Noires
+        static var cafeDeNoiresName: String {
+            Localized("label_offer_cafe_name_cafe_de_noires")
+        }
         
         // Isso
         static let issoImage = "ic_Isso" // Image for Isso restaurant
-        static let issoName = "Isso" // Display name for Isso
+        static var issoName: String {
+            Localized("label_offer_cafe_name_isso")
+        }
         
         // Cafe Beans
         static let cafeBeansImage = "ic_Cafe Beans" // Image for Cafe Beans
-        static let cafeBeansName = "Cafe Beans" // Display name for Cafe Beans
+        static var cafeBeansName: String {
+            Localized("label_offer_cafe_name_cafe_beans")
+        }
         
         // Common default values
-        static let defaultRatings = "(124 ratings)" // Default ratings display
-        static let defaultRestaurantType = "Café" // Default type of restaurant
-        static let defaultFoodType = "Western Food" // Default cuisine type
+        static var defaultRatings: String {
+            Localized("label_offer_default_ratings")
+        }
+        static var defaultRestaurantType: String {
+            Localized("label_offer_default_restaurant_type")
+        }
+        static var defaultFoodType: String {
+            Localized("label_offer_default_food_type")
+        }
+    }
+    
+    struct OfferLabels {
+        static var navTitle: String {
+            Localized("label_offers_nav_title")
+        }
+        static var findDiscounts: String {
+            Localized("label_find_discounts")
+        }
+        static var btnCheckOffers: String {
+            Localized("label_btn_check_offers")
+        }
     }
     
     // MARK: - Animations
@@ -293,9 +520,15 @@ struct Main {
     // MARK: - Menu Counts
     // Number of items in each category (example placeholders)
     struct MenuCounts {
-        static let food = "25 Items" // Food item count
-        static let beverages = "25 Items" // Beverages item count
-        static let desserts = "25 Items" // Desserts item count
+        static var food: String {
+            String(format: Localized("label_menu_items_count"), 25)
+        }
+        static var beverages: String {
+            String(format: Localized("label_menu_items_count"), 25)
+        }
+        static var desserts: String {
+            String(format: Localized("label_menu_items_count"), 25)
+        }
     }
     
     // MARK: - Product Names
@@ -319,10 +552,28 @@ struct Main {
     struct EmptyState {
         static let wishlistjson = "Wishlist" // JSON reference for wishlist
         static let dessertsAnimation = "Walking Orange" // Dessert empty animation
-        static let noItemsFound = "No items found" // Generic empty message
         static let cartAnimation = "Add to cart" // Cart empty animation
-        static let cartEmptyMessage = "Your cart is empty" // Cart empty text
-        static let wishlistEmptyMessage = "Your wishlist is empty" // Wishlist empty text
+        
+        static var cartEmptyMessage: String {
+            Localized("label_empty_cart_message")
+        }
+        
+        static var wishlistEmptyMessage: String {
+            Localized("label_empty_wishlist_message")
+        }
+        
+        static func noItemsFound(for category: String) -> String {
+            switch category.lowercased() {
+            case "food":
+                return Main.MenuLabels.noFoodResults
+            case "beverages":
+                return Main.MenuLabels.noBeveragesResults
+            case "desserts":
+                return Main.MenuLabels.noDessertsResults
+            default:
+                return Localized("label_empty_no_items_found")
+            }
+        }
     }
     
     // MARK: - Ratings
@@ -350,12 +601,19 @@ struct Main {
         
         // Pin icon
         static let locationPin = "Ic_Location_Pin"
+        
+        static var lblChooseSavedAddress: String {
+            Localized("lbl_choose_a_saved_address")
+        }
+        // TextFields
+        static var txtSearchPlaceholder: String {
+            Localized("txt_search_placeholder")
+        }
     }
     
     // MARK: - New Password Screen
     // Titles, messages, and icons used in new password screen
     struct NewPassword {
-        static let navTitle = "New Password" // Screen title
         
         // Validation Titles
         static let newPasswordMissingTitle = "New Password is missing"
@@ -372,6 +630,24 @@ struct Main {
         // Eye icons for show/hide password
         static let eye = "eye"
         static let eyeSlash = "eye.slash"
+        
+        // MARK: - Labels / Placeholders
+        static var navTitle: String { Localized("lbl_newpassword_nav_title") }
+        static var title: String { Localized("lbl_newpassword_title") }
+        static var subtitle: String { Localized("lbl_newpassword_subtitle") }
+        static var newPasswordPlaceholder: String { Localized("txt_newpassword_placeholder") }
+        static var confirmPasswordPlaceholder: String { Localized("txt_confirm_password_placeholder") }
+        static var btnSubmit: String { Localized("btn_submit_newpassword") }
+        
+        // MARK: - Alerts / Validation
+        static var alertPasswordMissing: String { Localized("alert_password_missing") }
+        static var validationPasswordMissing: String { Localized("validation_password_missing") }
+        static var alertConfirmPasswordMissing: String { Localized("alert_confirm_password_missing") }
+        static var validationConfirmPasswordMissing: String { Localized("validation_confirm_password_missing") }
+        static var alertPasswordMismatch: String { Localized("alert_password_mismatch") }
+        static var validationPasswordMismatch: String { Localized("validation_password_mismatch") }
+        static var alertProfileUpdateFailed: String { Localized("alert_profile_update_failed") }
+        static var alertError: String { Localized("alert_error") }
     }
     
     struct model {
@@ -396,16 +672,22 @@ struct Main {
     // MARK: - Feature Texts
     // Texts for onboarding or feature screens
     struct FeatureTexts {
-        // Titles
-        static let findFoodTitle = "Find Food You Love"
-        static let fastDeliveryTitle = "Fast Delivery"
-        static let liveTrackingTitle = "Live Tracking"
         
-        // Subtitles
-        static let findFoodSubTitle = "Discover the best foods from over 1,000 restaurants and fast delivery to your doorstep"
-        static let fastDeliverySubTitle = "Fast food delivery to your home, office wherever you are"
-        static let liveTrackingSubTitle = "Real time tracking of your food on the app once you placed the order"
+        // MARK: - Titles
+        static var findFoodTitle: String { Localized("feature_find_food_title") }
+        static var fastDeliveryTitle: String { Localized("feature_fast_delivery_title") }
+        static var liveTrackingTitle: String { Localized("feature_live_tracking_title") }
+        
+        // MARK: - Subtitles
+        static var findFoodSubTitle: String { Localized("feature_find_food_subtitle") }
+        static var fastDeliverySubTitle: String { Localized("feature_fast_delivery_subtitle") }
+        static var liveTrackingSubTitle: String { Localized("feature_live_tracking_subtitle") }
+        
+        // MARK: - Buttons
+        static var next: String { Localized("label_next") }
+        static var done: String { Localized("label_done") }
     }
+    
     
     // MARK: - Validation Patterns
     // Regex patterns for form validation
@@ -430,53 +712,367 @@ struct Main {
     
     // MARK: - About Us Model
     // Text content displayed in About Us screen
-    struct aboutUsModel {
-        static let strText1 = "Our mission is to deliver a seamless and intuitive shopping experience..."
-        static let strText2 = "We are dedicated to maintaining high standards of performance, transparency..."
-        static let strText3 = "Your feedback matters. If you have any questions, suggestions..."
-        static let strText4 = "We believe that technology should serve people. That’s why we constantly refine..."
-        static let strText5 = "Security is our priority. We use industry-standard protocols..."
-        static let strText6 = "We value accessibility and inclusiveness. Our platform is designed to be usable by..."
-        static let strText7 = "Sustainability matters to us. We support eco-friendly business practices..."
+    struct AboutUsModelKeys {
+        static var text1: String { Localized("label_aboutus_text_1") }
+        static var text2: String { Localized("label_aboutus_text_2") }
+        static var text3: String { Localized("label_aboutus_text_3") }
+        static var text4: String { Localized("label_aboutus_text_4") }
+        static var text5: String { Localized("label_aboutus_text_5") }
+        static var text6: String { Localized("label_aboutus_text_6") }
+        static var text7: String { Localized("label_aboutus_text_7") }
     }
     
     // MARK: - Inbox Model
-    // Predefined messages for the inbox
     struct inboxModel {
-        static let promotions = ("MealMonkey Promotions", "6th July", "Get 20% off on your next meal!")
-        static let orderUpdate = ("Order Update", "6th July", "Your order is being prepared by the restaurant.")
-        static let deliveryReminders = ("Delivery Reminder", "6th July", "Your delivery agent is on the way.")
-        static let welcome = ("Welcome to MealMonkey", "6th July", "Thanks for joining us! Start exploring meals.")
-        static let experience = ("Rate Your Experience", "6th July", "How was your recent meal order?")
-        static let flashSale = ("Flash Sale", "6th July", "Enjoy 30% off on all pasta orders today only.")
-        static let newRestaurants = ("New Restaurants", "6th July", "Discover trending restaurants in your area.")
-        static let referEarn = ("Refer & Earn", "6th July", "Invite friends and earn ₹100 credits!")
-        static let weekendSpecial = ("Weekend Special", "6th July", "Free dessert on orders above ₹499.")
-        static let tips = ("MonkeyMeal Tips", "6th July", "Customize your orders with special instructions.")
-        static let orderCancel = ("Order Cancelled", "6th July", "Your order has been cancelled as requested.")
-        static let loyaltyProgram = ("Loyalty Program", "6th July", "Collect Monkey Points with every purchase.")
-        static let securityUpdate = ("Security Update", "6th July", "Your password was recently changed.")
-        static let accountVerified = ("Account Verified", "6th July", "Your account has been successfully verified.")
-        static let limitedDeal = ("Limited Time Deal", "6th July", "Flat ₹50 off on biryani orders today.")
+        static var promotions: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_promotions_title"),
+                Localized("label_inbox_promotions_date"),
+                Localized("label_inbox_promotions_desc")
+            )
+        }
+        static var orderUpdate: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_orderupdate_title"),
+                Localized("label_inbox_orderupdate_date"),
+                Localized("label_inbox_orderupdate_desc")
+            )
+        }
+        static var deliveryReminders: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_deliveryreminders_title"),
+                Localized("label_inbox_deliveryreminders_date"),
+                Localized("label_inbox_deliveryreminders_desc")
+            )
+        }
+        static var welcome: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_welcome_title"),
+                Localized("label_inbox_welcome_date"),
+                Localized("label_inbox_welcome_desc")
+            )
+        }
+        static var experience: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_experience_title"),
+                Localized("label_inbox_experience_date"),
+                Localized("label_inbox_experience_desc")
+            )
+        }
+        static var flashSale: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_flashsale_title"),
+                Localized("label_inbox_flashsale_date"),
+                Localized("label_inbox_flashsale_desc")
+            )
+        }
+        static var referEarn: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_referearn_title"),
+                Localized("label_inbox_referearn_date"),
+                Localized("label_inbox_referearn_desc")
+            )
+        }
+        static var weekendSpecial: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_weekendspecial_title"),
+                Localized("label_inbox_weekendspecial_date"),
+                Localized("label_inbox_weekendspecial_desc")
+            )
+        }
+        static var tips: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_tips_title"),
+                Localized("label_inbox_tips_date"),
+                Localized("label_inbox_tips_desc")
+            )
+        }
+        static var orderCancel: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_ordercancel_title"),
+                Localized("label_inbox_ordercancel_date"),
+                Localized("label_inbox_ordercancel_desc")
+            )
+        }
+        static var loyaltyProgram: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_loyaltyprogram_title"),
+                Localized("label_inbox_loyaltyprogram_date"),
+                Localized("label_inbox_loyaltyprogram_desc")
+            )
+        }
+        static var securityUpdate: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_securityupdate_title"),
+                Localized("label_inbox_securityupdate_date"),
+                Localized("label_inbox_securityupdate_desc")
+            )
+        }
+        static var accountVerified: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_accountverified_title"),
+                Localized("label_inbox_accountverified_date"),
+                Localized("label_inbox_accountverified_desc")
+            )
+        }
+        static var limitedDeal: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_limiteddeal_title"),
+                Localized("label_inbox_limiteddeal_date"),
+                Localized("label_inbox_limiteddeal_desc")
+            )
+        }
+        static var newRestaurants: (title: String, date: String, desc: String) {
+            return (
+                Localized("label_inbox_newrestaurants_title"),
+                Localized("label_inbox_newrestaurants_date"),
+                Localized("label_inbox_newrestaurants_desc")
+            )
+        }
     }
     
     // MARK: - Notification Model
-    // Predefined notifications displayed to the user
     struct notificationModel {
-        static let orderPlaced = ("Order placed successfully", "Just now")
-        static let paymentConfirmed = ("Your payment has been confirmed", "5m ago")
-        static let foodPrepared = ("Your food is being prepared", "10m ago")
-        static let agentAssigned = ("Delivery agent assigned", "30m ago")
-        static let orderOnWay = ("Your order is on the way", "1h ago")
-        static let discount = ("Special discount available!", "2h ago")
-        static let appUpdate = ("Download our new app update", "3h ago")
-        static let referFriend = ("Refer a friend and earn", "5h ago")
-        static let limitedDeal = ("Limited-time deal ending soon", "12h ago")
-        static let deliveryDone = ("Delivery completed", "1d ago")
-        static let rateMeal = ("Rate your last meal", "2d ago")
-        static let weekendOffer = ("Weekend offer just for you", "3d ago")
-        static let freeDelivery = ("Free delivery on orders above ₹299", "5d ago")
-        static let thanks = ("Thanks for being with us!", "6d ago")
-        static let newRestaurants = ("New restaurants added near you", "1w ago")
+        static var orderPlaced: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_orderplaced_msg"),
+                Localized("label_notifications_orderplaced_time")
+            )
+        }
+        static var paymentConfirmed: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_paymentconfirmed_msg"),
+                Localized("label_notifications_paymentconfirmed_time")
+            )
+        }
+        static var foodPrepared: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_foodprepared_msg"),
+                Localized("label_notifications_foodprepared_time")
+            )
+        }
+        static var agentAssigned: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_agentassigned_msg"),
+                Localized("label_notifications_agentassigned_time")
+            )
+        }
+        static var orderOnWay: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_orderonway_msg"),
+                Localized("label_notifications_orderonway_time")
+            )
+        }
+        static var discount: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_discount_msg"),
+                Localized("label_notifications_discount_time")
+            )
+        }
+        static var appUpdate: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_appupdate_msg"),
+                Localized("label_notifications_appupdate_time")
+            )
+        }
+        static var referFriend: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_referfriend_msg"),
+                Localized("label_notifications_referfriend_time")
+            )
+        }
+        static var limitedDeal: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_limiteddeal_msg"),
+                Localized("label_notifications_limiteddeal_time")
+            )
+        }
+        static var deliveryDone: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_deliverydone_msg"),
+                Localized("label_notifications_deliverydone_time")
+            )
+        }
+        static var rateMeal: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_ratemeal_msg"),
+                Localized("label_notifications_ratemeal_time")
+            )
+        }
+        static var weekendOffer: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_weekendoffer_msg"),
+                Localized("label_notifications_weekendoffer_time")
+            )
+        }
+        static var freeDelivery: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_freedelivery_msg"),
+                Localized("label_notifications_freedelivery_time")
+            )
+        }
+        static var thanks: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_thanks_msg"),
+                Localized("label_notifications_thanks_time")
+            )
+        }
+        static var newRestaurants: (msg: String, time: String) {
+            return (
+                Localized("label_notifications_newrestaurants_msg"),
+                Localized("label_notifications_newrestaurants_time")
+            )
+        }
+    }
+    
+    struct PaymentLabels {
+        
+        // MARK: - Navigation Title
+        static var paymentNavTitle: String { Localized("label_payment_nav_title") }
+        
+        static var expiry: String { Localized("label_expiry") }
+        static var addCreditDebitCard: String { Localized("label_add_credit_debit_card") }
+        static var customizePaymentMethod: String { Localized("label_customize_payment_method") }
+        static var youCanRemoveThisCard: String { Localized("label_you_can_remove_this_card") }
+        static var cashOnDelivery: String { Localized("label_cash_on_delivery") }
+        static var otherPaymentMethods: String { Localized("label_other_methods") }
+        
+        // MARK: - Buttons
+        static var addNewCard: String { Localized("label_add_new_card") }
+        static var addCard: String { Localized("label_add_card") }
+        static var closeAddCardView: String { Localized("label_close_add_card_view") }
+        
+        // MARK: - TextFields / Placeholders
+        static var firstName: String { Localized("label_first_name") }
+        static var lastName: String { Localized("label_last_name") }
+        static var cardNumber: String { Localized("label_card_number") }
+        static var expiryMonth: String { Localized("label_expiry_month") }
+        static var expiryYear: String { Localized("label_expiry_year") }
+        static var securityCode: String { Localized("label_security_code") }
+        
+        // MARK: - Alerts / Messages
+        static var invalidInput: String { Localized("label_alert_invalid_input") }
+        static var userNotFound: String { Localized("label_alert_user_not_found") }
+        static var cardAlreadySaved: String { Localized("label_alert_card_already_saved") }
+        
+        // MARK: - Empty State
+        static var noSavedCards: String { Localized("label_no_saved_cards") }
+        
+        // MARK: - Switch / Other UI
+        static var removeCardSwitch: String { Localized("label_remove_card_switch") }
+        
+        // MARK: - Common Buttons
+        static var ok: String { Localized("label_ok") }
+        static var next: String { Localized("label_next") }
+        static var done: String { Localized("label_done") }
+        static var selectLocation: String { Localized("label_select_location") }
+        static var unknown: String { Localized("label_unknown") }
+    }
+    
+    struct WishlistLabels {
+        static var wishlistEmptyMessage: String {
+            Localized("label_wishlist_empty_message")
+        }
+        static var wishlistAddItems: String {
+            Localized("label_wishlist_add_items")
+        }
+    }
+    
+    struct MenuLabels {
+        static var navTitle: String {
+            Localized("label_menu_nav_title")
+        }
+        
+        static var searchPlaceholder: String {
+            Localized("label_menu_search_placeholder")
+        }
+        static var searchFoodPlaceholder: String {
+            Localized("label_menu_search_food_placeholder")
+        }
+        static var searchBeveragesPlaceholder: String {
+            Localized("label_menu_search_beverages_placeholder")
+        }
+        static var searchDessertsPlaceholder: String {
+            Localized("label_menu_search_desserts_placeholder")
+        }
+        
+        static var noResults: String {
+            Localized("label_menu_no_results")
+        }
+        static var noFoodResults: String {
+            Localized("label_menu_no_food_results")
+        }
+        static var noBeveragesResults: String {
+            Localized("label_menu_no_beverages_results")
+        }
+        static var noDessertsResults: String {
+            Localized("label_menu_no_desserts_results")
+        }
+        
+        static var categoryFood: String {
+            Localized("label_menu_category_food")
+        }
+        static var categoryBeverages: String {
+            Localized("label_menu_category_beverages")
+        }
+        static var categoryDesserts: String {
+            Localized("label_menu_category_desserts")
+        }
+    }
+    
+    struct CartPage {
+        static var navTitle: String {
+            Localized("label_cart_nav_title")
+        }
+        static var emptyMessage: String {
+            Localized("label_cart_empty_message")
+        }
+        static var emptyTitle: String {
+            Localized("label_cart_empty_title")
+        }
+        static var placeOrderButton: String {
+            Localized("label_cart_place_order_btn")
+        }
+        static var orderPlacedTitle: String {
+            Localized("label_cart_order_placed_title")
+        }
+        static var orderPlacedMessage: String {
+            Localized("label_cart_order_placed_message")
+        }
+        static var orderErrorTitle: String {
+            Localized("label_cart_order_error_title")
+        }
+        static var orderErrorMessage: String {
+            Localized("label_cart_order_error_message")
+        }
+        static var qty: String {
+            Localized("label_cart_qty")
+        }
+    }
+    
+    struct OrderListPage {
+        static var navTitle: String {
+            Localized("label_order_list_nav_title")
+        }
+        static var orderNoPrefix: String {
+            Localized("label_order_list_order_no_prefix")
+        }
+        static var currencySymbol: String {
+            Localized("label_order_list_currency_symbol")
+        }
+        static var noOrdersMessage: String {
+            Localized("label_order_list_no_orders")
+        }
     }
 }
+
+func Localized(_ key: String) -> String {
+    return NSLocalizedString(
+        key,
+        tableName: nil,
+        bundle: LocalizationManager.shared.bundle,
+        value: "",
+        comment: ""
+    )
+}
+
