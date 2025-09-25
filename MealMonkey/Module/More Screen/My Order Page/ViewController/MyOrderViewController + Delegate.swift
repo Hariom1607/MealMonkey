@@ -31,7 +31,36 @@ extension MyOrderViewController: UITableViewDelegate, UITableViewDataSource {
         cell.lblProductsName.text = product.strProductName
         cell.lblProductQty.text = "x \(product.intProductQty ?? 1)"  // Show quantity (default to 1 if nil)
         cell.lblProductPrice.text = "$\(String(format: "%.2f", product.doubleProductPrice * Double(product.intProductQty ?? 1)))"
-        
+        cell.applyTheme()
+
         return cell
+    }
+    
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // MARK: - Backgrounds
+        view.backgroundColor = theme.backgroundColor
+        tblMyOrders.backgroundColor = theme.backgroundColor
+        
+        // MARK: - Labels
+        lblTotal.textColor = theme.primaryFontColor
+        lblSubTotal.textColor = theme.primaryFontColor
+        lblDeliveryCost.textColor = theme.primaryFontColor
+        
+        lblTotalTitle.textColor = theme.secondaryFontColor
+        lblSubTotalTitle.textColor = theme.secondaryFontColor
+        lblDeliveryCostTitle.textColor = theme.secondaryFontColor
+        lblAddress.textColor = theme.primaryFontColor
+        lblMealMonkey.textColor = theme.primaryFontColor
+        lblDeliveryInstruction.textColor = theme.secondaryFontColor
+        
+        // MARK: - Buttons
+        btnCheckout.backgroundColor = theme.mainColor
+        btnCheckout.setTitleColor(theme.accentColor, for: .normal)
+        btnAddNotes.setTitleColor(theme.buttonColor, for: .normal)
+        
+        // MARK: - Reload TableView to update cell colors
+        tblMyOrders.reloadData()
     }
 }

@@ -26,6 +26,14 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.updateCartBadge()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: Notification.Name("themeChanged"),
+            object: nil
+        )
+        
+        
         // Update navigation title
         setLeftAlignedTitle(Localized("label_profile_nav_title"))
         
@@ -54,13 +62,20 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // ✅ Localized placeholders
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: Notification.Name("themeChanged"),
+            object: nil
+        )
+        
+        // Localized placeholders
         txtName.placeholder = Main.Labels.profileNamePlaceholder
         txtEmail.placeholder = Main.Labels.profileEmailPlaceholder
         txtMobileNo.placeholder = Main.Labels.profileMobilePlaceholder
         txtAddress.placeholder = Main.Labels.profileAddressPlaceholder
         
-        // ✅ Localized buttons
+        // Localized buttons
         btnSaveUser.setTitle(Main.Labels.profileBtnSave, for: .normal)
         btnSignOut.setTitle(Main.Labels.profileBtnSignOut, for: .normal)
         btnEditProfile.setTitle(Main.Labels.profileBtnEdit, for: .normal)
@@ -96,13 +111,14 @@ class ProfileViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openImagePicker))
         imgUser.addGestureRecognizer(tapGesture)
         
-        // ✅ Welcome message
+        // Welcome message
         if let name = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.userName), !name.isEmpty {
             lblWelcomeMsg.text = String(format: Main.Labels.profileWelcome, name)
         } else {
             lblWelcomeMsg.text = String(format: Main.Labels.profileWelcome, "")
         }
         
+        applyTheme()
         // Load user profile from CoreData or UserDefaults
         loadUserProfile()
     }
@@ -120,7 +136,7 @@ class ProfileViewController: UIViewController {
         
         lblWelcomeMsg.text = "Welcome, \(user.name ?? "")"
         
-        // ✅ Load profile image directly from CoreData
+        // Load profile image directly from CoreData
         if let imageData = user.imageData {
             imgUser.image = UIImage(data: imageData)
         } else {
@@ -239,4 +255,55 @@ class ProfileViewController: UIViewController {
             UIAlertController.showAlert(title: Main.Alerts.error, message: Main.Messages.profileUpdateFailed, viewController: self)
         }
     }
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        viewImg.layer.borderColor = theme.buttonColor.cgColor
+        
+        // Labels
+        lblWelcomeMsg.textColor = theme.labelColor
+        
+        // Buttons
+        let buttons = [btnSaveUser]
+        buttons.forEach { btn in
+            btn?.backgroundColor = theme.buttonColor
+            btn?.setTitleColor(.white, for: .normal)
+            btn?.clipsToBounds = true
+        }
+        
+        let labelBtn = [btnSignOut, btnEditProfile]
+        labelBtn.forEach { btn in
+            btn?.setTitleColor(theme.buttonColor, for: .normal) 
+        }
+        // TextFields
+        let textFields = [txtName, txtEmail, txtMobileNo, txtAddress]
+        textFields.forEach { field in
+            field?.textColor = theme.primaryFontColor
+            field?.backgroundColor = theme.cellBackgroundColor
+            field?.layer.cornerRadius = 28     // same as styleViews
+            field?.layer.borderWidth = 1
+            field?.layer.borderColor = UIColor.black.cgColor
+            field?.clipsToBounds = true
+            if let placeholder = field?.placeholder {
+                field?.attributedPlaceholder = NSAttributedString(
+                    string: placeholder,
+                    attributes: [NSAttributedString.Key.foregroundColor: theme.placeholderColor]
+                )
+            }
+        }
+        
+        // Navigation bar
+        navigationController?.navigationBar.barTintColor = theme.mainColor
+        navigationController?.navigationBar.tintColor = theme.accentColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: theme.primaryFontColor
+        ]
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("themeChanged"), object: nil)
+    }
+    
 }

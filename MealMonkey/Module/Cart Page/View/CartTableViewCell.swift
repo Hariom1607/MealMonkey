@@ -50,6 +50,7 @@ class CartTableViewCell: UITableViewCell {
         } else {
             lblFoodType.text = Main.Labels.unknown
         }
+        applyTheme(ThemeManager.currentTheme)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -62,5 +63,14 @@ class CartTableViewCell: UITableViewCell {
     /// Delete button tapped → trigger callback
     @IBAction func btnDeleteCartAction(_ sender: Any) {
         onDelete?()
+    }
+    
+    func applyTheme(_ theme: Theme) {
+        lblFoodName.textColor = theme.primaryFontColor
+        lblFoodPrice.textColor = theme.primaryFontColor
+        lblQty.textColor = theme.primaryFontColor
+        lblFoodCategory.textColor = theme.secondaryFontColor
+        lblFoodType.textColor = theme.secondaryFontColor
+        btnDeleteFoodItem.tintColor = theme.buttonColor
     }
 }

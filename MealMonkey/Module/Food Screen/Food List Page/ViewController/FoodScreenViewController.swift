@@ -84,14 +84,19 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         // Show loader
         viewActivityIndicator.startAnimating()
         viewActivityIndicator.isHidden = false
-        viewActivityIndicator.tintColor = .loginButton
-        
+
+        applyTheme()
+
         // Fetch products from API
         loadProducts()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: Notification.Name("themeChanged"), object: nil)
+        applyTheme()
+
         
         viewActivityIndicator.type = .ballSpinFadeLoader   // pick any style you like
         viewActivityIndicator.color = .loginButton        // or your brand color
@@ -267,6 +272,26 @@ class FoodScreenViewController: UIViewController, FoodListTableViewCellDelegate 
         selectedCategory = category
         DispatchQueue.main.async {
             self.tblRecentItems.reloadData()
+        }
+    }
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        txtSearchFood.layer.borderColor = theme.borderColor.cgColor
+        txtSearchFood.textColor = theme.primaryFontColor
+        txtSearchFood.attributedPlaceholder = NSAttributedString(
+            string: txtSearchFood.placeholder ?? "",
+            attributes: [.foregroundColor: theme.placeholderColor]
+        )
+        lblDeliveringTo.textColor = theme.primaryFontColor
+        lblCurrentLocation.textColor = theme.secondaryFontColor
+        btnCurrentLocation.tintColor = theme.primaryFontColor
+        viewActivityIndicator.tintColor = theme.buttonColor
+        tblRecentItems.visibleCells.forEach { cell in
+            if let cell = cell as? FoodListTableViewCell {
+                cell.applyTheme(theme)
+            }
         }
     }
 }

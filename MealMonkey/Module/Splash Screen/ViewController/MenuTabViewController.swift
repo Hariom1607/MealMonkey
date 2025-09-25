@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Main Tab Bar Controller
 class MenuTabViewController: UITabBarController {
-
+    
     // Outlet to reference the custom tab bar from storyboard
     @IBOutlet weak var customTabBar: UITabBar!
     
@@ -17,10 +17,33 @@ class MenuTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Hide navigation bar since we are using a Tab Bar as the root navigation element
         self.navigationController?.navigationBar.isHidden = true
-
-        // Additional customization for tab bar can be done here
-        // Example: setting tintColor, backgroundColor, icons, etc.
+        
+        applyTheme()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+    }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // Tab bar background
+        tabBar.barTintColor = theme.backgroundColor
+        tabBar.backgroundColor = theme.backgroundColor
+        
+        // Selected tab icon & text color
+        tabBar.tintColor = theme.buttonColor
+        
+        // Unselected tab icon & text color
+        tabBar.unselectedItemTintColor = theme.secondaryFontColor
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }

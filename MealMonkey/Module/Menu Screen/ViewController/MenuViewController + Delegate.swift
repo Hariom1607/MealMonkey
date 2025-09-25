@@ -37,6 +37,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         // Disable default selection highlight
         cell.selectionStyle = .none
         
+        cell.applyTheme(ThemeManager.currentTheme)
+
         // Load category image if available, otherwise hide image view
         if let imageName = items.imageName {
             cell.imgItem.image = UIImage(named: imageName)

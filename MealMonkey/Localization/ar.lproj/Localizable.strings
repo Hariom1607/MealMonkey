@@ -149,7 +149,7 @@ label_other_methods = "طرق الدفع الأخرى";
 // Buttons
 label_add_new_card = "إضافة بطاقة جديدة";
 label_add_card = "إضافة بطاقة";
-label_close_add_card_view = "إغلاق";
+//label_close_add_card_view = "إغلاق";
 
 // TextFields / Placeholders
 label_first_name = "الاسم الأول";
@@ -327,7 +327,7 @@ label_checkout_thank_you = "شكراً لك";
 /* Buttons */
 btn_checkout_add_card = "أضف بطاقة";
 btn_checkout_send_order = "إرسال الطلب";
-btn_checkout_close = "إغلاق";
+//btn_checkout_close = "إغلاق";
 btn_checkout_back_to_home = "العودة إلى الصفحة الرئيسية";
 btn_checkout_track_order = "تتبع الطلب";
 btn_location_change = "تغيير";
@@ -457,3 +457,4 @@ label_done = "تم";
 
 label_more_languages = "اللغات";
 label_more_languages_title = "اختر اللغة";
+label_more_themes = "الثيمات";

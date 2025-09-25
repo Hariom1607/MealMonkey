@@ -151,7 +151,7 @@ label_other_methods = "अन्य भुगतान विधियाँ";
 // Buttons
 label_add_new_card = "नया कार्ड जोड़ें";
 label_add_card = "कार्ड जोड़ें";
-label_close_add_card_view = "बंद करें";
+//label_close_add_card_view = "बंद करें";
 
 // TextFields / Placeholders
 label_first_name = "पहला नाम";
@@ -329,7 +329,7 @@ label_checkout_thank_you = "धन्यवाद";
 /* Buttons */
 btn_checkout_add_card = "कार्ड जोड़ें";
 btn_checkout_send_order = "ऑर्डर भेजें";
-btn_checkout_close = "बंद करें";
+//btn_checkout_close = "बंद करें";
 btn_checkout_back_to_home = "होम पर वापस जाएं";
 btn_checkout_track_order = "ऑर्डर ट्रैक करें";
 btn_location_change = "बदलें";
@@ -459,3 +459,4 @@ label_done = "समाप्त";
 
 label_more_languages = "भाषाएँ";
 label_more_languages_title = "भाषा चुनें";
+label_more_themes = "थीम्स";

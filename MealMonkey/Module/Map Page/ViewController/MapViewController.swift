@@ -36,9 +36,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ✅ Apply theme initially
+        applyTheme()
+        
+        // ✅ Observe theme change
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
         lblChooseaSavedAddress.text = Main.map.lblChooseSavedAddress
         txtSearchAddress.placeholder = Main.map.txtSearchPlaceholder
-
+        
         // Style search box
         styleViews([txtSearchAddress], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
         setTextFieldPadding([txtSearchAddress])
@@ -367,6 +378,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         showRouteFromRestaurant(to: userLocation)
     }
     
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        mapView.tintColor = theme.buttonColor
+        
+        lblChooseaSavedAddress.textColor = theme.buttonColor
+        
+        // Buttons
+        let buttons = [btnShowtheSavedAddress, btnSearchAddress, btnRedirectToCurrentLocation]
+        buttons.forEach { btn in
+            btn?.setTitleColor(theme.titleColor, for: .normal)
+            btn?.layer.cornerRadius = 20
+        }
+        
+        // Textfield
+        txtSearchAddress.backgroundColor = theme.secondaryFontColor.withAlphaComponent(0.1)
+        txtSearchAddress.textColor = theme.primaryFontColor
+        txtSearchAddress.attributedPlaceholder = NSAttributedString(
+            string: Main.map.txtSearchPlaceholder,
+            attributes: [.foregroundColor: theme.secondaryFontColor]
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
+    }
 }
 
 // MARK: - Extensions

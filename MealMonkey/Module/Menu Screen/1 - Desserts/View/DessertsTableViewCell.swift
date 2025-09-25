@@ -41,4 +41,13 @@ class DessertsTableViewCell: UITableViewCell {
         lblProductName.accessibilityLabel = "Dessert name: \(product.strProductName)"
         lblRating.accessibilityLabel = "Rating: \(product.floatProductRating) stars"
     }
+    
+    func applyTheme(_ theme: Theme) {
+        contentView.backgroundColor = theme.cellBackgroundColor
+        lblCategoryName.textColor = theme.secondaryFontColor
+        lblRestaurantName.textColor = theme.secondaryFontColor
+        lblRating.textColor = theme.labelColor
+        lblProductName.textColor = theme.primaryFontColor
+        btnRatingStar.tintColor = theme.buttonColor
+    }
 }

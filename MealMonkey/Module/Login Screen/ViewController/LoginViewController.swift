@@ -11,7 +11,6 @@ class LoginViewController: UIViewController {
     
     // MARK: - Outlets
     
-    
     @IBOutlet weak var lblOrloginWith: UILabel!
     @IBOutlet weak var lblAddYourDetailToLogin: UILabel!
     @IBOutlet weak var lblLogin: UILabel!
@@ -31,6 +30,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: Notification.Name("themeChanged"),
+            object: nil
+        )
+        applyTheme()
+        
         lblOrloginWith.text = Main.Login.lblOrLoginWith
         lblAddYourDetailToLogin.text = Main.Login.lblAddDetailToLogin
         lblLogin.text = Main.Login.lblLogin
@@ -44,34 +51,32 @@ class LoginViewController: UIViewController {
         btnForgotPassword.setTitle(Main.Login.btnForgotPassword, for: .normal)
         btnLogin.setTitle(Main.Login.btnLogin, for: .normal)
         btnSignup.tintColor = UIColor.gray
-//        let fullText = Main.Login.btnSignup
-//        let attributedString = NSMutableAttributedString(string: fullText)
-//
-//        // Find range of "Sign Up" in the string
-//        if let signUpRange = fullText.range(of: "Sign Up") {
-//            let nsRange = NSRange(signUpRange, in: fullText)
-//            
-//            // Set orange color for "Sign Up"
-//            attributedString.addAttribute(.foregroundColor, value: UIColor.loginButton, range: nsRange)
-//        }
-//
-//        // Set grey color for the rest
-//        attributedString.addAttribute(.foregroundColor, value: UIColor.systemGray, range: NSRange(location: 0, length: fullText.count))
-
+        //        let fullText = Main.Login.btnSignup
+        //        let attributedString = NSMutableAttributedString(string: fullText)
+        //
+        //        // Find range of "Sign Up" in the string
+        //        if let signUpRange = fullText.range(of: "Sign Up") {
+        //            let nsRange = NSRange(signUpRange, in: fullText)
+        //
+        //            // Set orange color for "Sign Up"
+        //            attributedString.addAttribute(.foregroundColor, value: UIColor.loginButton, range: nsRange)
+        //        }
+        //
+        //        // Set grey color for the rest
+        //        attributedString.addAttribute(.foregroundColor, value: UIColor.systemGray, range: NSRange(location: 0, length: fullText.count))
+        
         // Assign to button
-//        btnSignup.setAttributedTitle(attributedString, for: .normal)
-
+        //        btnSignup.setAttributedTitle(attributedString, for: .normal)
+        
         // Apply rounded style to all inputs and buttons
         let allViews = [
             txtEmail!,
             txtPassword!,
             btnLogin!,
-            btnSignup!,
             btnGoogleLogin!,
             btnFacebookLogin!,
-            btnForgotPassword!
         ]
-        styleViews(allViews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        styleViews(allViews, cornerRadius: 28, borderWidth: 1, borderColor: UIColor.black.cgColor)
         
         // Add padding to text fields
         txtEmail.setPadding(left: 34, right: 34)
@@ -105,6 +110,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
     
     // MARK: - Actions
     
@@ -187,6 +193,43 @@ class LoginViewController: UIViewController {
         if let mlvc = storyboard.instantiateViewController(withIdentifier: Main.viewController.signup) as? SignupViewController {
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
+    }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        
+        // Labels
+        [lblOrloginWith, lblAddYourDetailToLogin, lblLogin].forEach {
+            $0?.textColor = theme.primaryFontColor
+        }
+        
+        // TextFields
+        [txtEmail, txtPassword].forEach {
+            $0?.backgroundColor = theme.cellBackgroundColor
+            $0?.textColor = theme.primaryFontColor
+            $0?.layer.borderWidth = 1
+            $0?.layer.borderColor = theme.borderColor.cgColor
+            if let placeholder = $0?.placeholder {
+                $0?.attributedPlaceholder = NSAttributedString(
+                    string: placeholder,
+                    attributes: [.foregroundColor: theme.placeholderColor]
+                )
+            }
+        }
+        
+        // Buttons
+        btnLogin.backgroundColor = theme.buttonColor
+        btnLogin.setTitleColor(theme.primaryFontColor, for: .normal)
+        
+        btnSignup.tintColor = theme.buttonColor
+        btnForgotPassword.setTitleColor(theme.buttonColor, for: .normal)
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("themeChanged"), object: nil)
     }
 }
 

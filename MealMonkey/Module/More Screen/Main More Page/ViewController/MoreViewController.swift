@@ -36,11 +36,38 @@ class MoreViewController: UIViewController {
         
         // Set navigation title
         setLeftAlignedTitle(Main.Labels.moreNavTitle)
-
+        
         // Add cart button to navigation bar
         setCartButton(target: self, action: #selector(cartButtonTapped))
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
     }
     
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // Update view background
+        view.backgroundColor = theme.backgroundColor
+        
+        // Update navigation bar colors
+        navigationController?.navigationBar.barTintColor = theme.mainColor
+//        navigationController?.navigationBar.tintColor = theme.accentColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: theme.primaryFontColor
+        ]
+        
+        // Update table view background
+        tblMore.backgroundColor = theme.backgroundColor
+        
+        // Reload table to apply text color changes
+        tblMore.reloadData()
+    }
+
     // MARK: - Cart Button Action
     @objc func cartButtonTapped() {
         // Navigate to CartViewController when cart button is tapped
@@ -49,4 +76,9 @@ class MoreViewController: UIViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
+    }
+
 }

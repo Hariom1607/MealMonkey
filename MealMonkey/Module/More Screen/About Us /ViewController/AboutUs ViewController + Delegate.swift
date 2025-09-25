@@ -24,24 +24,16 @@ extension AboutUsViewController: UITableViewDelegate, UITableViewDataSource {
         
         // Configure cell content based on objPagetype
         switch objPagetype {
-        
         case .AboutUs:
-            // Setup AboutUs cell UI
             cell.configureAboutUsCell(about: arrCurrent[indexPath.row])
-            
         case .Notifications:
-            // Setup Notification cell UI
-            cell.configureNotificationCell(
-                about: arrCurrent[indexPath.row]
-            )
-            
+            cell.configureNotificationCell(about: arrCurrent[indexPath.row])
         case .Inbox:
-            // Setup Inbox cell UI
             cell.configureInboxCell(about: arrCurrent[indexPath.row])
-            
-        default:
-            break   // Do nothing for other cases
         }
+
+        cell.textLabel?.textColor = ThemeManager.currentTheme.primaryFontColor
+        cell.backgroundColor = ThemeManager.currentTheme.backgroundColor
         
         return cell   // Return configured cell
     }

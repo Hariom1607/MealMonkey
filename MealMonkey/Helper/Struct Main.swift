@@ -46,7 +46,8 @@ struct Main {
         static let circleFill = "circle.fill" // Filled circle for selection
         static let cartFill = "cart.fill" // Filled cart icon
         static let language = "globe" // 👈 Or your custom asset
-        
+        static let palette = "paintpalette"
+        static let close = "X" // ❌ system symbol
     }
     
     // MARK: - TableView / CollectionView Cells
@@ -335,6 +336,7 @@ struct Main {
         static let unknown = "Unknown" // Default unknown text
         
         static let moreLanguages = Localized("label_more_languages") // ✅ Localized
+        static let moreThemes = Localized("label_more_themes")       // ✅ NEW key for Themes row
         static var moreNavTitle: String { Localized("label_more_nav_title") }
         static var morePaymentDetails: String { Localized("label_more_payment_details") }
         static var moreMyOrders: String { Localized("label_more_my_orders") }

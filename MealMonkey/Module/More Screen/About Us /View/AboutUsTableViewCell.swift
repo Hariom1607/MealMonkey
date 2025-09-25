@@ -15,6 +15,7 @@ class AboutUsTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var viewCellBack: UIView!
     /// Constraint for controlling date label width dynamically
     @IBOutlet weak var widthLblDate: NSLayoutConstraint!
     
@@ -35,7 +36,19 @@ class AboutUsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code runs after the cell is loaded from nib/storyboard
+        applyTheme()
+        
+        // Listen for theme change
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(themeChanged),
+                name: NSNotification.Name("themeChanged"),
+                object: nil
+            )
+    }
+    
+    @objc private func themeChanged() {
+        applyTheme()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,7 +56,16 @@ class AboutUsTableViewCell: UITableViewCell {
         // Configure the view when the cell is selected
     }
     
-    
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        contentView.backgroundColor = theme.backgroundColor
+        viewCellBack.backgroundColor = theme.cellBackgroundColor // use cellBackgroundColor here
+        lblTitle.textColor = theme.primaryFontColor
+        lblSubTitle.textColor = theme.secondaryFontColor
+        lblDate.textColor = theme.labelColor
+        btnStar.tintColor = theme.buttonColor
+    }
+
     // MARK: - Configuration Methods
     
     /// Configures the cell for **About Us** screen
@@ -55,6 +77,8 @@ class AboutUsTableViewCell: UITableViewCell {
         lblSubTitle.isHidden = true
         btnStar.isHidden = true
         widthLblDate.constant = 0
+        applyTheme()
+
     }
     
     /// Configures the cell for **Notifications** screen
@@ -66,6 +90,8 @@ class AboutUsTableViewCell: UITableViewCell {
         lblDate.isHidden = true
         btnStar.isHidden = true
         widthLblDate.constant = 0
+        applyTheme()
+
     }
     
     /// Configures the cell for **Inbox** screen
@@ -76,6 +102,11 @@ class AboutUsTableViewCell: UITableViewCell {
         
         // Show star button for inbox messages
         btnStar.isHidden = false
+        applyTheme()
+
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }
 

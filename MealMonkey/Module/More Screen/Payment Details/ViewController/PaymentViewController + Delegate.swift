@@ -26,7 +26,7 @@ extension PaymentDetailsViewController: UITableViewDelegate, UITableViewDataSour
         // Mask card number before displaying
         cell.lblCardNumber.text = CardHelper.maskedCardNumber(card.cardNumber ?? "")
         cell.delegate = self
-        
+        cell.applyTheme()
         return cell
     }
     
@@ -81,5 +81,47 @@ extension PaymentDetailsViewController: UITableViewDelegate, UITableViewDataSour
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // MARK: - Backgrounds
+        view.backgroundColor = theme.backgroundColor
+        viewMain.backgroundColor = theme.backgroundColor
+        viewScroll.backgroundColor = theme.backgroundColor
+        ScrollView.backgroundColor = theme.backgroundColor
+        viewAddCard.backgroundColor = theme.cellBackgroundColor
+        viewBack.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        
+        // MARK: - Labels
+        lblExpiry.textColor = theme.primaryFontColor
+        lblAddCreditDEbitCard.textColor = theme.primaryFontColor
+        lblCustomizeYourPaymentMethod.textColor = theme.primaryFontColor
+        lblYouCanRemoveThisCard.textColor = theme.secondaryFontColor
+        
+        // MARK: - Buttons
+        btnAddNewCard.backgroundColor = theme.mainColor
+        btnAddNewCard.setTitleColor(theme.accentColor, for: .normal)
+        btnAddCardView.backgroundColor = theme.mainColor
+        btnAddCardView.setTitleColor(theme.accentColor, for: .normal)
+        btnCloseAddCardView.tintColor = theme.mainColor
+        
+        // MARK: - TextFields
+        let textFields = [txtFirstName, txtLastName, txtCardNumber, txtExpiryMonth, txtExpiryYear, txtSecurityCode]
+        textFields.forEach { tf in
+            tf?.layer.borderColor = UIColor.gray.cgColor
+            tf?.layer.borderWidth = 1
+            tf?.backgroundColor = theme.cellBackgroundColor
+            tf?.textColor = theme.primaryFontColor
+            tf?.attributedPlaceholder = NSAttributedString(
+                string: tf?.placeholder ?? "",
+                attributes: [NSAttributedString.Key.foregroundColor: theme.placeholderColor]
+            )
+        }
+        
+        // MARK: - TableView
+        tblCardDetails.backgroundColor = theme.backgroundColor
+        tblCardDetails.reloadData()
     }
 }

@@ -15,6 +15,9 @@ class WishlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: Notification.Name("themeChanged"), object: nil)
+        applyTheme()
+
         // Get current user email from UserDefaults
         currentUserEmail = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) ?? ""
         
@@ -65,5 +68,10 @@ class WishlistViewController: UIViewController {
         } else {
             tblWishlist.restore()
         }
+    }
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        tblWishlist.backgroundColor = theme.backgroundColor
     }
 }

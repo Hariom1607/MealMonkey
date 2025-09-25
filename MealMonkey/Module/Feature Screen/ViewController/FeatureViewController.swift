@@ -32,9 +32,20 @@ class FeatureViewController: UIViewController {
         // Update first page labels
         updateLabels(for: currentIndex)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // ✅ Apply theme initially
+        applyTheme()
+        
+        // ✅ Listen for theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
         
         // Hide navigation bar for onboarding screens
         self.navigationController?.navigationBar.isHidden = true
@@ -70,10 +81,10 @@ class FeatureViewController: UIViewController {
         default:
             break
         }
-
+        
         pageControl.currentPage = index
         currentIndex = index
-
+        
         // Localize button
         btnNext.setTitle(index == 2 ? Localized("label_done") : Localized("label_next"), for: .normal)
     }
@@ -97,5 +108,20 @@ class FeatureViewController: UIViewController {
                 self.navigationController?.pushViewController(menuVC, animated: true)
             }
         }
+    }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        lblTitle.textColor = theme.titleColor
+        lblSubTitle.textColor = theme.secondaryFontColor
+        btnNext.backgroundColor = theme.buttonColor
+        btnNext.setTitleColor(theme.titleColor, for: .normal)
+        pageControl.currentPageIndicatorTintColor = theme.buttonColor
+        pageControl.pageIndicatorTintColor = theme.buttonColor.withAlphaComponent(0.4)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }

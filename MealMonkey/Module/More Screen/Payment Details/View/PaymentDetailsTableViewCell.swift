@@ -47,6 +47,19 @@ class PaymentDetailsTableViewCell: UITableViewCell {
         // Keep default selection behavior
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        ViewCardCell.backgroundColor = theme.cellBackgroundColor
+        lblCashCardondelivery.textColor = theme.primaryFontColor
+        lblOtherMethods.textColor = theme.primaryFontColor
+        lblCardNumber.textColor = theme.primaryFontColor
+        
+        btnDeleteCard.backgroundColor = theme.mainColor
+        btnDeleteCard.setTitleColor(theme.accentColor, for: .normal)
+        btnDeleteCard.layer.borderColor = theme.mainColor.cgColor
+    }
+    
     // MARK: - Actions
     /// Called when delete button is tapped, informs delegate
     @IBAction func btnDeleteCardAction(_ sender: Any) {

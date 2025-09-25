@@ -25,9 +25,8 @@ class CardTableViewCell: UITableViewCell {
                    borderColor: UIColor.black.cgColor)
         
         // Configure selection button with two states: normal & selected
-        btnCardSelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
-        btnCardSelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
-        btnCardSelection.tintColor = .loginButton  // custom color (defined in UIColor extension)
+        btnCardSelection.setImage(UIImage(systemName: Main.images.circle)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btnCardSelection.setImage(UIImage(systemName: Main.images.circleFill)?.withRenderingMode(.alwaysTemplate), for: .selected)
         btnCardSelection.backgroundColor = .clear
         btnCardSelection.layer.cornerRadius = btnCardSelection.frame.height / 2
         btnCardSelection.clipsToBounds = true
@@ -39,6 +38,13 @@ class CardTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Default override → no custom behavior
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        viewCard.backgroundColor = theme.cellBackgroundColor
+        lblCardNumber.textColor = theme.primaryFontColor
+        btnCardSelection.tintColor = theme.buttonColor
     }
     
     /// Action for selecting a card

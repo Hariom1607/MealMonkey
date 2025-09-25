@@ -24,6 +24,14 @@ class RecentItemsCollectionViewCell: UICollectionViewCell {
         styleViews([imgFood], cornerRadius: 8, borderWidth: 0, borderColor: UIColor.clear.cgColor)
     }
     
+    func applyTheme(_ theme: Theme) {
+        lblFoodName.textColor = theme.primaryFontColor
+        lblFoodType.textColor = theme.secondaryFontColor
+        lblFoodRating.textColor = theme.secondaryFontColor
+        lblTotalNoOfRatings.textColor = theme.secondaryFontColor
+        imgFood.layer.borderColor = theme.borderColor.cgColor
+    }
+
     // MARK: - Configuration
     /// Configures the cell with a `ProductModel`
     func configure(with item: ProductModel) {

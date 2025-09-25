@@ -30,16 +30,27 @@ class SignupViewController: UIViewController {
     var isPasswordVisible: Bool = false
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Apply styling to all text fields and buttons
-        let allFields = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSignup!, stackPassword!, stackConfirmPassword!]
-        styleViews(allFields, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        applyTheme()
         
-        // Add padding inside text fields
-        let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!]
-        setTextFieldPadding(allViews)
+        // Listen for theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
+        // Apply styling to all text fields and buttons
+        //        let allFields = [txtName!, txtEmail!, txtAddress!, txtMobileNo!, btnSignup!, stackPassword!, stackConfirmPassword!]
+        //        styleViews(allFields, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        //
+                // Add padding inside text fields
+                let allViews = [txtName!, txtEmail!, txtAddress!, txtMobileNo!]
+                setTextFieldPadding(allViews)
         
         // Add custom padding for password fields
         txtPassword.setPadding(left: 34, right: 5)
@@ -60,6 +71,45 @@ class SignupViewController: UIViewController {
         btnBackToLogin.setTitle(Main.Signup.btnBackToLogin, for: .normal)
         btnBackToLogin.tintColor = UIColor.gray
     }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme   // ✅ No .shared
+        
+        // Background
+        view.backgroundColor = theme.backgroundColor
+        
+        // Buttons
+        btnSignup.backgroundColor = theme.buttonColor
+        btnSignup.setTitleColor(theme.titleColor, for: .normal)
+        btnSignup.layer.cornerRadius = 28
+        btnSignup.clipsToBounds = true
+        btnSignup.layer.borderWidth = 1
+        btnSignup.layer.borderColor = theme.borderColor.cgColor
+        btnBackToLogin.tintColor = theme.secondaryFontColor
+        
+        // TextFields Styling
+        let textFields: [UITextField] = [txtName, txtEmail, txtMobileNo, txtAddress]
+        for tf in textFields {
+            tf.layer.cornerRadius = 28
+            tf.layer.masksToBounds = true
+            tf.layer.borderWidth = 1
+            tf.layer.borderColor = theme.borderColor.cgColor
+            tf.textColor = theme.labelColor
+            tf.backgroundColor = theme.cellBackgroundColor
+            
+        }
+        
+        // StackViews (password, confirm password)
+        let stacks: [UIStackView] = [stackPassword, stackConfirmPassword]
+        for stack in stacks {
+            stack.layer.cornerRadius = 28
+            stack.layer.masksToBounds = true
+            stack.layer.borderWidth = 1
+            stack.layer.borderColor = theme.borderColor.cgColor
+            stack.backgroundColor = theme.cellBackgroundColor
+        }
+    }
+
     
     // MARK: - Actions
     
@@ -93,23 +143,23 @@ class SignupViewController: UIViewController {
         let mobileNo = txtMobileNo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
         // ✅ Step 1: Validations
-//        switch true {
-//        case username.isEmpty:
-//            UIAlertController.showAlert(title: Main.AlertTitle.NameMissing, message: Main.ValidationMessages.nameMissing, viewController: self)
-//            return
-//        case email.isEmpty:
-//            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
-//            return
-//        case !isValidEmail(email):
-//            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
-//            return
-//        case mobileNo.isEmpty:
-//            UIAlertController.showAlert(title: Main.AlertTitle.MobileMissing, message: Main.ValidationMessages.mobileMissing, viewController: self)
-//            return
-//        case address.isEmpty:
-//            UIAlertController.showAlert(title: Main.AlertTitle.AddressMissing, message: Main.ValidationMessages.addressMissing, viewController: self)
-//            return
-//        case password.isEmpty:
+        //        switch true {
+        //        case username.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.NameMissing, message: Main.ValidationMessages.nameMissing, viewController: self)
+        //            return
+        //        case email.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.EmailMissing, message: Main.ValidationMessages.emailMissing, viewController: self)
+        //            return
+        //        case !isValidEmail(email):
+        //            UIAlertController.showAlert(title: Main.AlertTitle.InvalidEmail, message: Main.ValidationMessages.invalidEmail, viewController: self)
+        //            return
+        //        case mobileNo.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.MobileMissing, message: Main.ValidationMessages.mobileMissing, viewController: self)
+        //            return
+        //        case address.isEmpty:
+        //            UIAlertController.showAlert(title: Main.AlertTitle.AddressMissing, message: Main.ValidationMessages.addressMissing, viewController: self)
+        //            return
+        //        case password.isEmpty:
         //            UIAlertController.showAlert(title: Main.AlertTitle.PasswordMissing, message: Main.ValidationMessages.passwordMissing, viewController: self)
         //            return
         //        case !isValidPassword(password):
@@ -190,6 +240,9 @@ class SignupViewController: UIViewController {
             completion?()
         })
         present(alert, animated: true)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }
 

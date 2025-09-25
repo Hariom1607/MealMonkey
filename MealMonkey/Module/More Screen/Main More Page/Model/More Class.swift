@@ -44,20 +44,15 @@ class More: NSObject {
     /// Predefined list of items displayed in the "More" section
     static var items: [More] {
         return [
-            More(imgSection: Main.images.paymentDetails,
-                 title: Main.Labels.morePaymentDetails),
-            More(imgSection: Main.images.myOrders,
-                 title: Main.Labels.moreMyOrders),
-            More(imgSection: Main.images.notifications,
-                 title: Main.Labels.moreNotifications),
-            More(imgSection: Main.images.inbox,
-                 title: Main.Labels.moreInbox),
-            More(imgSection: Main.images.heartfill,
-                 title: Main.Labels.moreWishlist),
-            More(imgSection: Main.images.aboutUs,
-                 title: Main.Labels.moreAboutUs),
-            More(imgSection: Main.images.language,
-                 title: Main.Labels.moreLanguages)
+            More(imgSection: Main.images.paymentDetails, title: Main.Labels.morePaymentDetails),
+            More(imgSection: Main.images.myOrders, title: Main.Labels.moreMyOrders),
+            More(imgSection: Main.images.notifications, title: Main.Labels.moreNotifications),
+            More(imgSection: Main.images.inbox, title: Main.Labels.moreInbox),
+            More(imgSection: Main.images.heartfill, title: Main.Labels.moreWishlist),
+            More(imgSection: Main.images.aboutUs, title: Main.Labels.moreAboutUs),
+            More(imgSection: Main.images.language, title: Main.Labels.moreLanguages),
+            More(imgSection: Main.images.palette, title: Main.Labels.moreThemes) // NEW THEME ROW
         ]
     }
+
 }

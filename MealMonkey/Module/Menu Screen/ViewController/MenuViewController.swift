@@ -13,6 +13,7 @@ class MenuViewController: UIViewController {
     /// Search bar for filtering menu items
     @IBOutlet weak var txtSearch: UITextField!
     
+    @IBOutlet weak var imgSideBar: UIImageView!
     /// Table view that shows menu categories
     @IBOutlet weak var tblMenu: UITableView!
     
@@ -27,6 +28,16 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        applyTheme()
+        
+        // Listen for theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: Notification.Name("themeChanged"),
+            object: nil
+        )
+        
         txtSearch.placeholder = Main.MenuLabels.searchPlaceholder
         txtSearch.setPadding(left: 34, right: 34)
         
@@ -40,7 +51,7 @@ class MenuViewController: UIViewController {
         // ✅ Style search field with padding and rounded corners
         txtSearch.setPadding(left: 34, right: 34)
         let allviews = [txtSearch!]
-        styleViews(allviews, cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
+        styleViews(allviews, cornerRadius: 28, borderWidth: 1, borderColor: UIColor.black.cgColor)
         
         // ✅ Register custom table view cell
         tblMenu.register(UINib(nibName: Main.cells.menuCell, bundle: nil),
@@ -75,5 +86,34 @@ class MenuViewController: UIViewController {
         
         tblMenu.reloadData()
         updateEmptyState()
+    }
+    
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // View background
+//        view.backgroundColor = theme.backgroundColor
+        
+        // Search bar styling
+        txtSearch.backgroundColor = theme.cellBackgroundColor
+        txtSearch.textColor = theme.primaryFontColor
+        txtSearch.layer.cornerRadius = 28
+        txtSearch.layer.borderWidth = 1
+        txtSearch.clipsToBounds = true
+        txtSearch.layer.borderColor = UIColor.black.cgColor
+        if let placeholder = txtSearch.placeholder {
+            txtSearch.attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [NSAttributedString.Key.foregroundColor: theme.placeholderColor]
+            )
+        }
+        
+        // TableView background
+        tblMenu.backgroundColor = .clear
+        tblMenu.reloadData() // so cells also get themed
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("themeChanged"), object: nil)
     }
 }

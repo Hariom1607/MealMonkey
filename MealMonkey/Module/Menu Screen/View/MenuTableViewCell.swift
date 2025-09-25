@@ -39,6 +39,14 @@ class MenuTableViewCell: UITableViewCell {
         btnRightClick.clipsToBounds = true
     }
     
+    func applyTheme(_ theme: Theme) {
+        contentView.backgroundColor = .clear
+        lblName.textColor = theme.labelColor
+        lblQuantity.textColor = theme.secondaryFontColor
+        btnRightClick.backgroundColor = theme.buttonColor
+        btnRightClick.tintColor = .white
+    }
+
     /// Action triggered when right button is tapped
     @IBAction func btnRightClickAction(_ sender: Any) {
         // TODO: Handle right-click button tap (e.g., navigate, open details)

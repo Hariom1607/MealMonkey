@@ -34,6 +34,13 @@ class AboutUsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
         // Register reusable cell
         tblAboutUs.register(
             UINib(nibName: Main.cells.aboutUsCell, bundle: nil),
@@ -65,6 +72,21 @@ class AboutUsViewController: UIViewController {
         }
     }
     
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        tblAboutUs.backgroundColor = theme.backgroundColor
+        
+        navigationController?.navigationBar.barTintColor = theme.mainColor
+        navigationController?.navigationBar.tintColor = theme.accentColor
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: theme.primaryFontColor
+        ]
+        
+        // Reload table so each cell applies the new theme
+        tblAboutUs.reloadData()
+    }
     
     // MARK: - Navigation Button Actions
     
@@ -112,5 +134,9 @@ class AboutUsViewController: UIViewController {
         if let menuVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }

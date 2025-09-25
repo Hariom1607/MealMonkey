@@ -21,6 +21,7 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
             // Case 0 → Cash on Delivery cell
             let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.checkoutCashCell, for: indexPath) as! CashOnDeliveryTableViewCell
             cell.btnCashOnDeliverySelection.isSelected = (selectedPaymentIndex == 0)
+            cell.applyTheme()
             return cell
             
         case 1..<(1 + savedCards.count):
@@ -30,12 +31,14 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
             let card = savedCards[cardIndex]
             cell.lblCardNumber.text = CardHelper.maskedCardNumber(card.cardNumber ?? "")
             cell.btnCardSelection.isSelected = (selectedPaymentIndex == indexPath.row)
+            cell.applyTheme()
             return cell
             
         case 1 + savedCards.count:
             // Last case → UPI cell
             let cell = tableView.dequeueReusableCell(withIdentifier: Main.cells.checkoutUpiCell, for: indexPath) as! UpiTableViewCell
             cell.btnUpiSelection.isSelected = (selectedPaymentIndex == indexPath.row)
+            cell.applyTheme()
             return cell
             
         default:
@@ -115,4 +118,38 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource, UI
         }
         return true
     }
+    
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // MARK: - Backgrounds
+        view.backgroundColor = theme.backgroundColor
+        viewMain.backgroundColor = theme.backgroundColor
+        addCardView.backgroundColor = theme.cellBackgroundColor
+        sendOrderView.backgroundColor = theme.cellBackgroundColor
+        
+        // MARK: - Labels
+        let labels = [lblYoucanremovethiscardatanytime, lblExpiry, lblAddCreditDebitCard,
+                      lblDescriptionThankyoupage, lblForYouOrder, lblThankYou,
+                      lblDeliveryAddress, lblPaymentMethod, lblSubTotalTitle,
+                      lblDeliveryCostTitle, lblDiscountTitle, lblTotalTitle,
+                      lblSubTotal, lblDeliveryCost, lblDiscount, lblTotal, lblCurrentLocation]
+        labels.forEach { $0?.textColor = theme.primaryFontColor }
+        
+        // MARK: - Buttons
+        let buttons = [btnSendOrder, btnTrackOrder, btnAddNewCardPopUp]
+        buttons.forEach {
+            $0?.backgroundColor = theme.mainColor
+            $0?.setTitleColor(theme.accentColor, for: .normal)
+        }
+        
+        btnLocationChange.tintColor = theme.buttonColor
+        btnAddCard.tintColor = theme.buttonColor
+        btnBackToHome.tintColor = theme.buttonColor
+        btnCloseAddCardView.tintColor = theme.buttonColor
+        btnCloseThankyouView.tintColor = theme.buttonColor
+        
+        tblPaymentDetails.reloadData() // Update cell colors
+    }
+
 }

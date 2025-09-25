@@ -23,6 +23,13 @@ class DessertsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: Notification.Name("themeChanged"),
+            object: nil
+        )
+        applyTheme()
         setupUI()
         fetchProducts()
     }
@@ -94,5 +101,32 @@ class DessertsViewController: UIViewController {
         if let cartVC = storyboard.instantiateViewController(withIdentifier: Main.viewController.cart) as? CartViewController {
             self.navigationController?.pushViewController(cartVC, animated: true)
         }
+    }
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // View background
+        view.backgroundColor = theme.backgroundColor
+        
+        // Search bar styling
+        txtSearch.backgroundColor = theme.cellBackgroundColor
+        txtSearch.textColor = theme.primaryFontColor
+        txtSearch.layer.cornerRadius = 28
+        txtSearch.layer.borderWidth = 1
+        txtSearch.clipsToBounds = true
+        if let placeholder = txtSearch.placeholder {
+            txtSearch.attributedPlaceholder = NSAttributedString(
+                string: placeholder,
+                attributes: [NSAttributedString.Key.foregroundColor: theme.placeholderColor]
+            )
+        }
+        
+        // Table view background
+        tblDesserts.backgroundColor = theme.backgroundColor
+        tblDesserts.reloadData() // So all cells get themed
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("themeChanged"), object: nil)
     }
 }

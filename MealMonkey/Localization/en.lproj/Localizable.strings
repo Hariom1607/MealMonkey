@@ -151,7 +151,7 @@ label_other_methods = "Other Payment Methods";
 // Buttons
 label_add_new_card = "Add New Card";
 label_add_card = "Add Card";
-label_close_add_card_view = "Close";
+//label_close_add_card_view = "Close";
 
 // TextFields / Placeholders
 label_first_name = "First Name";
@@ -331,7 +331,7 @@ label_checkout_thank_you = "Thank You";
 /* Buttons */
 btn_checkout_add_card = "Add Card";
 btn_checkout_send_order = "Send Order";
-btn_checkout_close = "Close";
+//btn_checkout_close = "Close";
 btn_checkout_back_to_home = "Back to Home";
 btn_checkout_track_order = "Track Order";
 btn_location_change = "Change";
@@ -461,3 +461,4 @@ label_done = "Done";
 
 label_more_languages = "Languages";
 label_more_languages_title = "Select Language";
+label_more_themes = "Themes";

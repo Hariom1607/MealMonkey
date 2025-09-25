@@ -8,7 +8,7 @@
 import UIKit
 
 class OffersTableViewCell: UITableViewCell {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var lblFoodType: UILabel!
     @IBOutlet weak var lblRestaurantType: UILabel!
@@ -23,9 +23,21 @@ class OffersTableViewCell: UITableViewCell {
         imgCafe.layer.cornerRadius = 10
         imgCafe.clipsToBounds = true
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        lblCafeName.textColor = theme.primaryFontColor
+        lblFoodType.textColor = theme.secondaryFontColor
+        lblRestaurantType.textColor = theme.secondaryFontColor
+        lblNoOfRatings.textColor = theme.secondaryFontColor
+        
+        backgroundColor = theme.cellBackgroundColor
+        contentView.backgroundColor = theme.cellBackgroundColor
     }
     
     // MARK: - Configure Cell

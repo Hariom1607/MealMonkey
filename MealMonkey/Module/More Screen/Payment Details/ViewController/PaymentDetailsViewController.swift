@@ -67,6 +67,16 @@ class PaymentDetailsViewController: UIViewController {
         loadSavedCards()
         
         setupLocalization()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
+        // Apply theme initially
+        applyTheme()
     }
     
     private func setupLocalization() {
@@ -87,7 +97,7 @@ class PaymentDetailsViewController: UIViewController {
         txtSecurityCode.placeholder = Main.PaymentLabels.securityCode
         
         // Labels
-        lblExpiry.text = Main.PaymentLabels.expiry         
+        lblExpiry.text = Main.PaymentLabels.expiry
         lblAddCreditDEbitCard.text = Main.PaymentLabels.addCreditDebitCard
         lblCustomizeYourPaymentMethod.text = Main.PaymentLabels.customizePaymentMethod
         lblYouCanRemoveThisCard.text = Main.PaymentLabels.youCanRemoveThisCard
@@ -95,7 +105,7 @@ class PaymentDetailsViewController: UIViewController {
         // Switch label
         switchRemoveCard.accessibilityLabel = Main.PaymentLabels.removeCardSwitch
     }
-
+    
     private func loadCurrentUser() {
         if let email = UserDefaults.standard.string(forKey: Main.UserDefaultsKeys.currentUserEmail) {
             print("📩 Logged in email from UserDefaults = \(email)")
@@ -124,7 +134,7 @@ class PaymentDetailsViewController: UIViewController {
             tblCardDetails.restore()
         }
     }
-
+    
     func showAlert(message: String) {
         let alert = UIAlertController(title: Main.PaymentLabels.invalidInput, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Main.PaymentLabels.ok, style: .default))
@@ -230,4 +240,8 @@ class PaymentDetailsViewController: UIViewController {
     }
     
     @IBAction func switchValueChanged(_ sender: Any) { }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
+    }
 }

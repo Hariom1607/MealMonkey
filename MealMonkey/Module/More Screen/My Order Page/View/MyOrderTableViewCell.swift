@@ -25,4 +25,15 @@ class MyOrderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state (optional highlight styling)
     }
+    
+    func applyTheme() {
+            let theme = ThemeManager.currentTheme
+            
+            lblProductsName.textColor = theme.primaryFontColor
+            lblProductQty.textColor = theme.secondaryFontColor
+            lblProductPrice.textColor = theme.primaryFontColor
+            
+            backgroundColor = theme.cellBackgroundColor
+            contentView.backgroundColor = theme.cellBackgroundColor
+        }
 }

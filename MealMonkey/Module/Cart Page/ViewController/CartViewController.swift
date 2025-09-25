@@ -26,6 +26,9 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: Notification.Name("themeChanged"), object: nil)
+        applyTheme()
+
         // Style button
         btnPlaceOrder.setTitle(Main.CartPage.placeOrderButton, for: .normal)
         styleViews([btnPlaceOrder!], cornerRadius: 28, borderWidth: 0, borderColor: UIColor.black.cgColor)
@@ -37,6 +40,15 @@ class CartViewController: UIViewController {
         tblCart.register(UINib(nibName: Main.cells.cartCell, bundle: nil), forCellReuseIdentifier: Main.cells.cartCell)
     }
     
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        tblCart.backgroundColor = theme.backgroundColor
+        
+        btnPlaceOrder.backgroundColor = theme.buttonColor
+        btnPlaceOrder.setTitleColor(theme.primaryFontColor, for: .normal)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

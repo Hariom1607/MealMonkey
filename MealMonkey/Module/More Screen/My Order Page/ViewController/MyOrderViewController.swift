@@ -50,7 +50,7 @@ class MyOrderViewController: UIViewController {
         // Recalculate totals with localized labels
         calculateTotals()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +74,16 @@ class MyOrderViewController: UIViewController {
         
         // Calculate and display totals initially
         calculateTotals()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
+        // Apply theme initially
+        applyTheme()
     }
     
     // MARK: - Helper Methods
@@ -101,5 +111,9 @@ class MyOrderViewController: UIViewController {
             mlvc.orderProducts = self.orderProducts // Pass order details to checkout screen
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }

@@ -25,7 +25,7 @@ class OffersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         // Round the corners of the "Check Offers" button
         btnCheckOffers.layer.cornerRadius = Main.UI.cornerRadiusSmall
         
@@ -37,6 +37,16 @@ class OffersViewController: UIViewController {
         setCartButton(target: self, action: #selector(cartBtnTapped))
         lblfindDiscount.text = Main.OfferLabels.findDiscounts
         btnCheckOffers.setTitle(Main.OfferLabels.btnCheckOffers, for: .normal)
+        
+        // MARK: - Theme
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
+        applyTheme() // Apply current theme initially
     }
     
     @objc func cartBtnTapped() {
@@ -49,5 +59,9 @@ class OffersViewController: UIViewController {
     // Action for "Check Offers" button tap
     @IBAction func btnCheckOffersAction(_ sender: Any) {
         // Currently empty - can be used to navigate to another screen or show more offers
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }

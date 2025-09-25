@@ -65,10 +65,13 @@ class FoodDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        applyTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: Notification.Name("themeChanged"), object: nil)
+
         // Style UI components
         let allviews = [btnPortionReduce!, btnPortionIncrease!]
         styleViews(allviews, cornerRadius: 15, borderWidth: 0, borderColor: UIColor.black.cgColor)
-        styleViews([lblNimberOfPortion], cornerRadius: 15, borderWidth: 1, borderColor: UIColor.loginButton.cgColor)
+//        styleViews([lblNimberOfPortion], cornerRadius: 15, borderWidth: 1)
         setTextFieldPadding([txtSelectIngridients!, txtSizeOfPortions!])
         btnAddtoCart.layer.cornerRadius = 7.42
         
@@ -233,6 +236,51 @@ class FoodDetailViewController: UIViewController {
                 Main.Keys.objProductCategory: product.objProductCategory.rawValue,
                 Main.Keys.objProductType: product.objProductType.rawValue
             ]
+        }
+    }
+    
+    @objc func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        
+        // TextFields
+        [txtSelectIngridients, txtSizeOfPortions].forEach { tf in
+            tf?.layer.borderColor = theme.borderColor.cgColor
+            tf?.layer.borderWidth = 1
+            tf?.layer.cornerRadius = 4
+            tf?.textColor = theme.primaryFontColor
+            if let placeholder = tf?.placeholder {
+                tf?.attributedPlaceholder = NSAttributedString(
+                    string: placeholder,
+                    attributes: [.foregroundColor: theme.placeholderColor]
+                )
+            }
+        }
+        
+        // Buttons
+        btnAddtoCart.backgroundColor = theme.buttonColor
+        btnAddtoCart.setTitleColor(theme.primaryFontColor, for: .normal)
+        btnPortionReduce.backgroundColor = theme.buttonColor
+        btnPortionIncrease.backgroundColor = theme.buttonColor
+        [btnPortionIncrease, btnPortionReduce, btnDropDownPortions, btnDropDownIngredients].forEach { btn in
+        }
+        
+        // Labels
+        lblFoodName.textColor = theme.primaryFontColor
+        lblFoodPrize.textColor = theme.secondaryFontColor
+        lblTotalPice.textColor = theme.primaryFontColor
+        lbl4StarRatings.textColor = theme.buttonColor
+        lblNimberOfPortion.layer.borderColor = theme.buttonColor.cgColor
+        lblNimberOfPortion.layer.borderWidth = 1
+        lblNimberOfPortion.layer.cornerRadius = 15
+        
+        // Heart & Stars
+        btnWishlist.tintColor = theme.iconTintColor
+        stackRating.arrangedSubviews.forEach { view in
+            if let img = view as? UIImageView {
+                img.tintColor = theme.iconTintColor
+            }
         }
     }
 }

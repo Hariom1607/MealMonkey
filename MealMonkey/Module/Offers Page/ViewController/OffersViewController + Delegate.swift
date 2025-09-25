@@ -25,7 +25,26 @@ extension OffersViewController: UITableViewDelegate, UITableViewDataSource{
         // Configure the cell with the offer details
         cell.configure(with: offer)
         // Disable cell selection highlight
+        cell.applyTheme() // Apply theme
         cell.selectionStyle = .none
         return cell
     }
+    
+    @objc func applyTheme() {
+            let theme = ThemeManager.currentTheme
+            
+            // MARK: - Backgrounds
+            view.backgroundColor = theme.backgroundColor
+            tblOffers.backgroundColor = theme.backgroundColor
+            
+            // MARK: - Labels
+            lblfindDiscount.textColor = theme.primaryFontColor
+            
+            // MARK: - Buttons
+            btnCheckOffers.backgroundColor = theme.mainColor
+            btnCheckOffers.setTitleColor(theme.accentColor, for: .normal)
+            
+            // Reload table view to update cell colors
+            tblOffers.reloadData()
+        }
 }

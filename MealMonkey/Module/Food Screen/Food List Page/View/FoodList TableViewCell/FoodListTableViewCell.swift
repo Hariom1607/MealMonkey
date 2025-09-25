@@ -102,6 +102,23 @@ class FoodListTableViewCell: UITableViewCell {
     // "View All" button action (currently empty, can be delegated if needed)
     @IBAction func btnViewAllClick(_ sender: Any) {
     }
+    
+    func applyTheme(_ theme: Theme) {
+        lblCollViewHeading.textColor = theme.primaryFontColor
+        btnViewAll.setTitleColor(theme.buttonColor, for: .normal)
+        
+        collViewFood.visibleCells.forEach { cell in
+            if let cell = cell as? MostPopularCollectionViewCell {
+                cell.applyTheme(theme)
+            } else if let cell = cell as? PopularFoodCollectionViewCell {
+                cell.applyTheme(theme)
+            } else if let cell = cell as? RecentItemsCollectionViewCell {
+                cell.applyTheme(theme)
+            } else if let cell = cell as? FoodCategoryCollectionViewCell {
+                // Add if needed
+            }
+        }
+    }
 }
 
 // MARK: - Collection View Handling

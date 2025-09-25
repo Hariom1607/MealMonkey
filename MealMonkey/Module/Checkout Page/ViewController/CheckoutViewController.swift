@@ -112,7 +112,7 @@ class CheckoutViewController: UIViewController {
         btnBackToHome.setTitle(Main.Labels.btnBackToHome, for: .normal)
         btnTrackOrder.setTitle(Main.Labels.btnTrackOrder, for: .normal)
         btnAddNewCardPopUp.setTitle(Main.Labels.addNewCard, for: .normal)
-        btnCloseAddCardView.setTitle(Main.Labels.closeAddCardView, for: .normal)
+        btnCloseAddCardView.setTitle(Main.images.close, for: .normal)
         btnLocationChange.setTitle(Main.Labels.btnLocationChange, for: .normal)
 
         roundCorners(of: [viewAddCardTopCorner, viewPlaceOrderTopCorner])
@@ -136,6 +136,15 @@ class CheckoutViewController: UIViewController {
         // Load saved cards from CoreData
         loadCurrentUser()
         loadSavedCards()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        applyTheme()
+
     }
     
     private func setupLocalization() {
@@ -144,9 +153,9 @@ class CheckoutViewController: UIViewController {
         btnTrackOrder.setTitle(Main.Labels.btnTrackOrder, for: .normal)
         btnAddCard.setTitle(Main.Labels.btnAddCard, for: .normal)
         btnBackToHome.setTitle(Main.Labels.btnBackToHome, for: .normal)
-        btnCloseThankyouView.setTitle(Main.Labels.btnClose, for: .normal)
+        btnCloseThankyouView.setTitle(Main.images.close, for: .normal)
         btnAddNewCardPopUp.setTitle(Main.Labels.addNewCard, for: .normal)
-        btnCloseAddCardView.setTitle(Main.Labels.closeAddCardView, for: .normal)
+        btnCloseAddCardView.setTitle(Main.images.close, for: .normal)
         btnLocationChange.setTitle(Main.Labels.btnLocationChange, for: .normal)
         
         // Labels

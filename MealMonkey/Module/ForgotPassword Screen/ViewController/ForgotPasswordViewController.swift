@@ -33,9 +33,19 @@ class ForgotPasswordViewController: UIViewController {
         // Update button title
         btnSend.setTitle(Localized("btn_send"), for: .normal)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        applyTheme()
+        
+        // ✅ Listen for theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
         
         // Show navigation bar
         self.navigationController?.navigationBar.isHidden = false
@@ -52,7 +62,7 @@ class ForgotPasswordViewController: UIViewController {
         setLeftAlignedTitleWithBack(Main.ForgotPassword.navTitle, target: self, action: #selector(backButtonTapped))
         lblTitleForgotPassword.text = Main.ForgotPassword.title
         subTitile.text = Main.ForgotPassword.subtitle
-
+        
     }
     
     // MARK: - Navigation
@@ -116,5 +126,21 @@ class ForgotPasswordViewController: UIViewController {
                 viewController: self
             )
         }
+    }
+    deinit {
+        // ✅ Clean up notification
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
+    }
+    
+    // MARK: - Theme
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        lblTitleForgotPassword.textColor = theme.titleColor
+        subTitile.textColor = theme.secondaryFontColor
+        txtEmail.textColor = theme.labelColor
+        txtEmail.backgroundColor = theme.secondaryFontColor.withAlphaComponent(0.1)
+        btnSend.backgroundColor = theme.buttonColor
+        btnSend.setTitleColor(theme.titleColor, for: .normal)
     }
 }

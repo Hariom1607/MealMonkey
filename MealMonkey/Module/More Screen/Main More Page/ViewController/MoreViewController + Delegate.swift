@@ -29,7 +29,13 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             cell.lblTitleMore.text = item.title
         }
         cell.imgIconMore.image = item.imgSection
-        cell.imgIconMore.tintColor = .loginLabel
+//        cell.imgIconMore.tintColor = .loginLabel
+        // Set text (language row gets localized string)
+        cell.lblTitleMore.text = indexPath.row == 6 ? Localized("label_more_languages") : item.title
+        cell.imgIconMore.image = item.imgSection?.withRenderingMode(.alwaysTemplate)
+        
+        // Apply the theme
+        cell.applyTheme()
         
         return cell
     }
@@ -89,6 +95,12 @@ extension MoreViewController: UITableViewDelegate, UITableViewDataSource {
             nav.modalPresentationStyle = .pageSheet // iOS 15 bottom sheet style
             self.present(nav, animated: true)
             
+        case 7: // Themes
+            let themeVC = ThemeSelectionViewController()
+            let nav = UINavigationController(rootViewController: themeVC)
+            nav.modalPresentationStyle = .pageSheet
+            self.present(nav, animated: true)
+
         default: // Any other rows
             print("Other row selected")
         }

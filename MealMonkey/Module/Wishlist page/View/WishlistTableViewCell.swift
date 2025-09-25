@@ -60,6 +60,8 @@ class WishlistTableViewCell: UITableViewCell {
             imgProduct.image = UIImage(named: product.strProductImage) ?? UIImage(named: Main.images.placeholder)
         }
         
+        applyTheme(ThemeManager.currentTheme)
+
         // ✅ Check CoreData to determine wishlist state and update heart button
         let isInWishlist = CoreDataHelper.shared.isInWishlist(productId: product.intId, userEmail: userEmail)
         btnWishlist.setImage(UIImage(systemName: isInWishlist ? Main.images.heartfill : Main.images.heart), for: .normal)
@@ -78,7 +80,17 @@ class WishlistTableViewCell: UITableViewCell {
             btnWishlist.setImage(UIImage(systemName: Main.images.heartfill), for: .normal)
         }
         
+        btnWishlist.tintColor = ThemeManager.currentTheme.buttonColor
+
         // Notify parent view controller to refresh UI (if needed)
         onWishlistToggle?()
+    }
+    
+    func applyTheme(_ theme: Theme) {
+        lblProductName.textColor = theme.primaryFontColor
+        lblPrice.textColor = theme.primaryFontColor
+        lblCategory.textColor = theme.secondaryFontColor
+        lblType.textColor = theme.secondaryFontColor
+        btnWishlist.tintColor = theme.iconTintColor
     }
 }

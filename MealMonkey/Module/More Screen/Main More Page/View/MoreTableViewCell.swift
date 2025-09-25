@@ -43,6 +43,23 @@ class MoreTableViewCell: UITableViewCell {
         btnNavigate.clipsToBounds = true
     }
     
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        // Card style for each cell
+        viewMoreItems.backgroundColor = .textFieldBackground
+        viewMoreItems.layer.cornerRadius = 10
+        viewMoreItems.layer.masksToBounds = true
+        
+        // Whole background
+        contentView.backgroundColor = theme.backgroundColor
+        
+        // Label and icon colors
+        lblTitleMore.textColor = theme.primaryFontColor
+        imgIconMore.tintColor = theme.mainColor
+        btnNavigate.tintColor = theme.buttonColor
+    }
+    
     // MARK: - Configuration
     
     /// Configure cell with `More` model

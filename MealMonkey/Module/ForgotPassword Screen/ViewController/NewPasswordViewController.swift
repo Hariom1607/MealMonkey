@@ -26,6 +26,17 @@ class NewPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ✅ Apply theme once
+        applyTheme()
+        
+        // ✅ Observe theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
         // Set localized texts
         lblTitleNewPassword.text = Main.NewPassword.title
         lblSubTitle.text = Main.NewPassword.subtitle
@@ -125,6 +136,28 @@ class NewPasswordViewController: UIViewController {
         if let button = sender as? UIButton {
             button.setImage(UIImage(systemName: imageName), for: .normal)
         }
+    }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.backgroundColor
+        lblTitleNewPassword.textColor = theme.titleColor
+        lblSubTitle.textColor = theme.secondaryFontColor
+        txtNewPassword.textColor = theme.labelColor
+        txtConfirmPassword.textColor = theme.labelColor
+        txtNewPassword.backgroundColor = theme.secondaryFontColor.withAlphaComponent(0.1)
+        txtConfirmPassword.backgroundColor = theme.secondaryFontColor.withAlphaComponent(0.1)
+        btnSubmit.backgroundColor = theme.buttonColor
+        btnSubmit.setTitleColor(theme.titleColor, for: .normal)
+        
+        // Optional: match eye icons with theme
+        btnEyePassword.tintColor = theme.placeholderColor
+        btnEyeConfirmPassword.tintColor = theme.placeholderColor
+    }
+    
+    deinit {
+        // ✅ Remove observer
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }
 

@@ -36,6 +36,7 @@ extension DessertsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let product = filteredProducts[indexPath.row]
         cell.configure(with: product)
+        cell.applyTheme(ThemeManager.currentTheme) // ✅ Apply current theme
         return cell
     }
     

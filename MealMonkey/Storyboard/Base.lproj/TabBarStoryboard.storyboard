@@ -35,6 +35,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_1x_Side bar orange" translatesAutoresizingMaskIntoConstraints="NO" id="QSL-7v-Qgt">
                                                 <rect key="frame" x="0.0" y="0.0" width="97" height="440"/>
+                                                <color key="tintColor" name="LoginButton"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -80,6 +81,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nnf-9d-jAk"/>
                     <connections>
+                        <outlet property="imgSideBar" destination="QSL-7v-Qgt" id="9yk-qL-nUk"/>
                         <outlet property="tblMenu" destination="PLp-PN-7YX" id="ZDg-at-bd9"/>
                         <outlet property="txtSearch" destination="zxH-Ao-KE8" id="NYE-e8-jns"/>
                     </connections>

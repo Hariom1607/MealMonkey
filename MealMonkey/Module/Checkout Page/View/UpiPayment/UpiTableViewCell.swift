@@ -29,7 +29,6 @@ class UpiTableViewCell: UITableViewCell {
         // Configure UPI selection button
         btnUpiSelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
         btnUpiSelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
-        btnUpiSelection.tintColor = .loginButton
         btnUpiSelection.backgroundColor = .clear
         btnUpiSelection.layer.cornerRadius = btnUpiSelection.frame.height / 2
         btnUpiSelection.clipsToBounds = true
@@ -41,6 +40,14 @@ class UpiTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Default override — no extra customization
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        viewUpi.backgroundColor = theme.cellBackgroundColor
+        lblUpiId.textColor = theme.primaryFontColor
+        btnUpiSelection.tintColor = theme.buttonColor
+
     }
     
     /// Action when UPI option is tapped

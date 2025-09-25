@@ -22,6 +22,13 @@ class PopularFoodCollectionViewCell: UICollectionViewCell {
         
     }
     
+    func applyTheme(_ theme: Theme) {
+        lblFoodName.textColor = theme.primaryFontColor
+        lblFoodType.textColor = theme.secondaryFontColor
+        lblFoodRating.textColor = theme.secondaryFontColor
+        imgfood.layer.borderColor = theme.borderColor.cgColor
+    }
+
     // MARK: - Configuration
     /// Configures the cell with a `ProductModel`
     func configure(with item: ProductModel) {

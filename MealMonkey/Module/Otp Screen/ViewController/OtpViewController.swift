@@ -22,6 +22,17 @@ class OtpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ✅ Apply theme initially
+        applyTheme()
+        
+        // ✅ Observe theme changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applyTheme),
+            name: NSNotification.Name("themeChanged"),
+            object: nil
+        )
+        
         // Localize labels and buttons
         lblOtpTitle.text = Main.OTP.otpTitle
         lblSubTitle.text = Main.OTP.otpSubTitle
@@ -77,6 +88,32 @@ class OtpViewController: UIViewController {
             mlvc.email = email
             self.navigationController?.pushViewController(mlvc, animated: true)
         }
+    }
+    
+    @objc private func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        
+        view.backgroundColor = theme.backgroundColor
+        
+        lblOtpTitle.textColor = theme.titleColor
+        lblSubTitle.textColor = theme.secondaryFontColor
+        
+        // Buttons
+        btnOtpRegeneration.setTitleColor(theme.buttonColor, for: .normal)
+        
+        btnNext.backgroundColor = theme.buttonColor
+        btnNext.setTitleColor(theme.titleColor, for: .normal)
+        btnNext.layer.cornerRadius = 28
+        
+        // OTP View styling
+        viewOtp.borderColorTextField = theme.secondaryFontColor
+        viewOtp.selectedBorderColorTextField = theme.buttonColor
+        viewOtp.backGroundColorTextField = theme.secondaryFontColor.withAlphaComponent(0.1)
+        viewOtp.fontTextField = UIFont(name: Main.Colors.fontTextfield, size: CGFloat(25.0))!
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("themeChanged"), object: nil)
     }
 }
 

@@ -29,7 +29,6 @@ class CashOnDeliveryTableViewCell: UITableViewCell {
         // Configure selection button
         btnCashOnDeliverySelection.setImage(UIImage(systemName: Main.images.circle), for: .normal)
         btnCashOnDeliverySelection.setImage(UIImage(systemName: Main.images.circleFill), for: .selected)
-        btnCashOnDeliverySelection.tintColor = .loginButton
         btnCashOnDeliverySelection.backgroundColor = .clear
         btnCashOnDeliverySelection.layer.cornerRadius = btnCashOnDeliverySelection.frame.height / 2
         btnCashOnDeliverySelection.clipsToBounds = true
@@ -41,6 +40,14 @@ class CashOnDeliveryTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Default override — no custom behavior
+    }
+    
+    func applyTheme() {
+        let theme = ThemeManager.currentTheme
+        viewCash.backgroundColor = theme.cellBackgroundColor
+        lblCashOnDelivery.textColor = theme.primaryFontColor
+        btnCashOnDeliverySelection.tintColor = theme.buttonColor
+
     }
     
     /// Action when "Cash on Delivery" button is tapped

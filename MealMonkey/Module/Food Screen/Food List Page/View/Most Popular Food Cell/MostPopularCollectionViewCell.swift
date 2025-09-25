@@ -24,6 +24,13 @@ class MostPopularCollectionViewCell: UICollectionViewCell {
         styleViews([imgMostPopularFood], cornerRadius: 10, borderWidth: 0, borderColor: UIColor.black.cgColor)
     }
     
+    func applyTheme(_ theme: Theme) {
+        lblFoodName.textColor = theme.primaryFontColor
+        lblFoodCategory.textColor = theme.secondaryFontColor
+        lblRatings.textColor = theme.secondaryFontColor
+        imgMostPopularFood.layer.borderColor = theme.borderColor.cgColor
+    }
+
     // MARK: - Configuration
     /// Configures the cell with a given product
     func configure(with item: ProductModel) {
